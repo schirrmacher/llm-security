@@ -1,0 +1,7 @@
+black==24.4.0
+fastembed==0.2.7
+llama-index-core==0.10.40
+llama-index-llms-mistralai==0.1.12
+llama-index==0.10.40
+pytest==8.1.1
+python-dotenv==1.0.1
