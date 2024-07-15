@@ -14,10 +14,14 @@ format:
 
 run:
 	@echo "Running Security Army Knife"
-	python3 security_army_knife.py
+	python3 security_army_knife.py $(filter-out $@,$(MAKECMDGOALS))
 
 
 test:
 	@echo "Running tests..."
 	. sak/bin/activate; \
 	pytest tests
+
+# Prevent make from trying to interpret the arguments as targets
+%:
+	@:

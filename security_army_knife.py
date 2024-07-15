@@ -1,6 +1,6 @@
 import argparse
 import logging
-from typing import TextIO, BinaryIO
+from typing import TextIO
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -83,7 +83,7 @@ def parse_arguments():
         "--large_language_model",
         type=str,
         choices=["Mistral"],
-        required=True,
+        default="Mistral",
         help="Large language model option (only option now is Mistral)",
     )
 
@@ -92,7 +92,7 @@ def parse_arguments():
         "--output",
         type=str,
         choices=["severity"],
-        required=True,
+        default="severity",
         help="Output option (only option now is severity)",
     )
 
@@ -101,7 +101,7 @@ def parse_arguments():
         "--output_format",
         type=str,
         choices=["text", "json"],
-        required=True,
+        default="text",
         help="Output format (text or json)",
     )
 

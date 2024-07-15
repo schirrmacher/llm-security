@@ -7,7 +7,10 @@ This repository contains security utilities. The features will be announced soon
 ## Run
 
 ```
-Coming Soon
+make run -- \
+    -cve examples/cve-advisories.txt \
+    -dep examples/dependencies.csv \
+    -arc examples/architecture.drawio.html
 ```
 
 ## Developing
@@ -34,8 +37,3 @@ Requirements:
 
 - easy to run and launch without errors
 - chore: format code, comment purpose
-
-# Security
-
-- minimal/verified dependencies
-- multi-stage docker build
