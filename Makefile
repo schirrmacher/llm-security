@@ -12,6 +12,11 @@ format:
 	. sak/bin/activate; \
 	python3 -m black --config pyproject.toml tests api
 
+run:
+	@echo "Running Security Army Knife"
+	python3 security_army_knife.py
+
+
 test:
 	@echo "Running tests..."
 	. sak/bin/activate; \
