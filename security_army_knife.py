@@ -20,7 +20,7 @@ def setup_logging():
 
 def run_security_army_knife(
     cve_description: TextIO,
-    architecture_diagram: BinaryIO,
+    architecture_diagram: TextIO,
     dependency_list: TextIO,
     large_language_model: str,
     output_option: str,
@@ -65,7 +65,7 @@ def parse_arguments():
     parser.add_argument(
         "-arc",
         "--architecture_diagram",
-        type=argparse.FileType("rb"),
+        type=argparse.FileType("r"),
         required=True,
         help="Path to the architecture diagram file (image or text)",
     )
