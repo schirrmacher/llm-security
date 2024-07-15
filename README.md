@@ -6,9 +6,10 @@ This repository contains security utilities. The features will be announced soon
 
 ## Run
 
+First run `make setup`, then:
+
 ```
-make run -- \
-    -cve examples/cve-advisories.txt \
+sak -cve examples/cve-advisories.txt \
     -dep examples/dependencies.csv \
     -arc examples/architecture.drawio.html
 ```
