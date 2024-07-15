@@ -1,0 +1,38 @@
+name: Test Installation and Run Security Army Knife
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          make setup
+
+      - name: Run formatter
+        run: |
+          make format
+
+      - name: Run tests
+        run: |
+          make test
+
+      - name: Run CLI
+        run: |
+          sak -cve examples/cve-advisories.txt -dep examples/dependencies.csv -arc examples/architecture.drawio.html

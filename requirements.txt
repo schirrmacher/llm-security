@@ -1,10 +1,10 @@
 black==24.4.0
 fastembed==0.2.7
-llama-index-core==0.10.40
-llama-index-llms-mistralai==0.1.12
-llama-index==0.10.40
+llama-index-core==0.10.55
+llama-index-llms-mistralai==0.1.17
+llama-index==0.10.55
 pytest==8.1.1
 python-dotenv==1.0.1
 selenium==4.10.0
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
 llama-index-embeddings-fastembed==0.1.4
