@@ -25,7 +25,7 @@ jobs:
         run: |
           make setup
 
-      - name: Run tests
+      - name: Run formatter
         run: |
           make format
 

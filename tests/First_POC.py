@@ -11,15 +11,17 @@ from llama_index.embeddings.fastembed import FastEmbedEmbedding
 from llama_index.core import Settings
 from llama_index.core import download_loader
 
+
 def fetch_page(url, driver):
     driver.get(url)
-    time.sleep(5) 
+    time.sleep(5)
     return driver.page_source
+
 
 def extract_date(text):
     date_patterns = [
-        (re.compile(r'(\d{4}-\d{2}-\d{2})'), "%Y-%m-%d"),
-        (re.compile(r'(\d{4}/\d{2}/\d{2})'), "%Y/%m/%d")
+        (re.compile(r"(\d{4}-\d{2}-\d{2})"), "%Y-%m-%d"),
+        (re.compile(r"(\d{4}/\d{2}/\d{2})"), "%Y/%m/%d"),
     ]
     for pattern, date_format in date_patterns:
         match = pattern.search(text)
@@ -27,9 +29,11 @@ def extract_date(text):
             return datetime.strptime(match.group(1), date_format)
     return None
 
+
 def extract_cve_ids(text):
-    cve_pattern = re.compile(r'CVE-2024-\d{4,7}')
+    cve_pattern = re.compile(r"CVE-2024-\d{4,7}")
     return cve_pattern.findall(text)
+
 
 def filter_documents_by_date_or_cve(documents, threshold_date):
     filtered_docs = []
@@ -40,6 +44,7 @@ def filter_documents_by_date_or_cve(documents, threshold_date):
             filtered_docs.append(doc)
     return filtered_docs
 
+
 def query(index, query_str, threshold_date):
     query_engine = index.as_query_engine()
     response = query_engine.query(query_str)
@@ -47,7 +52,7 @@ def query(index, query_str, threshold_date):
 
     print("Response:", response)
 
-    if hasattr(response, 'nodes'):
+    if hasattr(response, "nodes"):
         for node in response.nodes:
             date = extract_date(node.text)
             cve_list = extract_cve_ids(node.text)
@@ -55,12 +60,14 @@ def query(index, query_str, threshold_date):
                 summary = node.metadata.get("summary", "No summary available")
                 text = node.text
                 relevant_docs.append((summary, text))
-    elif hasattr(response, 'documents'):
+    elif hasattr(response, "documents"):
         for document in response.documents:
             date = extract_date(document.text)
             cve_list = extract_cve_ids(document.text)
             if (date and date >= threshold_date) or cve_list:
-                summary = document.metadata.get("summary", "No summary available")
+                summary = document.metadata.get(
+                    "summary", "No summary available"
+                )
                 text = document.text
                 relevant_docs.append((summary, text))
     elif isinstance(response, list):
@@ -68,11 +75,14 @@ def query(index, query_str, threshold_date):
             date = extract_date(document.text)
             cve_list = extract_cve_ids(document.text)
             if (date and date >= threshold_date) or cve_list:
-                summary = document.metadata.get("summary", "No summary available")
+                summary = document.metadata.get(
+                    "summary", "No summary available"
+                )
                 text = document.text
                 relevant_docs.append((summary, text))
-    
+
     return relevant_docs
+
 
 def main():
     llm = MistralAI(model="mistral-large-latest")
@@ -88,22 +98,24 @@ def main():
         "https://www.cvedetails.com/vulnerability-list/vendor_id-33168/Opentelemetry.html",
         "https://www.cvedetails.com/vulnerability-list/vendor_id-14185/Golang.html",
         "https://www.cvedetails.com/vulnerability-list/vendor_id-15867/Kubernetes.html",
-        "https://www.cvedetails.com/vulnerability-list/vendor_id-3080/product_id-25405/Fortinet-Forticlient.html"
+        "https://www.cvedetails.com/vulnerability-list/vendor_id-3080/product_id-25405/Fortinet-Forticlient.html",
     ]
 
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(options=options)
 
     selenium_documents = []
     for url in urls:
         try:
             page_source = fetch_page(url, driver)
-            soup = BeautifulSoup(page_source, 'html.parser')
-            text_content = soup.get_text(separator=' ', strip=True)
-            selenium_documents.append(Document(text=text_content, metadata={'URL': url}))
+            soup = BeautifulSoup(page_source, "html.parser")
+            text_content = soup.get_text(separator=" ", strip=True)
+            selenium_documents.append(
+                Document(text=text_content, metadata={"URL": url})
+            )
             print(f"Fetched content from {url}")
         except Exception as e:
             print(f"Failed to fetch content from {url}: {str(e)}")
@@ -118,7 +130,7 @@ def main():
         "https://openjdk.org/groups/vulnerability/advisories/",
         "https://spring.io/security",
         "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=Kubernetes",
-        "https://www.cloudvulndb.org/results?tags=GCP"
+        "https://www.cloudvulndb.org/results?tags=GCP",
     ]
 
     soup_documents = loader.load_data(urls=remaining_urls)
@@ -129,18 +141,27 @@ def main():
         print(f"Document URL: {doc.metadata.get('URL', 'No URL')}")
 
     threshold_date = datetime.strptime("2024-01-01", "%Y-%m-%d")
-    filtered_documents = filter_documents_by_date_or_cve(all_documents, threshold_date)
+    filtered_documents = filter_documents_by_date_or_cve(
+        all_documents, threshold_date
+    )
 
     index = VectorStoreIndex.from_documents(filtered_documents)
 
-    technologies = ["Google Cloud Platform", "Kubernetes", "Golang", "OpenTelemetry","Forticlient"]
+    technologies = [
+        "Google Cloud Platform",
+        "Kubernetes",
+        "Golang",
+        "OpenTelemetry",
+        "Forticlient",
+    ]
     for tech in technologies:
         print(f"\n{'='*20}\nQuerying for {tech}\n{'='*20}")
-        query_str = f"Provide any recent security advisories or known issues for {tech} that have been published since {threshold_date.date()}? Specifically, we are looking for any new vulnerabilities, patches."        
+        query_str = f"Provide any recent security advisories or known issues for {tech} that have been published since {threshold_date.date()}? Specifically, we are looking for any new vulnerabilities, patches."
         relevant_docs = query(index, query_str, threshold_date)
         for summary, text in relevant_docs:
             print(f"Summary: {summary}")
             print(f"Text: {text}\n")
+
 
 if __name__ == "__main__":
     main()
