@@ -6,6 +6,7 @@ setup:
 	@echo "Activating virtual environment..."
 	. sak/bin/activate; \
 	pip3 install -r requirements.txt
+	@echo "Installing CLI..."
 	pip install -e .
 
 format:
