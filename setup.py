@@ -9,4 +9,12 @@ setup(
             "sak = security_army_knife.cli:main",
         ],
     },
+    install_requires=[
+        "black==24.4.0",
+        "fastembed==0.2.7",
+        "llama-index-core==0.10.55",
+        "llama-index-llms-mistralai==0.1.17",
+        "llama-index==0.10.55",
+        "pytest==8.1.1",
+    ],
 )

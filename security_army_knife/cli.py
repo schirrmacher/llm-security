@@ -1,7 +1,7 @@
 import argparse
 import logging
 from typing import TextIO
-from mistral_agent import MistralAgent
+from security_army_knife.mistral_agent import MistralAgent
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
