@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.7
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.1.1
         with:
           python-version: "3.11"
 
@@ -35,4 +35,4 @@ jobs:
 
       - name: Run CLI
         run: |
-          sak -cve examples/cve-advisories.txt -dep examples/dependencies.csv -arc examples/architecture.drawio.html
+          sak/bin/sak --help

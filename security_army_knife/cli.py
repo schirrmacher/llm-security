@@ -1,6 +1,7 @@
 import argparse
 import logging
 from typing import TextIO
+from security_army_knife.mistral_agent import MistralAgent
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -12,7 +13,7 @@ ASCII_ART = """
 def setup_logging():
     logging.basicConfig(
         level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        format="%(message)s",
     )
     logger = logging.getLogger("SecurityArmyKnife")
     logger.info(ASCII_ART)
@@ -28,16 +29,12 @@ def run_security_army_knife(
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
     try:
-        logger.info(f"CVE Description File: {cve_description.name}")
-        logger.info(f"Architecture Diagram File: {architecture_diagram.name}")
-        logger.info(f"Dependency List File: {dependency_list.name}")
-        logger.info(f"Large Language Model Option: {large_language_model}")
-        logger.info(f"Output Option: {output_option}")
-        logger.info(f"Output Format: {output_format}")
+        if large_language_model == "Mistral":
+            print(MistralAgent().talk("Tell me something about security!"))
+        else:
+            return 1
 
-        # You can add the processing logic for each file here
-
-        return 0  # Success code
+        return 0
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
