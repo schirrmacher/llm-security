@@ -1,3 +1,4 @@
+import os
 import json
 import time
 import logging
@@ -36,6 +37,7 @@ def run_security_army_knife(
     architecture_diagram: TextIO,
     dependency_list: TextIO,
     api_documentation: TextIO,
+    source_code: str,
     large_language_model: str,
     output_option: str,
     output_format: str,
@@ -56,7 +58,7 @@ def run_security_army_knife(
                 f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
             )
 
-        cves = CVE.from_json_list(advisories)[:2]
+        cves = CVE.from_json_list(advisories)
 
         categorizer = CVECategorizerAgent(model)
         categorized_cves = categorizer.categorize(cves=cves)
@@ -86,12 +88,27 @@ def run_security_army_knife(
         api_documentation.close()
 
 
+def is_valid_directory(path):
+    """Check if the given path is a valid directory."""
+    if not os.path.isdir(path):
+        raise argparse.ArgumentTypeError(f"'{path}' is not a valid directory.")
+    return path
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Analyze CVEs to accelerate decisions."
     )
 
-    parser.add_argument(
+    # Creating argument groups
+    input_group = parser.add_argument_group(
+        "input files", "Input files required for analysis"
+    )
+    output_group = parser.add_argument_group(
+        "output options", "Options for the output format and content"
+    )
+
+    input_group.add_argument(
         "-cve",
         "--cve_description",
         type=argparse.FileType("r"),
@@ -99,7 +116,7 @@ def parse_arguments():
         help="Path to the CVE description text file",
     )
 
-    parser.add_argument(
+    input_group.add_argument(
         "-arc",
         "--architecture_diagram",
         type=argparse.FileType("r"),
@@ -107,7 +124,7 @@ def parse_arguments():
         help="Path to the architecture diagram file (image or text)",
     )
 
-    parser.add_argument(
+    input_group.add_argument(
         "-dep",
         "--dependency_list",
         type=argparse.FileType("r"),
@@ -115,7 +132,7 @@ def parse_arguments():
         help="Path to the dependency list text file",
     )
 
-    parser.add_argument(
+    input_group.add_argument(
         "-api",
         "--api_documentation",
         type=argparse.FileType("r"),
@@ -123,7 +140,15 @@ def parse_arguments():
         help="Documentation of a system's API",
     )
 
-    parser.add_argument(
+    input_group.add_argument(
+        "-src",
+        "--source_code",
+        type=is_valid_directory,
+        required=True,
+        help="Path to the source code repository folder",
+    )
+
+    output_group.add_argument(
         "-llm",
         "--large_language_model",
         type=str,
@@ -132,7 +157,7 @@ def parse_arguments():
         help="Large language model option (only option now is Mistral)",
     )
 
-    parser.add_argument(
+    output_group.add_argument(
         "-o",
         "--output",
         type=str,
@@ -141,7 +166,7 @@ def parse_arguments():
         help="Output option (only option now is severity)",
     )
 
-    parser.add_argument(
+    output_group.add_argument(
         "-of",
         "--output_format",
         type=str,
@@ -151,6 +176,13 @@ def parse_arguments():
     )
 
     args = parser.parse_args()
+
+    # Validate the source_code argument to ensure it's a directory
+    if not os.path.isdir(args.source_code):
+        parser.error(
+            f"The source_code path '{args.source_code}' is not a valid directory"
+        )
+
     return args
 
 
@@ -158,11 +190,14 @@ def main():
     setup_logging()
     args = parse_arguments()
     result_code = run_security_army_knife(
+        # input
         cve_description=args.cve_description,
         architecture_diagram=args.architecture_diagram,
         dependency_list=args.dependency_list,
         api_documentation=args.api_documentation,
+        source_code=args.source_code,
         large_language_model=args.large_language_model,
+        # output
         output_option=args.output,
         output_format=args.output_format,
     )

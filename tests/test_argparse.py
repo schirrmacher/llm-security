@@ -24,6 +24,8 @@ class TestParseArguments(unittest.TestCase):
             "json",
             "-api",
             "tests/files/swagger-open-api.json",
+            "-src",
+            "tests/files",
         ],
     )
     def test_parse_arguments(self):
@@ -46,6 +48,7 @@ class TestParseArguments(unittest.TestCase):
             simplify_string(args.api_documentation.read()),
             '{"components":{"schemas":{"Act',
         )
+        self.assertEqual(args.source_code, "tests/files")
         self.assertEqual(args.large_language_model, "Mistral")
         self.assertEqual(args.output, "severity")
         self.assertEqual(args.output_format, "json")
