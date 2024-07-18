@@ -95,6 +95,13 @@ def is_valid_directory(path):
     return path
 
 
+def is_valid_file(path):
+    """Check if the given path is a valid directory."""
+    if not os.path.isfile(path):
+        raise argparse.ArgumentTypeError(f"'{path}' is not a valid file.")
+    return path
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Analyze CVEs to accelerate decisions."
@@ -146,6 +153,14 @@ def parse_arguments():
         type=is_valid_directory,
         required=True,
         help="Path to the source code repository folder",
+    )
+
+    input_group.add_argument(
+        "-s",
+        "--state",
+        type=is_valid_file,
+        required=False,
+        help="Path to state file for reducing requests to the LLM API.",
     )
 
     output_group.add_argument(
@@ -205,8 +220,9 @@ def main():
         dependency_list=args.dependency_list,
         api_documentation=args.api_documentation,
         source_code=args.source_code,
-        large_language_model=args.large_language_model,
+        state=args.state_file,
         # output
+        large_language_model=args.large_language_model,
         output_option=args.output,
         output_format=args.output_format,
     )
