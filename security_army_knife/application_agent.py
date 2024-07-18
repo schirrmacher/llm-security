@@ -16,6 +16,7 @@ class ApplicationCVE(CategorizedCVE):
         name: str,
         description: str,
         urgent: bool,
+        category: str,
         code_queries: list,
     ):
         super().__init__(name, description, urgent, category=CVECategory.app)
@@ -42,16 +43,10 @@ class ApplicationCVE(CategorizedCVE):
             code_queries=code_queries,
         )
 
-    def to_json_string(self) -> str:
-        return json.dumps(
-            {
-                "name": self.name,
-                "description": self.description,
-                "urgent": self.urgent,
-                "category": self.category,
-                "code_queries": self.code_queries,
-            }
-        )
+    def to_json(self):
+        cve_json = super().to_json()
+        cve_json["code_queries"] = self.code_queries
+        return cve_json
 
     def __str__(self):
         urgency = "Urgent" if self.urgent else "Not Urgent"
@@ -72,7 +67,7 @@ class ApplicationAgent(BaseAgent):
         categorized_cves: list[ApplicationCVE] = []
         for cve in cves:
 
-            task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json_string()}"
+            task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object. Leave the list empty if not applicable."
 
             messages = [

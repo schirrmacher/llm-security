@@ -21,14 +21,12 @@ class CVE:
     def from_json_list(cls, json_list: list):
         return [cls.from_json(item) for item in json_list]
 
-    def to_json_string(self) -> str:
-        return json.dumps(
-            {
-                "name": self.name,
-                "description": self.description,
-                "urgent": self.urgent,
-            }
-        )
+    def to_json(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "urgent": self.urgent,
+        }
 
     def __str__(self):
         urgency = "Urgent" if self.urgent else "Not Urgent"

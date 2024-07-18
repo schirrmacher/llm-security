@@ -1,6 +1,5 @@
 import json
 import logging
-from enum import Enum
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.base_agent import BaseAgent
@@ -31,6 +30,11 @@ class CategorizedCVE(CVE):
             category=json_dict.get("category", CVECategory.unknown),
         )
 
+    def to_json(self):
+        cve_json = super().to_json()
+        cve_json["category"] = self.category
+        return cve_json
+
     @classmethod
     def from_cve(cls, cve: CVE, category: str):
         return cls(
@@ -59,7 +63,7 @@ class CVECategorizerAgent(BaseAgent):
         categorized_cves: list[CategorizedCVE] = []
         for cve in cves:
 
-            task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_json_string()}"
+            task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'category' with one of: os, distro, app."
 
             messages = [
