@@ -22,7 +22,7 @@ class StateHandler:
                         for item in data.get("categorized_cves", [])
                     ]
                     if "categorized_cves" in data
-                    else None
+                    else []
                 )
                 self.application_cves = (
                     [
@@ -30,19 +30,19 @@ class StateHandler:
                         for item in data.get("application_cves", [])
                     ]
                     if "application_cves" in data
-                    else None
+                    else []
                 )
         except FileNotFoundError:
-            self.categorized_cves = None
-            self.application_cves = None
+            self.categorized_cves = []
+            self.application_cves = []
         except json.JSONDecodeError:
-            self.categorized_cves = None
-            self.application_cves = None
+            self.categorized_cves = []
+            self.application_cves = []
 
-    def get_categorized_cves(self):
+    def get_categorized_cves(self) -> List[CategorizedCVE]:
         return self.categorized_cves
 
-    def get_application_cves(self):
+    def get_application_cves(self) -> List[ApplicationCVE]:
         return self.application_cves
 
     def store_categorized_cves(self, categorized_cves: List[CategorizedCVE]):
@@ -58,12 +58,12 @@ class StateHandler:
             "categorized_cves": (
                 [cve.to_json() for cve in self.categorized_cves]
                 if self.categorized_cves
-                else None
+                else []
             ),
             "application_cves": (
                 [cve.to_json() for cve in self.application_cves]
                 if self.application_cves
-                else None
+                else []
             ),
         }
         with open(self.file_path, "w") as file:

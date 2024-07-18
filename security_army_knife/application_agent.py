@@ -40,6 +40,7 @@ class ApplicationCVE(CategorizedCVE):
             name=categorized_cve.name,
             description=categorized_cve.description,
             urgent=categorized_cve.urgent,
+            category=categorized_cve.category,
             code_queries=code_queries,
         )
 

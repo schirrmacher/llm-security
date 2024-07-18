@@ -13,8 +13,10 @@ from security_army_knife.application_agent import ApplicationAgent
 from security_army_knife.cve_categorizer_agent import (
     CVECategorizerAgent,
     CVECategory,
+    CategorizedCVE,
 )
 from security_army_knife.cve import CVE
+from security_army_knife.state_handler import StateHandler
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -38,12 +40,15 @@ def run_security_army_knife(
     dependency_list: TextIO,
     api_documentation: TextIO,
     source_code: str,
+    state_file_path: str,
     large_language_model: str,
     output_option: str,
     output_format: str,
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
     try:
+
+        state = StateHandler(state_file_path)
 
         model: BaseModel
         if large_language_model == "Mistral":
@@ -60,17 +65,23 @@ def run_security_army_knife(
 
         cves = CVE.from_json_list(advisories)
 
-        categorizer = CVECategorizerAgent(model)
-        categorized_cves = categorizer.categorize(cves=cves)
+        categorized_cves = state.get_categorized_cves()
+        if len(categorized_cves) == 0:
+            categorizer = CVECategorizerAgent(model)
+            categorized_cves = categorizer.categorize(cves=cves)
+            state.store_categorized_cves(categorized_cves)
 
         for c in categorized_cves:
             print(f"{c.name}: {c.category}")
 
-        app_cves = [
-            e for e in categorized_cves if e.category == CVECategory.app
-        ]
-        app_cve_analyzer = ApplicationAgent(model)
-        analyzed_app_cves = app_cve_analyzer.categorize(cves=app_cves)
+        analyzed_app_cves = state.get_application_cves()
+        if len(analyzed_app_cves) == 0:
+            app_cves = [
+                e for e in categorized_cves if e.category == CVECategory.app
+            ]
+            app_cve_analyzer = ApplicationAgent(model)
+            analyzed_app_cves = app_cve_analyzer.categorize(cves=app_cves)
+            state.store_application_cves(analyzed_app_cves)
 
         for cve in analyzed_app_cves:
             print(f"{cve.name}: {cve.category} {cve.code_queries}")
@@ -158,7 +169,8 @@ def parse_arguments():
     input_group.add_argument(
         "-s",
         "--state",
-        type=is_valid_file,
+        type=str,
+        default="state.json",
         required=False,
         help="Path to state file for reducing requests to the LLM API.",
     )
@@ -220,7 +232,7 @@ def main():
         dependency_list=args.dependency_list,
         api_documentation=args.api_documentation,
         source_code=args.source_code,
-        state=args.state_file,
+        state_file_path=args.state,
         # output
         large_language_model=args.large_language_model,
         output_option=args.output,
