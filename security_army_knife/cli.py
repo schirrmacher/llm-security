@@ -1,11 +1,9 @@
 import os
 import json
-import time
 import logging
 import argparse
 
-import pandas as pd
-from typing import TextIO
+from typing import TextIO, Optional
 
 from security_army_knife.mistral_model import MistralModel
 from security_army_knife.base_model import BaseModel
@@ -13,7 +11,6 @@ from security_army_knife.application_agent import ApplicationAgent
 from security_army_knife.cve_categorizer_agent import (
     CVECategorizerAgent,
     CVECategory,
-    CategorizedCVE,
 )
 from security_army_knife.cve import CVE
 from security_army_knife.state_handler import StateHandler
@@ -36,11 +33,11 @@ def setup_logging(log_level):
 
 def run_security_army_knife(
     cve_description: TextIO,
-    architecture_diagram: TextIO,
-    dependency_list: TextIO,
-    api_documentation: TextIO,
-    source_code: str,
-    state_file_path: str,
+    architecture_diagram: Optional[TextIO],
+    dependency_list: Optional[TextIO],
+    api_documentation: Optional[TextIO],
+    source_code: Optional[str],
+    state_file_path: Optional[str],
     large_language_model: str,
     output_option: str,
     output_format: str,
@@ -92,12 +89,6 @@ def run_security_army_knife(
         logger.error(f"An error occurred: {e}")
         return 1
 
-    finally:
-        cve_description.close()
-        architecture_diagram.close()
-        dependency_list.close()
-        api_documentation.close()
-
 
 def is_valid_directory(path):
     """Check if the given path is a valid directory."""
@@ -138,7 +129,8 @@ def parse_arguments():
         "-arc",
         "--architecture_diagram",
         type=argparse.FileType("r"),
-        required=True,
+        default=None,
+        required=False,
         help="Path to the architecture diagram file (image or text)",
     )
 
@@ -146,7 +138,8 @@ def parse_arguments():
         "-dep",
         "--dependency_list",
         type=argparse.FileType("r"),
-        required=True,
+        default=None,
+        required=False,
         help="Path to the dependency list text file",
     )
 
@@ -154,7 +147,8 @@ def parse_arguments():
         "-api",
         "--api_documentation",
         type=argparse.FileType("r"),
-        required=True,
+        default=None,
+        required=False,
         help="Documentation of a system's API",
     )
 
@@ -162,7 +156,8 @@ def parse_arguments():
         "-src",
         "--source_code",
         type=is_valid_directory,
-        required=True,
+        default=None,
+        required=False,
         help="Path to the source code repository folder",
     )
 
