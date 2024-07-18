@@ -5,8 +5,15 @@ import argparse
 
 import pandas as pd
 from typing import TextIO
-from security_army_knife.mistral_agent import MistralAgent
-from llama_index.core.llms import ChatMessage
+
+from security_army_knife.mistral_model import MistralModel
+from security_army_knife.base_model import BaseModel
+from security_army_knife.application_agent import ApplicationAgent
+from security_army_knife.cve_categorizer_agent import (
+    CVECategorizerAgent,
+    CVECategory,
+)
+from security_army_knife.cve import CVE
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -35,137 +42,42 @@ def run_security_army_knife(
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
     try:
+
+        model: BaseModel
         if large_language_model == "Mistral":
+            model = MistralModel()
+        else:
+            raise ValueError(f"{large_language_model} not supported.")
 
-            mistral = MistralAgent()
+        try:
+            advisories = json.loads(cve_description.read())
+        except:
+            raise ValueError(
+                f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
+            )
 
-            try:
-                advisories = json.loads(cve_description.read())
-            except:
-                raise ValueError(
-                    f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
-                )
+        cves = CVE.from_json_list(advisories)[:2]
 
-            comparison_results = []
+        categorizer = CVECategorizerAgent(model)
+        categorized_cves = categorizer.categorize(cves=cves)
 
-            for advisory in advisories:
-                logger.info(f"+++ Analyzing {advisory['name']} +++")
+        for c in categorized_cves:
+            print(f"{c.name}: {c.category}")
 
-                task = """
-                Decide about the severity of the following CVE.
-                Add a short explanation about the vulnerability and why you decided to choose the severity."""
-                task += f"{advisory['name']}: {advisory['description']}"
+        app_cves = [
+            e for e in categorized_cves if e.category == CVECategory.app
+        ]
+        app_cve_analyzer = ApplicationAgent(model)
+        analyzed_app_cves = app_cve_analyzer.categorize(cves=app_cves)
 
-                architecture_analysis = """
-                Now take the architecture diagram into consideration and adapt the severity.
-                """
-                architecture_analysis += architecture_diagram.read()
-
-                dependency_analysis = """
-                Now take the dependencies into consideration and change adapt the severity.
-                """
-                dependency_analysis += dependency_list.read()
-
-                context_knowledge = """
-                Now consider the following and change adapt the severity:
-                The targeted application is a Java microservice deployed in Google Kubernetes Engine (GKE) via a container.
-                We assume no local attacks only malicious requests from public internet or from another container.
-                We apply Java Eclipse Temurin the open source Java SE build based upon OpenJDK.
-                The application does not parse YAML files.
-                Availability is of high importance.
-                """
-
-                api_analysis = """
-                Challenge your analysis by looking at the API spec and adapt the severity.
-                We assume the API performs solid sanitization and only accepts described formats and files.
-                """
-                api_analysis += api_documentation.read()
-
-                messages = [
-                    ChatMessage(
-                        role="system",
-                        content="You are the accurate and professional security analyst.",
-                    ),
-                    ChatMessage(
-                        role="user",
-                        content=task,
-                    ),
-                    # ChatMessage(
-                    #     role="user",
-                    #     content=architecture_analysis,
-                    # ),
-                    ChatMessage(
-                        role="user",
-                        content=context_knowledge,
-                    ),
-                    ChatMessage(
-                        role="user",
-                        content=api_analysis,
-                    ),
-                ]
-                response = mistral.talk(messages, json=False)
-
-                formatting = f"Format the CVE analysis as JSON object with name, explanation, urgent (true or false), severity (low, medium, high), explanation: {response.message.content}"
-                formatted_response = mistral.talk(
-                    [
-                        ChatMessage(
-                            role="user",
-                            content=formatting,
-                        ),
-                    ],
-                    json=True,
-                )
-
-                try:
-                    llm_analysis = json.loads(
-                        formatted_response.message.content
-                    )
-                except Exception as e:
-                    logger.error(
-                        f"Issues parsing the Mistral JSON response: {e}"
-                    )
-
-                urgency_match = llm_analysis["urgent"] == advisory["urgent"]
-                severity_match = (
-                    llm_analysis["severity"].lower()
-                    == advisory["severity"].lower()
-                )
-
-                status = ""
-                if urgency_match and severity_match:
-                    status = "✅"
-                elif urgency_match:
-                    status = "🟡"
-                else:
-                    status = "❌"
-
-                comparison_results.append(
-                    {
-                        "Passed": status,
-                        "CVE": advisory["name"],
-                        "Urgency (human/machine)": f"{advisory['urgent']}/{llm_analysis['urgent']}",
-                        "Severity (human/machine)": f"{advisory['severity']}/{llm_analysis['severity']}",
-                        "Human Explanation": advisory["explanation"],
-                        "Machine Explanation": llm_analysis["explanation"],
-                    }
-                )
-
-                if urgency_match:
-                    print(f"> {llm_analysis['name']}, urgent: ✅")
-                else:
-                    print(
-                        f"> {llm_analysis['name']}, urgency match: ❌\n\n- machine: {llm_analysis['explanation']}\n- human: {advisory['explanation']}\n\n"
-                    )
-
-        timestamp = int(time.time())
-        result_df = pd.DataFrame(comparison_results)
-        result_df.to_html(f"{timestamp}-comparison.html", index=False)
+        for cve in analyzed_app_cves:
+            print(f"{cve.name}: {cve.category} {cve.code_queries}")
 
         return 0
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
-        return 1  # Error code
+        return 1
 
     finally:
         cve_description.close()
