@@ -72,8 +72,8 @@ class ApplicationAgent(BaseAgent):
         categorized_cves: list[ApplicationCVE] = []
         for cve in cves:
 
-            task = f"For the following CVE, how can you detect it in code? Create a recursive grep query, only if needed: {cve.to_json_string()}"
-            formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object."
+            task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json_string()}"
+            formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object. Leave the list empty if not applicable."
 
             messages = [
                 ChatMessage(

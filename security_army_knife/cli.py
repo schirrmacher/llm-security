@@ -23,9 +23,9 @@ ASCII_ART = """
 """
 
 
-def setup_logging():
+def setup_logging(log_level):
     logging.basicConfig(
-        level=logging.INFO,
+        level=log_level,
         format="%(message)s",
     )
     logger = logging.getLogger("SecurityArmyKnife")
@@ -175,6 +175,15 @@ def parse_arguments():
         help="Output format (text or json)",
     )
 
+    output_group.add_argument(
+        "-l",
+        "--log_level",
+        type=str,
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        default="INFO",
+        help="Set the logging level",
+    )
+
     args = parser.parse_args()
 
     # Validate the source_code argument to ensure it's a directory
@@ -187,8 +196,8 @@ def parse_arguments():
 
 
 def main():
-    setup_logging()
     args = parse_arguments()
+    setup_logging(args.log_level)
     result_code = run_security_army_knife(
         # input
         cve_description=args.cve_description,
