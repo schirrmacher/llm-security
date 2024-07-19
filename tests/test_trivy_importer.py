@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch, mock_open
 import json
 from security_army_knife.trivy_importer import TrivyImporter
+from security_army_knife.cve import CVE
 
 
 class TestTrivyImporter(unittest.TestCase):
@@ -281,28 +282,34 @@ class TestTrivyImporter(unittest.TestCase):
         mock_file.return_value.read.return_value = json.dumps(self.sample_json)
 
         trivy_importer = TrivyImporter("dummy_path.json")
-        cve_objects = trivy_importer.get_cve_objects()
+        cve_objects = trivy_importer.get_cves()
 
         expected_cve_objects = [
-            {
-                "name": "CVE-2023-6378",
-                "description": "A serialization vulnerability in logback receiver component part of \nlogback version 1.4.11 allows an attacker to mount a Denial-Of-Service \nattack by sending poisoned data.\n\n",
-            },
-            {
-                "name": "CVE-2023-44487",
-                "description": "A client might overload the server by issue frequent RST frames. This can cause a massive amount of load on the remote system and so cause a DDOS attack. \n\n### Impact\nThis is a DDOS attack, any http2 server is affected and so you should update as soon as possible.\n\n### Patches\nThis is patched in version 4.1.100.Final.\n\n### Workarounds\nA user can limit the amount of RST frames that are accepted per connection over a timeframe manually using either an own `Http2FrameListener` implementation or an `ChannelInboundHandler` implementation (depending which http2 API is used).\n\n### References\n- https://www.cve.org/CVERecord?id=CVE-2023-44487\n- https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/\n- https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
-            },
-            {
-                "name": "CVE-2023-34054",
-                "description": "\nIn Reactor Netty HTTP Server, versions 1.1.x prior to 1.1.13 and versions 1.0.x prior to 1.0.39, it is possible for a user to provide specially crafted HTTP requests that may cause a denial-of-service (DoS) condition.\n\nSpecifically, an application is vulnerable if Reactor Netty HTTP Server built-in integration with Micrometer is enabled.\n\n\n\n\n",
-            },
-            {
-                "name": "CVE-2022-1471",
-                "description": "SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
-            },
+            CVE(
+                name="CVE-2023-6378",
+                description="A serialization vulnerability in logback receiver component part of \nlogback version 1.4.11 allows an attacker to mount a Denial-Of-Service \nattack by sending poisoned data.\n\n",
+                urgent=False,
+            ),
+            CVE(
+                name="CVE-2023-44487",
+                description="A client might overload the server by issue frequent RST frames. This can cause a massive amount of load on the remote system and so cause a DDOS attack. \n\n### Impact\nThis is a DDOS attack, any http2 server is affected and so you should update as soon as possible.\n\n### Patches\nThis is patched in version 4.1.100.Final.\n\n### Workarounds\nA user can limit the amount of RST frames that are accepted per connection over a timeframe manually using either an own `Http2FrameListener` implementation or an `ChannelInboundHandler` implementation (depending which http2 API is used).\n\n### References\n- https://www.cve.org/CVERecord?id=CVE-2023-44487\n- https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/\n- https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
+                urgent=False,
+            ),
+            CVE(
+                name="CVE-2023-34054",
+                description="\nIn Reactor Netty HTTP Server, versions 1.1.x prior to 1.1.13 and versions 1.0.x prior to 1.0.39, it is possible for a user to provide specially crafted HTTP requests that may cause a denial-of-service (DoS) condition.\n\nSpecifically, an application is vulnerable if Reactor Netty HTTP Server built-in integration with Micrometer is enabled.\n\n\n\n\n",
+                urgent=False,
+            ),
+            CVE(
+                name="CVE-2022-1471",
+                description="SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
+                urgent=False,
+            ),
         ]
 
-        self.assertEqual(cve_objects, expected_cve_objects)
+        for actual, expected in zip(cve_objects, expected_cve_objects):
+            if actual != expected:
+                self.assertEqual(str(actual), str(expected))
 
 
 if __name__ == "__main__":

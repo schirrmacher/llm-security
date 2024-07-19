@@ -32,10 +32,7 @@ class TestParseArguments(unittest.TestCase):
 
         args = parse_arguments()
 
-        self.assertEqual(
-            simplify_string(args.cve_description.read()),
-            '[    {        "name": "CVE-202',
-        )
+        self.assertEqual(args.cve_list, "tests/files/cve-advisories.json")
         self.assertEqual(
             simplify_string(args.architecture_diagram.read()),
             "vars: {  d2-config: {    layou",

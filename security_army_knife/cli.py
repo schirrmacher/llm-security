@@ -12,6 +12,7 @@ from security_army_knife.cve_categorizer_agent import (
     CVECategorizerAgent,
     CVECategory,
 )
+from security_army_knife.trivy_importer import TrivyImporter
 from security_army_knife.cve import CVE
 from security_army_knife.state_handler import StateHandler
 
@@ -32,7 +33,8 @@ def setup_logging(log_level):
 
 
 def run_security_army_knife(
-    cve_description: TextIO,
+    cve_file_path: Optional[str],
+    trivy_file_path: Optional[str],
     architecture_diagram: Optional[TextIO],
     dependency_list: Optional[TextIO],
     api_documentation: Optional[TextIO],
@@ -54,13 +56,19 @@ def run_security_army_knife(
             raise ValueError(f"{large_language_model} not supported.")
 
         try:
-            advisories = json.loads(cve_description.read())
+            if trivy_file_path:
+                with open(trivy_file_path, "r") as file:
+                    advisories = file.read()
+                    cves = TrivyImporter(trivy_file_path).get_cves()
+            elif cve_file_path:
+                with open(cve_file_path, "r") as file:
+                    advisories = file.read()
+                    cves = CVE.from_json_list(advisories)
+
         except:
             raise ValueError(
                 f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
             )
-
-        cves = CVE.from_json_list(advisories)
 
         categorized_cves = state.get_categorized_cves()
         if len(categorized_cves) == 0:
@@ -117,12 +125,22 @@ def parse_arguments():
         "output options", "Options for the output format and content"
     )
 
-    input_group.add_argument(
+    cve_input_group = input_group.add_mutually_exclusive_group(required=True)
+
+    cve_input_group.add_argument(
         "-cve",
-        "--cve_description",
-        type=argparse.FileType("r"),
-        required=True,
+        "--cve_list",
+        type=is_valid_file,
+        default=None,
         help="Path to the CVE description text file",
+    )
+
+    cve_input_group.add_argument(
+        "-trivy",
+        "--trivy_json",
+        type=is_valid_file,
+        default=None,
+        help="Path of the Trivy JSON file",
     )
 
     input_group.add_argument(
@@ -208,12 +226,6 @@ def parse_arguments():
 
     args = parser.parse_args()
 
-    # Validate the source_code argument to ensure it's a directory
-    if not os.path.isdir(args.source_code):
-        parser.error(
-            f"The source_code path '{args.source_code}' is not a valid directory"
-        )
-
     return args
 
 
@@ -222,7 +234,8 @@ def main():
     setup_logging(args.log_level)
     result_code = run_security_army_knife(
         # input
-        cve_description=args.cve_description,
+        cve_file_path=args.cve_list,
+        trivy_file_path=args.trivy_json,
         architecture_diagram=args.architecture_diagram,
         dependency_list=args.dependency_list,
         api_documentation=args.api_documentation,
