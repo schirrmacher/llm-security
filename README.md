@@ -9,9 +9,11 @@ This repository contains security utilities. The features will be announced soon
 First run `make setup`, then:
 
 ```
-sak -cve examples/cve-advisories.txt \
+sak/bin/sak -cve examples/cve-advisories.json \
     -dep examples/dependencies.csv \
-    -arc examples/architecture.drawio.html
+    -arc examples/architecture.d2 \
+    -api examples/swagger-open-api.json \
+    -src examples
 ```
 
 ## Developing
