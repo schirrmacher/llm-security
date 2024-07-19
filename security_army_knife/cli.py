@@ -11,6 +11,7 @@ from security_army_knife.application_agent import ApplicationAgent
 from security_army_knife.cve_categorizer_agent import (
     CVECategorizerAgent,
     CVECategory,
+    CategorizedCVE,
 )
 from security_army_knife.trivy_importer import TrivyImporter
 from security_army_knife.cve import CVE
@@ -45,57 +46,54 @@ def run_security_army_knife(
     output_format: str,
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
+
+    model: BaseModel
+    if large_language_model == "Mistral":
+        model = MistralModel()
+    else:
+        raise ValueError(f"{large_language_model} not supported.")
+
     try:
+        if trivy_file_path:
+            with open(trivy_file_path, "r") as file:
+                advisories = file.read()
+                cves = TrivyImporter(trivy_file_path).get_cves()
+        elif cve_file_path:
+            with open(cve_file_path, "r") as file:
+                advisories = file.read()
+                cves = CVE.from_json_list(advisories)
 
-        state = StateHandler(state_file_path)
+    except:
+        raise ValueError(
+            f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
+        )
 
-        model: BaseModel
-        if large_language_model == "Mistral":
-            model = MistralModel()
-        else:
-            raise ValueError(f"{large_language_model} not supported.")
+    state = StateHandler(state_file_path, input_cves=cves)
 
-        try:
-            if trivy_file_path:
-                with open(trivy_file_path, "r") as file:
-                    advisories = file.read()
-                    cves = TrivyImporter(trivy_file_path).get_cves()
-            elif cve_file_path:
-                with open(cve_file_path, "r") as file:
-                    advisories = file.read()
-                    cves = CVE.from_json_list(advisories)
+    ### CATEGORIZE STAGE ###
+    categorizer = CVECategorizerAgent(model)
+    to_be_categorized: list[CVE] = state.get_cves_to_be_categorized()
+    categorized_cves: list[CategorizedCVE] = categorizer.categorize(
+        cves=to_be_categorized
+    )
+    all_categorized_cves = state.store_categorized_cves(categorized_cves)
 
-        except:
-            raise ValueError(
-                f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
-            )
+    for cve in all_categorized_cves:
+        logger.info(f"Categorized: {cve.name} => {cve.category}")
 
-        categorized_cves = state.get_categorized_cves()
-        if len(categorized_cves) == 0:
-            categorizer = CVECategorizerAgent(model)
-            categorized_cves = categorizer.categorize(cves=cves)
-            state.store_categorized_cves(categorized_cves)
+    ### ANALYZE APPLICATION CVEs STAGE ###
+    app_cve_analyzer = ApplicationAgent(model)
+    analyzed_app_cves = state.get_application_cves_to_be_analyzed()
+    to_be_analyzed = [
+        e for e in analyzed_app_cves if e.category == CVECategory.app
+    ]
+    analyzed_app_cves = app_cve_analyzer.categorize(cves=to_be_analyzed)
+    all_application_cves = state.store_application_cves(analyzed_app_cves)
 
-        for c in categorized_cves:
-            print(f"{c.name}: {c.category}")
+    for cve in all_application_cves:
+        logger.info(f"Analyzed: {cve.name} => {cve.code_queries}")
 
-        analyzed_app_cves = state.get_application_cves()
-        if len(analyzed_app_cves) == 0:
-            app_cves = [
-                e for e in categorized_cves if e.category == CVECategory.app
-            ]
-            app_cve_analyzer = ApplicationAgent(model)
-            analyzed_app_cves = app_cve_analyzer.categorize(cves=app_cves)
-            state.store_application_cves(analyzed_app_cves)
-
-        for cve in analyzed_app_cves:
-            print(f"{cve.name}: {cve.category} {cve.code_queries}")
-
-        return 0
-
-    except Exception as e:
-        logger.error(f"An error occurred: {e}")
-        return 1
+    return 0
 
 
 def is_valid_directory(path):
