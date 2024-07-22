@@ -2,9 +2,9 @@ import unittest
 import json
 from unittest.mock import mock_open, patch
 
-from security_army_knife.application_agent import ApplicationCVE
-from security_army_knife.cve_categorizer_agent import (
-    CategorizedCVE,
+from security_army_knife.agents.source_code_agent import CVE
+from security_army_knife.agents.cve_categorizer import (
+    CVE,
     CVECategory,
 )
 from security_army_knife.cve import CVE
@@ -16,17 +16,14 @@ class TestStateHandler(unittest.TestCase):
         CVE(
             name="CVE-2023-34054",
             description="In Reactor Netty HTTP Server, versions 1.1.x prior to 1.1.13 and versions 1.0.x prior to 1.0.39, it is possible for a user to provide specially crafted HTTP requests that may cause a denial-of-service (DoS) condition. Specifically, an application is vulnerable if Reactor Netty HTTP Server built-in integration with Micrometer is enabled.",
-            urgent=False,
         ),
         CVE(
             name="CVE-2022-1471",
             description="SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.",
-            urgent=False,
         ),
         CVE(
             name="CVE-2023-0001",
             description="Description for CVE-2023-0001",
-            urgent=False,
         ),
     ]
 
@@ -35,13 +32,11 @@ class TestStateHandler(unittest.TestCase):
             {
                 "name": "CVE-2023-0001",
                 "description": "Description for CVE-2023-0001",
-                "urgent": True,
                 "category": "Category1",
             },
             {
                 "name": "CVE-2023-0002",
                 "description": "Description for CVE-2023-0002",
-                "urgent": False,
                 "category": "Category2",
             },
         ],
@@ -49,14 +44,12 @@ class TestStateHandler(unittest.TestCase):
             {
                 "name": "CVE-2023-0003",
                 "description": "Description for CVE-2023-0003",
-                "urgent": True,
                 "category": "application",
                 "code_queries": ["query1", "query2"],
             },
             {
                 "name": "CVE-2023-0004",
                 "description": "Description for CVE-2023-0004",
-                "urgent": False,
                 "category": "application",
                 "code_queries": ["query3"],
             },
@@ -89,11 +82,16 @@ class TestStateHandler(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open, read_data=json.dumps(state))
     def test_store_categorized_cves(self, mock_file):
         state_handler = StateHandler("dummypath.json", self.input_cves)
-        new_categorized_cves = [
-            CategorizedCVE.from_cve(self.input_cves[0], CVECategory.app),
-            CategorizedCVE.from_cve(self.input_cves[1], CVECategory.app),
-            CategorizedCVE.from_cve(self.input_cves[2], CVECategory.app),
-        ]
+        new_categorized_cves = []
+
+        for cve in self.input_cves:
+            new_categorized_cves.append(
+                CVE(
+                    name=cve.name,
+                    description=cve.description,
+                    category=CVECategory.app,
+                ),
+            )
 
         all_categorized_cves = state_handler.store_categorized_cves(
             new_categorized_cves
@@ -111,12 +109,10 @@ class TestStateHandler(unittest.TestCase):
 
         for cve in self.input_cves:
             new_application_cves.append(
-                ApplicationCVE(
+                CVE(
                     name=cve.name,
                     description=cve.description,
-                    urgent=cve.urgent,
                     category=CVECategory.app,
-                    code_queries=[],
                 ),
             )
 

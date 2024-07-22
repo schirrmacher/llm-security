@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 from security_army_knife.cve import CVE
 from security_army_knife.base_model import BaseModel
-from security_army_knife.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import BaseAgent
 from security_army_knife.agent_tree import AgentTree
 
 
@@ -44,7 +44,6 @@ class TestAgentTree(unittest.TestCase):
             CVE(
                 name="CVE-2022-1471",
                 description="SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
-                urgent=False,
             ),
         )
 

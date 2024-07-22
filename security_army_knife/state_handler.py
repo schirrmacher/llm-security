@@ -1,8 +1,8 @@
 import json
 
 from security_army_knife.cve import CVE
-from security_army_knife.cve_categorizer_agent import CategorizedCVE
-from security_army_knife.application_agent import ApplicationCVE
+from security_army_knife.agents.cve_categorizer import CVE
+from security_army_knife.agents.source_code_agent import CVE
 
 
 class StateHandler:
@@ -18,11 +18,11 @@ class StateHandler:
             with open(file_path, "r") as file:
                 data = json.load(file)
                 categorized_cves = [
-                    CategorizedCVE.from_json(item)
+                    CVE.from_json(item)
                     for item in data.get("categorized_cves", [])
                 ]
                 application_cves = [
-                    ApplicationCVE.from_json(item)
+                    CVE.from_json(item)
                     for item in data.get("application_cves", [])
                 ]
         except FileNotFoundError:
@@ -42,12 +42,12 @@ class StateHandler:
             )
         )
 
-    def get_cves_to_be_categorized(self) -> list[CategorizedCVE]:
+    def get_cves_to_be_categorized(self) -> list[CVE]:
         return self._get_diff(
             cve_list=self.input_cves, analyzed_cves=self.categorized_cves
         )
 
-    def get_application_cves_to_be_analyzed(self) -> list[ApplicationCVE]:
+    def get_application_cves_to_be_analyzed(self) -> list[CVE]:
         return self._get_diff(
             cve_list=self.categorized_cves,
             analyzed_cves=self.application_cves,
@@ -63,8 +63,8 @@ class StateHandler:
         return unique_cves
 
     def store_categorized_cves(
-        self, new_categorized_cves: list[CategorizedCVE]
-    ) -> list[CategorizedCVE]:
+        self, new_categorized_cves: list[CVE]
+    ) -> list[CVE]:
         all_categorized_cves = self._remove_duplicate_cves(
             self.categorized_cves + new_categorized_cves
         )
@@ -76,8 +76,8 @@ class StateHandler:
         return all_categorized_cves
 
     def store_application_cves(
-        self, new_application_cves: list[ApplicationCVE]
-    ) -> list[ApplicationCVE]:
+        self, new_application_cves: list[CVE]
+    ) -> list[CVE]:
         all_application_cves = self._remove_duplicate_cves(
             self.application_cves + new_application_cves
         )
@@ -89,8 +89,8 @@ class StateHandler:
 
     def save_data(
         self,
-        categorized_cves: list[CategorizedCVE],
-        application_cves: list[ApplicationCVE],
+        categorized_cves: list[CVE],
+        application_cves: list[CVE],
     ):
         data = {
             "categorized_cves": [cve.to_json() for cve in categorized_cves],

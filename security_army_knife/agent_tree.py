@@ -2,7 +2,7 @@ import networkx as nx
 from typing import Callable
 
 from security_army_knife.cve import CVE
-from security_army_knife.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import BaseAgent
 
 
 def build_dependency_graph(agents: list[BaseAgent]) -> nx.DiGraph:

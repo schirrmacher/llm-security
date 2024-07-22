@@ -56,7 +56,6 @@ class TrivyImporter:
             cve_object = CVE(
                 name=vulnerability.get("VulnerabilityID"),
                 description=vulnerability.get("Description"),
-                urgent=False,
             )
             cve_objects.append(cve_object)
         return cve_objects
