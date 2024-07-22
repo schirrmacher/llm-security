@@ -29,11 +29,13 @@ class AgentTree:
 
     agents: list[BaseAgent]
 
-    def __init__(self, agents: BaseAgent):
+    def __init__(self, agents: list[BaseAgent]):
         self.agents = agents
 
     def traverse(
-        self, for_agent: Callable[[BaseAgent, CVE], None], cve: CVE
+        self,
+        for_agent: Callable[[BaseAgent, list[CVE]], list[CVE]],
+        cve_list: list[CVE],
     ) -> None:
 
         order = resolve_dependencies(self.agents)
@@ -41,4 +43,4 @@ class AgentTree:
 
         for agent_name in order:
             agent = agent_map[agent_name]
-            for_agent(agent, cve)
+            cve_list = for_agent(agent, cve_list)

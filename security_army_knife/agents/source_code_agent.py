@@ -9,14 +9,16 @@ from security_army_knife.cve import CVE
 
 class ApplicationAgent(BaseAgent):
 
+    dependencies = ["CVECategorizerAgent"]
+
     def __init__(self, model):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")
 
-    def categorize(self, cves: list[CVE]) -> list[CVE]:
+    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
 
         categorized_cves: list[CVE] = []
-        for cve in cves:
+        for cve in cve_list:
 
             task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object. Leave the list empty if not applicable."
@@ -40,17 +42,11 @@ class ApplicationAgent(BaseAgent):
                 response = self.model.talk(messages, json=True)
                 self.logger.debug(response.message.content)
                 json_object = json.loads(response.message.content)
-                cve_categorized = CVE.from_categorized_cve(
-                    cve, json_object["code_queries"]
-                )
-                categorized_cves.append(cve_categorized)
+                cve.code_analysis.queries = json_object["code_queries"]
+                categorized_cves.append(cve)
             except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed: {e}"
                 )
-                categorized_cves.append(
-                    CVE.from_categorized_cve(
-                        categorized_cve=cve, code_queries=[]
-                    )
-                )
+                cve.code_analysis.queries = []
         return categorized_cves

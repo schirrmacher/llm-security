@@ -9,14 +9,16 @@ from security_army_knife.cve import CVE, CVECategory
 
 class CVECategorizerAgent(BaseAgent):
 
+    dependencies = []
+
     def __init__(self, model):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")
 
-    def categorize(self, cves: list[CVE]) -> list[CVE]:
+    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
 
         categorized_cves: list[CVE] = []
-        for cve in cves:
+        for cve in cve_list:
 
             task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'category' with one of: os, distro, app."

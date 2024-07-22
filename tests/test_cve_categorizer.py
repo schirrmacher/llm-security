@@ -30,7 +30,7 @@ class TestCVECategorizerAgent(unittest.TestCase):
 
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.categorize([cve])
+        categorized_cves = agent.analyze([cve])
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)
@@ -57,7 +57,7 @@ class TestCVECategorizerAgent(unittest.TestCase):
 
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.categorize([cve])
+        categorized_cves = agent.analyze([cve])
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)
