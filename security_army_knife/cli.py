@@ -7,11 +7,11 @@ from typing import TextIO, Optional
 
 from security_army_knife.mistral_model import MistralModel
 from security_army_knife.base_model import BaseModel
-from security_army_knife.application_agent import ApplicationAgent
-from security_army_knife.cve_categorizer_agent import (
+from security_army_knife.agents.source_code_agent import ApplicationAgent
+from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
     CVECategory,
-    CategorizedCVE,
+    CVE,
 )
 from security_army_knife.trivy_importer import TrivyImporter
 from security_army_knife.cve import CVE
@@ -71,9 +71,7 @@ def run_security_army_knife(
     ### CATEGORIZE STAGE ###
     categorizer = CVECategorizerAgent(model)
     to_be_categorized: list[CVE] = state.get_cves_to_be_categorized()
-    categorized_cves: list[CategorizedCVE] = categorizer.categorize(
-        cves=to_be_categorized
-    )
+    categorized_cves: list[CVE] = categorizer.categorize(cves=to_be_categorized)
     all_categorized_cves = state.store_categorized_cves(categorized_cves)
 
     for cve in all_categorized_cves:
