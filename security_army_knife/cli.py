@@ -60,13 +60,11 @@ def run_security_army_knife(
                 cves = TrivyImporter(trivy_file_path).get_cves()
         elif cve_file_path:
             with open(cve_file_path, "r") as file:
-                advisories = file.read()
+                advisories = json.loads(file.read())
                 cves = CVE.from_json_list(advisories)
 
-    except:
-        raise ValueError(
-            f"The CVEs must be formatted as JSON list with objects containing 'name' and 'description' attributes."
-        )
+    except Exception as e:
+        raise ValueError(f"There are issues with parsing CVEs from: {e}")
 
     state = StateHandler(state_file_path, input_cves=cves)
 
