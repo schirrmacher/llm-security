@@ -1,4 +1,4 @@
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 from security_army_knife.base_model import BaseModel
 
 
@@ -11,4 +11,4 @@ class BaseAgent:
         self.dependencies = dependencies
 
     def analyze(self, cve_list: list[CVE]) -> list[CVE]:
-        pass
+        return cve_list

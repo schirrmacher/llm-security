@@ -3,7 +3,7 @@ import json
 import unittest
 from unittest.mock import patch, MagicMock
 
-from security_army_knife.cve import CVE, CVECategory
+from security_army_knife.analysis.cve import CVE, CVECategory
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 
 

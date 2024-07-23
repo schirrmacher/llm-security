@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, mock_open
 import json
 from security_army_knife.trivy_importer import TrivyImporter
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 
 
 class TestTrivyImporter(unittest.TestCase):

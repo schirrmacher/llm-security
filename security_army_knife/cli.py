@@ -10,12 +10,10 @@ from security_army_knife.base_model import BaseModel
 from security_army_knife.agents.source_code_agent import ApplicationAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
-    CVECategory,
     CVE,
 )
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 from security_army_knife.agent_tree import AgentTree
-from security_army_knife.state_handler import StateHandler
 from security_army_knife.agents.base_agent import BaseAgent
 from security_army_knife.trivy_importer import TrivyImporter
 
@@ -68,7 +66,6 @@ def run_security_army_knife(
     except Exception as e:
         raise ValueError(f"There are issues with parsing CVEs from: {e}")
 
-    state = StateHandler(state_file_path, input_cves=cve_list)
     tree = AgentTree([CVECategorizerAgent(model), ApplicationAgent(model)])
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):

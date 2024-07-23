@@ -1,7 +1,7 @@
 import networkx as nx
 from typing import Callable
 
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 from security_army_knife.agents.base_agent import BaseAgent
 
 

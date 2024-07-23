@@ -1,7 +1,7 @@
 import json
 from typing import List, Dict, Any
 
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 
 
 class TrivyImporter:

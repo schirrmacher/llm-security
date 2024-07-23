@@ -4,7 +4,7 @@ import logging
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import BaseAgent
 
-from security_army_knife.cve import CVE
+from security_army_knife.analysis.cve import CVE
 
 
 class ApplicationAgent(BaseAgent):
