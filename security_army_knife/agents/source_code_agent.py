@@ -21,7 +21,9 @@ class ApplicationAgent(BaseAgent):
         for cve in cve_list:
 
             if cve.code_analysis:
-                logging.debug(f"{cve.name}, already analyzed")
+                logging.info(
+                    f"{self.__class__.__name__}: {cve.name}, already analyzed"
+                )
                 continue
 
             task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json()}"
