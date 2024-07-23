@@ -17,7 +17,6 @@ class CVECategorizerAgent(BaseAgent):
 
     def analyze(self, cve_list: list[CVE]) -> list[CVE]:
 
-        categorized_cves: list[CVE] = []
         for cve in cve_list:
 
             if cve.category != CVECategory.unknown:
@@ -44,12 +43,12 @@ class CVECategorizerAgent(BaseAgent):
             try:
                 response = self.model.talk(messages, json=True)
                 json_object = json.loads(response.message.content)
-                cve_categorized = CVE.from_json(json_object)
-                categorized_cves.append(cve_categorized)
+                cve.category = json_object.get("category", CVECategory.unknown)
+
             except:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed."
                 )
                 cve.category = CVECategory.unknown
-                categorized_cves.append(cve)
-        return categorized_cves
+
+        return cve_list

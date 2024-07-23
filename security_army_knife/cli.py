@@ -66,6 +66,9 @@ def run_security_army_knife(
     except Exception as e:
         raise ValueError(f"There are issues with parsing CVEs from: {e}")
 
+    if state_file_path:
+        cve_list = CVE.load_and_merge_state(state_file_path, cve_list)
+
     tree = AgentTree([CVECategorizerAgent(model), ApplicationAgent(model)])
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):

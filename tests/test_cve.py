@@ -25,6 +25,13 @@ class TestCVE(unittest.TestCase):
             "code_analysis": {"mock": "data"},
         }
 
+        self.new_cve_data = {
+            "name": "CVE-5678",
+            "description": "New CVE",
+            "category": CVECategory.app,
+            "code_analysis": {"mock": "new data"},
+        }
+
         # File path for testing persistence
         self.file_path = "test_cve_state.json"
 
@@ -109,6 +116,37 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(
             loaded_cves[0].code_analysis.to_json(), {"mock": "data"}
         )
+
+    def test_merge_cves(self):
+        cve1 = CVE.from_json(self.cve_data)
+        cve2 = CVE.from_json(self.new_cve_data)
+
+        merged_cves = CVE.merge_cves([cve1], [cve2])
+
+        self.assertEqual(len(merged_cves), 2)
+        self.assertEqual(merged_cves[0].name, "CVE-5678")
+        self.assertEqual(merged_cves[1].name, "CVE-1234")
+
+    def test_load_and_merge_state(self):
+        cve1 = CVE.from_json(self.cve_data)
+        new_cve = CVE.from_json(self.new_cve_data)
+
+        # Persist initial state
+        CVE.persist_state([cve1], self.file_path)
+
+        # Load and merge new CVEs
+        merged_cves = CVE.load_and_merge_state(self.file_path, [new_cve])
+
+        self.assertEqual(len(merged_cves), 2)
+        self.assertEqual(merged_cves[0].name, "CVE-5678")
+        self.assertEqual(merged_cves[1].name, "CVE-1234")
+
+        with open(self.file_path, "r") as file:
+            data = json.load(file)
+
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0]["name"], "CVE-5678")
+        self.assertEqual(data[1]["name"], "CVE-1234")
 
 
 if __name__ == "__main__":

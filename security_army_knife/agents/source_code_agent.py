@@ -18,7 +18,6 @@ class ApplicationAgent(BaseAgent):
 
     def analyze(self, cve_list: list[CVE]) -> list[CVE]:
 
-        categorized_cves: list[CVE] = []
         for cve in cve_list:
 
             if cve.code_analysis:
@@ -50,10 +49,10 @@ class ApplicationAgent(BaseAgent):
                 cve.code_analysis = CodeAnalysis(
                     queries=json_object["code_queries"]
                 )
-                categorized_cves.append(cve)
+
             except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed: {e}"
                 )
                 cve.code_analysis.queries = []
-        return categorized_cves
+        return cve_list

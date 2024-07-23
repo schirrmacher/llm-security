@@ -70,3 +70,23 @@ class CVE:
         with open(file_path, "r") as file:
             cve_list = json.load(file)
             return CVE.from_json_list(cve_list)
+
+    @staticmethod
+    def merge_cves(existing_cves: list, new_cves: list) -> list:
+        # Prefer to use existing CVEs because they might have been analyzed already
+        new_cve_dict = {cve.name: cve for cve in new_cves}
+
+        for existing_cve in existing_cves:
+            if existing_cve.name in new_cve_dict:
+                new_cve_dict[existing_cve.name] = existing_cve
+            else:
+                new_cve_dict[existing_cve.name] = existing_cve
+
+        return list(new_cve_dict.values())
+
+    @staticmethod
+    def load_and_merge_state(file_path: str, new_cves: list) -> list:
+        existing_cves = CVE.load_state(file_path)
+        merged_cves = CVE.merge_cves(existing_cves, new_cves)
+        CVE.persist_state(merged_cves, file_path)
+        return merged_cves
