@@ -35,4 +35,11 @@ jobs:
 
       - name: Run CLI
         run: |
-          sak/bin/sak --help
+          export MISTRALAI_API_KEY=DUMMY_API_KEY_NOT_USED_BECAUSE_OF_STATE_FILE
+          sak/bin/sak \
+            -cve examples/cve-advisories.json \
+            -dep examples/dependencies.csv \
+            -arc examples/architecture.d2 \
+            -api examples/swagger-open-api.json \
+            -src examples \
+            -s examples/state.json
