@@ -69,12 +69,22 @@ def run_security_army_knife(
     if state_file_path:
         cve_list = CVE.load_and_merge_state(state_file_path, cve_list)
 
-    tree = AgentTree(
-        [
-            CVECategorizerAgent(model),
-            SourceCodeAgent(model, source_code_path=source_code),
-        ]
-    )
+    agents = [CVECategorizerAgent(model)]
+
+    if source_code:
+        agents.append(SourceCodeAgent(model, source_code_path=source_code))
+
+    if architecture_diagram:
+        pass
+
+    if dependency_list:
+        pass
+
+    if dependency_list:
+        pass
+
+    if api_documentation:
+        pass
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")
@@ -82,6 +92,7 @@ def run_security_army_knife(
         CVE.persist_state(analyzed_cve_list, state_file_path)
         return analyzed_cve_list
 
+    tree = AgentTree(agents=agents)
     tree.traverse(handle_agent, cve_list=cve_list)
 
     for cve in cve_list:
