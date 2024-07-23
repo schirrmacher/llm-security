@@ -17,3 +17,11 @@ test:
 	@echo "Running tests..."
 	. sak/bin/activate; \
 	sak/bin/pytest tests
+
+state_remove_categories:
+	@echo "Manipulating state..."
+	jq 'map(del(.category))' state.json > temp_state.json && mv temp_state.json state.json
+	
+state_remove_code_analysis:
+	@echo "Manipulating state..."
+	jq 'map(del(.code_analysis))' state.json > temp_state.json && mv temp_state.json state.json
