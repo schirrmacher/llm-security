@@ -20,6 +20,9 @@ class CVECategorizerAgent(BaseAgent):
         categorized_cves: list[CVE] = []
         for cve in cve_list:
 
+            if cve.category != CVECategory.unknown:
+                continue
+
             task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'category' with one of: os, distro, app."
 

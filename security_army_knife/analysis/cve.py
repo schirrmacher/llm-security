@@ -61,9 +61,9 @@ class CVE:
         )
 
     @staticmethod
-    def persist_state(cves: list, file_path: str):
+    def persist_state(cve_list: list["CVE"], file_path: str):
         with open(file_path, "w") as file:
-            json.dump([cve.to_json() for cve in cves], file, indent=4)
+            json.dump([cve.to_json() for cve in cve_list], file, indent=4)
 
     @staticmethod
     def load_state(file_path: str) -> list:

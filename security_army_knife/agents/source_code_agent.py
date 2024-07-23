@@ -5,6 +5,7 @@ from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import BaseAgent
 
 from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.code_analysis import CodeAnalysis
 
 
 class ApplicationAgent(BaseAgent):
@@ -19,6 +20,10 @@ class ApplicationAgent(BaseAgent):
 
         categorized_cves: list[CVE] = []
         for cve in cve_list:
+
+            if cve.code_analysis:
+                logging.debug(f"{cve.name}, already analyzed")
+                continue
 
             task = f"For the following CVE, how can you detect it in code? Create a recursive full grep query, only if applicable: {cve.to_json()}"
             formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object. Leave the list empty if not applicable."
@@ -42,7 +47,9 @@ class ApplicationAgent(BaseAgent):
                 response = self.model.talk(messages, json=True)
                 self.logger.debug(response.message.content)
                 json_object = json.loads(response.message.content)
-                cve.code_analysis.queries = json_object["code_queries"]
+                cve.code_analysis = CodeAnalysis(
+                    queries=json_object["code_queries"]
+                )
                 categorized_cves.append(cve)
             except Exception as e:
                 self.logger.error(

@@ -70,7 +70,9 @@ def run_security_army_knife(
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")
-        return agent.analyze(cve_list=cve_list)
+        analyzed_cve_list = agent.analyze(cve_list=cve_list)
+        CVE.persist_state(analyzed_cve_list, state_file_path)
+        return analyzed_cve_list
 
     tree.traverse(handle_agent, cve_list=cve_list)
 
