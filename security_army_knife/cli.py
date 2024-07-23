@@ -7,7 +7,7 @@ from typing import TextIO, Optional
 
 from security_army_knife.mistral_model import MistralModel
 from security_army_knife.base_model import BaseModel
-from security_army_knife.agents.source_code_agent import ApplicationAgent
+from security_army_knife.agents.source_code_agent import SourceCodeAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
     CVE,
@@ -69,7 +69,12 @@ def run_security_army_knife(
     if state_file_path:
         cve_list = CVE.load_and_merge_state(state_file_path, cve_list)
 
-    tree = AgentTree([CVECategorizerAgent(model), ApplicationAgent(model)])
+    tree = AgentTree(
+        [
+            CVECategorizerAgent(model),
+            SourceCodeAgent(model, source_code_path=source_code),
+        ]
+    )
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")

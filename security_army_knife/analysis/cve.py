@@ -67,9 +67,13 @@ class CVE:
 
     @staticmethod
     def load_state(file_path: str) -> list:
-        with open(file_path, "r") as file:
-            cve_list = json.load(file)
-            return CVE.from_json_list(cve_list)
+        try:
+            with open(file_path, "r") as file:
+                cve_list = json.load(file)
+                return CVE.from_json_list(cve_list)
+        except (IOError, json.JSONDecodeError, TypeError) as e:
+            # Log the error if needed, e.g., print(e) or use a logging framework
+            return []
 
     @staticmethod
     def merge_cves(existing_cves: list, new_cves: list) -> list:

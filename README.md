@@ -36,7 +36,12 @@ Format code:
 make format
 ```
 
-Requirements:
+### Manipulate `state.json`
 
-- easy to run and launch without errors
-- chore: format code, comment purpose
+```
+# Remove categorization
+jq 'map(del(.category))' state.json > state.json
+
+# Remove code analysis
+jq 'map(del(.code_analysis))' state.json > state.json
+```
