@@ -3,7 +3,7 @@ import json
 import unittest
 from unittest.mock import patch, MagicMock
 
-from security_army_knife.cve import CVE, CVECategory
+from security_army_knife.analysis.cve import CVE, CVECategory
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 
 
@@ -30,7 +30,7 @@ class TestCVECategorizerAgent(unittest.TestCase):
 
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.categorize([cve])
+        categorized_cves = agent.analyze([cve])
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)
@@ -57,7 +57,7 @@ class TestCVECategorizerAgent(unittest.TestCase):
 
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.categorize([cve])
+        categorized_cves = agent.analyze([cve])
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)

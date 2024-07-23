@@ -10,12 +10,12 @@ from security_army_knife.base_model import BaseModel
 from security_army_knife.agents.source_code_agent import ApplicationAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
-    CVECategory,
     CVE,
 )
+from security_army_knife.analysis.cve import CVE
+from security_army_knife.agent_tree import AgentTree
+from security_army_knife.agents.base_agent import BaseAgent
 from security_army_knife.trivy_importer import TrivyImporter
-from security_army_knife.cve import CVE
-from security_army_knife.state_handler import StateHandler
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -57,37 +57,30 @@ def run_security_army_knife(
         if trivy_file_path:
             with open(trivy_file_path, "r") as file:
                 advisories = file.read()
-                cves = TrivyImporter(trivy_file_path).get_cves()
+                cve_list = TrivyImporter(trivy_file_path).get_cves()
         elif cve_file_path:
             with open(cve_file_path, "r") as file:
                 advisories = json.loads(file.read())
-                cves = CVE.from_json_list(advisories)
+                cve_list = CVE.from_json_list(advisories)
 
     except Exception as e:
         raise ValueError(f"There are issues with parsing CVEs from: {e}")
 
-    state = StateHandler(state_file_path, input_cves=cves)
+    if state_file_path:
+        cve_list = CVE.load_and_merge_state(state_file_path, cve_list)
 
-    ### CATEGORIZE STAGE ###
-    categorizer = CVECategorizerAgent(model)
-    to_be_categorized: list[CVE] = state.get_cves_to_be_categorized()
-    categorized_cves: list[CVE] = categorizer.categorize(cves=to_be_categorized)
-    all_categorized_cves = state.store_categorized_cves(categorized_cves)
+    tree = AgentTree([CVECategorizerAgent(model), ApplicationAgent(model)])
 
-    for cve in all_categorized_cves:
-        logger.info(f"Categorized: {cve.name} => {cve.category}")
+    def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
+        logger.info(f"+++ {agent.__class__.__name__} +++")
+        analyzed_cve_list = agent.analyze(cve_list=cve_list)
+        CVE.persist_state(analyzed_cve_list, state_file_path)
+        return analyzed_cve_list
 
-    ### ANALYZE APPLICATION CVEs STAGE ###
-    app_cve_analyzer = ApplicationAgent(model)
-    analyzed_app_cves = state.get_application_cves_to_be_analyzed()
-    to_be_analyzed = [
-        e for e in analyzed_app_cves if e.category == CVECategory.app
-    ]
-    analyzed_app_cves = app_cve_analyzer.categorize(cves=to_be_analyzed)
-    all_application_cves = state.store_application_cves(analyzed_app_cves)
+    tree.traverse(handle_agent, cve_list=cve_list)
 
-    for cve in all_application_cves:
-        logger.info(f"Analyzed: {cve.name} => {cve.code_queries}")
+    for cve in cve_list:
+        logger.info(cve)
 
     return 0
 
