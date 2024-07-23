@@ -87,14 +87,14 @@ def run_security_army_knife(
         pass
 
     def before_cve_analysis(cve: CVE):
-        logger.info(f"- Start analyzing {cve.name}")
+        logger.info(f"- analysis started {cve.name}")
 
     def after_cve_analysis(cve: CVE):
-        logger.info(f"  - Analyzed {cve.name}")
+        logger.info(f"  - analysis done")
         CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
 
     def when_skipped(cve: CVE):
-        logger.info(f"  - Skipping {cve.name}")
+        logger.info(f"  - skipped")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")
@@ -106,11 +106,12 @@ def run_security_army_knife(
         )
         return analyzed_cve_list
 
-    tree = AgentTree(agents=agents)
-    tree.traverse(handle_agent, cve_list=cve_list)
-
-    for cve in cve_list:
-        logger.info(cve)
+    try:
+        tree = AgentTree(agents=agents)
+        tree.traverse(handle_agent, cve_list=cve_list)
+    except KeyboardInterrupt:
+        logger.info("👋")
+        return 0
 
     return 0
 
