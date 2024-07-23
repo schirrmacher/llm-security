@@ -3,6 +3,7 @@ import json
 import logging
 
 from pathlib import Path
+from typing import Callable
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import BaseAgent
@@ -38,16 +39,22 @@ class SourceCodeAgent(BaseAgent):
                     matching_files.append(file_path)
         return matching_files
 
-    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
+    def analyze(
+        self,
+        cve_list: list[CVE],
+        before_cve_analyzed: Callable[[CVE], None],
+        after_cve_analyzed: Callable[[CVE], None],
+        when_cve_skipped: Callable[[CVE], None],
+    ) -> list[CVE]:
 
         all_file_paths = self._list_files_recursive(self.source_code_path)
 
         for cve in cve_list:
 
+            before_cve_analyzed(cve)
+
             if cve.code_analysis:
-                logging.info(
-                    f"{self.__class__.__name__}: {cve.name}, already analyzed"
-                )
+                when_cve_skipped(cve)
                 continue
 
             logging.info(f"{self.__class__.__name__}: analyzing {cve.name}")
@@ -83,9 +90,12 @@ class SourceCodeAgent(BaseAgent):
                 )
                 cve.code_analysis.affected_files = matches
 
+                after_cve_analyzed(cve)
+
             except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed: {e}"
                 )
+                when_cve_skipped(cve)
                 cve.code_analysis.queries = []
         return cve_list

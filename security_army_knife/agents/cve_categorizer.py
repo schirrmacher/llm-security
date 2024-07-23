@@ -1,6 +1,8 @@
 import json
 import logging
 
+from typing import Callable
+
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import BaseAgent
 
@@ -15,14 +17,20 @@ class CVECategorizerAgent(BaseAgent):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")
 
-    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
+    def analyze(
+        self,
+        cve_list: list[CVE],
+        before_cve_analyzed: Callable[[CVE], None],
+        after_cve_analyzed: Callable[[CVE], None],
+        when_cve_skipped: Callable[[CVE], None],
+    ) -> list[CVE]:
 
         for cve in cve_list:
 
+            before_cve_analyzed(cve)
+
             if cve.category != CVECategory.unknown:
-                logging.info(
-                    f"{self.__class__.__name__}: {cve.name}, already analyzed"
-                )
+                when_cve_skipped(cve)
                 continue
 
             logging.info(f"{self.__class__.__name__}: analyzing {cve.name}")
@@ -55,5 +63,8 @@ class CVECategorizerAgent(BaseAgent):
                     f"Response for {cve.name} could not be parsed."
                 )
                 cve.category = CVECategory.unknown
+                when_cve_skipped(cve)
+
+            after_cve_analyzed(cve)
 
         return cve_list

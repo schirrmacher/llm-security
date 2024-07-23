@@ -86,10 +86,24 @@ def run_security_army_knife(
     if api_documentation:
         pass
 
+    def before_cve_analysis(cve: CVE):
+        logger.info(f"- Start analyzing {cve.name}")
+
+    def after_cve_analysis(cve: CVE):
+        logger.info(f"  - Analyzed {cve.name}")
+        CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
+
+    def when_skipped(cve: CVE):
+        logger.info(f"  - Skipping {cve.name}")
+
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")
-        analyzed_cve_list = agent.analyze(cve_list=cve_list)
-        CVE.persist_state(analyzed_cve_list, state_file_path)
+        analyzed_cve_list = agent.analyze(
+            cve_list=cve_list,
+            before_cve_analyzed=before_cve_analysis,
+            after_cve_analyzed=after_cve_analysis,
+            when_cve_skipped=when_skipped,
+        )
         return analyzed_cve_list
 
     tree = AgentTree(agents=agents)
