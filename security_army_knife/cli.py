@@ -90,21 +90,18 @@ def run_security_army_knife(
     if api_documentation:
         pass
 
-    def before_cve_analysis(cve: CVE):
-        logger.info(f"= {cve.name}")
-
-    def after_cve_analysis(cve: CVE):
-        CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
-
     def handle_event(event: AgentEvent):
-        logger.info(f"  - {event.message}")
+        if event.event_type == AgentEventType.BEFORE_CVE_ANALYSIS:
+            logger.info(f"= {event.cve.name}")
+        elif event.event_type == AgentEventType.AFTER_CVE_ANALYSIS:
+            CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
+        elif event.event_type == AgentEventType.INFORMATION:
+            logger.info(f"  - {event.message}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
         logger.info(f"+++ {agent.__class__.__name__} +++")
         analyzed_cve_list = agent.analyze(
             cve_list=cve_list,
-            before_cve_analyzed=before_cve_analysis,
-            after_cve_analyzed=after_cve_analysis,
             handle_event=handle_event,
         )
         return analyzed_cve_list

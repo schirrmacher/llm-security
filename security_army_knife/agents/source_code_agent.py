@@ -46,8 +46,6 @@ class SourceCodeAgent(BaseAgent):
     def analyze(
         self,
         cve_list: list[CVE],
-        before_cve_analyzed: Callable[[CVE], None],
-        after_cve_analyzed: Callable[[CVE], None],
         handle_event: Callable[[AgentEvent], None],
     ) -> list[CVE]:
 
@@ -122,7 +120,12 @@ class SourceCodeAgent(BaseAgent):
                     )
                 )
 
-                after_cve_analyzed(cve)
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.AFTER_CVE_ANALYSIS,
+                        cve=cve,
+                    )
+                )
 
             except Exception as e:
                 self.logger.error(

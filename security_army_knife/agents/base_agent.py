@@ -6,7 +6,8 @@ from security_army_knife.base_model import BaseModel
 
 class AgentEventType:
     INFORMATION = "INFORMATION"
-    SKIPPED = "SKIPPED"
+    BEFORE_CVE_ANALYSIS = "BEFORE_CVE_ANALYSIS"
+    AFTER_CVE_ANALYSIS = "AFTER_CVE_ANALYSIS"
 
 
 class AgentEvent:
@@ -14,7 +15,7 @@ class AgentEvent:
         self,
         event_type: AgentEventType,
         cve: CVE,
-        message: str,
+        message: str = "",
     ):
         self.event_type = event_type
         self.cve = cve
@@ -32,11 +33,6 @@ class BaseAgent:
     def analyze(
         self,
         cve_list: list[CVE],
-        before_cve_analyzed: Callable[[CVE], None],
-        after_cve_analyzed: Callable[[CVE], None],
         handle_event: Callable[[AgentEvent], None],
     ) -> list[CVE]:
-        for cve in cve_list:
-            before_cve_analyzed(cve)
-            after_cve_analyzed(cve)
         return cve_list

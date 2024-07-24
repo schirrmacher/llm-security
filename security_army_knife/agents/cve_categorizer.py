@@ -24,14 +24,17 @@ class CVECategorizerAgent(BaseAgent):
     def analyze(
         self,
         cve_list: list[CVE],
-        before_cve_analyzed: Callable[[CVE], None],
-        after_cve_analyzed: Callable[[CVE], None],
         handle_event: Callable[[AgentEvent], None],
     ) -> list[CVE]:
 
         for cve in cve_list:
 
-            before_cve_analyzed(cve)
+            handle_event(
+                AgentEvent(
+                    AgentEventType.BEFORE_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
 
             if cve.category != CVECategory.unknown:
                 handle_event(
@@ -81,6 +84,11 @@ class CVECategorizerAgent(BaseAgent):
                     )
                 )
 
-            after_cve_analyzed(cve)
+            handle_event(
+                AgentEvent(
+                    AgentEventType.AFTER_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
 
         return cve_list

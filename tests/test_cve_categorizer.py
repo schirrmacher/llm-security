@@ -29,12 +29,6 @@ class TestCVECategorizerAgent(unittest.TestCase):
             description="Test CVE description",
         )
 
-        def before_cve_analysis(cve: CVE):
-            pass
-
-        def after_cve_analysis(cve: CVE):
-            pass
-
         def handle_event(event: AgentEvent):
             pass
 
@@ -42,8 +36,6 @@ class TestCVECategorizerAgent(unittest.TestCase):
         agent = CVECategorizerAgent(model=mock_model)
         categorized_cves = agent.analyze(
             [cve],
-            before_cve_analyzed=before_cve_analysis,
-            after_cve_analyzed=after_cve_analysis,
             handle_event=handle_event,
         )
 
@@ -70,12 +62,6 @@ class TestCVECategorizerAgent(unittest.TestCase):
             description="Test CVE description",
         )
 
-        def before_cve_analysis(cve: CVE):
-            pass
-
-        def after_cve_analysis(cve: CVE):
-            pass
-
         def handle_event(event: AgentEvent):
             pass
 
@@ -83,8 +69,6 @@ class TestCVECategorizerAgent(unittest.TestCase):
         agent = CVECategorizerAgent(model=mock_model)
         categorized_cves = agent.analyze(
             [cve],
-            before_cve_analyzed=before_cve_analysis,
-            after_cve_analyzed=after_cve_analysis,
             handle_event=handle_event,
         )
 
