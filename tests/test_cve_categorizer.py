@@ -3,6 +3,7 @@ import json
 import unittest
 from unittest.mock import patch, MagicMock
 
+from security_army_knife.agents.base_agent import AgentEvent
 from security_army_knife.analysis.cve import CVE, CVECategory
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 
@@ -28,9 +29,23 @@ class TestCVECategorizerAgent(unittest.TestCase):
             description="Test CVE description",
         )
 
+        def before_cve_analysis(cve: CVE):
+            pass
+
+        def after_cve_analysis(cve: CVE):
+            pass
+
+        def handle_event(event: AgentEvent):
+            pass
+
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.analyze([cve])
+        categorized_cves = agent.analyze(
+            [cve],
+            before_cve_analyzed=before_cve_analysis,
+            after_cve_analyzed=after_cve_analysis,
+            handle_event=handle_event,
+        )
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)
@@ -55,9 +70,23 @@ class TestCVECategorizerAgent(unittest.TestCase):
             description="Test CVE description",
         )
 
+        def before_cve_analysis(cve: CVE):
+            pass
+
+        def after_cve_analysis(cve: CVE):
+            pass
+
+        def handle_event(event: AgentEvent):
+            pass
+
         # Instantiate the agent and categorize the CVE
         agent = CVECategorizerAgent(model=mock_model)
-        categorized_cves = agent.analyze([cve])
+        categorized_cves = agent.analyze(
+            [cve],
+            before_cve_analyzed=before_cve_analysis,
+            after_cve_analyzed=after_cve_analysis,
+            handle_event=handle_event,
+        )
 
         # Check the result
         self.assertEqual(len(categorized_cves), 1)

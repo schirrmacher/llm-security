@@ -6,7 +6,11 @@ from pathlib import Path
 from typing import Callable
 
 from llama_index.core.llms import ChatMessage
-from security_army_knife.agents.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import (
+    BaseAgent,
+    AgentEvent,
+    AgentEventType,
+)
 from security_army_knife.base_model import BaseModel
 
 from security_army_knife.analysis.cve import CVE
@@ -44,17 +48,28 @@ class SourceCodeAgent(BaseAgent):
         cve_list: list[CVE],
         before_cve_analyzed: Callable[[CVE], None],
         after_cve_analyzed: Callable[[CVE], None],
-        when_cve_skipped: Callable[[CVE], None],
+        handle_event: Callable[[AgentEvent], None],
     ) -> list[CVE]:
 
         all_file_paths = self._list_files_recursive(self.source_code_path)
 
         for cve in cve_list:
 
-            before_cve_analyzed(cve)
+            handle_event(
+                AgentEvent(
+                    AgentEventType.BEFORE_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
 
             if cve.code_analysis:
-                when_cve_skipped(cve)
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message="skipped, already analyzed",
+                    )
+                )
                 continue
 
             logging.info(f"{self.__class__.__name__}: analyzing {cve.name}")
@@ -79,16 +94,33 @@ class SourceCodeAgent(BaseAgent):
 
             try:
                 response = self.model.talk(messages, json=True)
-                self.logger.debug(response.message.content)
+
                 json_object = json.loads(response.message.content)
-                cve.code_analysis = CodeAnalysis(
-                    queries=json_object.get("code_queries", [])
+
+                queries = json_object.get("queries", [])
+                cve.code_analysis = CodeAnalysis(queries=queries)
+
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"queries: {queries}",
+                    )
                 )
 
                 matches = self._apply_regexes_to_files(
                     files=all_file_paths, regexes=cve.code_analysis.queries
                 )
+
                 cve.code_analysis.affected_files = matches
+
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"affected: {matches}",
+                    )
+                )
 
                 after_cve_analyzed(cve)
 
@@ -96,6 +128,12 @@ class SourceCodeAgent(BaseAgent):
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed: {e}"
                 )
-                when_cve_skipped(cve)
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"skipped, due to error {e}",
+                    )
+                )
                 cve.code_analysis.queries = []
         return cve_list

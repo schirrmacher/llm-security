@@ -4,7 +4,11 @@ import logging
 from typing import Callable
 
 from llama_index.core.llms import ChatMessage
-from security_army_knife.agents.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import (
+    BaseAgent,
+    AgentEvent,
+    AgentEventType,
+)
 
 from security_army_knife.analysis.cve import CVE, CVECategory
 
@@ -22,7 +26,7 @@ class CVECategorizerAgent(BaseAgent):
         cve_list: list[CVE],
         before_cve_analyzed: Callable[[CVE], None],
         after_cve_analyzed: Callable[[CVE], None],
-        when_cve_skipped: Callable[[CVE], None],
+        handle_event: Callable[[AgentEvent], None],
     ) -> list[CVE]:
 
         for cve in cve_list:
@@ -30,7 +34,13 @@ class CVECategorizerAgent(BaseAgent):
             before_cve_analyzed(cve)
 
             if cve.category != CVECategory.unknown:
-                when_cve_skipped(cve)
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message="skipped, already analyzed",
+                    )
+                )
                 continue
 
             logging.info(f"{self.__class__.__name__}: analyzing {cve.name}")
@@ -58,12 +68,18 @@ class CVECategorizerAgent(BaseAgent):
                 json_object = json.loads(response.message.content)
                 cve.category = json_object.get("category", CVECategory.unknown)
 
-            except:
+            except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed."
                 )
                 cve.category = CVECategory.unknown
-                when_cve_skipped(cve)
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"skipped, due to error {e}",
+                    )
+                )
 
             after_cve_analyzed(cve)
 
