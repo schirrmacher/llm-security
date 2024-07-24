@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Type
 
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.base_model import BaseModel
@@ -24,7 +24,7 @@ class AgentEvent:
 
 class BaseAgent:
 
-    dependencies: list[str]
+    dependencies: list[Type]
 
     def __init__(self, model: BaseModel, dependencies: list[str] = []):
         self.model = model

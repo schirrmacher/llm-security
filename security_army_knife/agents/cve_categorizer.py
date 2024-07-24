@@ -1,7 +1,7 @@
 import json
 import logging
 
-from typing import Callable
+from typing import Callable, Type
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
@@ -15,7 +15,7 @@ from security_army_knife.analysis.cve import CVE, CVECategory
 
 class CVECategorizerAgent(BaseAgent):
 
-    dependencies = []
+    dependencies: list[Type] = []
 
     def __init__(self, model):
         super().__init__(model=model)

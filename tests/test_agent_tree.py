@@ -29,8 +29,8 @@ class TestAgentTree(unittest.TestCase):
         model = MagicMock(spec=BaseModel)
 
         agent_a = AgentA(model, [])
-        agent_b = AgentB(model, ["AgentA"])
-        agent_c = AgentC(model, ["AgentA", "AgentB"])
+        agent_b = AgentB(model, [AgentA])
+        agent_c = AgentC(model, [AgentA, AgentB])
 
         agents = [agent_a, agent_b, agent_c]
         agent_tree = AgentTree(agents)

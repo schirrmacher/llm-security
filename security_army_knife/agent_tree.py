@@ -11,7 +11,7 @@ def build_dependency_graph(agents: list[BaseAgent]) -> nx.DiGraph:
         agent_name = agent.__class__.__name__
         G.add_node(agent_name)
         for dependency in agent.dependencies:
-            G.add_edge(dependency, agent_name)
+            G.add_edge(dependency.__name__, agent_name)
 
     return G
 

@@ -3,7 +3,7 @@ import json
 import logging
 
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Type
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
@@ -13,13 +13,14 @@ from security_army_knife.agents.base_agent import (
 )
 from security_army_knife.base_model import BaseModel
 
+from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 
 
 class SourceCodeAgent(BaseAgent):
 
-    dependencies = ["CVECategorizerAgent"]
+    dependencies: list[Type] = [CVECategorizerAgent]
 
     def __init__(self, model: BaseModel, source_code_path: str):
         super().__init__(model=model)
