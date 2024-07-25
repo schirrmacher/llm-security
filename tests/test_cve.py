@@ -1,7 +1,9 @@
-import unittest
-import json
 import os
+import json
+import unittest
+
 from unittest.mock import MagicMock
+from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 from security_army_knife.analysis.cve import (
     CVE,
@@ -12,74 +14,136 @@ from security_army_knife.analysis.cve import (
 class TestCVE(unittest.TestCase):
 
     def setUp(self):
-        # Create a mock CodeAnalysis object
-        self.mock_code_analysis = MagicMock(spec=CodeAnalysis)
-        self.mock_code_analysis.to_json.return_value = {"mock": "data"}
-        self.mock_code_analysis.__str__.return_value = "Mock Code Analysis"
+        self.file_path = "test_cve_state.json"
 
-        # Example CVE data
+        self.mock_code_analysis = CodeAnalysis(
+            queries=["query1"], affected_files=["file1"]
+        )
+        self.mock_code_analysis_json = self.mock_code_analysis.to_json()
+
         self.cve_data = {
             "name": "CVE-1234",
             "description": "Example CVE",
             "category": CVECategory.os,
-            "code_analysis": {"mock": "data"},
+            "code_analysis": self.mock_code_analysis_json,
         }
 
         self.new_cve_data = {
             "name": "CVE-5678",
-            "description": "New CVE",
+            "description": "Another CVE",
             "category": CVECategory.app,
-            "code_analysis": {"mock": "new data"},
+            "code_analysis": {
+                "queries": ["query2"],
+                "affected_files": ["file2"],
+            },
         }
 
-        # File path for testing persistence
-        self.file_path = "test_cve_state.json"
-
     def tearDown(self):
-        # Clean up the test file if it exists
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
 
-    def test_cve_initialization(self):
-        cve = CVE(
-            name="CVE-1234",
-            description="Example CVE",
-            category=CVECategory.os,
-            code_analysis=self.mock_code_analysis,
+    def test_code_analysis(self):
+        # Test initialization
+        code_analysis = CodeAnalysis(
+            queries=["query1", "query2"], affected_files=["file1", "file2"]
+        )
+        self.assertEqual(code_analysis.queries, ["query1", "query2"])
+        self.assertEqual(code_analysis.affected_files, ["file1", "file2"])
+
+        # Test from_json method
+        json_data = {"queries": ["query3"], "affected_files": ["file3"]}
+        code_analysis_from_json = CodeAnalysis.from_json(json_data)
+        self.assertEqual(code_analysis_from_json.queries, ["query3"])
+        self.assertEqual(code_analysis_from_json.affected_files, ["file3"])
+
+        # Test to_json method
+        self.assertEqual(code_analysis_from_json.to_json(), json_data)
+
+        # Test __str__ method
+        self.assertEqual(
+            str(code_analysis),
+            "Code Analysis:\n  Queries: query1, query2\n  Affected Files: file1, file2",
         )
 
-        self.assertEqual(cve.name, "CVE-1234")
-        self.assertEqual(cve.description, "Example CVE")
-        self.assertEqual(cve.category, CVECategory.os)
-        self.assertEqual(cve.code_analysis, self.mock_code_analysis)
+    def test_api_spec_analysis(self):
+        # Test initialization
+        api_spec_analysis = APISpecAnalysis(
+            critical=True, explanation="Critical issue found"
+        )
+        self.assertTrue(api_spec_analysis.critical)
+        self.assertEqual(api_spec_analysis.explanation, "Critical issue found")
 
-    def test_cve_from_json(self):
-        # Mock the from_json method of CodeAnalysis
-        CodeAnalysis.from_json = MagicMock(return_value=self.mock_code_analysis)
+        # Test from_json method
+        json_data = {"critical": False, "explanation": "Minor issue"}
+        api_spec_from_json = APISpecAnalysis.from_json(json_data)
+        self.assertFalse(api_spec_from_json.critical)
+        self.assertEqual(api_spec_from_json.explanation, "Minor issue")
 
-        cve = CVE.from_json(self.cve_data)
+        # Test to_json method
+        self.assertEqual(api_spec_from_json.to_json(), json_data)
 
-        self.assertEqual(cve.name, "CVE-1234")
-        self.assertEqual(cve.description, "Example CVE")
-        self.assertEqual(cve.category, CVECategory.os)
-        self.assertEqual(cve.code_analysis, self.mock_code_analysis)
-
-    def test_cve_to_json(self):
-        cve = CVE(
-            name="CVE-1234",
-            description="Example CVE",
-            category=CVECategory.os,
-            code_analysis=self.mock_code_analysis,
+        # Test __str__ method
+        self.assertEqual(
+            str(api_spec_analysis),
+            "API Spec Analysis:\n  Critical: True\n  Explanation: Critical issue found",
         )
 
-        expected_json = {
-            "name": "CVE-1234",
-            "description": "Example CVE",
-            "category": CVECategory.os,
-            "code_analysis": {"mock": "data"},
+    def test_cve(self):
+        # Test initialization
+        code_analysis = CodeAnalysis(
+            queries=["query1"], affected_files=["file1"]
+        )
+        api_spec_analysis = APISpecAnalysis(
+            critical=False, explanation="No critical issues"
+        )
+        cve = CVE(
+            name="CVE-1234",
+            description="Test CVE",
+            category=CVECategory.os,
+            code_analysis=code_analysis,
+            api_spec_analysis=api_spec_analysis,
+        )
+        self.assertEqual(cve.name, "CVE-1234")
+        self.assertEqual(cve.description, "Test CVE")
+        self.assertEqual(cve.category, CVECategory.os)
+        self.assertEqual(cve.code_analysis, code_analysis)
+        self.assertEqual(cve.api_spec_analysis, api_spec_analysis)
+
+        # Test from_json method
+        json_data = {
+            "name": "CVE-5678",
+            "description": "Another CVE",
+            "category": CVECategory.app,
+            "code_analysis": {
+                "queries": ["query2"],
+                "affected_files": ["file2"],
+            },
+            "api_spec_analysis": {
+                "critical": True,
+                "explanation": "Critical issue found",
+            },
         }
+        cve_from_json = CVE.from_json(json_data)
+        self.assertEqual(cve_from_json.name, "CVE-5678")
+        self.assertEqual(cve_from_json.description, "Another CVE")
+        self.assertEqual(cve_from_json.category, CVECategory.app)
+        self.assertEqual(cve_from_json.code_analysis.queries, ["query2"])
+        self.assertEqual(cve_from_json.code_analysis.affected_files, ["file2"])
+        self.assertTrue(cve_from_json.api_spec_analysis.critical)
+        self.assertEqual(
+            cve_from_json.api_spec_analysis.explanation, "Critical issue found"
+        )
 
-        self.assertEqual(cve.to_json(), expected_json)
+        # Test to_json method
+        self.assertEqual(cve_from_json.to_json(), json_data)
+
+        # Test __str__ method
+        self.assertEqual(
+            str(cve),
+            "CVE Name: CVE-1234\nDescription: Test CVE\nCategory: os\n"
+            "Code Analysis:\n  Queries: query1\n  Affected Files: file1\n"
+            "API Spec Analysis:\n  Critical: False\n  Explanation: No critical issues",
+        )
 
     def test_cve_persist_state(self):
         cve = CVE(
@@ -114,7 +178,7 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(loaded_cves[0].description, "Example CVE")
         self.assertEqual(loaded_cves[0].category, CVECategory.os)
         self.assertEqual(
-            loaded_cves[0].code_analysis.to_json(), {"mock": "data"}
+            loaded_cves[0].code_analysis.to_json(), self.mock_code_analysis_json
         )
 
     def test_merge_cves(self):
