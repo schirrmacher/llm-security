@@ -18,30 +18,34 @@ sak/bin/sak -cve examples/cve-advisories.json \
 
 ## Developing
 
-Install dependencies:
+#### Install dependencies
 
 ```
 make setup
 ```
 
-Execute tests:
+#### Execute tests
 
 ```
 make test
 ```
 
-Format code:
+#### Format code
 
 ```
 make format
 ```
 
-### Manipulate `state.json`
+### Manipulate State (`state.json`)
+
+#### Remove categorization
 
 ```
-# Remove categorization
-jq 'map(del(.category))' state.json > state.json
+make state_remove_categories
+```
 
-# Remove code analysis
-jq 'map(del(.code_analysis))' state.json > state.json
+#### Remove code analysis
+
+```
+make state_remove_code_analysis
 ```

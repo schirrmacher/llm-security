@@ -1,27 +1,48 @@
 import json
 import logging
 
+from typing import Callable, Type
+
 from llama_index.core.llms import ChatMessage
-from security_army_knife.agents.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import (
+    BaseAgent,
+    AgentEvent,
+    AgentEventType,
+)
 
 from security_army_knife.analysis.cve import CVE, CVECategory
 
 
 class CVECategorizerAgent(BaseAgent):
 
-    dependencies = []
+    dependencies: list[Type] = []
 
     def __init__(self, model):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")
 
-    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
+    def analyze(
+        self,
+        cve_list: list[CVE],
+        handle_event: Callable[[AgentEvent], None],
+    ) -> list[CVE]:
 
         for cve in cve_list:
 
+            handle_event(
+                AgentEvent(
+                    AgentEventType.BEFORE_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
+
             if cve.category != CVECategory.unknown:
-                logging.info(
-                    f"{self.__class__.__name__}: {cve.name}, already analyzed"
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message="skipped, already analyzed",
+                    )
                 )
                 continue
 
@@ -50,10 +71,24 @@ class CVECategorizerAgent(BaseAgent):
                 json_object = json.loads(response.message.content)
                 cve.category = json_object.get("category", CVECategory.unknown)
 
-            except:
+            except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed."
                 )
                 cve.category = CVECategory.unknown
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"skipped, due to error {e}",
+                    )
+                )
+
+            handle_event(
+                AgentEvent(
+                    AgentEventType.AFTER_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
 
         return cve_list

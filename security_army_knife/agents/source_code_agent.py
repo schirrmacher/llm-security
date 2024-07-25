@@ -3,18 +3,24 @@ import json
 import logging
 
 from pathlib import Path
+from typing import Callable, Type
 
 from llama_index.core.llms import ChatMessage
-from security_army_knife.agents.base_agent import BaseAgent
+from security_army_knife.agents.base_agent import (
+    BaseAgent,
+    AgentEvent,
+    AgentEventType,
+)
 from security_army_knife.base_model import BaseModel
 
+from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 
 
 class SourceCodeAgent(BaseAgent):
 
-    dependencies = ["CVECategorizerAgent"]
+    dependencies: list[Type] = [CVECategorizerAgent]
 
     def __init__(self, model: BaseModel, source_code_path: str):
         super().__init__(model=model)
@@ -38,15 +44,30 @@ class SourceCodeAgent(BaseAgent):
                     matching_files.append(file_path)
         return matching_files
 
-    def analyze(self, cve_list: list[CVE]) -> list[CVE]:
+    def analyze(
+        self,
+        cve_list: list[CVE],
+        handle_event: Callable[[AgentEvent], None],
+    ) -> list[CVE]:
 
         all_file_paths = self._list_files_recursive(self.source_code_path)
 
         for cve in cve_list:
 
+            handle_event(
+                AgentEvent(
+                    AgentEventType.BEFORE_CVE_ANALYSIS,
+                    cve=cve,
+                )
+            )
+
             if cve.code_analysis:
-                logging.info(
-                    f"{self.__class__.__name__}: {cve.name}, already analyzed"
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message="skipped, already analyzed",
+                    )
                 )
                 continue
 
@@ -72,20 +93,51 @@ class SourceCodeAgent(BaseAgent):
 
             try:
                 response = self.model.talk(messages, json=True)
-                self.logger.debug(response.message.content)
+
                 json_object = json.loads(response.message.content)
-                cve.code_analysis = CodeAnalysis(
-                    queries=json_object.get("code_queries", [])
+
+                queries = json_object.get("queries", [])
+                cve.code_analysis = CodeAnalysis(queries=queries)
+
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"queries: {queries}",
+                    )
                 )
 
                 matches = self._apply_regexes_to_files(
                     files=all_file_paths, regexes=cve.code_analysis.queries
                 )
+
                 cve.code_analysis.affected_files = matches
+
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"affected: {matches}",
+                    )
+                )
+
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.AFTER_CVE_ANALYSIS,
+                        cve=cve,
+                    )
+                )
 
             except Exception as e:
                 self.logger.error(
                     f"Response for {cve.name} could not be parsed: {e}"
+                )
+                handle_event(
+                    AgentEvent(
+                        AgentEventType.INFORMATION,
+                        cve=cve,
+                        message=f"skipped, due to error {e}",
+                    )
                 )
                 cve.code_analysis.queries = []
         return cve_list
