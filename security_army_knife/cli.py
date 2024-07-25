@@ -14,11 +14,7 @@ from security_army_knife.agents.cve_categorizer import (
 )
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.agent_tree import AgentTree
-from security_army_knife.agents.base_agent import (
-    BaseAgent,
-    AgentEvent,
-    AgentEventType,
-)
+from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.trivy_importer import TrivyImporter
 
 ASCII_ART = """
@@ -90,12 +86,12 @@ def run_security_army_knife(
     if api_documentation:
         pass
 
-    def handle_event(event: AgentEvent):
-        if event.event_type == AgentEventType.BEFORE_CVE_ANALYSIS:
+    def handle_event(event: Event):
+        if event.event_type == Event.Type.BEFORE_ANALYSIS:
             logger.info(f"= {event.cve.name}")
-        elif event.event_type == AgentEventType.AFTER_CVE_ANALYSIS:
+        elif event.event_type == Event.Type.AFTER_ANALYSIS:
             CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
-        elif event.event_type == AgentEventType.INFORMATION:
+        else:
             logger.info(f"  - {event.message}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
