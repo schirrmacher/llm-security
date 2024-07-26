@@ -17,6 +17,7 @@ from security_army_knife.analysis.cve import CVE
 from security_army_knife.agent_tree import AgentTree
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.trivy_importer import TrivyImporter
+from security_army_knife.agents.architecuture_agent import ArchitectureAgent
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀
@@ -79,7 +80,7 @@ def run_security_army_knife(
         agents.append(APISpecAgent(model, api_spec=api_documentation))
 
     if architecture_diagram:
-        pass
+        agents.append(ArchitectureAgent(model, architecture_diagram=architecture_diagram,dependency_list=dependency_list,api_documentation=api_documentation,))
 
     if dependency_list:
         pass

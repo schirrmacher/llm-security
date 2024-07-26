@@ -17,6 +17,6 @@ setup(
         "llama-index==0.10.55",
         "pandas==2.2.2",
         "pytest==8.1.1",
-        "networkx==3.3",
+        "networkx==3.2.1",
     ],
 )
