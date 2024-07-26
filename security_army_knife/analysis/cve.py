@@ -90,7 +90,7 @@ class CVE:
             f"Description: {self.description}\n"
             f"Category: {self.category}\n"
             f"{self.code_analysis or 'No Code Analysis'}\n"
-            f"{self.api_spec_analysis or 'No API Spec Analysis'}"
+            f"{self.api_spec_analysis or 'No API Spec Analysis'}\n"
             f"{self.architecture_analysis or 'No Architecture Analysis'}"
         )
 

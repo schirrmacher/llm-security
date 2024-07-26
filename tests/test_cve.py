@@ -5,6 +5,9 @@ import unittest
 from unittest.mock import MagicMock
 from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 from security_army_knife.analysis.code_analysis import CodeAnalysis
+from security_army_knife.analysis.architecture_analysis import (
+    ArchitectureAnalysis,
+)
 from security_army_knife.analysis.cve import (
     CVE,
     CVECategory,
@@ -36,6 +39,7 @@ class TestCVE(unittest.TestCase):
                 "queries": ["query2"],
                 "affected_files": ["file2"],
             },
+            "architecture_analysis": None,  # Add this line
         }
 
     def tearDown(self):
@@ -96,18 +100,25 @@ class TestCVE(unittest.TestCase):
         api_spec_analysis = APISpecAnalysis(
             critical=False, explanation="No critical issues"
         )
+        architecture_analysis = ArchitectureAnalysis(
+            infrastructure_conditions=["condition1"]
+        )  # Add initialization for architecture analysis
         cve = CVE(
             name="CVE-1234",
             description="Test CVE",
             category=CVECategory.os,
             code_analysis=code_analysis,
             api_spec_analysis=api_spec_analysis,
+            architecture_analysis=architecture_analysis,  # Add this line
         )
         self.assertEqual(cve.name, "CVE-1234")
         self.assertEqual(cve.description, "Test CVE")
         self.assertEqual(cve.category, CVECategory.os)
         self.assertEqual(cve.code_analysis, code_analysis)
         self.assertEqual(cve.api_spec_analysis, api_spec_analysis)
+        self.assertEqual(
+            cve.architecture_analysis, architecture_analysis
+        )  # Add this line
 
         # Test from_json method
         json_data = {
@@ -122,6 +133,7 @@ class TestCVE(unittest.TestCase):
                 "critical": True,
                 "explanation": "Critical issue found",
             },
+            "architecture_analysis": None,
         }
         cve_from_json = CVE.from_json(json_data)
         self.assertEqual(cve_from_json.name, "CVE-5678")
@@ -142,7 +154,8 @@ class TestCVE(unittest.TestCase):
             str(cve),
             "CVE Name: CVE-1234\nDescription: Test CVE\nCategory: os\n"
             "Code Analysis:\n  Queries: query1\n  Affected Files: file1\n"
-            "API Spec Analysis:\n  Critical: False\n  Explanation: No critical issues",
+            "API Spec Analysis:\n  Critical: False\n  Explanation: No critical issues\n"
+            "Architecture Analysis:\n  Infrastructure Conditions: condition1",
         )
 
     def test_cve_persist_state(self):
