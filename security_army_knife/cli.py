@@ -80,7 +80,14 @@ def run_security_army_knife(
         agents.append(APISpecAgent(model, api_spec=api_documentation))
 
     if architecture_diagram:
-        agents.append(ArchitectureAgent(model, architecture_diagram=architecture_diagram,dependency_list=dependency_list,api_documentation=api_documentation,))
+        agents.append(
+            ArchitectureAgent(
+                model,
+                architecture_diagram=architecture_diagram,
+                dependency_list=dependency_list,
+                api_documentation=api_documentation,
+            )
+        )
 
     if dependency_list:
         pass

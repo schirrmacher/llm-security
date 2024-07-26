@@ -2,7 +2,10 @@ import json
 
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
-from security_army_knife.analysis.architecture_analysis import ArchitectureAnalysis
+from security_army_knife.analysis.architecture_analysis import (
+    ArchitectureAnalysis,
+)
+
 
 class CVECategory:
     os = "os"
@@ -40,7 +43,9 @@ class CVE:
         api_spec_analysis = (
             APISpecAnalysis.from_json(api_spec_data) if api_spec_data else None
         )
-        architecture_analysis_data = json_dict.get("architecture_analysis")  # Add this line
+        architecture_analysis_data = json_dict.get(
+            "architecture_analysis"
+        )  # Add this line
         architecture_analysis = (  # Add this block
             ArchitectureAnalysis.from_json(architecture_analysis_data)
             if architecture_analysis_data
@@ -73,7 +78,9 @@ class CVE:
                 else None
             ),
             "architecture_analysis": (
-                self.architecture_analysis.to_json() if self.architecture_analysis else None
+                self.architecture_analysis.to_json()
+                if self.architecture_analysis
+                else None
             ),
         }
 

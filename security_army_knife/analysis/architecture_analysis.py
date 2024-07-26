@@ -8,7 +8,9 @@ class ArchitectureAnalysis:
     @classmethod
     def from_json(cls, json_dict: dict):
         return cls(
-            infrastructure_conditions=json_dict.get("infrastructure_conditions", []),
+            infrastructure_conditions=json_dict.get(
+                "infrastructure_conditions", []
+            ),
         )
 
     def to_json(self):
