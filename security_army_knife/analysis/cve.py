@@ -1,6 +1,7 @@
 import json
 
 from security_army_knife.analysis.code_analysis import CodeAnalysis
+from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 
 
 class CVECategory:
@@ -17,11 +18,13 @@ class CVE:
         description: str,
         category: str = CVECategory.unknown,
         code_analysis: CodeAnalysis = None,
+        api_spec_analysis: APISpecAnalysis = None,
     ):
         self.name = name
         self.description = description
         self.category = category
         self.code_analysis = code_analysis
+        self.api_spec_analysis = api_spec_analysis
 
     @classmethod
     def from_json(cls, json_dict: dict):
@@ -31,11 +34,16 @@ class CVE:
             if code_analysis_data
             else None
         )
+        api_spec_data = json_dict.get("api_spec_analysis")
+        api_spec_analysis = (
+            APISpecAnalysis.from_json(api_spec_data) if api_spec_data else None
+        )
         return cls(
             name=json_dict.get("name"),
             description=json_dict.get("description"),
             category=json_dict.get("category", CVECategory.unknown),
             code_analysis=code_analysis,
+            api_spec_analysis=api_spec_analysis,
         )
 
     @classmethod
@@ -50,6 +58,11 @@ class CVE:
             "code_analysis": (
                 self.code_analysis.to_json() if self.code_analysis else None
             ),
+            "api_spec_analysis": (
+                self.api_spec_analysis.to_json()
+                if self.api_spec_analysis
+                else None
+            ),
         }
 
     def __str__(self):
@@ -57,7 +70,8 @@ class CVE:
             f"CVE Name: {self.name}\n"
             f"Description: {self.description}\n"
             f"Category: {self.category}\n"
-            f"{self.code_analysis or 'No Code Analysis'}"
+            f"{self.code_analysis or 'No Code Analysis'}\n"
+            f"{self.api_spec_analysis or 'No API Spec Analysis'}"
         )
 
     @staticmethod

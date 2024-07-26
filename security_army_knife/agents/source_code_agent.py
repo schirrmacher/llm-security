@@ -62,19 +62,25 @@ class SourceCodeAgent(BaseAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            logging.info(f"{self.__class__.__name__}: analyzing {cve.name}")
-
-            task = f"For the following CVE, how can you detect it in code? Create a regular expression string, only if applicable: {cve.to_json()}"
-            formatting = "Format the result as JSON and add the attribute 'code_queries' as a string list to this object. Leave the list empty if not applicable."
+            task = f"""How can I detect the following security vulnerability in my code? {cve.name}: {cve.description}"""
+            regex_task = "Can you create a list of very short strings to grep for? Be careful with capitalization and accurate class names"
+            formatting = """
+            Format the result as a JSON list with strings, as an attribute called 'queries'.
+            Make sure the results can be parsed with the Python function re.compile and that the escaping is correct.
+            """
 
             messages = [
                 ChatMessage(
                     role="system",
-                    content="You are security code reviewer.",
+                    content="You are an expert code reviewer.",
                 ),
                 ChatMessage(
                     role="user",
                     content=task,
+                ),
+                ChatMessage(
+                    role="user",
+                    content=regex_task,
                 ),
                 ChatMessage(
                     role="user",
@@ -101,7 +107,7 @@ class SourceCodeAgent(BaseAgent):
                 handle_event(InformationEvent(cve, f"affected: {matches}"))
 
             except Exception as e:
-                cve.code_analysis.queries = []
+                cve.code_analysis = None
                 handle_event(ErrorEvent(cve, error=e))
 
             handle_event(AfterAnalysis(cve))

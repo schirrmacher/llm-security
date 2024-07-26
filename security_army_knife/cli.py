@@ -8,6 +8,7 @@ from typing import TextIO, Optional
 from security_army_knife.mistral_model import MistralModel
 from security_army_knife.base_model import BaseModel
 from security_army_knife.agents.source_code_agent import SourceCodeAgent
+from security_army_knife.agents.api_spec_agent import APISpecAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
     CVE,
@@ -74,6 +75,9 @@ def run_security_army_knife(
     if source_code:
         agents.append(SourceCodeAgent(model, source_code_path=source_code))
 
+    if api_documentation:
+        agents.append(APISpecAgent(model, api_spec=api_documentation))
+
     if architecture_diagram:
         pass
 
@@ -81,9 +85,6 @@ def run_security_army_knife(
         pass
 
     if dependency_list:
-        pass
-
-    if api_documentation:
         pass
 
     def handle_event(event: Event):
