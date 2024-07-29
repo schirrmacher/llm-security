@@ -1,3 +1,5 @@
+import logging
+
 from llama_index.core.llms import ChatMessage, ChatResponse
 from llama_index.llms.mistralai import MistralAI
 
@@ -20,10 +22,17 @@ class MistralModel(BaseModel):
         )
 
     def talk(self, messages: ChatMessage, json: bool = False) -> ChatResponse:
+        # Disable logging for model requests, maybe there is a better solution
+        # but this works
+        previous_level = logging.getLogger().getEffectiveLevel()
+        logger = logging.getLogger("SecurityArmyKnife")
+        logging.disable(logging.CRITICAL)
         if json:
             response = self.llm.chat(
                 messages, response_format={"type": "json_object"}
             )
         else:
             response = self.llm.chat(messages)
+
+        logging.disable(logging.NOTSET)
         return response

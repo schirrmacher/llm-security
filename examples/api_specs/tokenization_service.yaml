@@ -1,0 +1,896 @@
+openapi: 3.1.0
+info:
+  title: Tokenization Service
+  version: '1.0'
+  description: |
+    # Introduction
+    The **Tokenization Service** is a [PCI DSS](https://www.pcisecuritystandards.org/) compliant service that allows the
+    storage of cardholder data in a secure and compliant manner. In exchange for the data a user will receive a 
+    **Token**  that can be used to retrieve the data or initialize a payment transaction.
+    
+    ### Servers
+    | Environment        | Server                                 | Description                                 |
+    | ------------------ | -------------------------------------- | --------------------------------------------|
+    | Integration Server | `https://api.int.pci.paymenttools.net` | Test environment for testing implementation |
+    | Production Server  | `https://api.pci.paymenttools.com`     | Production environment                      |
+    
+    <div style="background-color:#feeda5; padding:10px">
+    <b>⚠️ It is prohibited to store real credit card data within any test environment!</b>
+    </div>
+
+    # Authentication
+    The **Tokenization Service** is protected by **OAuth2.0**. To access the service, a client must obtain an access 
+    token from the authorization server. The access token must be included in the `Authorization` header of each request.
+    
+    Access tokens can be requested using the [client credentials flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4) 
+    from the following path on each server: `https://{authorization-server}/realms/merchants/protocol/openid-connect/token`
+    
+    ### Authorization Server
+    | Environment        | Server                          |
+    | ------------------ | ------------------------------- |
+    | Integration Server | `auth.int.pci.paymenttools.net` |
+    | Production Server  | `auth.paymenttools.com`         |
+tags:
+  - name: Credit Card
+    description: |
+      Endpoints to store, retrieve and delete credit card data in the **Tokenization Service**.
+servers:
+  - url: https://api.int.pci.paymenttools.net
+    description: Integration server (Test environment)
+  - url: https://api.pci.paymenttools.com
+    description: Production server
+security:
+  - integration: [ ]
+  - production: [ ]
+paths:
+  /v1/creditcards:
+    post:
+      summary: Tokenize Card Data
+      description: |
+        Endpoint to store **cleartext** credit card data in the **Tokenization Service** in exchange for a **Token**.
+        
+        The returned **Token** is unique for every card (including duplicates) and can be used to retrieve the cleartext
+        cardholder data, delete data or to initialize a payment transaction.
+        
+        ### Expiration Date Format
+        The expiration date of the card can be provided in two ways:
+        - As an object with the properties `month` and `year` (e.g. `{ "month": 12, "year": 2027 }`)
+        - As a string in the format `MM/YY` (e.g. `12/27`)
+        
+        If both formats are provided, the object will take precedence.
+        
+        ### CVC/CVV storage
+        When using the **Tokenization Service** to store cardholder data, the cleartext **CVC/CVV** can be provided.
+        
+        The **CVC/CVV** is stored only for the purpose of initializing a payment and is deleted 
+        afterwards. If no payment authorization occurs within the span of `1 day`, the **CVC/CVV** is deleted
+        automatically.
+      tags:
+        - Credit Card
+      security:
+        - integration: [ permission:cde/cards.write ]
+        - production: [ permission:cde/cards.write ]
+      operationId: storeCreditCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Store Credit Card Request
+              allOf:
+                - $ref: '#/components/schemas/ApiResource'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/StoreCardholderData'
+                    meta:
+                      $ref: '#/components/schemas/StoreCardholderMeta'
+        required: true
+      responses:
+        201:
+          description: Stored successfully
+          content:
+            application/json:
+              schema:
+                title: Store Credit Card Response
+                allOf:
+                  - $ref: '#/components/schemas/ApiResource'
+                  - properties:
+                      data:
+                        $ref: '#/components/schemas/CardholderDataReference'
+                      meta:
+                        type: object
+                        properties:
+                          persisted:
+                            type: boolean
+                            deprecated: true
+                            description: Is the data persisted or not
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+  /v1/creditcards/{token}:
+    get:
+      summary: Detokenize Card Data
+      description: |
+        Endpoint to retrieve credit card data stored in the **Tokenization Service** using a **Token**.
+        
+        The returned data is in **cleartext** and contains **highly sensitive data**. 
+        - The **PAN** is always included in the response.
+        - The **expiry date** is included in the response, both as an object and as a string.
+        - The **CVC/CVV** might be included in the response if it was stored during the tokenization process and was not
+          yet used for any payment authorization.
+        - The **cardholder name** is included in the response if it was stored during the tokenization process.
+      tags:
+        - Credit Card
+      security:
+        - integration: [ permission:cde/cards.read ]
+        - production: [ permission:cde/cards.read ]
+      operationId: getCreditCard
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        200:
+          description: Cardholder Data retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: Credit Card Response
+                allOf:
+                  - $ref: '#/components/schemas/ApiResource'
+                  - properties:
+                      data:
+                        $ref: '#/components/schemas/CardholderData'
+                      meta:
+                        $ref: '#/components/schemas/CardholderDataMeta'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+    delete:
+      summary: Delete Card Data
+      description: |
+        Endpoint to delete stored credit card data stored in the **Tokenization Service** using a **Token**.
+        
+        This action is **irreversible**. The **Token** cannot be used to initialize payment transaction or to retrieve 
+        the cardholder data.
+      tags:
+        - Credit Card
+      security:
+        - integration: [ permission:cde/cards.write ]
+        - production: [ permission:cde/cards.write ]
+      operationId: deleteCreditCard
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        204:
+          description: Deleted successfully
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+  /v1/creditcards/{token}/meta:
+    get:
+      summary: Retrieve Card Metadata
+      description: |
+        Endpoint to retrieve metadata of credit card data stored in the **Tokenization Service** using a **Token**.
+        
+        The metadata contains **only non-sensitive** information about the cardholder data (e.g. scheme of the card).
+      tags:
+        - Credit Card
+      security:
+        - integration: [ permission:cde/meta.read ]
+        - production: [ permission:cde/meta.read ]
+      operationId: getMetadata
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        200:
+          description: Cardholder Metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: Credit Card Metadata Response
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CardholderMetadata'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+  /v1/creditcards/searches:
+    post:
+      x-internal: true
+      summary: Search for Card Data
+      description: |
+        Endpoint to **search** for and **detokenize** one or more cards matching a certain pattern.
+        
+        The returned data is in **cleartext** and contains **highly sensitive data**.
+
+        Please note that this endpoint will only return data **available** to the caller. Data requested beyond that is 
+        not included in the response. Due to this, an empty search result is also treated as a valid response.
+        Data is considered _not_ available if:
+          - It does not exist
+          - The caller is not authorized to retrieve it
+
+        Supported search pattern(s):
+          - `ids`: A list of **Tokens** (ids) to match. This will return all available card data for the provided Tokens.
+      tags:
+        - Credit Card
+      security:
+        - integration: [ permission:cde/card.read ]
+        - production: [ permission:cde/card.read ]
+      operationId: search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: Credit Card Search Request
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        type: string
+                        description: A Token to retrieve cardholder data for
+      responses:
+        200:
+          description: All Cardholder Data retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: Credit Card Search Response
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CardholderData'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+  /v1/creditcards/{token}/networktokens:
+    get:
+      x-internal: true
+      summary: Detokenize Network Token Data
+      description: |
+        Endpoint to retrieve network token data from the **Tokenization Service** using a **Token**.
+        
+        <div style="background-color:#90d5ff; padding:10px">
+        ℹ️ In order for network token data to be successfully retrieved the merchant must be signed up for network tokenization and
+        the card must have been successfully enrolled with the card network.
+        </div>
+
+        The returned data contains **highly sensitive data** and can be used to **perform a payment**.
+        - The **PAN Token** is always included in the response.
+        - The **cryptogram** is always included in the response.
+        - The **expiry date** of the network token data is always included as an object.
+        
+        <div style="background-color:#feeda5; padding:10px">
+        ⚠️ Note that the combination of a <b>PAN Token</b> and a <b>cryptogram</b> is equivalent to having a 
+        cleartext <b>PAN</b> and <b>CVC/CVV</b> value. It has the same PCI-DSS requirements! 
+        </div>
+      tags:
+        - Credit Card
+      operationId: getNetworkToken
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        200:
+          description: Network Token data retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: Network Token Data Response
+                properties:
+                  data:
+                    $ref: '#/components/schemas/NetworkTokenData'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+  /v1/creditcards/{token}/transactioncredentials:
+    get:
+      x-internal: true
+      summary: Detokenize Transaction Credentials
+      description: |
+        Endpoint to retrieve transaction credentials from the **Tokenization Service** using a **Token**. This endpoint
+        first tries to retrieve network token data, and if this fails it falls back to credit card data.
+        
+        <div style="background-color:#90d5ff; padding:10px">
+        ℹ️ In order for network token data to be successfully retrieved the merchant must be signed up for network tokenization and
+        the card must have been successfully enrolled with the card network.
+        </div>
+        
+        Response is __either__:
+        - Network token data
+        - Credit card data in **cleartext**
+      tags:
+        - Credit Card
+      operationId: getTransactionCredentials
+      parameters:
+        - $ref: '#/components/parameters/token'
+      responses:
+        200:
+          description: Transaction Credentials retrieved successfully
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - title: Credit Card Data Response
+                    required:
+                      - data
+                    properties:
+                      data:
+                        description: The data of the resource
+                        $ref: '#/components/schemas/CardholderData'
+                        required:
+                          - type
+                        properties:
+                          type:
+                            type: string
+                            enum: [credit_card]
+                  - title: Network Token Data Response
+                    required:
+                      - data
+                    properties:
+                      data:
+                        description: The data of the resource
+                        $ref: '#/components/schemas/NetworkTokenData'
+                        required:
+                          - type
+                        properties:
+                          type:
+                            type: string
+                            enum: [network_token]
+              examples:
+                Credit Card Data:
+                  value:
+                    data:
+                      type: credit_card
+                      id: "string"
+                      cardholderName: "Peter Payment"
+                      cvc: "123"
+                      expiry:
+                        month: 12
+                        year: 2027
+                      expiryDate: "12/27"
+                      pan: "4929307742880874"
+                Network Token Data:
+                  value:
+                    data:
+                      type: network_token
+                      id: "string"
+                      panToken: "5186151969645999"
+                      cryptogram: "string"
+                      panTokenExpiry:
+                        month: 1
+                        year: 2027
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+webhooks:
+  tokenization-notifications:
+    x-internal: true
+    post:
+      summary: Receive Tokenization Notifications
+      description: |
+        Endpoint to receive notifications about the tokenization of credit card data. The request is send to the
+        configured URL of the consumer.
+        
+        <div style="background-color:#feeda5; padding:10px">
+        ⚠️ Notifications are only sent if the consumer is configured for webhook requests and a order id was specified
+        during the tokenization process.
+        </div>
+        
+        The request contains the following data:
+        - **Token** (id) referencing the card in the Tokenization Service
+        - **order id** provided on tokenization
+        - **metadata** about the card
+        
+        The request will also send a **OAuth2.0 Bearer token** in the `Authorization` header. The token is issued by the
+        **Authorization Server** of the the Tokenization Service.
+      tags:
+        - Credit Card
+      security:
+        - integration: [ ]
+        - production: [ ]
+      operationId: creditCardTokenizationNotification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenizationNotification'
+      responses:
+        200:
+          description: Request handled successfully
+        204:
+          description: Request handled successfully
+        4xx:
+          description: Request could not be handled, event will be replayed
+        5xx:
+          description: Request could not be handled, event will be replayed
+components:
+  securitySchemes:
+    integration:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.int.pci.paymenttools.net/realms/merchants/protocol/openid-connect/token
+          scopes:
+            permission:cde/cards.read: Enables read access to cardholder data
+            permission:cde/cards.write: Enables write access to cardholder data
+            permission:cde/meta.read: Enables read access to cardholder metadata
+    production:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.paymenttools.com/realms/merchants/protocol/openid-connect/token
+          scopes:
+            permission:cde/cards.read: Enables read access to cardholder data
+            permission:cde/cards.write: Enables write access to cardholder data
+            permission:cde/meta.read: Enables read access to cardholder metadata
+  schemas:
+    StoreCardholderData:
+      allOf:
+        - required:
+            - pan
+          type: object
+          properties:
+            cardholderName:
+              type: string
+              description: The name of the cardholder
+              examples:
+                - "Peter Payment"
+            cvc:
+              type: string
+              description: The **CVC/CVV** of the card in cleartext
+              minLength: 3
+              maxLength: 4
+              pattern: '^\d{3,4}$'
+              examples:
+                - "123"
+            pan:
+              type: string
+              description: |
+                The **PAN** of the card in cleartext, **must** pass Luhn check.
+              minLength: 12
+              maxLength: 19
+              pattern: '^\d{12,19}$'
+              examples:
+                - "4929307742880874"
+        - oneOf:
+            - title: Expiry Object
+              type: object
+              required:
+                - expiry
+              properties:
+                expiry:
+                  type: object
+                  description: |
+                    The **expiry date** of the card, **must** be in the future
+                    
+                    Either the expiry object or the expiryDate string must be provided.
+                  required:
+                    - month
+                    - year
+                  properties:
+                    month:
+                      type: integer
+                      description: The expiry month of the card
+                      minimum: 1
+                      maximum: 12
+                      examples:
+                        - 12
+                    year:
+                      type: integer
+                      description: |
+                        The expiry year of the card
+                      minimum: 1000
+                      maximum: 9999
+                      examples:
+                        - 2027
+            - title: Expiry Date String
+              required:
+                - expiryDate
+              properties:
+                expiryDate:
+                  type: string
+                  description: |
+                    The **expiry date** of the card in the format 'MM/YY', **must** be in the future
+                    
+                    Either the expiry object or the expiryDate string must be provided.
+                  pattern: '^(0[1-9]|1[0-2])/\d{2}$'
+                  examples:
+                    - "12/27"
+    StoreCardholderMeta:
+      type: object
+      properties:
+        uniqueShopperReference:
+          type: string
+          description: |
+            A unique identifier for the shopper.
+            
+            The shopper reference **must not** include any PII.
+        orderId:
+          type: string
+          description: |
+            A reference for the order pertaining to the stored card.
+            
+            If an order id is provided *and* the consumer is configured for webhook requests,
+            then a request containing the order id and **Token** (id) will be sent to the configured URL.
+    CardholderDataReference:
+      required:
+        - id
+        - relationships
+      type: object
+      properties:
+        id:
+          type: string
+          description: The **Token** (id) referencing the card in the Tokenization Service
+        relationships:
+          type: object
+          description: The relationships of the resource
+          required:
+            - metadata
+          properties:
+            metadata:
+              $ref: '#/components/schemas/CardholderMetadata'
+    CardholderMetadata:
+      required:
+        - cardScheme
+        - last4
+        - bin
+        - expiry
+      type: object
+      properties:
+        cardScheme:
+          type: string
+          description: The Card Scheme of the card
+          enum:
+            - AMEX
+            - MASTERCARD
+            - VISA
+            - UNKNOWN
+        last4:
+          type: string
+          description: The last 4 digits of the **PAN**
+          pattern: '^\d{4}$'
+          examples:
+            - "1234"
+        bin:
+          type: string
+          description: Bank Identification Number of the card
+          pattern: '^(\d{8}|\d{6})'
+          examples:
+            - "377400"
+            - "54311111"
+        cardholderName:
+          type: string
+          description: The name of the cardholder
+          example: Peter Payment
+        expiry:
+          type: object
+          description: The **expiry date** of the card
+          required:
+            - month
+            - year
+          properties:
+            month:
+              type: integer
+              description: The expiry month of the card
+              minimum: 1
+              maximum: 12
+              examples:
+                - 12
+            year:
+              type: integer
+              description: The expiry year of the card
+              minimum: 1000
+              maximum: 9999
+              examples:
+                - 2027
+    CardholderData:
+      required:
+        - id
+        - expiry
+        - expiryDate
+        - pan
+      type: object
+      properties:
+        id:
+          type: string
+          description: The **Token** (id) referencing the card in the Tokenization Service
+        cardholderName:
+          type: string
+          description: The name of the cardholder
+          examples:
+            - "Peter Payment"
+        cvc:
+          type: string
+          description: The **CVC/CVV** of the card in cleartext
+          minLength: 3
+          maxLength: 4
+          pattern: '^\d{3,4}$'
+          examples:
+            - "123"
+        expiry:
+          type: object
+          description: The **expiry date** of the card
+          required:
+            - month
+            - year
+          properties:
+            month:
+              type: integer
+              description: The expiry month of the card
+              minimum: 1
+              maximum: 12
+              examples:
+                - 12
+            year:
+              type: integer
+              description: The expiry year of the card
+              minimum: 1000
+              maximum: 9999
+              examples:
+                - 2027
+        expiryDate:
+          type: string
+          description: The **expiry date** of the card in the format 'MM/YY'
+          pattern: '^(0[1-9]|1[0-2])/\d{2}$'
+          examples:
+            - "12/27"
+        pan:
+          type: string
+          description: The **PAN** of the card in cleartext
+          minLength: 12
+          maxLength: 19
+          pattern: '^\d{12,19}$'
+          examples:
+            - "4929307742880874"
+    CardholderDataMeta:
+      required:
+        - created
+      type: object
+      properties:
+        uniqueShopperReference:
+          type: string
+          description: A unique identifier for the shopper.
+        created:
+          type: string
+          format: date-time
+          description: The timestamp of when the card was stored in the Tokenization Service
+    NetworkTokenData:
+      required:
+        - id
+        - panToken
+        - cryptogram
+        - panTokenExpiry
+      type: object
+      properties:
+        id:
+          type: string
+          description: The **Token** (id) referencing the related card in the Tokenization Service
+        panToken:
+          type: string
+          description: A replacement value for the original **PAN**
+          minLength: 12
+          maxLength: 19
+          pattern: '^\d{12,19}$'
+          examples:
+            - "5186151969645999"
+        cryptogram:
+          type: string
+          description: A one-time payment authorization code (OTAC)
+        panTokenExpiry:
+          type: object
+          description: The **expiry date** of the network token data
+          required:
+            - month
+            - year
+          properties:
+            month:
+              type: integer
+              description: The expiry month of the network token data
+              minimum: 1
+              maximum: 12
+              examples:
+                - 1
+            year:
+              type: integer
+              description: The expiry year of the network token data
+              minimum: 1000
+              maximum: 9999
+              examples:
+                - 2027
+    ApiResource:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: The data of the resource
+        meta:
+          type: object
+          description: The metadata of the resource
+    ApiErrorResource:
+      type: object
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+          examples:
+            - Bad Request
+            - Unauthorized
+          description: HTTP status text
+        status:
+          type: integer
+          examples:
+            - 400
+            - 401
+          description: HTTP status code
+        code:
+          type: string
+          examples:
+            - InvalidInput
+          description: Tokenization Service specific error code
+        validationErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      required:
+        - name
+        - reason
+      properties:
+        name:
+          type: string
+          examples:
+            - data
+            - data.expiry
+          description: Property that caused the issue
+        reason:
+          type: string
+          examples:
+            - must not be null
+          description: Human readable description of the mismatch
+    TokenizationNotification:
+      title: Tokenization Notification
+      type: object
+      required:
+        - orderId
+        - persistentToken
+        - cardScheme
+        - bin
+        - last4
+        - expiry
+      properties:
+        orderId:
+          type: string
+          description: The order id pertaining to the stored card
+        persistentToken:
+          type: string
+          description: The **Token** (id) referencing the card in the Tokenization Service
+        cardScheme:
+          type: string
+          description: The Card Scheme of the card
+          enum:
+            - AMEX
+            - MASTERCARD
+            - VISA
+            - UNKNOWN
+        bin:
+          type: string
+          description: Bank Identification Number of the card
+          pattern: '^(\d{8}|\d{6})'
+          examples:
+            - "377400"
+            - "54311111"
+        last4:
+          type: string
+          description: The last 4 digits of the **PAN**
+          pattern: '^\d{4}$'
+          examples:
+            - "1234"
+        expiry:
+          type: object
+          description: The **expiry date** of the card
+          required:
+            - month
+            - year
+          properties:
+            month:
+              type: integer
+              description: The expiry month of the card
+              minimum: 1
+              maximum: 12
+              examples:
+                - 12
+            year:
+              type: integer
+              description: The expiry year of the card
+              minimum: 1000
+              maximum: 9999
+              examples:
+                - 2027
+  parameters:
+    token:
+      name: token
+      in: path
+      required: true
+      description: The **Token** (id) referencing the card in the Tokenization Service
+      schema:
+        type: string
+  responses:
+    400:
+      description: Invalid Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResource'
+          examples:
+            InvalidInput:
+              summary: Invalid Request
+              value:
+                title: Bad Request
+                status: 400
+                code: InvalidInput
+                validationErrors:
+                  - name: data.pan
+                    reason: must not be null
+                  - name: data.expiry
+                    reason: must not be expired
+    401:
+      description: Unauthorized Request
+    403:
+      description: Access Denied
+      content:
+        text/plain:
+          examples:
+            AccessDenied:
+              value: "RBAC: access denied"
+    404:
+      description: Requested Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResource'
+          examples:
+            EntityNotFound:
+              summary: Requested Resource not found
+              value:
+                title: Not Found
+                status: 404
+                code: EntityNotFound
+                validationErrors:

@@ -164,4 +164,4 @@ cython_debug/
 
 lastcheckenv/*
 models/*
-state.json
+/state.json

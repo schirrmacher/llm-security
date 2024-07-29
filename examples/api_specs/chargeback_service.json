@@ -1,0 +1,3726 @@
+{
+    "components": {
+        "schemas": {
+            "AcquirerInformationRequest": {
+                "properties": {
+                    "acquirer": {
+                        "enum": [
+                            "RBI"
+                        ],
+                        "type": "string"
+                    },
+                    "acquirerDisputeId": {
+                        "pattern": "[0-9]+",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "disputeDeadline": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "disputedAmount": {
+                        "type": "number"
+                    },
+                    "disputedCurrency": {
+                        "type": "string"
+                    },
+                    "flowType": {
+                        "type": "string"
+                    },
+                    "reasonOfDispute": {
+                        "type": "string"
+                    },
+                    "transaction": {
+                        "$ref": "#/components/schemas/TransactionRequest"
+                    },
+                    "type": {
+                        "enum": [
+                            "COLLABORATION",
+                            "CHARGEBACK",
+                            "PRE_ARBITRATION",
+                            "DISPUTE"
+                        ],
+                        "type": "string"
+                    }
+                }
+            },
+            "AcquirerInformationResponse": {
+                "properties": {
+                    "id": {
+                        "$ref": "#/components/schemas/Id"
+                    }
+                }
+            },
+            "AddAdminMessageRequest": {
+                "properties": {
+                    "attachments": {
+                        "items": {
+                            "format": "binary",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "newDeadline": {
+                        "format": "date",
+                        "type": "string"
+                    }
+                }
+            },
+            "AddressSnapshot": {
+                "properties": {
+                    "city": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "street": {
+                        "type": "string"
+                    },
+                    "zip": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Attachment": {
+                "properties": {
+                    "acquirerDisputeId": {
+                        "type": "string"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/Id"
+                    },
+                    "mimeType": {
+                        "type": "string"
+                    },
+                    "resourceIdentifier": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                }
+            },
+            "AttachmentResponse": {
+                "properties": {
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/Id"
+                    },
+                    "mimeType": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                }
+            },
+            "ChargebackResponse": {
+                "properties": {
+                    "cardScheme": {
+                        "enum": [
+                            "VISA",
+                            "MASTERCARD",
+                            "MAESTRO",
+                            "AMEX",
+                            "DINERS_DISCOVER"
+                        ],
+                        "type": "string"
+                    },
+                    "currency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "maskedPan": {
+                        "type": "string"
+                    },
+                    "transactionDateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                }
+            },
+            "ChargebackReversalResponse": {
+                "properties": {
+                    "acquirerTransactionId": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "cardScheme": {
+                        "enum": [
+                            "VISA",
+                            "MASTERCARD",
+                            "MAESTRO",
+                            "AMEX",
+                            "DINERS_DISCOVER"
+                        ],
+                        "type": "string"
+                    },
+                    "currency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "maskedPan": {
+                        "type": "string"
+                    },
+                    "transactionDateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                }
+            },
+            "CompanyResponse": {
+                "properties": {
+                    "customId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CompanySnapshot": {
+                "properties": {
+                    "address": {
+                        "$ref": "#/components/schemas/AddressSnapshot"
+                    },
+                    "customId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "legalName": {
+                        "type": "string"
+                    },
+                    "ptIdent": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ConfigResponse": {
+                "properties": {
+                    "disputeRequest": {
+                        "$ref": "#/components/schemas/DisputeRequest"
+                    }
+                }
+            },
+            "DisputeConversationItem": {
+                "properties": {
+                    "attachments": {
+                        "items": {
+                            "$ref": "#/components/schemas/Attachment"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "receivedDateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "sender": {
+                        "enum": [
+                            "ADMIN",
+                            "ACQUIRER",
+                            "MERCHANT"
+                        ],
+                        "type": "string"
+                    },
+                    "status": {
+                        "enum": [
+                            "DRAFT",
+                            "FINAL"
+                        ],
+                        "type": "string"
+                    }
+                }
+            },
+            "DisputeDetailsResponse": {
+                "properties": {
+                    "acquirer": {
+                        "enum": [
+                            "RBI"
+                        ],
+                        "type": "string"
+                    },
+                    "acquirerAttachments": {
+                        "items": {
+                            "$ref": "#/components/schemas/Attachment"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "acquirerDisputeId": {
+                        "type": "string"
+                    },
+                    "arnNumber": {
+                        "type": "string"
+                    },
+                    "canRespond": {
+                        "type": "boolean"
+                    },
+                    "chargeback": {
+                        "$ref": "#/components/schemas/ChargebackResponse"
+                    },
+                    "chargebackReversal": {
+                        "$ref": "#/components/schemas/ChargebackReversalResponse"
+                    },
+                    "chargebackState": {
+                        "enum": [
+                            "NONE",
+                            "CHARGEBACK",
+                            "REVERSED_CHARGEBACK"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "disputeConversation": {
+                        "items": {
+                            "$ref": "#/components/schemas/DisputeConversationItem"
+                        },
+                        "type": "array"
+                    },
+                    "disputeDeadline": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "disputeHistory": {
+                        "items": {
+                            "$ref": "#/components/schemas/DisputeHistoryItem"
+                        },
+                        "type": "array"
+                    },
+                    "disputedAmount": {
+                        "type": "number"
+                    },
+                    "disputedCurrency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/Id"
+                    },
+                    "informationRequestedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "informationRequestedType": {
+                        "enum": [
+                            "COLLABORATION",
+                            "CHARGEBACK",
+                            "PRE_ARBITRATION",
+                            "DISPUTE"
+                        ],
+                        "type": "string"
+                    },
+                    "reasonOfDispute": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "enum": [
+                            "NEW",
+                            "INFORMATION_REQUESTED",
+                            "DRAFT_SAVED",
+                            "INFORMATION_SENT",
+                            "DEADLINE_EXPIRED"
+                        ],
+                        "type": "string"
+                    },
+                    "transaction": {
+                        "$ref": "#/components/schemas/TransactionDetailsResponse"
+                    }
+                }
+            },
+            "DisputeHistoryItem": {
+                "properties": {
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "nameKey": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DisputeListResponse": {
+                "properties": {
+                    "acquirer": {
+                        "enum": [
+                            "RBI"
+                        ],
+                        "type": "string"
+                    },
+                    "acquirerDisputeId": {
+                        "type": "string"
+                    },
+                    "arnNumber": {
+                        "type": "string"
+                    },
+                    "chargebackState": {
+                        "enum": [
+                            "NONE",
+                            "CHARGEBACK",
+                            "REVERSED_CHARGEBACK"
+                        ],
+                        "type": "string"
+                    },
+                    "disputeDeadline": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "disputedAmount": {
+                        "type": "number"
+                    },
+                    "disputedCurrency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "id": {
+                        "$ref": "#/components/schemas/Id"
+                    },
+                    "informationRequestedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "state": {
+                        "enum": [
+                            "NEW",
+                            "INFORMATION_REQUESTED",
+                            "DRAFT_SAVED",
+                            "INFORMATION_SENT",
+                            "DEADLINE_EXPIRED"
+                        ],
+                        "type": "string"
+                    },
+                    "storeCustomId": {
+                        "type": "string"
+                    },
+                    "storeName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DisputeListResponsePage": {
+                "properties": {
+                    "content": {
+                        "items": {
+                            "$ref": "#/components/schemas/DisputeListResponse"
+                        },
+                        "type": "array"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "first": {
+                        "type": "boolean"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numberOfElements": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "pageable": {
+                        "$ref": "#/components/schemas/PageableObject"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortObject"
+                        },
+                        "type": "array"
+                    },
+                    "totalElements": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "DisputeRequest": {
+                "properties": {
+                    "attachmentAllFilesMaxSizeInBytes": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "attachmentContentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "attachmentFileNameCharactersRegex": {
+                        "type": "string"
+                    },
+                    "attachmentFileNameMaxLength": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "attachmentMaxNumberOfFiles": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "attachmentSingleFileMaxSizeInBytes": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "descriptionMaxLength": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Error": {
+                "properties": {
+                    "detail": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "additionalProperties": {},
+                        "type": "object"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "properties": {
+                    "errors": {
+                        "items": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "type": "array"
+                    }
+                }
+            },
+            "Id": {
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    }
+                }
+            },
+            "MerchantEmailsResponse": {
+                "properties": {
+                    "companyId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "companyName": {
+                        "type": "string"
+                    },
+                    "companyPtIdent": {
+                        "type": "string"
+                    },
+                    "emails": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "merchantId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "merchantName": {
+                        "type": "string"
+                    },
+                    "merchantPtIdent": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "COMPANY",
+                            "MERCHANT"
+                        ],
+                        "type": "string"
+                    }
+                }
+            },
+            "MerchantResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ptIdent": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MerchantSnapshot": {
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ptIdent": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PageCompanyResponse": {
+                "properties": {
+                    "content": {
+                        "items": {
+                            "$ref": "#/components/schemas/CompanyResponse"
+                        },
+                        "type": "array"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "first": {
+                        "type": "boolean"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numberOfElements": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "pageable": {
+                        "$ref": "#/components/schemas/PageableObject"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortObject"
+                        },
+                        "type": "array"
+                    },
+                    "totalElements": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "PageMerchantResponse": {
+                "properties": {
+                    "content": {
+                        "items": {
+                            "$ref": "#/components/schemas/MerchantResponse"
+                        },
+                        "type": "array"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "first": {
+                        "type": "boolean"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numberOfElements": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "pageable": {
+                        "$ref": "#/components/schemas/PageableObject"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortObject"
+                        },
+                        "type": "array"
+                    },
+                    "totalElements": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "PageStoreResponse": {
+                "properties": {
+                    "content": {
+                        "items": {
+                            "$ref": "#/components/schemas/StoreResponse"
+                        },
+                        "type": "array"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "first": {
+                        "type": "boolean"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "number": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "numberOfElements": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "pageable": {
+                        "$ref": "#/components/schemas/PageableObject"
+                    },
+                    "size": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sort": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortObject"
+                        },
+                        "type": "array"
+                    },
+                    "totalElements": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "PageableObject": {
+                "properties": {
+                    "offset": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "pageNumber": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "pageSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "paged": {
+                        "type": "boolean"
+                    },
+                    "sort": {
+                        "items": {
+                            "$ref": "#/components/schemas/SortObject"
+                        },
+                        "type": "array"
+                    },
+                    "unpaged": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "SortObject": {
+                "properties": {
+                    "ascending": {
+                        "type": "boolean"
+                    },
+                    "direction": {
+                        "type": "string"
+                    },
+                    "ignoreCase": {
+                        "type": "boolean"
+                    },
+                    "nullHandling": {
+                        "type": "string"
+                    },
+                    "property": {
+                        "type": "string"
+                    }
+                }
+            },
+            "StoreResponse": {
+                "properties": {
+                    "customId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "StoreSnapshot": {
+                "properties": {
+                    "address": {
+                        "$ref": "#/components/schemas/AddressSnapshot"
+                    },
+                    "customId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ptIdent": {
+                        "type": "string"
+                    }
+                }
+            },
+            "TerminalSnapshot": {
+                "properties": {
+                    "company": {
+                        "$ref": "#/components/schemas/CompanySnapshot"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "merchant": {
+                        "$ref": "#/components/schemas/MerchantSnapshot"
+                    },
+                    "physicalId": {
+                        "type": "string"
+                    },
+                    "store": {
+                        "$ref": "#/components/schemas/StoreSnapshot"
+                    }
+                }
+            },
+            "TransactionDetailsResponse": {
+                "properties": {
+                    "amount": {
+                        "type": "number"
+                    },
+                    "cardScheme": {
+                        "enum": [
+                            "VISA",
+                            "MASTERCARD",
+                            "MAESTRO",
+                            "AMEX",
+                            "DINERS_DISCOVER"
+                        ],
+                        "type": "string"
+                    },
+                    "currency": {
+                        "properties": {
+                            "currencyCode": {
+                                "type": "string"
+                            },
+                            "defaultFractionDigits": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "numericCode": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "numericCodeAsString": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "maskedPan": {
+                        "type": "string"
+                    },
+                    "terminal": {
+                        "$ref": "#/components/schemas/TerminalSnapshot"
+                    },
+                    "transactionDateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                }
+            },
+            "TransactionRequest": {
+                "properties": {
+                    "amount": {
+                        "type": "number"
+                    },
+                    "arnNumber": {
+                        "type": "string"
+                    },
+                    "cardScheme": {
+                        "enum": [
+                            "VISA",
+                            "MASTERCARD",
+                            "MAESTRO",
+                            "AMEX",
+                            "DINERS_DISCOVER"
+                        ],
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "maskedPan": {
+                        "type": "string"
+                    },
+                    "merchantId": {
+                        "type": "string"
+                    },
+                    "terminalPhysicalId": {
+                        "type": "string"
+                    },
+                    "transactionDateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateDisputeRequestBody": {
+                "properties": {
+                    "merchantDescription": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateMerchantEmailsRequest": {
+                "properties": {
+                    "emails": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "auth": {
+                "in": "header",
+                "name": "x-goog-iap-jwt-assertion",
+                "type": "apiKey"
+            },
+            "jwtAuth": {
+                "bearerFormat": "JWT",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    },
+    "info": {
+        "title": "Chargeback service API",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+        "/admin/disputes/{disputeId}/admin-message": {
+            "post": {
+                "operationId": "addAdminMessage",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Add admin message request example": {
+                                    "description": "Add admin message request example",
+                                    "value": {
+                                        "message": "Admin message",
+                                        "newDeadline": "2023-12-31"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/AddAdminMessageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully added admin message."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to submit this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Submit merchant response.",
+                "tags": [
+                    "Admin Dispute"
+                ]
+            }
+        },
+        "/configurations": {
+            "get": {
+                "operationId": "getConfig",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "disputeRequest": {
+                                        "attachmentAllFilesMaxSizeInBytes": 5242880,
+                                        "attachmentContentTypes": [
+                                            "application/pdf",
+                                            "application/msword",
+                                            "image/jpeg",
+                                            "image/png",
+                                            "text/plain",
+                                            "video/mp4",
+                                            "video/mpeg",
+                                            "video/ogg"
+                                        ],
+                                        "attachmentMaxNumberOfFiles": 5,
+                                        "attachmentSingleFileMaxSizeInBytes": 1048576,
+                                        "descriptionMaxLength": 10000
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConfigResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully returned configuration."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to view this."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Gets configuration.",
+                "tags": [
+                    "Config"
+                ]
+            }
+        },
+        "/dev/disputes": {
+            "post": {
+                "operationId": "addAcquirerInformationRequest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Create dispute request example": {
+                                    "description": "Create dispute request example",
+                                    "value": {
+                                        "acquirer": "RBI",
+                                        "acquirerDisputeId": "001",
+                                        "disputeDeadline": "2023-12-31",
+                                        "disputedAmount": 100,
+                                        "disputedCurrency": "EUR",
+                                        "flowType": "MASTERCARD",
+                                        "reasonOfDispute": "4567 Goods not received",
+                                        "transaction": {
+                                            "amount": 100,
+                                            "arnNumber": "0898323242",
+                                            "cardScheme": "MASTERCARD",
+                                            "currency": "EUR",
+                                            "maskedPan": "6703 **** **** 4449",
+                                            "merchantId": "Douglas 2002",
+                                            "terminalPhysicalId": "53512503",
+                                            "transactionDateTime": "2023-04-06T11:12:52.016Z"
+                                        },
+                                        "type": "COLLABORATION"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/AcquirerInformationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": "059a1659-3793-4936-baea-a8efd96c9e27"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/AcquirerInformationResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully created dispute."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create dispute",
+                "tags": [
+                    "Dev endpoints"
+                ]
+            }
+        },
+        "/dev/disputes/multiple": {
+            "post": {
+                "operationId": "addMultipleAcquirerInformationRequest",
+                "parameters": [
+                    {
+                        "description": "Number of disputes to create",
+                        "in": "query",
+                        "name": "numberOfDisputes",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "Create dispute request example": {
+                                    "description": "Create dispute request example",
+                                    "value": {
+                                        "acquirer": "RBI",
+                                        "acquirerDisputeId": "001",
+                                        "disputeDeadline": "2023-12-31",
+                                        "disputedAmount": 100,
+                                        "disputedCurrency": "EUR",
+                                        "flowType": "MASTERCARD",
+                                        "reasonOfDispute": "4567 Goods not received",
+                                        "transaction": {
+                                            "amount": 100,
+                                            "arnNumber": "0898323242",
+                                            "cardScheme": "MASTERCARD",
+                                            "currency": "EUR",
+                                            "maskedPan": "6703 **** **** 4449",
+                                            "merchantId": "Douglas 2002",
+                                            "terminalPhysicalId": "53512503",
+                                            "transactionDateTime": "2023-04-06T11:12:52.016Z"
+                                        },
+                                        "type": "COLLABORATION"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/AcquirerInformationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "id": "059a1659-3793-4936-baea-a8efd96c9e27"
+                                    },
+                                    {
+                                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                                    }
+                                ],
+                                "schema": {
+                                    "$ref": "#/components/schemas/AcquirerInformationResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully created dispute."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Mass create disputes",
+                "tags": [
+                    "Dev endpoints"
+                ]
+            }
+        },
+        "/disputes": {
+            "get": {
+                "operationId": "getDisputeList",
+                "parameters": [
+                    {
+                        "description": "Merchant ID",
+                        "in": "query",
+                        "name": "merchantId",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Company ID.",
+                        "in": "query",
+                        "name": "companyId",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Store ID.",
+                        "in": "query",
+                        "name": "storeId",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Dispute state.",
+                        "in": "query",
+                        "name": "state",
+                        "schema": {
+                            "enum": [
+                                "NEW",
+                                "INFORMATION_REQUESTED",
+                                "DRAFT_SAVED",
+                                "INFORMATION_SENT",
+                                "DEADLINE_EXPIRED"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Chargeback state.",
+                        "in": "query",
+                        "name": "chargebackState",
+                        "schema": {
+                            "enum": [
+                                "NONE",
+                                "CHARGEBACK",
+                                "REVERSED_CHARGEBACK"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Dispute deadline from, YYYY-MM-DD format.",
+                        "in": "query",
+                        "name": "disputeDeadlineFrom",
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Dispute deadline to, YYYY-MM-DD format.",
+                        "in": "query",
+                        "name": "disputeDeadlineTo",
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Sorting criteria in the format: \"property,(asc|desc)\". Default ordering is DISPUTE_DEADLINE,ASC.\n",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "enum": [
+                                "DISPUTE_DEADLINE,asc",
+                                "DISPUTED_AMOUNT,asc",
+                                "DISPUTED_CURRENCY,asc",
+                                "MERCHANT_NAME,asc",
+                                "STORE_NAME,asc",
+                                "INFORMATION_REQUESTED_AT,asc",
+                                "DISPUTE_DEADLINE,desc",
+                                "DISPUTED_AMOUNT,desc",
+                                "DISPUTED_CURRENCY,desc",
+                                "MERCHANT_NAME,desc",
+                                "STORE_NAME,desc",
+                                "INFORMATION_REQUESTED_AT,desc"
+                            ]
+                        }
+                    },
+                    {
+                        "description": "Zero-based page index (0..N)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0
+                        }
+                    },
+                    {
+                        "description": "The size of the page to be returned",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "content": [
+                                        {
+                                            "acquirer": "RBI",
+                                            "acquirerDisputeId": "230509001",
+                                            "arnNumber": "0182301823",
+                                            "chargebackState": "NONE",
+                                            "disputeDeadline": "2023-05-18",
+                                            "disputedAmount": 0,
+                                            "disputedCurrency": "EUR",
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "informationRequestedAt": "2023-05-18T19:35:10.334Z",
+                                            "merchantId": "512312",
+                                            "state": "NEW",
+                                            "storeAddressCity": "Berlin",
+                                            "storeAddressCountry": "DE",
+                                            "storeAddressStreet": "Street 5B",
+                                            "storeAddressZip": "90210",
+                                            "storeName": "string",
+                                            "storePtIdent": "578192804057029464"
+                                        }
+                                    ],
+                                    "empty": true,
+                                    "first": true,
+                                    "last": true,
+                                    "number": 0,
+                                    "numberOfElements": 0,
+                                    "pageable": {
+                                        "offset": 0,
+                                        "pageNumber": 0,
+                                        "pageSize": 0,
+                                        "paged": true,
+                                        "sort": [
+                                            {
+                                                "empty": true
+                                            },
+                                            {
+                                                "sorted": true
+                                            },
+                                            {
+                                                "unsorted": true
+                                            }
+                                        ],
+                                        "unpaged": true
+                                    },
+                                    "size": 0,
+                                    "sort": [
+                                        {
+                                            "empty": true
+                                        },
+                                        {
+                                            "sorted": true
+                                        },
+                                        {
+                                            "unsorted": true
+                                        }
+                                    ],
+                                    "totalElements": 0,
+                                    "totalPages": 0
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/DisputeListResponsePage"
+                                }
+                            }
+                        },
+                        "description": "Successfully returned the page of disputes."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to view this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "405": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "406": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "No acceptable representation",
+                                            "status": "406",
+                                            "title": "Not Acceptable"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "No acceptable representation."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Gets disputes matching criteria.",
+                "tags": [
+                    "Dispute"
+                ]
+            }
+        },
+        "/disputes/{disputeId}": {
+            "get": {
+                "operationId": "getDisputeDetails",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "acquirer": "RBI",
+                                    "acquirerDisputeId": "230509001",
+                                    "arnNumber": "0100100123",
+                                    "canEditResponse": true,
+                                    "chargeback": {
+                                        "acquirerTransactionId": "30205010-26999560",
+                                        "amount": 0,
+                                        "cardScheme": "VISA",
+                                        "currency": "EUR",
+                                        "maskedPan": "5505 **** **** 1234",
+                                        "transactionDateTime": "2023-05-18T11:59:39.968Z"
+                                    },
+                                    "chargebackReversal": {
+                                        "acquirerTransactionId": "30205010-26999560",
+                                        "amount": 0,
+                                        "cardScheme": "VISA",
+                                        "currency": "EUR",
+                                        "maskedPan": "5505 **** **** 1234",
+                                        "transactionDateTime": "2023-05-18T11:59:39.968Z"
+                                    },
+                                    "chargebackState": "NONE",
+                                    "disputeDeadline": "2023-05-18",
+                                    "disputedAmount": 0,
+                                    "disputedCurrency": "EUR",
+                                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                    "informationRequestAttachments": [
+                                        {
+                                            "acquirerDisputeId": "230509001",
+                                            "fileName": "very_important_proof.pdf",
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "mimeType": "application/pdf",
+                                            "resourceIdentifier": "230509001/e0373f2f-6522-4d87-bc5a-be2b52eedcfb",
+                                            "size": 0
+                                        }
+                                    ],
+                                    "informationRequestedAt": "2023-05-18T11:59:39.968Z",
+                                    "informationRequestedType": "COLLABORATION",
+                                    "merchantAttachments": [
+                                        {
+                                            "acquirerDisputeId": "230509001",
+                                            "fileName": "very_important_proof.pdf",
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "mimeType": "application/pdf",
+                                            "resourceIdentifier": "230509001/e0373f2f-6522-4d87-bc5a-be2b52eedcfb",
+                                            "size": 0
+                                        }
+                                    ],
+                                    "merchantResponse": "Berlin",
+                                    "reasonOfDispute": "Berlin",
+                                    "state": "NEW",
+                                    "transaction": {
+                                        "amount": 0,
+                                        "cardScheme": "VISA",
+                                        "currency": "EUR",
+                                        "maskedPan": "5505 **** **** 1234",
+                                        "terminal": {
+                                            "company": {
+                                                "customId": "213",
+                                                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                                "name": "REWE Rainer Nuvoli",
+                                                "ptIdent": "813163217097"
+                                            },
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "merchant": {
+                                                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                                "name": "REWE International AG",
+                                                "ptIdent": "512312"
+                                            },
+                                            "physicalId": "56033812",
+                                            "store": {
+                                                "address": {
+                                                    "city": "Berlin",
+                                                    "country": "DE",
+                                                    "street": "Deggendorfer Str. 9",
+                                                    "zip": "12163"
+                                                },
+                                                "customId": "147/002",
+                                                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                                "name": "Billa",
+                                                "ptIdent": "578192804057029464"
+                                            }
+                                        },
+                                        "transactionDateTime": "2023-05-18T11:59:39.968Z"
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/DisputeDetailsResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully returned dispute."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to view this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get dispute details.",
+                "tags": [
+                    "Dispute"
+                ]
+            },
+            "patch": {
+                "operationId": "updateDispute",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "merchantDescription": "The transaction was made by a family member."
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDisputeRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated dispute."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to update this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update dispute data.",
+                "tags": [
+                    "Dispute"
+                ]
+            }
+        },
+        "/disputes/{disputeId}/attachments": {
+            "post": {
+                "operationId": "upload",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "format": "binary",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "file"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AttachmentResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully created dispute attachment."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to add attachment to this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "415": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Content-Type 'application/json' is not supported",
+                                            "status": "415",
+                                            "title": "Unsupported Media Type"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Unsupported media type."
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Post a dispute attachment.",
+                "tags": [
+                    "Dispute attachment"
+                ]
+            }
+        },
+        "/disputes/{disputeId}/attachments/{attachmentId}": {
+            "delete": {
+                "operationId": "delete_1",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Id of the dispute attachment.",
+                        "in": "path",
+                        "name": "attachmentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted dispute attachment."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to delete this attachment."
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete a dispute attachment.",
+                "tags": [
+                    "Dispute attachment"
+                ]
+            },
+            "get": {
+                "operationId": "download",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Id of the dispute attachment.",
+                        "in": "path",
+                        "name": "attachmentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/octet-stream": {}
+                        },
+                        "description": "Successfully returned dispute attachment."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to view this Dispute attachment."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get a dispute attachment.",
+                "tags": [
+                    "Dispute attachment"
+                ]
+            }
+        },
+        "/disputes/{disputeId}/submit-responses": {
+            "post": {
+                "operationId": "submitResponse",
+                "parameters": [
+                    {
+                        "description": "Id of the dispute.",
+                        "in": "path",
+                        "name": "disputeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully submitted merchant response."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "An attachment with file name 'hello.txt' already exists. Refers dispute with id a44ba355-e0ae-4002-86f1-cc1a78ab54dd.",
+                                            "status": "400",
+                                            "title": "Bad Request"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Request failed."
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Access Denied",
+                                            "status": "403",
+                                            "title": "Forbidden"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to submit this Dispute."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Dispute with id 0a1fe451-db78-417a-a4b9-f6ae917339d1 could not be found.",
+                                            "status": "404",
+                                            "title": "Not Found"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not found."
+                    },
+                    "405": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Request method 'POST' is not supported",
+                                            "status": "405",
+                                            "title": "Method Not Allowed"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Method not allowed."
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "errors": [
+                                        {
+                                            "details": "Error",
+                                            "status": "500",
+                                            "title": "Internal Server Error"
+                                        }
+                                    ]
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Submit merchant response.",
+                "tags": [
+                    "Dispute"
+                ]
+            }
+        },
+        "/merchant-data/companies": {
+            "get": {
+                "operationId": "companies",
+                "parameters": [
+                    {
+                        "description": "Id of merchant which companies should be fetched.",
+                        "in": "query",
+                        "name": "merchantId",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Pattern to search company for by name or customId.",
+                        "in": "query",
+                        "name": "companyPattern",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Page number",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size",
+                        "in": "query",
+                        "name": "size",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageCompanyResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully fetched companies."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to get companies."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get lists of companies.",
+                "tags": [
+                    "Merchant data"
+                ]
+            }
+        },
+        "/merchant-data/merchants": {
+            "get": {
+                "operationId": "merchants",
+                "parameters": [
+                    {
+                        "description": "Pattern to search merchant for by name or ptIdent.",
+                        "in": "query",
+                        "name": "merchantPattern",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Page number",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size",
+                        "in": "query",
+                        "name": "size",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageMerchantResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully fetched merchants."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to get merchants."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get lists of merchants.",
+                "tags": [
+                    "Merchant data"
+                ]
+            }
+        },
+        "/merchant-data/stores": {
+            "get": {
+                "operationId": "stores",
+                "parameters": [
+                    {
+                        "description": "Id of company which stores should be fetched.",
+                        "in": "query",
+                        "name": "companyId",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Pattern to search store for by name or customId.",
+                        "in": "query",
+                        "name": "storePattern",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Page number",
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Page size",
+                        "in": "query",
+                        "name": "size",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageStoreResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully fetched stores."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "You don't have access rights to get stores."
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get lists of stores.",
+                "tags": [
+                    "Merchant data"
+                ]
+            }
+        },
+        "/merchant-emails": {
+            "get": {
+                "operationId": "getList",
+                "parameters": [
+                    {
+                        "description": "Merchant id",
+                        "in": "query",
+                        "name": "merchantId",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Company id",
+                        "in": "query",
+                        "name": "companyId",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Type",
+                        "in": "query",
+                        "name": "type",
+                        "schema": {
+                            "enum": [
+                                "COMPANY",
+                                "MERCHANT"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Zero-based page index (0..N)",
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "default": 0
+                        }
+                    },
+                    {
+                        "description": "The size of the page to be returned",
+                        "in": "query",
+                        "name": "size",
+                        "schema": {
+                            "default": 20
+                        }
+                    },
+                    {
+                        "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "items": {}
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "content": [
+                                        {
+                                            "companyId": "4a261923-55b4-46f5-9dbd-dc73598cd461",
+                                            "companyName": "BERLIN WEST",
+                                            "emails": [
+                                                "office@email.de",
+                                                "management@email.de"
+                                            ],
+                                            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                            "merchantId": "a029fae5-8336-4176-9de1-44fe20195f24",
+                                            "merchantName": "REWE",
+                                            "type": "COMPANY"
+                                        }
+                                    ],
+                                    "empty": true,
+                                    "first": true,
+                                    "last": true,
+                                    "number": 0,
+                                    "numberOfElements": 0,
+                                    "pageable": {
+                                        "offset": 0,
+                                        "pageNumber": 0,
+                                        "pageSize": 0,
+                                        "paged": true,
+                                        "sort": {
+                                            "empty": true,
+                                            "sorted": true,
+                                            "unsorted": true
+                                        },
+                                        "unpaged": true
+                                    },
+                                    "size": 0,
+                                    "sort": {
+                                        "empty": true,
+                                        "sorted": true,
+                                        "unsorted": true
+                                    },
+                                    "totalElements": 0,
+                                    "totalPages": 0
+                                }
+                            }
+                        },
+                        "description": "Successfully returned the page of merchant emails."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Gets merchants emails list.",
+                "tags": [
+                    "Merchant emails"
+                ]
+            },
+            "post": {
+                "operationId": "add",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "companyId": "4a261923-55b4-46f5-9dbd-dc73598cd461",
+                                "emails": [
+                                    "office@email.de",
+                                    "management@email.de"
+                                ],
+                                "merchantId": "a029fae5-8336-4176-9de1-44fe20195f24",
+                                "type": "COMPANY"
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMerchantEmailsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "companyId": "4a261923-55b4-46f5-9dbd-dc73598cd461",
+                                    "companyName": "BERLIN WEST",
+                                    "emails": [
+                                        "office@email.de",
+                                        "management@email.de"
+                                    ],
+                                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                    "merchantId": "a029fae5-8336-4176-9de1-44fe20195f24",
+                                    "merchantName": "REWE",
+                                    "type": "COMPANY"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantEmailsResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully returned details of merchant."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Add merchant emails.",
+                "tags": [
+                    "Merchant emails"
+                ]
+            }
+        },
+        "/merchant-emails/{merchantEmailsId}": {
+            "delete": {
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "description": "Id of the merchant emails.",
+                        "in": "path",
+                        "name": "merchantEmailsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "example": {
+                                    "companyId": "4a261923-55b4-46f5-9dbd-dc73598cd461",
+                                    "companyName": "BERLIN WEST",
+                                    "emails": [
+                                        "office@email.de",
+                                        "management@email.de"
+                                    ],
+                                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                    "merchantId": "a029fae5-8336-4176-9de1-44fe20195f24",
+                                    "merchantName": "REWE",
+                                    "type": "COMPANY"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantEmailsResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully deleted merchant emails."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete merchant emails.",
+                "tags": [
+                    "Merchant emails"
+                ]
+            },
+            "put": {
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "description": "Id of the merchant emails.",
+                        "in": "path",
+                        "name": "merchantEmailsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "emails": [
+                                    "office@email.de",
+                                    "management@email.de"
+                                ]
+                            },
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMerchantEmailsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "companyId": "4a261923-55b4-46f5-9dbd-dc73598cd461",
+                                    "companyName": "BERLIN WEST",
+                                    "emails": [
+                                        "office@email.de",
+                                        "management@email.de"
+                                    ],
+                                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                                    "merchantId": "a029fae5-8336-4176-9de1-44fe20195f24",
+                                    "merchantName": "REWE",
+                                    "type": "COMPANY"
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantEmailsResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully returned details of merchant."
+                    },
+                    "400": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update merchant emails.",
+                "tags": [
+                    "Merchant emails"
+                ]
+            }
+        }
+    },
+    "security": [
+        {
+            "jwtAuth": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "api.paymenttools.com/chargeback"
+        }
+    ]
+}

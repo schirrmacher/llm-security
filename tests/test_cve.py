@@ -72,15 +72,15 @@ class TestCVE(unittest.TestCase):
     def test_api_spec_analysis(self):
         # Test initialization
         api_spec_analysis = APISpecAnalysis(
-            critical=True, explanation="Critical issue found"
+            facilitates_attack=True, explanation="Critical issue found"
         )
-        self.assertTrue(api_spec_analysis.critical)
+        self.assertTrue(api_spec_analysis.facilitates_attack)
         self.assertEqual(api_spec_analysis.explanation, "Critical issue found")
 
         # Test from_json method
-        json_data = {"critical": False, "explanation": "Minor issue"}
+        json_data = {"facilitates_attack": False, "explanation": "Minor issue"}
         api_spec_from_json = APISpecAnalysis.from_json(json_data)
-        self.assertFalse(api_spec_from_json.critical)
+        self.assertFalse(api_spec_from_json.facilitates_attack)
         self.assertEqual(api_spec_from_json.explanation, "Minor issue")
 
         # Test to_json method
@@ -89,7 +89,7 @@ class TestCVE(unittest.TestCase):
         # Test __str__ method
         self.assertEqual(
             str(api_spec_analysis),
-            "API Spec Analysis:\n  Critical: True\n  Explanation: Critical issue found",
+            "API Spec Analysis:\n  Facilitates Attack: True\n  Explanation: Critical issue found",
         )
 
     def test_cve(self):
@@ -98,7 +98,7 @@ class TestCVE(unittest.TestCase):
             queries=["query1"], affected_files=["file1"]
         )
         api_spec_analysis = APISpecAnalysis(
-            critical=False, explanation="No critical issues"
+            facilitates_attack=False, explanation="No critical issues"
         )
         architecture_analysis = ArchitectureAnalysis(
             infrastructure_conditions=["condition1"]
@@ -130,7 +130,7 @@ class TestCVE(unittest.TestCase):
                 "affected_files": ["file2"],
             },
             "api_spec_analysis": {
-                "critical": True,
+                "facilitates_attack": True,
                 "explanation": "Critical issue found",
             },
             "architecture_analysis": None,
@@ -141,7 +141,7 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(cve_from_json.category, CVECategory.app)
         self.assertEqual(cve_from_json.code_analysis.queries, ["query2"])
         self.assertEqual(cve_from_json.code_analysis.affected_files, ["file2"])
-        self.assertTrue(cve_from_json.api_spec_analysis.critical)
+        self.assertTrue(cve_from_json.api_spec_analysis.facilitates_attack)
         self.assertEqual(
             cve_from_json.api_spec_analysis.explanation, "Critical issue found"
         )

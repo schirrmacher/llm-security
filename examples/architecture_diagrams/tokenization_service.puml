@@ -1,0 +1,178 @@
+@startuml
+'===========================================================================================
+' Includes and Constants
+'===========================================================================================
+
+!include <gcp/GCPCommon>
+!include <gcp/Databases/all>
+!include <gcp/Security/all>
+!include <gcp/Storage/all>
+!include <gcp/Data_Analytics/all>
+!include <gcp/Networking/all>
+
+!include <k8s/Common>
+!include <k8s/OSS/KubernetesPod>
+
+!include <material/bank>
+!include <logos/react>
+
+'===========================================================================================
+' Procedures
+'===========================================================================================
+!unquoted procedure Component($id, $label, $stereo = "", $icon = "", $color = "#036FFC")
+!if (%strlen($icon) > 0)
+    rectangle $id as "<$$icon,color=$color>\n<b>$label"<<$id>><<$stereo>><<component>>
+!else
+    rectangle $id as "<b>$label"<<$id>><<$stereo>><<component>>
+!endif
+!endprocedure
+
+!unquoted procedure Pod($id, $name)
+Component($id, $name, k8s, KubernetesPod)
+!endprocedure
+
+!unquoted procedure Spanner($id, $name)
+Component($id, $name, gcp, Cloud_Spanner)
+!endprocedure
+
+!unquoted procedure KMS($id, $name)
+Component($id, $name, gcp, Key_Management_Service)
+!endprocedure
+
+!unquoted procedure Storage($id, $name)
+Component($id, $name, gcp, Cloud_Storage)
+!endprocedure
+
+!unquoted procedure PubSub($id, $name)
+Component($id, $name, gcp, Cloud_PubSub)
+!endprocedure
+
+!unquoted procedure Product($id, $name, $description = "", $logo = "<$ptLogo*0.5>")
+!if (%strlen($description) > 0)
+    rectangle $id as "$logo <size:20><b>$name\n$description"<<$id>><<bounded-context>>
+!else
+    rectangle $id as "$logo <size:20><b>$name"<<$id>><<bounded-context>>
+!endif
+!endprocedure
+
+!unquoted procedure React($id, $name)
+Component($id, $name, react, react, #149eca)
+!endprocedure
+
+'===========================================================================================
+' Styling
+'===========================================================================================
+hide stereotype
+skinparam defaultTextAlignment center
+
+<style>
+    .component {
+        backgroundColor white
+        lineColor #999999
+        lineThickness 2
+        roundCorner 20
+    }
+    .bounded-context {
+        backgroundColor transparent
+        lineColor #DDDDDD
+        lineThickness 3
+        roundCorner 20
+    }
+    .no-boundaries {
+        backgroundColor transparent
+        lineColor transparent
+    }
+    .TokenService {
+        backgroundColor #fab608
+        lineColor #2e3859
+    }
+</style>
+
+'===========================================================================================
+' Diagram
+'===========================================================================================
+
+Product(Invoicing, "Invoicing")
+
+Product(TokenService, "Tokenization Service") {
+    Pod(CardholderDetailService, "Cardholder Detail Service") [[https://paymenttools.atlassian.net/wiki/x/kwAoKw]]
+    Pod(TokenDecryptor, "Token Decryptor") [[https://paymenttools.atlassian.net/wiki/x/lIAoKw]]
+    Pod(TokenVault, "Token Vault") [[https://paymenttools.atlassian.net/wiki/x/BQC1Kw]]
+    Pod(IntegrityChecker, "Integrity Checker") [[https://paymenttools.atlassian.net/wiki/x/AQBRTg]]
+    Pod(OnboardingService, "Onboarding Service") [[https://paymenttools.atlassian.net/wiki/x/EYA-W]]
+    Pod(WebhookService, "Webhook Service") [[https://paymenttools.atlassian.net/wiki/x/IIDjYg]]
+    Pod(NTGW, "Network Token Gateway") [[https://paymenttools.atlassian.net/wiki/x/L4CwY]]
+    KMS(KMS, "Google KMS")
+    Spanner(TokenVaultDB, "Database")
+    PubSub(Monetization, "Monetization")
+    PubSub(CreditCardNotifications, "Credit Card Notifications")
+}
+
+Product(PayPage, "Pay Page", "*.paymenttools.com") {
+    React(JS_SDK, "JS-SDK")
+    Storage(SDK_Bucket, "Google Storage Bucket")
+}
+
+Product(TransactionEngine, "Transaction Engine") {
+    Pod(TransactionEngineGateways, "Gateways")
+    PubSub(TransactionsTopic, "Transactions")
+}
+
+rectangle Acquirer as "<$ma_bank>\n**Acquirer**"<<no-boundaries>>
+
+Product(MerchantShop, "Merchant Shop", "*.customer.de", $logo="<$customerLogo*0.3>") {
+    Product(PayPageDropIn, "Pay Page Drop-In") {
+        React(PayPageSDK, "Pay Page SDK")
+    }
+}
+
+Product(MerchantBackendTokenize, "Merchant Backend", $logo="<$customerLogo*0.3>") {
+    Component(MerchantServices, "Payment Services")
+}
+
+Product(MerchantBackendNotification, "Merchant Backend", $logo="<$customerLogo*0.3>") {
+    Component(MerchantWebhook, "Webhook Service")
+}
+
+Product(CardProvider, "CardProvider", $logo="<$mclogo*0.06>") {
+    Component(SCOF, "Secure Card on File")
+}
+
+PayPageSDK -r-> JS_SDK : <<wraps>>
+
+JS_SDK --> SDK_Bucket
+
+JS_SDK --> CardholderDetailService
+MerchantServices --> CardholderDetailService
+MerchantServices --> TokenDecryptor
+
+CardholderDetailService ---> TokenVault
+CardholderDetailService ---> KMS
+CardholderDetailService ...> CreditCardNotifications
+CardholderDetailService ...> Monetization
+
+TransactionsTopic <.. TokenDecryptor
+TransactionEngineGateways -> TokenDecryptor
+
+TransactionEngineGateways --> Acquirer
+
+TokenDecryptor ---> TokenVault
+TokenDecryptor ---> KMS
+TokenDecryptor ...> Monetization
+
+TokenVault ---> OnboardingService
+TokenVault --> TokenVaultDB
+TokenVault ---> NTGW
+
+IntegrityChecker -r-> TokenVaultDB
+
+WebhookService -> OnboardingService
+WebhookService ---> MerchantWebhook
+
+CreditCardNotifications <... WebhookService
+
+Monetization <.... Invoicing
+
+NTGW ---> SCOF 
+
+@enduml
