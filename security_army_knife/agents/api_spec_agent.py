@@ -41,12 +41,12 @@ class APISpecAgent(BaseAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            task = f"""What messages or files are affected by this vulnerability? {cve.name}: {cve.description}"""
-            api_task = f"Is the following API definition listing a way to exploit this?: {self.api_spec.read()}"
+            task = f"""How looks a vulnerable API spec facilitating the following CVE? {cve.name}: {cve.description}"""
+            api_task = f"Is the following API spec facilitating the exploit or not?: {self.api_spec.read()}"
             formatting = """
             Format the result as a single JSON object, like: {
-                "critical": true|false,
-                "explanation": "Why is this critical or not critical?"
+                "facilitates_attack": true|false,
+                "explanation": "Why is the API facilitating the vulnerability or not?"
             }
             """
 
@@ -61,7 +61,11 @@ class APISpecAgent(BaseAgent):
                 ),
                 ChatMessage(
                     role="user",
-                    content=api_task + formatting,
+                    content=api_task,
+                ),
+                ChatMessage(
+                    role="user",
+                    content=formatting,
                 ),
             ]
 
@@ -72,7 +76,7 @@ class APISpecAgent(BaseAgent):
                 handle_event(
                     InformationEvent(
                         cve,
-                        message=f"critical: {cve.api_spec_analysis.critical}",
+                        message=f"facilitates_attack: {cve.api_spec_analysis.facilitates_attack}",
                     )
                 )
 
