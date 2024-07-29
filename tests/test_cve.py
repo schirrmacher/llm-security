@@ -154,7 +154,7 @@ class TestCVE(unittest.TestCase):
             str(cve),
             "CVE Name: CVE-1234\nDescription: Test CVE\nCategory: os\n"
             "Code Analysis:\n  Queries: query1\n  Affected Files: file1\n"
-            "API Spec Analysis:\n  Critical: False\n  Explanation: No critical issues\n"
+            "API Spec Analysis:\n  Facilitates Attack: False\n  Explanation: No critical issues\n"
             "Architecture Analysis:\n  Infrastructure Conditions: condition1",
         )
 
