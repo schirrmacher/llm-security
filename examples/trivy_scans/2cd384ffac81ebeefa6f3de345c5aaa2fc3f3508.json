@@ -1,0 +1,1064 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "debian",
+      "Name": "11.7"
+    },
+    "ImageID": "sha256:5271a3ed3e3baa426da9dfe01e4b8af60f96436c403025ec8013b377bf98041c",
+    "DiffIDs": [
+      "sha256:e023e0e48e6e29e90e519f4dd356d058ff2bffbd16e28b802f3b8f93aa4ccb17",
+      "sha256:6fbdf253bbc2490dcfede5bdb58ca0db63ee8aff565f6ea9f918f3bce9e2d5aa",
+      "sha256:7bea6b893187b14fc0a759fe5f8972d1292a9c0554c87cbf485f0947c26b8a05",
+      "sha256:ff5700ec54186528cbae40f54c24b1a34fb7c01527beaa1232868c16e2353f52",
+      "sha256:d52f02c6501c9c4410568f0bf6ff30d30d8290f57794c308fe36ea78393afac2",
+      "sha256:e624a5370eca2b8266e74d179326e2a8767d361db14d13edd9fb57e408731784",
+      "sha256:1a73b54f556b477f0a8b939d13c504a3b4f4db71f7a09c63afbc10acb3de5849",
+      "sha256:d2d7ec0f6756eb51cf1602c6f8ac4dd811d3d052661142e0110357bf0b581457",
+      "sha256:4cb10dd2545bd173858450b80853b850e49608260f1a0789e0d0b39edf12f500",
+      "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb",
+      "sha256:1c47a89b8f417471ea2e6af631571f4632ba00772e2778cc7c15b72080f8da14",
+      "sha256:6a1069d9378ceb8b9c68d24d0431f61ac711d50ba675e7f273279f768e3d5f9a",
+      "sha256:bb0331ba46923a59e01101fbd6c18a7f68a782f4622ed1d3ddc4062ee2b835fa",
+      "sha256:dcecd3d0367df6fe0709ccdac68f3e710d499fc6e93110fa84765ba9f288418e",
+      "sha256:5bf213caca445a019d6501033d1a6ad8c26fb0415e25d2e7ef7830ae47026597",
+      "sha256:564879c622a57b0ea320db7ab1fd9a39953f171ba481d5fe36381b77e3225626",
+      "sha256:8ab021f6947dcd3a413e5181b629c28c4a55ab9b180cfb1e66f94012f7f2dff0",
+      "sha256:68c0f124f32d0d1d8135e2305ed63fd5f3792802f0e59021375ca5b2e7514766",
+      "sha256:ff95d2619b1aa335a7f7445924472705eeccabd640738ada22992293904552e0",
+      "sha256:67d0a20df4814419cd7465f49f62942d0cc534b2916b0b611651a40f5de4636d",
+      "sha256:ec0340aa7feb0c0dbfc393c69c43fcfcc7229f60389c5d00ce2d758fb78b01cd",
+      "sha256:2c28500c1f442b35a6f195e4426ba975a13e0a9b3e93a9d2cfe86e5e8265dec8",
+      "sha256:8ad91bbff3a3bd7f1fbf84d1a0b6719e4dcf3fcba9f858b8d23b47bbcbf34c85",
+      "sha256:4c55386b56bfa744b3f9ede9e0136a88a88420ece9ad2edccccdf5cd756df4b7",
+      "sha256:a58505e27bd02fb31a3285624023b2d049074b6694b83d8c58034871878d1ed0",
+      "sha256:47e03de55d6a9f766614344977abc99379c226bb7ad967d743cad561147cbc1e",
+      "sha256:97cbe406696891c730af2d6f7a099b349d960f5fe1a0d2460aef2c5c749ce908",
+      "sha256:6039518c67bf2b4cfc779ec5e7a41bee5f9346e7b5633da1e25a7815e9136bef",
+      "sha256:225776ec0f3ae1af557733a1755003ee9708012d1c05b26d53ce9cb8927ca18d",
+      "sha256:30c5f804a1640e4ad0f7c2d5937c0323a55b95faee8dd11eb4b2beac4514f9ae",
+      "sha256:c34d6c879dc00aeb9059be11109d668b89fdd77024ad9783d4ff834a4f86ef4d",
+      "sha256:825cf03e721a866fa36f74adc7f6726372f54036f1ade0afedc2b6496bf5a27e",
+      "sha256:8c4d8db3407769ec2d66297322b538032b3ec08fbb6cb6a8e012e8c3213aa282",
+      "sha256:5b1059b6875f7c3cbb644cdf5052311f85c63d377600d1523c17791a1fa425b8",
+      "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e",
+      "sha256:a8430d6d15abb3bf7ee6c334342a2ad537dd10cc7457a43937bbfe75fa5c002b",
+      "sha256:d980a84d61bc11d916f81da9cac2e90c15084f4c9db38d36a2deb2d39e1bcfee",
+      "sha256:f37bfaeb4ab636ab417216dca47b3d3dc5d69201d223360ed22b081cffa85b98",
+      "sha256:71fb5e2ef8cc1cd4c27527a116e72459bb2cea9108608dff3940dbf779c12675",
+      "sha256:294f507fc74dcace088c6e462e84536043c3942da6d4c6eacc156288394bada0"
+    ],
+    "RepoTags": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous"
+    ],
+    "RepoDigests": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous@sha256:60dcc1014080b8e606c21e916df2919d66551c524bf7952dd0133c2c5345b1bd"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "1970-01-01T00:00:00Z",
+      "history": [
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "dependencies"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "project dependencies"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "resources"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "classes"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "jvm arg files"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "extra files"
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:e023e0e48e6e29e90e519f4dd356d058ff2bffbd16e28b802f3b8f93aa4ccb17",
+          "sha256:6fbdf253bbc2490dcfede5bdb58ca0db63ee8aff565f6ea9f918f3bce9e2d5aa",
+          "sha256:7bea6b893187b14fc0a759fe5f8972d1292a9c0554c87cbf485f0947c26b8a05",
+          "sha256:ff5700ec54186528cbae40f54c24b1a34fb7c01527beaa1232868c16e2353f52",
+          "sha256:d52f02c6501c9c4410568f0bf6ff30d30d8290f57794c308fe36ea78393afac2",
+          "sha256:e624a5370eca2b8266e74d179326e2a8767d361db14d13edd9fb57e408731784",
+          "sha256:1a73b54f556b477f0a8b939d13c504a3b4f4db71f7a09c63afbc10acb3de5849",
+          "sha256:d2d7ec0f6756eb51cf1602c6f8ac4dd811d3d052661142e0110357bf0b581457",
+          "sha256:4cb10dd2545bd173858450b80853b850e49608260f1a0789e0d0b39edf12f500",
+          "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb",
+          "sha256:1c47a89b8f417471ea2e6af631571f4632ba00772e2778cc7c15b72080f8da14",
+          "sha256:6a1069d9378ceb8b9c68d24d0431f61ac711d50ba675e7f273279f768e3d5f9a",
+          "sha256:bb0331ba46923a59e01101fbd6c18a7f68a782f4622ed1d3ddc4062ee2b835fa",
+          "sha256:dcecd3d0367df6fe0709ccdac68f3e710d499fc6e93110fa84765ba9f288418e",
+          "sha256:5bf213caca445a019d6501033d1a6ad8c26fb0415e25d2e7ef7830ae47026597",
+          "sha256:564879c622a57b0ea320db7ab1fd9a39953f171ba481d5fe36381b77e3225626",
+          "sha256:8ab021f6947dcd3a413e5181b629c28c4a55ab9b180cfb1e66f94012f7f2dff0",
+          "sha256:68c0f124f32d0d1d8135e2305ed63fd5f3792802f0e59021375ca5b2e7514766",
+          "sha256:ff95d2619b1aa335a7f7445924472705eeccabd640738ada22992293904552e0",
+          "sha256:67d0a20df4814419cd7465f49f62942d0cc534b2916b0b611651a40f5de4636d",
+          "sha256:ec0340aa7feb0c0dbfc393c69c43fcfcc7229f60389c5d00ce2d758fb78b01cd",
+          "sha256:2c28500c1f442b35a6f195e4426ba975a13e0a9b3e93a9d2cfe86e5e8265dec8",
+          "sha256:8ad91bbff3a3bd7f1fbf84d1a0b6719e4dcf3fcba9f858b8d23b47bbcbf34c85",
+          "sha256:4c55386b56bfa744b3f9ede9e0136a88a88420ece9ad2edccccdf5cd756df4b7",
+          "sha256:a58505e27bd02fb31a3285624023b2d049074b6694b83d8c58034871878d1ed0",
+          "sha256:47e03de55d6a9f766614344977abc99379c226bb7ad967d743cad561147cbc1e",
+          "sha256:97cbe406696891c730af2d6f7a099b349d960f5fe1a0d2460aef2c5c749ce908",
+          "sha256:6039518c67bf2b4cfc779ec5e7a41bee5f9346e7b5633da1e25a7815e9136bef",
+          "sha256:225776ec0f3ae1af557733a1755003ee9708012d1c05b26d53ce9cb8927ca18d",
+          "sha256:30c5f804a1640e4ad0f7c2d5937c0323a55b95faee8dd11eb4b2beac4514f9ae",
+          "sha256:c34d6c879dc00aeb9059be11109d668b89fdd77024ad9783d4ff834a4f86ef4d",
+          "sha256:825cf03e721a866fa36f74adc7f6726372f54036f1ade0afedc2b6496bf5a27e",
+          "sha256:8c4d8db3407769ec2d66297322b538032b3ec08fbb6cb6a8e012e8c3213aa282",
+          "sha256:5b1059b6875f7c3cbb644cdf5052311f85c63d377600d1523c17791a1fa425b8",
+          "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e",
+          "sha256:a8430d6d15abb3bf7ee6c334342a2ad537dd10cc7457a43937bbfe75fa5c002b",
+          "sha256:d980a84d61bc11d916f81da9cac2e90c15084f4c9db38d36a2deb2d39e1bcfee",
+          "sha256:f37bfaeb4ab636ab417216dca47b3d3dc5d69201d223360ed22b081cffa85b98",
+          "sha256:71fb5e2ef8cc1cd4c27527a116e72459bb2cea9108608dff3940dbf779c12675",
+          "sha256:294f507fc74dcace088c6e462e84536043c3942da6d4c6eacc156288394bada0"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "java",
+          "-XX:InitialRAMPercentage=50.0",
+          "-XX:MaxRAMPercentage=50.0",
+          "-javaagent:/app/agent/opentelemetry-javaagent.jar",
+          "--add-opens=java.base/java.util=ALL-UNNAMED",
+          "-cp",
+          "@/app/jib-classpath-file",
+          "com.paymenttools.eclog.bff.Application"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt",
+          "OTEL_RESOURCE_ATTRIBUTES=service.name=ec-log-bff",
+          "OTEL_METRICS_EXPORTER=none",
+          "OTEL_TRACES_EXPORTER=none",
+          "JAVA_VERSION=17.0.7",
+          "LANG=C.UTF-8",
+          "OTEL_JAVAAGENT_DEBUG=false"
+        ],
+        "Labels": {
+          "org.opencontainers.image.base.name": "unknowngit.commit.timestamp=1702549544",
+          "org.opencontainers.image.created": "2023-12-14T10:39:58+0000",
+          "org.opencontainers.image.revision": "2cd384ffac81ebeefa6f3de345c5aaa2fc3f3508",
+          "org.opencontainers.image.source": "https://github.com/paymenttools/ec-log-frontend-backend"
+        },
+        "User": "65532",
+        "WorkingDir": "/home/nonroot",
+        "ExposedPorts": {
+          "8080/tcp": {},
+          "8081/tcp": {}
+        }
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous (debian 11.7)",
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-4911",
+          "VendorIDs": [
+            "DSA-5514-1"
+          ],
+          "PkgID": "libc6@2.31-13+deb11u6",
+          "PkgName": "libc6",
+          "InstalledVersion": "2.31-13+deb11u6",
+          "FixedVersion": "2.31-13+deb11u7",
+          "Layer": {
+            "Digest": "sha256:96266735468f361ae6828901a80fc15a7f75e26640351df9e0f0f9824f36cf92",
+            "DiffID": "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-4911",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: buffer overflow in ld.so leading to privilege escalation",
+          "Description": "A buffer overflow was discovered in the GNU C Library's dynamic loader ld.so while processing the GLIBC_TUNABLES environment variable. This issue could allow a local attacker to use maliciously crafted GLIBC_TUNABLES environment variables when launching binaries with SUID permission to execute code with elevated privileges.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://packetstormsecurity.com/files/174986/glibc-ld.so-Local-Privilege-Escalation.html",
+            "http://seclists.org/fulldisclosure/2023/Oct/11",
+            "http://www.openwall.com/lists/oss-security/2023/10/03/2",
+            "http://www.openwall.com/lists/oss-security/2023/10/03/3",
+            "http://www.openwall.com/lists/oss-security/2023/10/05/1",
+            "http://www.openwall.com/lists/oss-security/2023/10/13/11",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/3",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/5",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/6",
+            "https://access.redhat.com/errata/RHSA-2023:5453",
+            "https://access.redhat.com/errata/RHSA-2023:5454",
+            "https://access.redhat.com/errata/RHSA-2023:5455",
+            "https://access.redhat.com/errata/RHSA-2023:5476",
+            "https://access.redhat.com/security/cve/CVE-2023-4911",
+            "https://bugzilla.redhat.com/2234712",
+            "https://bugzilla.redhat.com/2237782",
+            "https://bugzilla.redhat.com/2237798",
+            "https://bugzilla.redhat.com/2238352",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2234712",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2237782",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2237798",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2238352",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4527",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4806",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4813",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911",
+            "https://errata.almalinux.org/9/ALSA-2023-5453.html",
+            "https://errata.rockylinux.org/RLSA-2023:5455",
+            "https://linux.oracle.com/cve/CVE-2023-4911.html",
+            "https://linux.oracle.com/errata/ELSA-2023-5455.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4DBUQRRPB47TC3NJOUIBVWUGFHBJAFDL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DFG4P76UHHZEWQ26FWBXG76N2QLKKPZA/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NDAQWHTSVOCOZ5K6KPIWKRT3JX4RTZUR/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-4911",
+            "https://security.gentoo.org/glsa/202310-03",
+            "https://security.netapp.com/advisory/ntap-20231013-0006/",
+            "https://ubuntu.com/security/notices/USN-6409-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-4911",
+            "https://www.debian.org/security/2023/dsa-5514",
+            "https://www.qualys.com/2023/10/03/cve-2023-4911/looney-tunables-local-privilege-escalation-glibc-ld-so.txt",
+            "https://www.qualys.com/cve-2023-4911/"
+          ],
+          "PublishedDate": "2023-10-03T18:15:00Z",
+          "LastModifiedDate": "2023-11-07T04:23:00Z"
+        }
+      ]
+    },
+    {
+      "Target": "Java",
+      "Class": "lang-pkgs",
+      "Type": "jar",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-6378",
+          "PkgName": "ch.qos.logback:logback-classic",
+          "PkgPath": "app/libs/logback-classic-1.2.11.jar",
+          "InstalledVersion": "1.2.11",
+          "FixedVersion": "1.3.12, 1.4.12, 1.2.13",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-6378",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "logback: serialization vulnerability in logback receiver",
+          "Description": "A serialization vulnerability in logback receiver component part of \nlogback version 1.4.11 allows an attacker to mount a Denial-Of-Service \nattack by sending poisoned data.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+              "V3Score": 7.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-6378",
+            "https://github.com/qos-ch/logback",
+            "https://github.com/qos-ch/logback/commit/9c782b45be4abdafb7e17481e24e7354c2acd1eb",
+            "https://github.com/qos-ch/logback/commit/b8eac23a9de9e05fb6d51160b3f46acd91af9731",
+            "https://github.com/qos-ch/logback/commit/bb095154be011267b64e37a1d401546e7cc2b7c3",
+            "https://github.com/qos-ch/logback/issues/745#issuecomment-1836227158",
+            "https://logback.qos.ch/manual/receivers.html",
+            "https://logback.qos.ch/news.html#1.2.13",
+            "https://logback.qos.ch/news.html#1.3.12",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-6378",
+            "https://www.cve.org/CVERecord?id=CVE-2023-6378"
+          ],
+          "PublishedDate": "2023-11-29T12:15:00Z",
+          "LastModifiedDate": "2023-12-05T21:00:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-6378",
+          "PkgName": "ch.qos.logback:logback-core",
+          "PkgPath": "app/libs/logback-core-1.2.11.jar",
+          "InstalledVersion": "1.2.11",
+          "FixedVersion": "1.3.12, 1.4.12, 1.2.13",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-6378",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "logback: serialization vulnerability in logback receiver",
+          "Description": "A serialization vulnerability in logback receiver component part of \nlogback version 1.4.11 allows an attacker to mount a Denial-Of-Service \nattack by sending poisoned data.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+              "V3Score": 7.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-6378",
+            "https://github.com/qos-ch/logback",
+            "https://github.com/qos-ch/logback/commit/9c782b45be4abdafb7e17481e24e7354c2acd1eb",
+            "https://github.com/qos-ch/logback/commit/b8eac23a9de9e05fb6d51160b3f46acd91af9731",
+            "https://github.com/qos-ch/logback/commit/bb095154be011267b64e37a1d401546e7cc2b7c3",
+            "https://github.com/qos-ch/logback/issues/745#issuecomment-1836227158",
+            "https://logback.qos.ch/manual/receivers.html",
+            "https://logback.qos.ch/news.html#1.2.13",
+            "https://logback.qos.ch/news.html#1.3.12",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-6378",
+            "https://www.cve.org/CVERecord?id=CVE-2023-6378"
+          ],
+          "PublishedDate": "2023-11-29T12:15:00Z",
+          "LastModifiedDate": "2023-12-05T21:00:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-1370",
+          "PkgName": "net.minidev:json-smart",
+          "PkgPath": "app/libs/nimbus-jose-jwt-9.22.jar",
+          "InstalledVersion": "2.4.8",
+          "FixedVersion": "2.4.9",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-1370",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "json-smart: Uncontrolled Resource Consumption vulnerability in json-smart (Resource Exhaustion)",
+          "Description": "[Json-smart](https://netplex.github.io/json-smart/) is a performance focused, JSON processor lib.\n\nWhen reaching a ‘[‘ or ‘{‘ character in the JSON input, the code parses an array or an object respectively.\n\nIt was discovered that the code does not have any limit to the nesting of such arrays or objects. Since the parsing of nested arrays and objects is done recursively, nesting too many of them can cause a stack exhaustion (stack overflow) and crash the software.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-674"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-1370",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1370",
+            "https://github.com/advisories/GHSA-493p-pfq6-5258",
+            "https://github.com/netplex/json-smart-v2/commit/5b3205d051952d3100aa0db1535f6ba6226bd87a",
+            "https://github.com/netplex/json-smart-v2/commit/e2791ae506a57491bc856b439d706c81e45adcf8",
+            "https://github.com/netplex/json-smart-v2/issues/137",
+            "https://github.com/oswaldobapvicjr/jsonmerge",
+            "https://github.com/oswaldobapvicjr/jsonmerge/security/advisories/GHSA-493p-pfq6-5258",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-1370",
+            "https://research.jfrog.com/vulnerabilities/stack-exhaustion-in-json-smart-leads-to-denial-of-service-when-parsing-malformed-json-xray-427633/",
+            "https://security.snyk.io/vuln/SNYK-JAVA-NETMINIDEV-3369748",
+            "https://ubuntu.com/security/notices/USN-6011-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-1370"
+          ],
+          "PublishedDate": "2023-03-22T06:15:00Z",
+          "LastModifiedDate": "2023-11-07T04:03:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-20873",
+          "PkgName": "org.springframework.boot:spring-boot-actuator-autoconfigure",
+          "PkgPath": "app/libs/spring-boot-actuator-autoconfigure-2.7.7.jar",
+          "InstalledVersion": "2.7.7",
+          "FixedVersion": "3.0.6, 2.7.11",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-20873",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "spring-boot: Security Bypass With Wildcard Pattern Matching on Cloud Foundry",
+          "Description": "In Spring Boot versions 3.0.0 - 3.0.5, 2.7.0 - 2.7.10, and older unsupported versions, an application that is deployed to Cloud Foundry could be susceptible to a security bypass. Users of affected versions should apply the following mitigation: 3.0.x users should upgrade to 3.0.6+. 2.7.x users should upgrade to 2.7.11+. Users of older, unsupported versions should upgrade to 3.0.6+ or 2.7.11+.",
+          "Severity": "CRITICAL",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-20873",
+            "https://github.com/advisories/GHSA-g5h3-w546-pj7f",
+            "https://github.com/spring-projects/spring-boot",
+            "https://github.com/spring-projects/spring-boot/commit/32444fed4b51cc58dc908467f706102d7f0bfc15",
+            "https://github.com/spring-projects/spring-boot/commit/3522714c13b47af03bf42e7f2d5994af568cb1a7",
+            "https://github.com/spring-projects/spring-boot/releases/tag/v2.7.11",
+            "https://github.com/spring-projects/spring-boot/releases/tag/v3.0.6",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-20873",
+            "https://security.netapp.com/advisory/ntap-20230601-0009/",
+            "https://spring.io/blog/2023/05/18/spring-boot-2-5-15-and-2-6-15-available-now",
+            "https://spring.io/security/cve-2023-20873",
+            "https://spring.io/security/cve-2023-20873/",
+            "https://www.cve.org/CVERecord?id=CVE-2023-20873"
+          ],
+          "PublishedDate": "2023-04-20T21:15:00Z",
+          "LastModifiedDate": "2023-08-28T13:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-20883",
+          "PkgName": "org.springframework.boot:spring-boot-autoconfigure",
+          "PkgPath": "app/libs/spring-boot-autoconfigure-2.7.7.jar",
+          "InstalledVersion": "2.7.7",
+          "FixedVersion": "3.0.7, 2.7.12, 2.6.15, 2.5.15",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-20883",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Spring Boot Welcome Page DoS Vulnerability",
+          "Description": "In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-20883",
+            "https://github.com/spring-projects/spring-boot",
+            "https://github.com/spring-projects/spring-boot/commit/418dd1ba5bdad79b55a043000164bfcbda2acd78",
+            "https://github.com/spring-projects/spring-boot/issues/35552",
+            "https://github.com/spring-projects/spring-boot/releases/tag/v2.5.15",
+            "https://github.com/spring-projects/spring-boot/releases/tag/v2.6.15",
+            "https://github.com/spring-projects/spring-boot/releases/tag/v2.7.12",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-20883",
+            "https://security.netapp.com/advisory/ntap-20230703-0008/",
+            "https://spring.io/security/cve-2023-20883",
+            "https://www.cve.org/CVERecord?id=CVE-2023-20883"
+          ],
+          "PublishedDate": "2023-05-26T17:15:00Z",
+          "LastModifiedDate": "2023-07-03T16:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-34034",
+          "PkgName": "org.springframework.security:spring-security-config",
+          "PkgPath": "app/libs/spring-security-config-5.7.6.jar",
+          "InstalledVersion": "5.7.6",
+          "FixedVersion": "5.6.12, 5.7.10, 5.8.5, 6.0.5, 6.1.2",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-34034",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "spring-security-webflux: path wildcard leads to security bypass",
+          "Description": "Using \"**\" as a pattern in Spring Security configuration \nfor WebFlux creates a mismatch in pattern matching between Spring \nSecurity and Spring WebFlux, and the potential for a security bypass.\n\n",
+          "Severity": "CRITICAL",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-34034",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-34034",
+            "https://ossindex.sonatype.org/vulnerability/CVE-2023-34034",
+            "https://security.netapp.com/advisory/ntap-20230814-0008/",
+            "https://security.snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITY-5777893",
+            "https://spring.io/security/cve-2023-34034",
+            "https://www.cve.org/CVERecord?id=CVE-2023-34034"
+          ],
+          "PublishedDate": "2023-07-19T15:15:00Z",
+          "LastModifiedDate": "2023-08-14T19:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-20863",
+          "PkgName": "org.springframework:spring-core",
+          "PkgPath": "app/libs/spring-core-5.3.24.jar",
+          "InstalledVersion": "5.3.24",
+          "FixedVersion": "6.0.8, 5.3.27, 5.2.24.RELEASE",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-20863",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Spring Expression DoS Vulnerability",
+          "Description": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-917"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-20863",
+            "https://github.com/spring-projects/spring-framework",
+            "https://github.com/spring-projects/spring-framework/commit/b73f5fcac22555f844cf27a7eeb876cb9d7f7f7e",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-20863",
+            "https://spring.io/security/cve-2023-20863",
+            "https://www.cve.org/CVERecord?id=CVE-2023-20863"
+          ],
+          "PublishedDate": "2023-04-13T20:15:00Z",
+          "LastModifiedDate": "2023-04-21T18:04:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2016-1000027",
+          "PkgName": "org.springframework:spring-web",
+          "PkgPath": "app/libs/spring-web-5.3.24.jar",
+          "InstalledVersion": "5.3.24",
+          "FixedVersion": "6.0.0",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2016-1000027",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "spring: HttpInvokerServiceExporter readRemoteInvocation method untrusted java deserialization",
+          "Description": "Pivotal Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required. NOTE: the vendor's position is that untrusted data is not an intended use case. The product's behavior will not be changed because some users rely on deserialization of trusted data.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 7.5,
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2016-1000027",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-1000027",
+            "https://github.com/spring-projects/spring-framework",
+            "https://github.com/spring-projects/spring-framework/commit/2b051b8b321768a4cfef83077db65c6328ffd60f",
+            "https://github.com/spring-projects/spring-framework/commit/5cbe90b2cd91b866a5a9586e460f311860e11cfa",
+            "https://github.com/spring-projects/spring-framework/issues/21680",
+            "https://github.com/spring-projects/spring-framework/issues/24434",
+            "https://github.com/spring-projects/spring-framework/issues/24434#issuecomment-1231625331",
+            "https://github.com/spring-projects/spring-framework/issues/24434#issuecomment-579669626",
+            "https://github.com/spring-projects/spring-framework/issues/24434#issuecomment-582313417",
+            "https://github.com/spring-projects/spring-framework/issues/24434#issuecomment-744519525",
+            "https://jira.spring.io/browse/SPR-17143?redirect=false",
+            "https://nvd.nist.gov/vuln/detail/CVE-2016-1000027",
+            "https://raw.githubusercontent.com/distributedweaknessfiling/cvelist/master/2016/1000xxx/CVE-2016-1000027.json",
+            "https://security-tracker.debian.org/tracker/CVE-2016-1000027",
+            "https://security.netapp.com/advisory/ntap-20230420-0009/",
+            "https://spring.io/blog/2022/05/11/spring-framework-5-3-20-and-5-2-22-available-now",
+            "https://support.contrastsecurity.com/hc/en-us/articles/4402400830612-Spring-web-Java-Deserialization-CVE-2016-1000027",
+            "https://www.cve.org/CVERecord?id=CVE-2016-1000027",
+            "https://www.tenable.com/security/research/tra-2016-20"
+          ],
+          "PublishedDate": "2020-01-02T23:15:00Z",
+          "LastModifiedDate": "2023-04-20T09:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1471",
+          "PkgName": "org.yaml:snakeyaml",
+          "PkgPath": "app/agent/opentelemetry-javaagent.jar",
+          "InstalledVersion": "1.30",
+          "FixedVersion": "2.0",
+          "Layer": {
+            "Digest": "sha256:a57841311a59f9f832bbdda3e76242b36cd7c96a61c16e8f6f9c0e7c0faa296c",
+            "DiffID": "sha256:294f507fc74dcace088c6e462e84536043c3942da6d4c6eacc156288394bada0"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1471",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "SnakeYaml: Constructor Deserialization Remote Code Execution",
+          "Description": "SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
+              "V3Score": 8.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "http://packetstormsecurity.com/files/175095/PyTorch-Model-Server-Registration-Deserialization-Remote-Code-Execution.html",
+            "http://www.openwall.com/lists/oss-security/2023/11/19/1",
+            "https://access.redhat.com/errata/RHSA-2022:9058",
+            "https://access.redhat.com/security/cve/CVE-2022-1471",
+            "https://bitbucket.org/snakeyaml/snakeyaml",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/5014df1a36f50aca54405bb8433bc99a8847f758",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/acc44099f5f4af26ff86b4e4e4cc1c874e2dc5c4",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64581479",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64634374",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64876314",
+            "https://bitbucket.org/snakeyaml/snakeyaml/wiki/CVE-2022-1471",
+            "https://bugzilla.redhat.com/2150009",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2150009",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1471",
+            "https://errata.almalinux.org/8/ALSA-2022-9058.html",
+            "https://errata.rockylinux.org/RLSA-2022:9058",
+            "https://github.com/google/security-research/security/advisories/GHSA-mjmj-j48q-9wg2",
+            "https://github.com/mbechler/marshalsec",
+            "https://groups.google.com/g/kubernetes-security-announce/c/mwrakFaEdnc",
+            "https://linux.oracle.com/cve/CVE-2022-1471.html",
+            "https://linux.oracle.com/errata/ELSA-2022-9058-1.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1471",
+            "https://security.netapp.com/advisory/ntap-20230818-0015/",
+            "https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1471",
+            "https://www.github.com/mbechler/marshalsec/blob/master/marshalsec.pdf?raw=true"
+          ],
+          "PublishedDate": "2022-12-01T11:15:00Z",
+          "LastModifiedDate": "2023-11-19T15:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1471",
+          "PkgName": "org.yaml:snakeyaml",
+          "PkgPath": "app/libs/snakeyaml-1.30.jar",
+          "InstalledVersion": "1.30",
+          "FixedVersion": "2.0",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1471",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "SnakeYaml: Constructor Deserialization Remote Code Execution",
+          "Description": "SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
+              "V3Score": 8.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "http://packetstormsecurity.com/files/175095/PyTorch-Model-Server-Registration-Deserialization-Remote-Code-Execution.html",
+            "http://www.openwall.com/lists/oss-security/2023/11/19/1",
+            "https://access.redhat.com/errata/RHSA-2022:9058",
+            "https://access.redhat.com/security/cve/CVE-2022-1471",
+            "https://bitbucket.org/snakeyaml/snakeyaml",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/5014df1a36f50aca54405bb8433bc99a8847f758",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/acc44099f5f4af26ff86b4e4e4cc1c874e2dc5c4",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64581479",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64634374",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64876314",
+            "https://bitbucket.org/snakeyaml/snakeyaml/wiki/CVE-2022-1471",
+            "https://bugzilla.redhat.com/2150009",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2150009",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1471",
+            "https://errata.almalinux.org/8/ALSA-2022-9058.html",
+            "https://errata.rockylinux.org/RLSA-2022:9058",
+            "https://github.com/google/security-research/security/advisories/GHSA-mjmj-j48q-9wg2",
+            "https://github.com/mbechler/marshalsec",
+            "https://groups.google.com/g/kubernetes-security-announce/c/mwrakFaEdnc",
+            "https://linux.oracle.com/cve/CVE-2022-1471.html",
+            "https://linux.oracle.com/errata/ELSA-2022-9058-1.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1471",
+            "https://security.netapp.com/advisory/ntap-20230818-0015/",
+            "https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1471",
+            "https://www.github.com/mbechler/marshalsec/blob/master/marshalsec.pdf?raw=true"
+          ],
+          "PublishedDate": "2022-12-01T11:15:00Z",
+          "LastModifiedDate": "2023-11-19T15:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-25857",
+          "PkgName": "org.yaml:snakeyaml",
+          "PkgPath": "app/agent/opentelemetry-javaagent.jar",
+          "InstalledVersion": "1.30",
+          "FixedVersion": "1.31",
+          "Layer": {
+            "Digest": "sha256:a57841311a59f9f832bbdda3e76242b36cd7c96a61c16e8f6f9c0e7c0faa296c",
+            "DiffID": "sha256:294f507fc74dcace088c6e462e84536043c3942da6d4c6eacc156288394bada0"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-25857",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "snakeyaml: Denial of Service due to missing nested depth limitation for collections",
+          "Description": "The package org.yaml:snakeyaml from 0 and before 1.31 are vulnerable to Denial of Service (DoS) due missing to nested depth limitation for collections.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-776"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:6820",
+            "https://access.redhat.com/security/cve/CVE-2022-25857",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/fc300780da21f4bb92c148bc90257201220cf174",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/525",
+            "https://bugzilla.redhat.com/2126789",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2126789",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25857",
+            "https://errata.almalinux.org/8/ALSA-2022-6820.html",
+            "https://errata.rockylinux.org/RLSA-2022:6820",
+            "https://github.com/snakeyaml/snakeyaml",
+            "https://github.com/snakeyaml/snakeyaml/commit/fc300780da21f4bb92c148bc90257201220cf174",
+            "https://linux.oracle.com/cve/CVE-2022-25857.html",
+            "https://linux.oracle.com/errata/ELSA-2022-6820.html",
+            "https://lists.debian.org/debian-lts-announce/2022/10/msg00001.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-25857",
+            "https://security.snyk.io/vuln/SNYK-JAVA-ORGYAML-2806360",
+            "https://ubuntu.com/security/notices/USN-5944-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-25857"
+          ],
+          "PublishedDate": "2022-08-30T05:15:00Z",
+          "LastModifiedDate": "2023-08-08T14:22:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-25857",
+          "PkgName": "org.yaml:snakeyaml",
+          "PkgPath": "app/libs/snakeyaml-1.30.jar",
+          "InstalledVersion": "1.30",
+          "FixedVersion": "1.31",
+          "Layer": {
+            "Digest": "sha256:779e8a396e0d04f12c05b43bd7ab88bf1f74bc14119c91a745be7c22230c2f38",
+            "DiffID": "sha256:610eb83d5b6741fcf0897309b51d78bc80496814788171568aba31cf2abf502e"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-25857",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "snakeyaml: Denial of Service due to missing nested depth limitation for collections",
+          "Description": "The package org.yaml:snakeyaml from 0 and before 1.31 are vulnerable to Denial of Service (DoS) due missing to nested depth limitation for collections.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-776"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:6820",
+            "https://access.redhat.com/security/cve/CVE-2022-25857",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/fc300780da21f4bb92c148bc90257201220cf174",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/525",
+            "https://bugzilla.redhat.com/2126789",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2126789",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25857",
+            "https://errata.almalinux.org/8/ALSA-2022-6820.html",
+            "https://errata.rockylinux.org/RLSA-2022:6820",
+            "https://github.com/snakeyaml/snakeyaml",
+            "https://github.com/snakeyaml/snakeyaml/commit/fc300780da21f4bb92c148bc90257201220cf174",
+            "https://linux.oracle.com/cve/CVE-2022-25857.html",
+            "https://linux.oracle.com/errata/ELSA-2022-6820.html",
+            "https://lists.debian.org/debian-lts-announce/2022/10/msg00001.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-25857",
+            "https://security.snyk.io/vuln/SNYK-JAVA-ORGYAML-2806360",
+            "https://ubuntu.com/security/notices/USN-5944-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-25857"
+          ],
+          "PublishedDate": "2022-08-30T05:15:00Z",
+          "LastModifiedDate": "2023-08-08T14:22:00Z"
+        }
+      ]
+    }
+  ]
+}

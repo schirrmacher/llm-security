@@ -1,0 +1,1322 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "debian",
+      "Name": "12.2"
+    },
+    "ImageID": "sha256:72a12139f08e9d83e27fc44148428a92ec52e10158e7e266a9370b9ed5c1fcaf",
+    "DiffIDs": [
+      "sha256:7cea17427f83f6c4706c74f94fb6d7925b06ea9a0701234f1a9d43f6af11432a",
+      "sha256:7c32e0608151e1683f9e1ee78eb507fe9fe73fc10584fc5f09b6b0475b95871b",
+      "sha256:30f5cd833236dc35f9ab67c205f913fc238902ee71f28a47fdb7d1ecaa9f0776",
+      "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972",
+      "sha256:652b8161668288f74e188402f8e571beed257e52f89b9427d197e4036b0a674b",
+      "sha256:f48a36f74def997da4fe5009510c5338171d758d824f3e73da72d1ab39913266",
+      "sha256:7973049f41b557119fa5a15a0c16f5d8739b04a33066a13c0620f41745c577f3",
+      "sha256:e471edff4937dcb589b858fad80a5db902a7f183f34f369415cdee1306c80e51",
+      "sha256:7889a244fe9730d21e5493d6f7c0d5940ee3323c71ccf3db0f9d1702335cbcdd",
+      "sha256:f1b16a2fff6aee42679a832048209d6ee3581ba1bcd3839014be35b5b2a4913f",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:6fa00b272b44a3fc2afc788773a2d699f8aa9742ce0eccdb7436da690473257a",
+      "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10",
+      "sha256:e7c3b20fe1bd606da8cdd144939d35bfa63c1eb35397e2caed5d33df220d4b36"
+    ],
+    "RepoTags": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous"
+    ],
+    "RepoDigests": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous@sha256:3979fa9cce0a7cd37a18897d27e734d53e93daa68b12428301f9bcfef538e3a9"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2023-12-19T11:05:34.3606024Z",
+      "history": [
+        {
+          "created": "2023-11-21T05:21:24.536066751Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:39d17d28c5de0bd629e5b7c8190228e5a445d61d668e189b7523e90e68f78244 in / "
+        },
+        {
+          "created": "2023-11-21T05:21:25.128983079Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"bash\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-11-21T09:52:48.60112971Z",
+          "created_by": "/bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tcurl \t\tgnupg \t\tnetbase \t\tsq \t\twget \t; \trm -rf /var/lib/apt/lists/*"
+        },
+        {
+          "created": "2023-11-21T09:53:05.826622089Z",
+          "created_by": "/bin/sh -c apt-get update \u0026\u0026 apt-get install -y --no-install-recommends \t\tgit \t\tmercurial \t\topenssh-client \t\tsubversion \t\t\t\tprocps \t\u0026\u0026 rm -rf /var/lib/apt/lists/*"
+        },
+        {
+          "created": "2023-11-21T09:54:02.653610372Z",
+          "created_by": "/bin/sh -c set -ex; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tautoconf \t\tautomake \t\tbzip2 \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\timagemagick \t\tlibbz2-dev \t\tlibc6-dev \t\tlibcurl4-openssl-dev \t\tlibdb-dev \t\tlibevent-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tlibglib2.0-dev \t\tlibgmp-dev \t\tlibjpeg-dev \t\tlibkrb5-dev \t\tliblzma-dev \t\tlibmagickcore-dev \t\tlibmagickwand-dev \t\tlibmaxminddb-dev \t\tlibncurses5-dev \t\tlibncursesw5-dev \t\tlibpng-dev \t\tlibpq-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tlibtool \t\tlibwebp-dev \t\tlibxml2-dev \t\tlibxslt-dev \t\tlibyaml-dev \t\tmake \t\tpatch \t\tunzip \t\txz-utils \t\tzlib1g-dev \t\t\t\t$( \t\t\tif apt-cache show 'default-libmysqlclient-dev' 2\u003e/dev/null | grep -q '^Version:'; then \t\t\t\techo 'default-libmysqlclient-dev'; \t\t\telse \t\t\t\techo 'libmysqlclient-dev'; \t\t\tfi \t\t) \t; \trm -rf /var/lib/apt/lists/*"
+        },
+        {
+          "created": "2023-11-22T00:46:37.890221863Z",
+          "created_by": "/bin/sh -c groupadd --gid 1000 node   \u0026\u0026 useradd --uid 1000 --gid node --shell /bin/bash --create-home node"
+        },
+        {
+          "created": "2023-11-23T10:40:32.363751232Z",
+          "created_by": "/bin/sh -c #(nop)  ENV NODE_VERSION=20.10.0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-11-23T10:40:47.803552899Z",
+          "created_by": "/bin/sh -c ARCH= \u0026\u0026 dpkgArch=\"$(dpkg --print-architecture)\"   \u0026\u0026 case \"${dpkgArch##*-}\" in     amd64) ARCH='x64';;     ppc64el) ARCH='ppc64le';;     s390x) ARCH='s390x';;     arm64) ARCH='arm64';;     armhf) ARCH='armv7l';;     i386) ARCH='x86';;     *) echo \"unsupported architecture\"; exit 1 ;;   esac   \u0026\u0026 export GNUPGHOME=\"$(mktemp -d)\"   \u0026\u0026 set -ex   \u0026\u0026 for key in     4ED778F539E3634C779C87C6D7062848A1AB005C     141F07595B7B3FFE74309A937405533BE57C7D57     74F12602B6F1C4E913FAA37AD3A89613643B6201     DD792F5973C6DE52C432CBDAC77ABFA00DDBF2B7     61FC681DFB92A079F1685E77973F295594EC4689     8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600     C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8     890C08DB8579162FEE0DF9DB8BEAB4DFCF555EF4     C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C     108F52B48DB57BB0CC439B2997B01419BD92F80A     A363A499291CBBC940DD62E41F10027AF002F8B0   ; do       gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" ||       gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" ;   done   \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz\"   \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc\"   \u0026\u0026 gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc   \u0026\u0026 gpgconf --kill all   \u0026\u0026 rm -rf \"$GNUPGHOME\"   \u0026\u0026 grep \" node-v$NODE_VERSION-linux-$ARCH.tar.xz\\$\" SHASUMS256.txt | sha256sum -c -   \u0026\u0026 tar -xJf \"node-v$NODE_VERSION-linux-$ARCH.tar.xz\" -C /usr/local --strip-components=1 --no-same-owner   \u0026\u0026 rm \"node-v$NODE_VERSION-linux-$ARCH.tar.xz\" SHASUMS256.txt.asc SHASUMS256.txt   \u0026\u0026 ln -s /usr/local/bin/node /usr/local/bin/nodejs   \u0026\u0026 node --version   \u0026\u0026 npm --version"
+        },
+        {
+          "created": "2023-11-23T10:40:48.357922085Z",
+          "created_by": "/bin/sh -c #(nop)  ENV YARN_VERSION=1.22.19",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-11-23T10:40:51.535879892Z",
+          "created_by": "/bin/sh -c set -ex   \u0026\u0026 export GNUPGHOME=\"$(mktemp -d)\"   \u0026\u0026 for key in     6A010C5166006599AA17F08146C2130DFD2497F5   ; do     gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" ||     gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" ;   done   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz\"   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc\"   \u0026\u0026 gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 gpgconf --kill all   \u0026\u0026 rm -rf \"$GNUPGHOME\"   \u0026\u0026 mkdir -p /opt   \u0026\u0026 tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg   \u0026\u0026 rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 yarn --version"
+        },
+        {
+          "created": "2023-11-23T10:40:51.657846148Z",
+          "created_by": "/bin/sh -c #(nop) COPY file:4d192565a7220e135cab6c77fbc1c73211b69f3d9fb37e62857b2c6eb9363d51 in /usr/local/bin/ "
+        },
+        {
+          "created": "2023-11-23T10:40:51.733736395Z",
+          "created_by": "/bin/sh -c #(nop)  ENTRYPOINT [\"docker-entrypoint.sh\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-11-23T10:40:51.815121481Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"node\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-12-19T11:04:21.213463168Z",
+          "created_by": "WORKDIR /app",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:04:21.328472673Z",
+          "created_by": "COPY . /app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:04:21.483872026Z",
+          "created_by": "COPY config.json /app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:05:21.871098411Z",
+          "created_by": "ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/google-cloud-sdk/bin/",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-12-19T11:05:21.871098411Z",
+          "created_by": "RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive \u0026\u0026     apt-get update -qqy \u0026\u0026     apt-get install -qqy --no-install-recommends          curl         python3-pip         pipx         apt-transport-https         lsb-release         openssh-client         gnupg         jq         gawk         clamav-daemon         clamav-freshclam         python3-crcmod \u0026\u0026     apt-get -qqy remove         libclamav9         clamav-base         clamav-daemon         clamav-freshclam \u0026\u0026     CLOUD_SDK_REPO=\"cloud-sdk-$(lsb_release -c -s)\" \u0026\u0026     echo -n \"Adding Cloud SDK apt repository: \" \u0026\u0026     echo \"deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main\"         | tee /etc/apt/sources.list.d/google-cloud-sdk.list \u0026\u0026     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg         | gpg --dearmor -o /etc/apt/trusted.gpg.d/packages-cloud-google-apt.gpg \u0026\u0026     apt-get update -qqy \u0026\u0026     apt-get install -qqy --no-install-recommends google-cloud-sdk \u0026\u0026     gcloud config set core/disable_usage_reporting true \u0026\u0026     gcloud config set component_manager/disable_update_check true \u0026\u0026     gcloud config set metrics/environment github_docker_image \u0026\u0026     gcloud --version \u0026\u0026     truncate -s 0 /var/log/apt/*.log /var/log/*.log # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:05:22.782624328Z",
+          "created_by": "RUN /bin/sh -c CLOUD_RUN_PROXY_VERSION=0.3.0 \u0026\u0026     curl -s -L         https://github.com/GoogleCloudPlatform/cloud-run-proxy/releases/download/v${CLOUD_RUN_PROXY_VERSION}/cloud-run-proxy_${CLOUD_RUN_PROXY_VERSION}_linux_amd64.tar.gz |         tar -zxf - cloud-run-proxy # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:05:34.3606024Z",
+          "created_by": "RUN /bin/sh -c npm install --omit=dev # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-12-19T11:05:34.3606024Z",
+          "created_by": "CMD [\"bash\" \"bootstrap.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:7cea17427f83f6c4706c74f94fb6d7925b06ea9a0701234f1a9d43f6af11432a",
+          "sha256:7c32e0608151e1683f9e1ee78eb507fe9fe73fc10584fc5f09b6b0475b95871b",
+          "sha256:30f5cd833236dc35f9ab67c205f913fc238902ee71f28a47fdb7d1ecaa9f0776",
+          "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972",
+          "sha256:652b8161668288f74e188402f8e571beed257e52f89b9427d197e4036b0a674b",
+          "sha256:f48a36f74def997da4fe5009510c5338171d758d824f3e73da72d1ab39913266",
+          "sha256:7973049f41b557119fa5a15a0c16f5d8739b04a33066a13c0620f41745c577f3",
+          "sha256:e471edff4937dcb589b858fad80a5db902a7f183f34f369415cdee1306c80e51",
+          "sha256:7889a244fe9730d21e5493d6f7c0d5940ee3323c71ccf3db0f9d1702335cbcdd",
+          "sha256:f1b16a2fff6aee42679a832048209d6ee3581ba1bcd3839014be35b5b2a4913f",
+          "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "sha256:6fa00b272b44a3fc2afc788773a2d699f8aa9742ce0eccdb7436da690473257a",
+          "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10",
+          "sha256:e7c3b20fe1bd606da8cdd144939d35bfa63c1eb35397e2caed5d33df220d4b36"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "bash",
+          "bootstrap.sh"
+        ],
+        "Entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/google-cloud-sdk/bin/",
+          "NODE_VERSION=20.10.0",
+          "YARN_VERSION=1.22.19"
+        ],
+        "Labels": {
+          "org.opencontainers.image.created": "2023-12-19T11:04:01+0000 org.opencontainers.image.source=https://github.com/paymenttools/malware-scanner-service org.opencontainers.image.revision=243e8b79ea97163215441d812c6b7fc3e7116bde org.opencontainers.image.base.name=unknowngit.commit.timestamp=1702983762"
+        },
+        "WorkingDir": "/app",
+        "ArgsEscaped": true
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous (debian 12.2)",
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-27103",
+          "PkgID": "libde265-0@1.0.11-1",
+          "PkgName": "libde265-0",
+          "InstalledVersion": "1.0.11-1",
+          "FixedVersion": "1.0.11-1+deb12u1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-27103",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "Libde265 v1.0.11 was discovered to contain a heap buffer overflow via  ...",
+          "Description": "Libde265 v1.0.11 was discovered to contain a heap buffer overflow via the function derive_collocated_motion_vectors at motion.cc.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://github.com/strukturag/libde265/issues/394",
+            "https://lists.debian.org/debian-lts-announce/2023/11/msg00032.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-27103"
+          ],
+          "PublishedDate": "2023-03-15T15:15:09.67Z",
+          "LastModifiedDate": "2023-11-30T19:15:10.8Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-43887",
+          "PkgID": "libde265-0@1.0.11-1",
+          "PkgName": "libde265-0",
+          "InstalledVersion": "1.0.11-1",
+          "FixedVersion": "1.0.11-1+deb12u1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-43887",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "Libde265 v1.0.12 was discovered to contain multiple buffer overflows v ...",
+          "Description": "Libde265 v1.0.12 was discovered to contain multiple buffer overflows via the num_tile_columns and num_tile_row parameters in the function pic_parameter_set::dump.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-120"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:H",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://github.com/strukturag/libde265/commit/63b596c915977f038eafd7647d1db25488a8c133",
+            "https://github.com/strukturag/libde265/issues/418",
+            "https://lists.debian.org/debian-lts-announce/2023/11/msg00032.html"
+          ],
+          "PublishedDate": "2023-11-22T18:15:08.747Z",
+          "LastModifiedDate": "2023-11-30T19:15:13.26Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-44487",
+          "VendorIDs": [
+            "DSA-5570-1"
+          ],
+          "PkgID": "libnghttp2-14@1.52.0-1",
+          "PkgName": "libnghttp2-14",
+          "InstalledVersion": "1.52.0-1",
+          "FixedVersion": "1.52.0-1+deb12u1",
+          "Layer": {
+            "Digest": "sha256:27e1a8ca91d35598fbae8dee7f1c211f0f93cec529f6804a60e9301c53a604d0",
+            "DiffID": "sha256:7c32e0608151e1683f9e1ee78eb507fe9fe73fc10584fc5f09b6b0475b95871b"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-44487",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "HTTP/2: Multiple HTTP/2 enabled web servers are vulnerable to a DDoS attack (Rapid Reset Attack)",
+          "Description": "The HTTP/2 protocol allows a denial of service (server resource consumption) because request cancellation can reset many streams quickly, as exploited in the wild in August through October 2023.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/10/13/4",
+            "http://www.openwall.com/lists/oss-security/2023/10/13/9",
+            "http://www.openwall.com/lists/oss-security/2023/10/18/4",
+            "http://www.openwall.com/lists/oss-security/2023/10/18/8",
+            "http://www.openwall.com/lists/oss-security/2023/10/19/6",
+            "http://www.openwall.com/lists/oss-security/2023/10/20/8",
+            "https://access.redhat.com/errata/RHSA-2023:6746",
+            "https://access.redhat.com/security/cve/CVE-2023-44487",
+            "https://access.redhat.com/security/cve/cve-2023-44487",
+            "https://arstechnica.com/security/2023/10/how-ddosers-used-the-http-2-protocol-to-deliver-attacks-of-unprecedented-size/",
+            "https://aws.amazon.com/security/security-bulletins/AWS-2023-011/",
+            "https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/",
+            "https://blog.cloudflare.com/zero-day-rapid-reset-http2-record-breaking-ddos-attack/",
+            "https://blog.litespeedtech.com/2023/10/11/rapid-reset-http-2-vulnerablilty/",
+            "https://blog.qualys.com/vulnerabilities-threat-research/2023/10/10/cve-2023-44487-http-2-rapid-reset-attack",
+            "https://blog.vespa.ai/cve-2023-44487/",
+            "https://bugzilla.proxmox.com/show_bug.cgi?id=4988",
+            "https://bugzilla.redhat.com/2242803",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2242803",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1216123",
+            "https://cgit.freebsd.org/ports/commit/?id=c64c329c2c1752f46b73e3e6ce9f4329be6629f9",
+            "https://chaos.social/@icing/111210915918780532",
+            "https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
+            "https://cloud.google.com/blog/products/identity-security/how-it-works-the-novel-http2-rapid-reset-ddos-attack",
+            "https://community.traefik.io/t/is-traefik-vulnerable-to-cve-2023-44487/20125",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487",
+            "https://devblogs.microsoft.com/dotnet/october-2023-updates/",
+            "https://discuss.hashicorp.com/t/hcsec-2023-32-vault-consul-and-boundary-affected-by-http-2-rapid-reset-denial-of-service-vulnerability-cve-2023-44487/59715",
+            "https://edg.io/lp/blog/resets-leaks-ddos-and-the-tale-of-a-hidden-cve",
+            "https://errata.almalinux.org/9/ALSA-2023-6746.html",
+            "https://errata.rockylinux.org/RLSA-2023:5838",
+            "https://forums.swift.org/t/swift-nio-http2-security-update-cve-2023-44487-http-2-dos/67764",
+            "https://gist.github.com/adulau/7c2bfb8e9cdbe4b35a5e131c66a0c088",
+            "https://github.com/Azure/AKS/issues/3947",
+            "https://github.com/Kong/kong/discussions/11741",
+            "https://github.com/advisories/GHSA-qppj-fm5r-hxr3",
+            "https://github.com/advisories/GHSA-vx74-f528-fxqg",
+            "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p",
+            "https://github.com/akka/akka-http/issues/4323",
+            "https://github.com/alibaba/tengine/issues/1872",
+            "https://github.com/apache/apisix/issues/10320",
+            "https://github.com/apache/httpd-site/pull/10",
+            "https://github.com/apache/httpd/blob/afcdbeebbff4b0c50ea26cdd16e178c0d1f24152/modules/http2/h2_mplx.c#L1101-L1113",
+            "https://github.com/apache/tomcat/tree/main/java/org/apache/coyote/http2",
+            "https://github.com/apache/trafficserver/pull/10564",
+            "https://github.com/apple/swift-nio-http2",
+            "https://github.com/apple/swift-nio-http2/security/advisories/GHSA-qppj-fm5r-hxr3",
+            "https://github.com/arkrwn/PoC/tree/main/CVE-2023-44487",
+            "https://github.com/bcdannyboy/CVE-2023-44487",
+            "https://github.com/caddyserver/caddy/issues/5877",
+            "https://github.com/caddyserver/caddy/releases/tag/v2.7.5",
+            "https://github.com/dotnet/announcements/issues/277",
+            "https://github.com/dotnet/core/blob/e4613450ea0da7fd2fc6b61dfb2c1c1dec1ce9ec/release-notes/6.0/6.0.23/6.0.23.md?plain=1#L73",
+            "https://github.com/eclipse/jetty.project/issues/10679",
+            "https://github.com/envoyproxy/envoy/pull/30055",
+            "https://github.com/etcd-io/etcd/issues/16740",
+            "https://github.com/facebook/proxygen/pull/466",
+            "https://github.com/golang/go/issues/63417",
+            "https://github.com/grpc/grpc-go/pull/6703",
+            "https://github.com/grpc/grpc-go/releases",
+            "https://github.com/h2o/h2o/pull/3291",
+            "https://github.com/h2o/h2o/security/advisories/GHSA-2m7v-gc89-fjqf",
+            "https://github.com/haproxy/haproxy/issues/2312",
+            "https://github.com/hyperium/hyper/issues/3337",
+            "https://github.com/icing/mod_h2/blob/0a864782af0a942aa2ad4ed960a6b32cd35bcf0a/mod_http2/README.md?plain=1#L239-L244",
+            "https://github.com/junkurihara/rust-rpxy/issues/97",
+            "https://github.com/kazu-yamamoto/http2/commit/f61d41a502bd0f60eb24e1ce14edc7b6df6722a1",
+            "https://github.com/kazu-yamamoto/http2/issues/93",
+            "https://github.com/kubernetes/kubernetes/pull/121120",
+            "https://github.com/line/armeria/pull/5232",
+            "https://github.com/linkerd/website/pull/1695/commits/4b9c6836471bc8270ab48aae6fd2181bc73fd632",
+            "https://github.com/micrictor/http2-rst-stream",
+            "https://github.com/microsoft/CBL-Mariner/pull/6381",
+            "https://github.com/netty/netty/commit/58f75f665aa81a8cbcf6ffa74820042a285c5e61",
+            "https://github.com/nghttp2/nghttp2/pull/1961",
+            "https://github.com/nghttp2/nghttp2/releases/tag/v1.57.0",
+            "https://github.com/ninenines/cowboy/issues/1615",
+            "https://github.com/nodejs/node/pull/50121",
+            "https://github.com/openresty/openresty/issues/930",
+            "https://github.com/opensearch-project/data-prepper/issues/3474",
+            "https://github.com/oqtane/oqtane.framework/discussions/3367",
+            "https://github.com/projectcontour/contour/pull/5826",
+            "https://github.com/tempesta-tech/tempesta/issues/1986",
+            "https://github.com/varnishcache/varnish-cache/issues/3996",
+            "https://go.dev/cl/534215",
+            "https://go.dev/cl/534235",
+            "https://go.dev/issue/63417",
+            "https://groups.google.com/g/golang-announce/c/iNNxDTCjZvo",
+            "https://groups.google.com/g/golang-announce/c/iNNxDTCjZvo/m/UDd7VKQuAAAJ",
+            "https://istio.io/latest/news/security/istio-security-2023-004/",
+            "https://linkerd.io/2023/10/12/linkerd-cve-2023-44487/",
+            "https://linux.oracle.com/cve/CVE-2023-44487.html",
+            "https://linux.oracle.com/errata/ELSA-2023-7205.html",
+            "https://lists.apache.org/thread/5py8h42mxfsn8l1wy6o41xwhsjlsd87q",
+            "https://lists.debian.org/debian-lts-announce/2023/10/msg00020.html",
+            "https://lists.debian.org/debian-lts-announce/2023/10/msg00023.html",
+            "https://lists.debian.org/debian-lts-announce/2023/10/msg00024.html",
+            "https://lists.debian.org/debian-lts-announce/2023/10/msg00045.html",
+            "https://lists.debian.org/debian-lts-announce/2023/10/msg00047.html",
+            "https://lists.debian.org/debian-lts-announce/2023/11/msg00001.html",
+            "https://lists.debian.org/debian-lts-announce/2023/11/msg00012.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/2MBEPPC36UBVOZZNAXFHKLFGSLCMN5LI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/3N4NJ7FR4X4FPZUGNTQAPSTVB2HB2Y4A/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BFQD3KUEMFBHPAPBGLWQC34L4OWL5HAZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/CLB4TW7KALB3EEQWNWCN7OUIWWVWWCG2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/E72T67UPDRXHIDLO3OROR25YAMN4GGW5/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/FNA62Q767CFAFHBCDKYNPBMZWB7TWYVU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/HT7T2R4MQKLIF4ODV4BDLPARWFPCJ5CZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/JIZSEFC3YKCGABA2BZW6ZJRMDZJMB7PJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/JMEXY22BFG5Q64HQCM5CK2Q7KDKVV4TY/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/KSEGD2IWKNUO3DWY4KQGUQM5BISRWHQE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LKYHSZQFDNR7RSA7LHVLLIAQMVYCUGBG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LNMZJCDHGLJJLXO4OXWJMTVQRNWOC7UL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VHUHTSXLXGXS7JYKBXTA3VINUPHTNGVU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VSRDIV77HNKUSM7SJC5BKE5JSHLHU2NK/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/WE2I52RHNNU42PX6NZ2RBUHSFFJ2LVZX/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/WLPRQ5TWUQQXYWBJM7ECYDAIL2YVKIUH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/X6QXN4ORIVF6XBW4WWFE7VNPVC74S45Y/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/XFOIBB4YFICHDM7IBOP7PWXW3FX4HLL2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZB43REMKRQR62NJEI7I5NQ4FSXNLBKRT/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZKQSIKIAT5TJ3WSLU3RDBQ35YX4GY4V3/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZLU6U2R2IC2K64NDPNMV55AUAO65MAF4/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/3N4NJ7FR4X4FPZUGNTQAPSTVB2HB2Y4A/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BFQD3KUEMFBHPAPBGLWQC34L4OWL5HAZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CLB4TW7KALB3EEQWNWCN7OUIWWVWWCG2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/E72T67UPDRXHIDLO3OROR25YAMN4GGW5/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/FNA62Q767CFAFHBCDKYNPBMZWB7TWYVU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HT7T2R4MQKLIF4ODV4BDLPARWFPCJ5CZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/JIZSEFC3YKCGABA2BZW6ZJRMDZJMB7PJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/JMEXY22BFG5Q64HQCM5CK2Q7KDKVV4TY/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KSEGD2IWKNUO3DWY4KQGUQM5BISRWHQE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LKYHSZQFDNR7RSA7LHVLLIAQMVYCUGBG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LNMZJCDHGLJJLXO4OXWJMTVQRNWOC7UL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/VHUHTSXLXGXS7JYKBXTA3VINUPHTNGVU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/VSRDIV77HNKUSM7SJC5BKE5JSHLHU2NK/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WLPRQ5TWUQQXYWBJM7ECYDAIL2YVKIUH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/X6QXN4ORIVF6XBW4WWFE7VNPVC74S45Y/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XFOIBB4YFICHDM7IBOP7PWXW3FX4HLL2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZB43REMKRQR62NJEI7I5NQ4FSXNLBKRT/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZKQSIKIAT5TJ3WSLU3RDBQ35YX4GY4V3/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZLU6U2R2IC2K64NDPNMV55AUAO65MAF4/",
+            "https://lists.w3.org/Archives/Public/ietf-http-wg/2023OctDec/0025.html",
+            "https://mailman.nginx.org/pipermail/nginx-devel/2023-October/S36Q5HBXR7CAIMPLLPRSSSYR4PCMWILK.html",
+            "https://martinthomson.github.io/h2-stream-limits/draft-thomson-httpbis-h2-stream-limits.html",
+            "https://msrc.microsoft.com/blog/2023/10/microsoft-response-to-distributed-denial-of-service-ddos-attacks-against-http/2/",
+            "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-44487",
+            "https://my.f5.com/manage/s/article/K000137106",
+            "https://netty.io/news/2023/10/10/4-1-100-Final.html",
+            "https://news.ycombinator.com/item?id=37830987",
+            "https://news.ycombinator.com/item?id=37830998",
+            "https://news.ycombinator.com/item?id=37831062",
+            "https://news.ycombinator.com/item?id=37837043",
+            "https://nodejs.org/en/blog/vulnerability/october-2023-security-releases",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-44487",
+            "https://openssf.org/blog/2023/10/10/http-2-rapid-reset-vulnerability-highlights-need-for-rapid-response/",
+            "https://pkg.go.dev/vuln/GO-2023-2102",
+            "https://seanmonstar.com/post/730794151136935936/hyper-http2-rapid-reset-unaffected",
+            "https://security.gentoo.org/glsa/202311-09",
+            "https://security.netapp.com/advisory/ntap-20231016-0001/",
+            "https://security.paloaltonetworks.com/CVE-2023-44487",
+            "https://tomcat.apache.org/security-10.html#Fixed_in_Apache_Tomcat_10.1.14",
+            "https://ubuntu.com/security/CVE-2023-44487",
+            "https://ubuntu.com/security/notices/USN-6427-1",
+            "https://ubuntu.com/security/notices/USN-6427-2",
+            "https://ubuntu.com/security/notices/USN-6438-1",
+            "https://ubuntu.com/security/notices/USN-6505-1",
+            "https://www.bleepingcomputer.com/news/security/new-http-2-rapid-reset-zero-day-attack-breaks-ddos-records/",
+            "https://www.cisa.gov/news-events/alerts/2023/10/10/http2-rapid-reset-vulnerability-cve-2023-44487",
+            "https://www.cve.org/CVERecord?id=CVE-2023-44487",
+            "https://www.darkreading.com/cloud/internet-wide-zero-day-bug-fuels-largest-ever-ddos-event",
+            "https://www.debian.org/security/2023/dsa-5521",
+            "https://www.debian.org/security/2023/dsa-5522",
+            "https://www.debian.org/security/2023/dsa-5540",
+            "https://www.debian.org/security/2023/dsa-5549",
+            "https://www.debian.org/security/2023/dsa-5558",
+            "https://www.debian.org/security/2023/dsa-5570",
+            "https://www.haproxy.com/blog/haproxy-is-not-affected-by-the-http-2-rapid-reset-attack-cve-2023-44487",
+            "https://www.mail-archive.com/haproxy@formilux.org/msg44134.html",
+            "https://www.netlify.com/blog/netlify-successfully-mitigates-cve-2023-44487/",
+            "https://www.nginx.com/blog/http-2-rapid-reset-attack-impacting-f5-nginx-products/",
+            "https://www.openwall.com/lists/oss-security/2023/10/10/6",
+            "https://www.phoronix.com/news/HTTP2-Rapid-Reset-Attack",
+            "https://www.theregister.com/2023/10/10/http2_rapid_reset_zeroday/"
+          ],
+          "PublishedDate": "2023-10-10T14:15:10.883Z",
+          "LastModifiedDate": "2023-12-02T01:15:08.373Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-47038",
+          "PkgID": "libperl5.36@5.36.0-7",
+          "PkgName": "libperl5.36",
+          "InstalledVersion": "5.36.0-7",
+          "FixedVersion": "5.36.0-7+deb12u1",
+          "Layer": {
+            "Digest": "sha256:d3a767d1d12e57724b9f254794e359f3b04d4d5ad966006e5b5cda78cc382762",
+            "DiffID": "sha256:30f5cd833236dc35f9ab67c205f913fc238902ee71f28a47fdb7d1ecaa9f0776"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-47038",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl: Write past buffer end via illegal user-defined Unicode property",
+          "Description": "A vulnerability was found in perl. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122"
+          ],
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-47038",
+            "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1056746",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2249523",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47038",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-47038",
+            "https://ubuntu.com/security/notices/USN-6517-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-47038"
+          ],
+          "PublishedDate": "2023-12-18T14:15:08.933Z",
+          "LastModifiedDate": "2023-12-18T15:04:28.363Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-35827",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-35827",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "race condition leading to use-after-free in ravb_remove()",
+          "Description": "An issue was discovered in the Linux kernel through 6.3.8. A use-after-free was found in ravb_remove in drivers/net/ethernet/renesas/ravb_main.c.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-362",
+            "CWE-416"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:P/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 6.4
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-35827",
+            "https://lore.kernel.org/lkml/cca0b40b-d6f8-54c7-1e46-83cb62d0a2f1%40huawei.com/T/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-35827",
+            "https://security.netapp.com/advisory/ntap-20230803-0003/",
+            "https://www.cve.org/CVERecord?id=CVE-2023-35827",
+            "https://www.spinics.net/lists/netdev/msg886947.html"
+          ],
+          "PublishedDate": "2023-06-18T22:15:09.373Z",
+          "LastModifiedDate": "2023-11-07T04:16:00.903Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-46813",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-46813",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "kernel: SEV-ES local priv escalation",
+          "Description": "An issue was discovered in the Linux kernel before 6.5.9, exploitable by local users with userspace access to MMIO registers. Incorrect access checking in the #VC handler and instruction emulation of the SEV-ES emulation of MMIO accesses could lead to arbitrary write access to kernel memory (and thus privilege escalation). This depends on a race condition through which userspace can replace an instruction before the #VC handler reads it.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-46813",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1212649",
+            "https://cdn.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.5.9",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46813",
+            "https://git.kernel.org/linus/63e44bc52047f182601e7817da969a105aa1f721 (6.6-rc7)",
+            "https://git.kernel.org/linus/a37cd2a59d0cb270b1bba568fd3a3b8668b9d3ba (6.6-rc7)",
+            "https://git.kernel.org/linus/b9cb9c45583b911e0db71d09caa6b56469eb2bdf (6.6-rc7)",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=63e44bc52047f182601e7817da969a105aa1f721",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=a37cd2a59d0cb270b1bba568fd3a3b8668b9d3ba",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b9cb9c45583b911e0db71d09caa6b56469eb2bdf",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-46813",
+            "https://ubuntu.com/security/notices/USN-6533-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-46813"
+          ],
+          "PublishedDate": "2023-10-27T03:15:08.27Z",
+          "LastModifiedDate": "2023-11-07T20:42:02.703Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5178",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5178",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "kernel: use after free in nvmet_tcp_free_crypto in NVMe",
+          "Description": "A use-after-free vulnerability was found in drivers/nvme/target/tcp.c` in `nvmet_tcp_free_crypto` due to a logical bug in the NVMe-oF/TCP subsystem in the Linux kernel. This issue may allow a malicious local privileged user to cause a use-after-free and double-free problem, which may permit remote code execution or lead to local privilege escalation problem.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-416"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2023:7370",
+            "https://access.redhat.com/errata/RHSA-2023:7379",
+            "https://access.redhat.com/errata/RHSA-2023:7418",
+            "https://access.redhat.com/errata/RHSA-2023:7548",
+            "https://access.redhat.com/errata/RHSA-2023:7549",
+            "https://access.redhat.com/errata/RHSA-2023:7551",
+            "https://access.redhat.com/errata/RHSA-2023:7554",
+            "https://access.redhat.com/errata/RHSA-2023:7557",
+            "https://access.redhat.com/errata/RHSA-2023:7559",
+            "https://access.redhat.com/security/cve/CVE-2023-5178",
+            "https://bugzilla.redhat.com/2148510",
+            "https://bugzilla.redhat.com/2148517",
+            "https://bugzilla.redhat.com/2151956",
+            "https://bugzilla.redhat.com/2154178",
+            "https://bugzilla.redhat.com/2224048",
+            "https://bugzilla.redhat.com/2240249",
+            "https://bugzilla.redhat.com/2241924",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2148510",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2148517",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2151956",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2154178",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2224048",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2240249",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2241924",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45884",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45886",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45919",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1192",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2163",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3812",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5178",
+            "https://errata.almalinux.org/8/ALSA-2023-7549.html",
+            "https://errata.rockylinux.org/RLSA-2023:7549",
+            "https://git.kernel.org/linus/d920abd1e7c4884f9ecd0749d1921b7ab19ddfbd",
+            "https://linux.oracle.com/cve/CVE-2023-5178.html",
+            "https://linux.oracle.com/errata/ELSA-2023-7549.html",
+            "https://lore.kernel.org/linux-nvme/20231002105428.226515-1-sagi@grimberg.me/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5178",
+            "https://security.netapp.com/advisory/ntap-20231208-0004/",
+            "https://ubuntu.com/security/notices/USN-6497-1",
+            "https://ubuntu.com/security/notices/USN-6534-1",
+            "https://ubuntu.com/security/notices/USN-6534-2",
+            "https://ubuntu.com/security/notices/USN-6534-3",
+            "https://ubuntu.com/security/notices/USN-6536-1",
+            "https://ubuntu.com/security/notices/USN-6537-1",
+            "https://ubuntu.com/security/notices/USN-6548-1",
+            "https://ubuntu.com/security/notices/USN-6548-2",
+            "https://ubuntu.com/security/notices/USN-6548-3",
+            "https://ubuntu.com/security/notices/USN-6549-1",
+            "https://ubuntu.com/security/notices/USN-6549-2",
+            "https://ubuntu.com/security/notices/USN-6549-3",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5178",
+            "https://www.openwall.com/lists/oss-security/2023/10/15/1"
+          ],
+          "PublishedDate": "2023-11-01T17:15:11.92Z",
+          "LastModifiedDate": "2023-12-08T19:15:08.323Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5345",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5345",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "kernel: use-after-free vulnerability in the smb client component",
+          "Description": "A use-after-free vulnerability in the Linux kernel's fs/smb/client component can be exploited to achieve local privilege escalation.\n\nIn case of an error in smb3_fs_context_parse_param, ctx-\u003epassword was freed but the field was not set to NULL which could lead to double free.\n\nWe recommend upgrading past commit e6e43b8aa7cd3c3af686caf0c2e11819a886d705.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-416"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-5345",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5345",
+            "https://git.kernel.org/linus/e6e43b8aa7cd3c3af686caf0c2e11819a886d705",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e6e43b8aa7cd3c3af686caf0c2e11819a886d705",
+            "https://kernel.dance/#e6e43b8aa7cd3c3af686caf0c2e11819a886d705",
+            "https://kernel.dance/e6e43b8aa7cd3c3af686caf0c2e11819a886d705",
+            "https://linux.oracle.com/cve/CVE-2023-5345.html",
+            "https://linux.oracle.com/errata/ELSA-2023-13047.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GISYSL3F6WIEVGHJGLC2MFNTUXHPTKQH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GPMICQ2HVZO5UAM5KPXHAZKA2U3ZDOO6/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/V5PDNWPKAP3WL5RQZ4RIDS6MG32OHH5R/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5345",
+            "https://ubuntu.com/security/notices/USN-6461-1",
+            "https://ubuntu.com/security/notices/USN-6502-1",
+            "https://ubuntu.com/security/notices/USN-6502-2",
+            "https://ubuntu.com/security/notices/USN-6502-3",
+            "https://ubuntu.com/security/notices/USN-6502-4",
+            "https://ubuntu.com/security/notices/USN-6503-1",
+            "https://ubuntu.com/security/notices/USN-6520-1",
+            "https://ubuntu.com/security/notices/USN-6537-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5345"
+          ],
+          "PublishedDate": "2023-10-03T03:15:09.75Z",
+          "LastModifiedDate": "2023-10-24T17:51:46.7Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5717",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5717",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "kernel: A heap out-of-bounds write",
+          "Description": "A heap out-of-bounds write vulnerability in the Linux kernel's Linux Kernel Performance Events (perf) component can be exploited to achieve local privilege escalation.\n\nIf perf_read_group() is called while an event's sibling_list is smaller than its child's sibling_list, it can increment or write to memory locations outside of the allocated buffer.\n\nWe recommend upgrading past commit 32671e3799ca2e4590773fd0e63aaa4229e50c06.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-5717",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5717",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/kernel/events?id=32671e3799ca2e4590773fd0e63aaa4229e50c06",
+            "https://kernel.dance/32671e3799ca2e4590773fd0e63aaa4229e50c06",
+            "https://lore.kernel.org/all/1441336073-22750-7-git-send-email-sukadev@linux.vnet.ibm.com/T/#u",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5717",
+            "https://ubuntu.com/security/notices/USN-6494-1",
+            "https://ubuntu.com/security/notices/USN-6494-2",
+            "https://ubuntu.com/security/notices/USN-6497-1",
+            "https://ubuntu.com/security/notices/USN-6532-1",
+            "https://ubuntu.com/security/notices/USN-6534-1",
+            "https://ubuntu.com/security/notices/USN-6534-2",
+            "https://ubuntu.com/security/notices/USN-6534-3",
+            "https://ubuntu.com/security/notices/USN-6536-1",
+            "https://ubuntu.com/security/notices/USN-6537-1",
+            "https://ubuntu.com/security/notices/USN-6548-1",
+            "https://ubuntu.com/security/notices/USN-6548-2",
+            "https://ubuntu.com/security/notices/USN-6548-3",
+            "https://ubuntu.com/security/notices/USN-6549-1",
+            "https://ubuntu.com/security/notices/USN-6549-2",
+            "https://ubuntu.com/security/notices/USN-6549-3",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5717"
+          ],
+          "PublishedDate": "2023-10-25T18:17:43.913Z",
+          "LastModifiedDate": "2023-11-04T03:24:15.637Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-6111",
+          "PkgID": "linux-libc-dev@6.1.55-1",
+          "PkgName": "linux-libc-dev",
+          "InstalledVersion": "6.1.55-1",
+          "FixedVersion": "6.1.64-1",
+          "Layer": {
+            "Digest": "sha256:711be5dc50448ab08ccab0b44d65962f36574d341749ab30651b78ec0d4bfd1c",
+            "DiffID": "sha256:80bd043d4663600a3f8fa3d36604acf9885cef3f67b8a878d510c07289761972"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-6111",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "kernel: netfilter: use-after-free when removing catchall element in GC sync path",
+          "Description": "A use-after-free vulnerability in the Linux kernel's netfilter: nf_tables component can be exploited to achieve local privilege escalation.\n\nThe function nft_trans_gc_catchall did not remove the catchall set element from the catchall_list when the argument sync is true, making it possible to free a catchall set element many times.\n\nWe recommend upgrading past commit 93995bf4af2c5a99e2a87f0cd5ce547d31eb7630.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-416"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-6111",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6111",
+            "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=93995bf4af2c5a99e2a87f0cd5ce547d31eb7630",
+            "https://kernel.dance/93995bf4af2c5a99e2a87f0cd5ce547d31eb7630",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IG6IF3FUY7LVZJMFRPANAU4L4PSJ3ESQ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YQ7JVDEDZV5SNHG5EW7RHKK2ZN56HSGB/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-6111",
+            "https://www.cve.org/CVERecord?id=CVE-2023-6111"
+          ],
+          "PublishedDate": "2023-11-14T14:15:29.063Z",
+          "LastModifiedDate": "2023-12-04T03:15:07.253Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-47038",
+          "PkgID": "perl@5.36.0-7",
+          "PkgName": "perl",
+          "InstalledVersion": "5.36.0-7",
+          "FixedVersion": "5.36.0-7+deb12u1",
+          "Layer": {
+            "Digest": "sha256:d3a767d1d12e57724b9f254794e359f3b04d4d5ad966006e5b5cda78cc382762",
+            "DiffID": "sha256:30f5cd833236dc35f9ab67c205f913fc238902ee71f28a47fdb7d1ecaa9f0776"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-47038",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl: Write past buffer end via illegal user-defined Unicode property",
+          "Description": "A vulnerability was found in perl. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122"
+          ],
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-47038",
+            "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1056746",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2249523",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47038",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-47038",
+            "https://ubuntu.com/security/notices/USN-6517-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-47038"
+          ],
+          "PublishedDate": "2023-12-18T14:15:08.933Z",
+          "LastModifiedDate": "2023-12-18T15:04:28.363Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-47038",
+          "PkgID": "perl-base@5.36.0-7",
+          "PkgName": "perl-base",
+          "InstalledVersion": "5.36.0-7",
+          "FixedVersion": "5.36.0-7+deb12u1",
+          "Layer": {
+            "Digest": "sha256:90e5e7d8b87a34877f61c2b86d053db1c4f440b9054cf49573e3be5d6a674a47",
+            "DiffID": "sha256:7cea17427f83f6c4706c74f94fb6d7925b06ea9a0701234f1a9d43f6af11432a"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-47038",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl: Write past buffer end via illegal user-defined Unicode property",
+          "Description": "A vulnerability was found in perl. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122"
+          ],
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-47038",
+            "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1056746",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2249523",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47038",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-47038",
+            "https://ubuntu.com/security/notices/USN-6517-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-47038"
+          ],
+          "PublishedDate": "2023-12-18T14:15:08.933Z",
+          "LastModifiedDate": "2023-12-18T15:04:28.363Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-47038",
+          "PkgID": "perl-modules-5.36@5.36.0-7",
+          "PkgName": "perl-modules-5.36",
+          "InstalledVersion": "5.36.0-7",
+          "FixedVersion": "5.36.0-7+deb12u1",
+          "Layer": {
+            "Digest": "sha256:d3a767d1d12e57724b9f254794e359f3b04d4d5ad966006e5b5cda78cc382762",
+            "DiffID": "sha256:30f5cd833236dc35f9ab67c205f913fc238902ee71f28a47fdb7d1ecaa9f0776"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-47038",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl: Write past buffer end via illegal user-defined Unicode property",
+          "Description": "A vulnerability was found in perl. This issue occurs when a crafted regular expression is compiled by perl, which can allow an attacker controlled byte buffer overflow in a heap allocated buffer.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122"
+          ],
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-47038",
+            "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1056746",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2249523",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47038",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-47038",
+            "https://ubuntu.com/security/notices/USN-6517-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-47038"
+          ],
+          "PublishedDate": "2023-12-18T14:15:08.933Z",
+          "LastModifiedDate": "2023-12-18T15:04:28.363Z"
+        }
+      ]
+    },
+    {
+      "Target": "Node.js",
+      "Class": "lang-pkgs",
+      "Type": "node-pkg",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-36665",
+          "PkgID": "protobufjs@7.2.3",
+          "PkgName": "protobufjs",
+          "PkgPath": "app/node_modules/protobufjs/package.json",
+          "InstalledVersion": "7.2.3",
+          "FixedVersion": "7.2.4, 6.11.4",
+          "Layer": {
+            "Digest": "sha256:611d71f516cecfe65ae4ced33b40bc93acec64dade40ccc744aaeb6a53ccf3b6",
+            "DiffID": "sha256:e7c3b20fe1bd606da8cdd144939d35bfa63c1eb35397e2caed5d33df220d4b36"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-36665",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "protobufjs: prototype pollution using user-controlled protobuf message",
+          "Description": "\"protobuf.js (aka protobufjs) 6.10.0 through 7.x before 7.2.5 allows Prototype Pollution, a different vulnerability than CVE-2022-25878. A user-controlled protobuf message can be used by an attacker to pollute the prototype of Object.prototype by adding and overwriting its data and functions. Exploitation can involve: (1) using the function parse to parse protobuf messages on the fly, (2) loading .proto files by using load/loadSync functions, or (3) providing untrusted input to the functions ReflectionObject.setParsedOption and util.setProperty.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-1321"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 8.6
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-36665",
+            "https://github.com/protobufjs/protobuf.js",
+            "https://github.com/protobufjs/protobuf.js/commit/e66379f451b0393c27d87b37fa7d271619e16b0d",
+            "https://github.com/protobufjs/protobuf.js/commits/release-6.11.4",
+            "https://github.com/protobufjs/protobuf.js/compare/protobufjs-v7.2.3...protobufjs-v7.2.4",
+            "https://github.com/protobufjs/protobuf.js/pull/1899",
+            "https://github.com/protobufjs/protobuf.js/releases/tag/protobufjs-v7.2.4",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-36665",
+            "https://www.code-intelligence.com/blog/cve-protobufjs-prototype-pollution-cve-2023-36665",
+            "https://www.cve.org/CVERecord?id=CVE-2023-36665"
+          ],
+          "PublishedDate": "2023-07-05T14:15:09.41Z",
+          "LastModifiedDate": "2023-09-07T22:15:07.643Z"
+        }
+      ]
+    },
+    {
+      "Target": "app/cloud-run-proxy",
+      "Class": "lang-pkgs",
+      "Type": "gobinary",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2022-41721",
+          "PkgName": "golang.org/x/net",
+          "InstalledVersion": "v0.0.0-20221004154528-8021a29435af",
+          "FixedVersion": "0.1.1-0.20221104162952-702349b0e862",
+          "Layer": {
+            "Digest": "sha256:1740337c4cf7dbeebb7881c0ecca435c8a01beb338eb15206a201819101eb0cd",
+            "DiffID": "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-41721",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "x/net/http2/h2c: request smuggling",
+          "Description": "A request smuggling attack is possible when using MaxBytesHandler. When using MaxBytesHandler, the body of an HTTP request is not fully consumed. When the server attempts to read HTTP2 frames from the connection, it will instead be reading the body of the HTTP request, which could be attacker-manipulated to represent arbitrary HTTP2 requests.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-444"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-41721",
+            "https://cs.opensource.google/go/x/net",
+            "https://go.dev/cl/447396",
+            "https://go.dev/issue/56352",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/X3H3EWQXM2XL5AGBX6UL443JEJ3GQXJN/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/X5DXTLLWN6HKI5I35EUZRBISTNZJ75GP/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-41721",
+            "https://pkg.go.dev/vuln/GO-2023-1495",
+            "https://www.cve.org/CVERecord?id=CVE-2022-41721"
+          ],
+          "PublishedDate": "2023-01-13T23:15:09.25Z",
+          "LastModifiedDate": "2023-11-07T03:52:55.5Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-41723",
+          "PkgName": "golang.org/x/net",
+          "InstalledVersion": "v0.0.0-20221004154528-8021a29435af",
+          "FixedVersion": "0.7.0",
+          "Layer": {
+            "Digest": "sha256:1740337c4cf7dbeebb7881c0ecca435c8a01beb338eb15206a201819101eb0cd",
+            "DiffID": "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-41723",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "net/http, golang.org/x/net/http2: avoid quadratic complexity in HPACK decoding",
+          "Description": "A maliciously crafted HTTP/2 stream could cause excessive CPU consumption in the HPACK decoder, sufficient to cause a denial of service from a small number of small requests.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2023:6474",
+            "https://access.redhat.com/security/cve/CVE-2022-41723",
+            "https://bugzilla.redhat.com/2174485",
+            "https://bugzilla.redhat.com/2178358",
+            "https://bugzilla.redhat.com/2178488",
+            "https://bugzilla.redhat.com/2178492",
+            "https://bugzilla.redhat.com/2184481",
+            "https://bugzilla.redhat.com/2184482",
+            "https://bugzilla.redhat.com/2184483",
+            "https://bugzilla.redhat.com/2184484",
+            "https://bugzilla.redhat.com/2196026",
+            "https://bugzilla.redhat.com/2196027",
+            "https://bugzilla.redhat.com/2196029",
+            "https://bugzilla.redhat.com/2222167",
+            "https://bugzilla.redhat.com/2228689",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41723",
+            "https://errata.almalinux.org/9/ALSA-2023-6474.html",
+            "https://github.com/advisories/GHSA-vvpx-j8f3-3w6h",
+            "https://go.dev/cl/468135",
+            "https://go.dev/cl/468295",
+            "https://go.dev/issue/57855",
+            "https://groups.google.com/g/golang-announce/c/V0aBFqaFs_E",
+            "https://linux.oracle.com/cve/CVE-2022-41723.html",
+            "https://linux.oracle.com/errata/ELSA-2023-6939.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4BUK2ZIAGCULOOYDNH25JPU6JBES5NF2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4MA5XS5DAOJ5PKKNG5TUXKPQOFHT5VBC/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/REMHVVIBDNKSRKNOTV7EQSB7CYQWOUOU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RGW7GE2Z32ZT47UFAQFDRQE33B7Q7LMT/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RLBQ3A7ROLEQXQLXFDLNJ7MYPKG5GULE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/T7N5GV4CHH6WAGX3GFMDD3COEOVCZ4RI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XX3IMUTZKRQ73PBZM4E2JP4BKYH4C6XE/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-41723",
+            "https://pkg.go.dev/vuln/GO-2023-1571",
+            "https://security.gentoo.org/glsa/202311-09",
+            "https://vuln.go.dev/ID/GO-2023-1571.json",
+            "https://www.couchbase.com/alerts/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-41723"
+          ],
+          "PublishedDate": "2023-02-28T18:15:09.98Z",
+          "LastModifiedDate": "2023-11-25T11:15:10.09Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-39325",
+          "PkgName": "golang.org/x/net",
+          "InstalledVersion": "v0.0.0-20221004154528-8021a29435af",
+          "FixedVersion": "0.17.0",
+          "Layer": {
+            "Digest": "sha256:1740337c4cf7dbeebb7881c0ecca435c8a01beb338eb15206a201819101eb0cd",
+            "DiffID": "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-39325",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang: net/http, x/net/http2: rapid stream resets can cause excessive work (CVE-2023-44487)",
+          "Description": "A malicious HTTP/2 client which rapidly creates requests and immediately resets them can cause excessive server resource consumption. While the total number of requests is bounded by the http2.Server.MaxConcurrentStreams setting, resetting an in-progress request allows the attacker to create a new request while the existing one is still executing. With the fix applied, HTTP/2 servers now bound the number of simultaneously executing handler goroutines to the stream concurrency limit (MaxConcurrentStreams). New requests arriving when at the limit (which can only happen after the client has reset an existing, in-flight request) will be queued until a handler exits. If the request queue grows too large, the server will terminate the connection. This issue is also fixed in golang.org/x/net/http2 for users manually configuring HTTP/2. The default stream concurrency limit is 250 streams (requests) per HTTP/2 connection. This value may be adjusted using the golang.org/x/net/http2 package; see the Server.MaxConcurrentStreams setting and the ConfigureServer function.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "golang.org/x/net",
+            "https://access.redhat.com/errata/RHSA-2023:6077",
+            "https://access.redhat.com/security/cve/CVE-2023-39325",
+            "https://access.redhat.com/security/cve/CVE-2023-44487",
+            "https://access.redhat.com/security/vulnerabilities/RHSB-2023-003",
+            "https://bugzilla.redhat.com/2242803",
+            "https://bugzilla.redhat.com/2243296",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2242803",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2243296",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487",
+            "https://errata.almalinux.org/9/ALSA-2023-6077.html",
+            "https://errata.rockylinux.org/RLSA-2023:6077",
+            "https://github.com/golang/go/issues/63417",
+            "https://go.dev/cl/534215",
+            "https://go.dev/cl/534235",
+            "https://go.dev/issue/63417",
+            "https://groups.google.com/g/golang-announce/c/iNNxDTCjZvo/m/UDd7VKQuAAAJ",
+            "https://linux.oracle.com/cve/CVE-2023-39325.html",
+            "https://linux.oracle.com/errata/ELSA-2023-5867.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/3SZN67IL7HMGMNAVLOTIXLIHUDXZK4LH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4BUK2ZIAGCULOOYDNH25JPU6JBES5NF2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AVZDNSMVDAQJ64LJC5I5U5LDM5753647/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CLB4TW7KALB3EEQWNWCN7OUIWWVWWCG2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/D2BBIDR2ZMB3X5BC7SR4SLQMHRMVPY6L/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ECRC75BQJP6FJN2L7KCKYZW4DSBD7QSD/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GSY7SXFFTPZFWDM6XELSDSHZLVW3AHK7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HZQIELEIRSZUYTFFH5KTH2YJ4IIQG2KE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KSEGD2IWKNUO3DWY4KQGUQM5BISRWHQE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NG7IMPL55MVWU3LCI4JQJT3K2U5CHDV7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OXGWPQOJ3JNDW2XIYKIVJ7N7QUIFNM2Q/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QF5QSYAOPDOWLY6DUHID56Q4HQFYB45I/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/R3UETKPUB3V5JS5TLZOF3SMTGT5K5APS/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/REMHVVIBDNKSRKNOTV7EQSB7CYQWOUOU/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/T7N5GV4CHH6WAGX3GFMDD3COEOVCZ4RI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ULQQONMSCQSH5Z5OWFFQHCGEZ3NL4DRJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UTT7DG3QOF5ZNJLUGHDNLRUIN6OWZARP/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WCNCBYKZXLDFGAJUB7ZP5VLC3YTHJNVH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XFOIBB4YFICHDM7IBOP7PWXW3FX4HLL2/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XTNLSL44Y5FB6JWADSZH6DCV4JJAAEQY/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YRKEXKANQ7BKJW2YTAMP625LJUJZLJ4P/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-39325",
+            "https://pkg.go.dev/vuln/GO-2023-2102",
+            "https://security.gentoo.org/glsa/202311-09",
+            "https://security.netapp.com/advisory/ntap-20231110-0008/",
+            "https://www.cisa.gov/news-events/alerts/2023/10/10/http2-rapid-reset-vulnerability-cve-2023-44487",
+            "https://www.cve.org/CVERecord?id=CVE-2023-39325"
+          ],
+          "PublishedDate": "2023-10-11T22:15:09.88Z",
+          "LastModifiedDate": "2023-12-07T03:15:06.853Z"
+        },
+        {
+          "VulnerabilityID": "GHSA-m425-mq94-257g",
+          "PkgName": "google.golang.org/grpc",
+          "InstalledVersion": "v1.50.0",
+          "FixedVersion": "1.56.3, 1.57.1, 1.58.3",
+          "Layer": {
+            "Digest": "sha256:1740337c4cf7dbeebb7881c0ecca435c8a01beb338eb15206a201819101eb0cd",
+            "DiffID": "sha256:a1a02cbc5e8d5f8ed5fb948ab1fd2ac7c424f8b426a10ceeadece8a021932d10"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-m425-mq94-257g",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "gRPC-Go HTTP/2 Rapid Reset vulnerability",
+          "Description": "### Impact\nIn affected releases of gRPC-Go, it is possible for an attacker to send HTTP/2 requests, cancel them, and send subsequent requests, which is valid by the HTTP/2 protocol, but would cause the gRPC-Go server to launch more concurrent method handlers than the configured maximum stream limit.\n\n### Patches\nThis vulnerability was addressed by #6703 and has been included in patch releases: 1.56.3, 1.57.1, 1.58.3.  It is also included in the latest release, 1.59.0.\n\nAlong with applying the patch, users should also ensure they are using the `grpc.MaxConcurrentStreams` server option to apply a limit to the server's resources used for any single connection.\n\n### Workarounds\nNone.\n\n### References\n#6703\n",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/grpc/grpc-go",
+            "https://github.com/grpc/grpc-go/commit/f2180b4d5403d2210b30b93098eb7da31c05c721",
+            "https://github.com/grpc/grpc-go/pull/6703",
+            "https://github.com/grpc/grpc-go/security/advisories/GHSA-m425-mq94-257g"
+          ]
+        }
+      ]
+    }
+  ]
+}

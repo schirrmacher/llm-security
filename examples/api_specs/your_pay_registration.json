@@ -1,0 +1,454 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://wlp-registration.dev.paymenttools.net",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/v1/paymentmeans/{id}/activation": {
+            "put": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "(Re-)activates an deactivated payment means.",
+                "description": "(Re-)activates a means of payment which.",
+                "operationId": "activatePaymentMeans",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "SignatureAuth": []
+                    }
+                ]
+            }
+        },
+        "/internal/v1/payment-token/authorize": {
+            "post": {
+                "tags": [
+                    "internal api"
+                ],
+                "summary": "Use a token.",
+                "description": "Use a token which has previously been minted for this subject. Afterwards it cannot be used for payment anymore but for reversals",
+                "operationId": "usePaymentToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PaymentTokenDeletionData"
+                            },
+                            "example": {
+                                "paymentToken": "02/92066af405b74c568ec3fa6042608b39/up56ByPY5NQuJIJ6P5AIY5PNmmvGe5sYbagiKyqsy2ptFW5OSXu0urCf5cgcdRKOCizNEaMcABaIMp6w6dn-AQ=="
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content - Payment token successfully deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UsedPaymentTokenDocs"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - Payment token not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UsedPaymentTokenDocs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/subject": {
+            "post": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Returns subject for the given public key.",
+                "description": "Responds with the subject for the given public key.",
+                "operationId": "getSubjectByPublicKey",
+                "parameters": [
+                    {
+                        "name": "wlp-public-key",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubjectDocs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment-tokens": {
+            "post": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Returns all payment tokens of the user plus newly created ones if necessary to reach the maximum amount.",
+                "description": "Returns all the user's payment tokens with scope payment. If the token limit is not reached, new tokens are minted beforehand so that the maximum amount of tokens is returned. The returned data (i.e. tokens, etc.) can be used as payment means reference at Payment API.Calling this endpoint multiple times without consuming tokens in the meantime always leads to the same response (idempotency).",
+                "operationId": "getAllPaymentTokens",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PaymentTokenData"
+                            },
+                            "example": {
+                                "paymentMeansId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully found list of payment tokens",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaymentTokenDocs"
+                                },
+                                "example": [
+                                    {
+                                        "token": "92066af405b74c568ec3fa6042608b39",
+                                        "paymentMeansId": "123e4567-e89b-12d3-a456-556642440000",
+                                        "created": "2024-06-11T08:30:00Z"
+                                    },
+                                    {
+                                        "token": "92066af405b74c568ec3fa6042608b39",
+                                        "paymentMeansId": "123e4567-e89b-12d3-a456-556642440001",
+                                        "created": "2024-06-11T08:30:00Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/paymentmeans/{id}/deactivation": {
+            "patch": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Deactivates an active payment means.",
+                "description": "Deactivates a means of payment which can eventually be deleted after some retention period.",
+                "operationId": "deactivatePaymentMeans",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "wlp-subject-id",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "SignatureAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/paymentmeans": {
+            "get": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Returns all active and inactive payment means of a subjectId.",
+                "description": "Responds with all created payment means of the given subjectId if any no matter whether they are active or inactive. The alias is a speaking name (by default the masked IBAN).",
+                "operationId": "getAllPaymentMeans",
+                "parameters": [
+                    {
+                        "name": "wlp-subject-id",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentMeansPublicView"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "SignatureAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/subject/{subject}": {
+            "delete": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Delete all active payment means and delete all user specific data for the given subject",
+                "description": "Delete all active payment means and delete all user specific data including payment tokens used or unused for the given subject.",
+                "operationId": "signOff",
+                "parameters": [
+                    {
+                        "name": "wlp-subject-id",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "subject",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/paymentmeans/{id}": {
+            "delete": {
+                "tags": [
+                    "public api"
+                ],
+                "summary": "Deletes payment means",
+                "description": "Deletes a payment means with given ID",
+                "operationId": "deletePaymentMeans",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "SignatureAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PaymentToken": {
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "string",
+                        "enum": [
+                            "01",
+                            "02"
+                        ]
+                    },
+                    "token": {
+                        "type": "string"
+                    },
+                    "signature": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PaymentTokenDeletionData": {
+                "required": [
+                    "paymentToken"
+                ],
+                "type": "object",
+                "properties": {
+                    "paymentToken": {
+                        "$ref": "#/components/schemas/PaymentToken"
+                    }
+                }
+            },
+            "UsedPaymentTokenDocs": {
+                "type": "object",
+                "properties": {
+                    "subjectId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "referenceId": {
+                        "type": "string"
+                    },
+                    "paymentMeansId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "mandateToken": {
+                        "type": "string"
+                    },
+                    "bankName": {
+                        "type": "string"
+                    },
+                    "maskedIban": {
+                        "type": "string"
+                    }
+                }
+            },
+            "SubjectDocs": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "PaymentTokenData": {
+                "required": [
+                    "paymentMeansId"
+                ],
+                "type": "object",
+                "properties": {
+                    "paymentMeansId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "PaymentTokenDocs": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "paymentMeansId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "FormattedYearMonth": {
+                "type": "object",
+                "properties": {
+                    "year": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "month": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "PaymentMeansPublicView": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "alias": {
+                        "type": "string"
+                    },
+                    "cardExpiry": {
+                        "$ref": "#/components/schemas/FormattedYearMonth"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
