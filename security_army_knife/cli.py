@@ -81,12 +81,7 @@ def run_security_army_knife(
 
     if architecture_diagram:
         agents.append(
-            ArchitectureAgent(
-                model,
-                architecture_diagram=architecture_diagram,
-                dependency_list=dependency_list,
-                api_documentation=api_documentation,
-            )
+            ArchitectureAgent(model, architecture_diagram=architecture_diagram)
         )
 
     if dependency_list:
