@@ -1,0 +1,339 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: /api/pos-explorer
+security:
+  - ApiKeyToken: []
+paths:
+  /status:
+    post:
+      tags:
+        - POS Explorer
+      summary: Gets data on terminals in the system of a selected service organization, that accepts client card products.
+      operationId: status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusRequestModel"
+            example:
+              requestId: "10"
+              ico: "65465448"
+              country: CZ
+        required: true
+      responses:
+        "200":
+          description: Successfully returned the terminals.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponseModel"
+              example:
+                requestId: "10"
+                terminalStatusList:
+                  - ico: "65465448"
+                    bTid: T1ST0008
+                    mTid: ABCM9100
+                    name: Organizational unit name
+                    street: Radlická 333/150
+                    city: Praha 5
+                    zip: "15000"
+                    bank: "2222"
+                    products:
+                      - product: CARDBRAND
+                        activationDate: 25.06.2018 16:10:25
+                        requestDate: 24.06.2018 16:10:25
+                  - ico: "65465448"
+                    bTid: T1ST0009
+                    mTid: ABCM9100
+                    name: Organizational unit name
+                    street: Radlická 333/150
+                    city: Praha 5
+                    zip: "15000"
+                    bank: "2222"
+                    products:
+                      - product: CARDBRAND
+                        activationDate: 20.01.2018 12:20:22
+                        requestDate: 20.01.2018 10:20:22
+        "400":
+          description: Missing required data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: Merchant or company with a given ICO does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /info:
+    post:
+      tags:
+        - POS Explorer
+      summary: Gets information about all active terminals in the network of the selected service organization for the trader defined by the ICO number.
+      operationId: info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InfoRequestModel"
+            example:
+              requestId: "10"
+              ico: "65465448"
+              country: CZ
+        required: true
+      responses:
+        "200":
+          description: Successfully returned the terminals.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoResponseModel"
+              example:
+                requestId: "10"
+                terminalList:
+                  - bTid: PIDM9100
+                    mTid: M1PIDM9100
+                    mid: "10000004"
+                    appSupported: false
+                    name: Organizational unit name
+                    street: Ke Štvanici 56/3
+                    city: Praha 12
+                    zip: "88600"
+                    bank: "0000"
+                    country: CZ
+                    mcc: "0000"
+                  - bTid: ABCM9100
+                    mTid: G1ABCM9100
+                    mid: "53263292"
+                    appSupported: false
+                    name: Organizational unit name
+                    street: Vsetínská 333/150
+                    city: Praha 7
+                    zip: "17000"
+                    bank: "2222"
+                    country: CZ
+                    mcc: "0000"
+                  - bTid: 3451M9100
+                    mTid: H13451M9100
+                    mid: "53264513"
+                    appSupported: false
+                    name: Organizational unit name
+                    street: Ke Štvanici 65/3
+                    city: Praha 8
+                    zip: "18600"
+                    bank: "1111"
+                    country: CZ
+                    mcc: "0000"
+        "400":
+          description: Missing required data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: Merchant or company with a given ICO does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /activation:
+    post:
+      tags:
+        - POS Explorer
+      summary: Activates or deactivates the card product for the terminal.
+      operationId: activation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivationRequestModel"
+            example:
+              requestId: "10"
+              tid: PIDM9100
+              product: CARD1
+              operation: ACTIVATE
+        required: true
+      responses:
+        "200":
+          description: Successfully activated the card product for the terminal.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActivationResponseModel"
+              example:
+                requestId: "10"
+                responseCode: "200"
+                responseMessage: Ok
+        "405":
+          description: Failed to activate or deactivate a card product for the terminal.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+components:
+  schemas:
+    StatusRequestModel:
+      required:
+        - requestId
+      type: object
+      properties:
+        requestId:
+          type: string
+        ico:
+          type: string
+        country:
+          type: string
+          enum:
+            - CZ
+            - SK
+            - UNSPECIFIED
+    StatusResponseModel:
+      required:
+        - requestId
+        - terminalStatusList
+      type: object
+      properties:
+        requestId:
+          type: string
+        terminalStatusList:
+          type: array
+          items:
+            $ref: "#/components/schemas/TerminalStatus"
+    TerminalProduct:
+      required:
+        - product
+      type: object
+      properties:
+        product:
+          type: string
+    TerminalStatus:
+      required:
+        - ico
+        - mTid
+        - products
+      type: object
+      properties:
+        ico:
+          type: string
+        mTid:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/TerminalProduct"
+    ProblemDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+    InfoRequestModel:
+      required:
+        - ico
+        - requestId
+      type: object
+      properties:
+        requestId:
+          type: string
+        ico:
+          type: string
+        country:
+          type: string
+          enum:
+            - CZ
+            - SK
+            - UNSPECIFIED
+    InfoResponseModel:
+      required:
+        - requestId
+        - terminalList
+      type: object
+      properties:
+        requestId:
+          type: string
+        terminalList:
+          type: array
+          items:
+            $ref: "#/components/schemas/TerminalInfo"
+    TerminalInfo:
+      required:
+        - bank
+        - city
+        - country
+        - mTid
+        - mid
+        - street
+      type: object
+      properties:
+        mTid:
+          type: string
+        mid:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        bank:
+          type: string
+        country:
+          type: string
+          enum:
+            - CZ
+            - SK
+            - UNSPECIFIED
+    ActivationRequestModel:
+      required:
+        - operation
+        - product
+        - requestId
+        - tid
+      type: object
+      properties:
+        requestId:
+          type: string
+        tid:
+          type: string
+        product:
+          type: string
+        operation:
+          type: string
+          enum:
+            - ACTIVATE
+            - DEACTIVATE
+    ActivationResponseModel:
+      required:
+        - requestId
+        - responseCode
+        - responseMessage
+      type: object
+      properties:
+        requestId:
+          type: string
+        responseCode:
+          type: string
+        responseMessage:
+          type: string
+  securitySchemes:
+    ApiKeyToken:
+      type: apiKey
+      description: ApiKey TOKEN
+      name: Authorization
+      in: header

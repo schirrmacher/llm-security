@@ -1,0 +1,135 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+gw: pt-gw {
+  lb: "" {
+    style: {
+      fill: transparent
+      stroke: transparent
+    }
+    gw: Gateway Ingress
+
+    i: Gateway Internal L4 LB
+    e: Gateway L4 LB
+    d: Dashboard Ingress
+  }
+  gke: {
+    n_gw: Gateway NS {
+      d_gw: Gateway Deployment {
+        pods: Pods {
+          style.multiple: true
+          istio: Istio Sidecar
+          tyk: Gateway
+        }
+      }
+      s_gw: Gateway SVC
+
+      s_gw -> d_gw.pods
+
+      d_dash: Dashboard Deployment {
+        pods: Pods {
+          style.multiple: true
+          istio: Istio Sidecar
+          tyk: Dashboard
+        }
+      }
+
+      s_dash: Dashboard SVC
+      s_dash -> d_dash.pods
+
+      d_pump: Pump Deployment {
+        pods: Pods {
+          style.multiple: true
+          istio: Istio Sidecar
+          tyk: Pump
+        }
+      }
+
+      d_gw.pods.istio -> s_dash: Polls {
+        style.stroke-dash: 3
+      }
+    }
+    n_obs: Observability NS {
+      d_otel: OTEL Deployment {
+        pods: Pods {
+          style.multiple: true
+          istio: Istio Sidecar
+          otel: OTEL Collector
+        }
+      }
+
+      d_otel.pods -> _.n_gw.d_pump.pods: Scrape Metrics
+
+      d_promtail: Promtail Deployment {
+        pods: Pods {
+          style.multiple: true
+          istio: Istio Sidecar
+          promtail: Promtail
+        }
+      }
+
+      d_promtail.pods -> _.n_gw.d_pump.pods: Scrape Logs
+    }
+  }
+
+  db: "" {
+    style: {
+      fill: transparent
+      stroke: transparent
+    }
+
+    redis: Redis {
+      shape: cylinder
+    }
+
+    pg: PostgreSQL {
+      shape: cylinder
+    }
+  }
+
+  gke.n_gw.d_gw.pods.tyk -> db.redis: |md
+    Write Analytics
+    Fetch API Keys
+  |
+
+  gke.n_gw.d_pump.pods.tyk -> db.pg: Write Analytics
+  gke.n_gw.d_pump.pods.tyk <- db.redis: Fetch Analytics
+
+  gke.n_gw.d_dash.pods.tyk -> db.redis: Write API Keys
+  gke.n_gw.d_dash.pods.tyk -> db.pg: |md
+    Persistence
+    Fetch Analytics
+  |
+
+  lb.gw -> gke.n_gw.s_gw
+  lb.d -> gke.n_gw.s_dash
+  lb.i -> gke.n_gw.s_gw
+  lb.e -> gke.n_gw.s_gw
+}
+
+metrics: "" {
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  mimir: Mimir
+  loki: Loki
+}
+gw.gke.n_obs.d_otel.pods -> metrics.mimir: Push Metrics
+gw.gke.n_obs.d_promtail.pods -> metrics.loki: Push Logs
+
+pt-svc: pt-prod-svc {
+  lb_i7: K8S API Gateway
+  gke: {
+    p_svc: Backend Service {
+      style.multiple: true
+    }
+  }
+
+  lb_i7 -> gke.p_svc
+}
+
+gw.gke.n_gw.d_gw.pods.istio -> pt-svc.lb_i7: Private Service Connect

@@ -1,0 +1,54 @@
+@startuml
+
+actor "Bitwarden Admin" as admin
+actor "SRE" as sre
+actor "Developer" as dev
+participant "Bitwarden" as bit
+participant "Kubernetes Cron Job" as cron
+participant "GCP SM" as sm
+participant "Application" as app
+
+== Add Bitwarden Admin ==
+
+admin -> bit: Adds another admin secured by Google Workspace Group
+
+== Credential Provisioning ==
+
+autonumber
+
+dev -> dev: Create secret or customers create them
+dev -> bit: Provide secret via Webinterface or Bitwarden Client with Identifier for secret
+
+note right
+  Every service has access permissions for their domain.
+  Security relies on Google Workspace.
+  So Multi-factor Auth is in place.
+end note
+
+== Credential Sync ==
+
+autonumber
+
+cron -> bit: read secrets with service account permissions
+note right
+  Sync happens every X 
+end note
+
+cron -> cron: calculate crc32c
+
+alt crc32c changed
+  cron -> sm: store secret    
+end
+
+== Secret Review ==
+
+dev -> app: Creates Pull Request with secret Identifier
+sre -> app: Approves Pull Request
+
+== Credential Application Usage ==
+
+autonumber
+
+app -> sm: Fetch secret by version authenticated with Workload Identity
+
+@enduml

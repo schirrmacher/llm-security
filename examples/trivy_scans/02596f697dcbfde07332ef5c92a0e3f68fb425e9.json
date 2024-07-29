@@ -1,0 +1,963 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous2e-test:main",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.18.4"
+    },
+    "ImageID": "sha256:e9f22aff469e132abb90758ae24c3f369f9f50d28a48a95bcdf9876667e1f096",
+    "DiffIDs": [
+      "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438",
+      "sha256:6bf64733992ad076e925450f16bb5a2ece96f04cb805587a8adf47d6217b8ad3",
+      "sha256:4c064c6985779300377a244d763c0842e84e6f20f24abd779b18a5585648d0d2",
+      "sha256:5d3ce509b4d53f33b90f0513b7453495b0aba81f97dbaa8e5fe033e93669386b",
+      "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+    ],
+    "RepoTags": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous2e-test:main"
+    ],
+    "RepoDigests": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous2e-test@sha256:86a7295a4c1f78386fc26755c5c910c838dfa300e48b865b9dd1f121395356e7"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2023-11-17T14:13:09.225476222Z",
+      "history": [
+        {
+          "created": "2023-09-28T21:19:27.686110063Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:756183bba9c7f4593c2b216e98e4208b9163c4c962ea0837ef88bd917609d001 in / "
+        },
+        {
+          "created": "2023-09-28T21:19:27.801479409Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/sh\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-11-17T13:25:54.66010645Z",
+          "created_by": "RUN /bin/sh -c apk add --no-cache     freetype     ttf-freefont     ca-certificates     chromium     chromium-chromedriver     openjdk17 # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-11-17T13:25:54.697445448Z",
+          "created_by": "WORKDIR /app",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-11-17T14:12:23.730307302Z",
+          "created_by": "COPY . . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-11-17T14:13:09.225476222Z",
+          "created_by": "RUN /bin/sh -c ./gradlew clean resolveTestRuntimeLibs classes testClasses -x test # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-11-17T14:13:09.225476222Z",
+          "created_by": "ENTRYPOINT [\"./gradlew\" \"--offline\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438",
+          "sha256:6bf64733992ad076e925450f16bb5a2ece96f04cb805587a8adf47d6217b8ad3",
+          "sha256:4c064c6985779300377a244d763c0842e84e6f20f24abd779b18a5585648d0d2",
+          "sha256:5d3ce509b4d53f33b90f0513b7453495b0aba81f97dbaa8e5fe033e93669386b",
+          "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "./gradlew",
+          "--offline"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "Labels": {
+          "org.opencontainers.image.created": "2023-11-17T14:12:01+0000 org.opencontainers.image.source=https://github.com/paymenttools/ec-log-e2e-test org.opencontainers.image.revision=02596f697dcbfde07332ef5c92a0e3f68fb425e9 org.opencontainers.image.base.name=unknowngit.commit.timestamp=1700230264"
+        },
+        "WorkingDir": "/app"
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous2e-test:main (alpine 3.18.4)",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-5363",
+          "PkgID": "libcrypto3@3.1.3-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.1.3-r0",
+          "FixedVersion": "3.1.4-r0",
+          "Layer": {
+            "Digest": "sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa",
+            "DiffID": "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5363",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Title": "openssl: Incorrect cipher key and IV length processing",
+          "Description": "Issue summary: A bug has been identified in the processing of key and\ninitialisation vector (IV) lengths.  This can lead to potential truncation\nor overruns during the initialisation of some symmetric ciphers.\n\nImpact summary: A truncation in the IV can result in non-uniqueness,\nwhich could result in loss of confidentiality for some cipher modes.\n\nWhen calling EVP_EncryptInit_ex2(), EVP_DecryptInit_ex2() or\nEVP_CipherInit_ex2() the provided OSSL_PARAM array is processed after\nthe key and IV have been established.  Any alterations to the key length,\nvia the \"keylen\" parameter or the IV length, via the \"ivlen\" parameter,\nwithin the OSSL_PARAM array will not take effect as intended, potentially\ncausing truncation or overreading of these values.  The following ciphers\nand cipher modes are impacted: RC2, RC4, RC5, CCM, GCM and OCB.\n\nFor the CCM, GCM and OCB cipher modes, truncation of the IV can result in\nloss of confidentiality.  For example, when following NIST's SP 800-38D\nsection 8.2.1 guidance for constructing a deterministic IV for AES in\nGCM mode, truncation of the counter portion could lead to IV reuse.\n\nBoth truncations and overruns of the key and overruns of the IV will\nproduce incorrect results and could, in some cases, trigger a memory\nexception.  However, these issues are not currently assessed as security\ncritical.\n\nChanging the key and/or IV lengths is not considered to be a common operation\nand the vulnerable API was recently introduced. Furthermore it is likely that\napplication developers will have spotted this problem during testing since\ndecryption would fail unless both peers in the communication were similarly\nvulnerable. For these reasons we expect the probability of an application being\nvulnerable to this to be quite low. However if an application is vulnerable then\nthis issue is considered very serious. For these reasons we have assessed this\nissue as Moderate severity overall.\n\nThe OpenSSL SSL/TLS implementation is not affected by this issue.\n\nThe OpenSSL 3.0 and 3.1 FIPS providers are not affected by this because\nthe issue lies outside of the FIPS provider boundary.\n\nOpenSSL 3.1 and 3.0 are vulnerable to this issue.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/10/24/1",
+            "https://access.redhat.com/security/cve/CVE-2023-5363",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5363",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=0df40630850fb2740e6be6890bb905d3fc623b2d",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=5f69f5c65e483928c4b28ed16af6e5742929f1ee",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5363",
+            "https://security.netapp.com/advisory/ntap-20231027-0010/",
+            "https://ubuntu.com/security/notices/USN-6450-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5363",
+            "https://www.debian.org/security/2023/dsa-5532",
+            "https://www.openssl.org/news/secadv/20231024.txt"
+          ],
+          "PublishedDate": "2023-10-25T18:17:00Z",
+          "LastModifiedDate": "2023-11-09T13:55:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5678",
+          "PkgID": "libcrypto3@3.1.3-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.1.3-r0",
+          "FixedVersion": "3.1.4-r1",
+          "Layer": {
+            "Digest": "sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa",
+            "DiffID": "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5678",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Title": "openssl: Generating excessively long X9.42 DH keys or checking excessively long X9.42 DH keys or parameters may be very slow",
+          "Description": "Issue summary: Generating excessively long X9.42 DH keys or checking\nexcessively long X9.42 DH keys or parameters may be very slow.\n\nImpact summary: Applications that use the functions DH_generate_key() to\ngenerate an X9.42 DH key may experience long delays.  Likewise, applications\nthat use DH_check_pub_key(), DH_check_pub_key_ex() or EVP_PKEY_public_check()\nto check an X9.42 DH key or X9.42 DH parameters may experience long delays.\nWhere the key or parameters that are being checked have been obtained from\nan untrusted source this may lead to a Denial of Service.\n\nWhile DH_check() performs all the necessary checks (as of CVE-2023-3817),\nDH_check_pub_key() doesn't make any of these checks, and is therefore\nvulnerable for excessively large P and Q parameters.\n\nLikewise, while DH_generate_key() performs a check for an excessively large\nP, it doesn't check for an excessively large Q.\n\nAn application that calls DH_generate_key() or DH_check_pub_key() and\nsupplies a key or parameters obtained from an untrusted source could be\nvulnerable to a Denial of Service attack.\n\nDH_generate_key() and DH_check_pub_key() are also called by a number of\nother OpenSSL functions.  An application calling any of those other\nfunctions may similarly be affected.  The other functions affected by this\nare DH_check_pub_key_ex(), EVP_PKEY_public_check(), and EVP_PKEY_generate().\n\nAlso vulnerable are the OpenSSL pkey command line application when using the\n\"-pubcheck\" option, as well as the OpenSSL genpkey command line application.\n\nThe OpenSSL SSL/TLS implementation is not affected by this issue.\n\nThe OpenSSL 3.0 and 3.1 FIPS providers are not affected by this issue.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-754"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-5678",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5678",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=34efaef6c103d636ab507a0cc34dca4d3aecc055",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=710fee740904b6290fef0dd5536fbcedbc38ff0c",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=db925ae2e65d0d925adef429afc37f75bd1c2017",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=ddeb4b6c6d527e54ce9a99cba785c0f7776e54b6",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5678",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5678",
+            "https://www.openssl.org/news/secadv/20231106.txt"
+          ],
+          "PublishedDate": "2023-11-06T16:15:00Z",
+          "LastModifiedDate": "2023-11-14T17:46:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5363",
+          "PkgID": "libssl3@3.1.3-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.1.3-r0",
+          "FixedVersion": "3.1.4-r0",
+          "Layer": {
+            "Digest": "sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa",
+            "DiffID": "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5363",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Title": "openssl: Incorrect cipher key and IV length processing",
+          "Description": "Issue summary: A bug has been identified in the processing of key and\ninitialisation vector (IV) lengths.  This can lead to potential truncation\nor overruns during the initialisation of some symmetric ciphers.\n\nImpact summary: A truncation in the IV can result in non-uniqueness,\nwhich could result in loss of confidentiality for some cipher modes.\n\nWhen calling EVP_EncryptInit_ex2(), EVP_DecryptInit_ex2() or\nEVP_CipherInit_ex2() the provided OSSL_PARAM array is processed after\nthe key and IV have been established.  Any alterations to the key length,\nvia the \"keylen\" parameter or the IV length, via the \"ivlen\" parameter,\nwithin the OSSL_PARAM array will not take effect as intended, potentially\ncausing truncation or overreading of these values.  The following ciphers\nand cipher modes are impacted: RC2, RC4, RC5, CCM, GCM and OCB.\n\nFor the CCM, GCM and OCB cipher modes, truncation of the IV can result in\nloss of confidentiality.  For example, when following NIST's SP 800-38D\nsection 8.2.1 guidance for constructing a deterministic IV for AES in\nGCM mode, truncation of the counter portion could lead to IV reuse.\n\nBoth truncations and overruns of the key and overruns of the IV will\nproduce incorrect results and could, in some cases, trigger a memory\nexception.  However, these issues are not currently assessed as security\ncritical.\n\nChanging the key and/or IV lengths is not considered to be a common operation\nand the vulnerable API was recently introduced. Furthermore it is likely that\napplication developers will have spotted this problem during testing since\ndecryption would fail unless both peers in the communication were similarly\nvulnerable. For these reasons we expect the probability of an application being\nvulnerable to this to be quite low. However if an application is vulnerable then\nthis issue is considered very serious. For these reasons we have assessed this\nissue as Moderate severity overall.\n\nThe OpenSSL SSL/TLS implementation is not affected by this issue.\n\nThe OpenSSL 3.0 and 3.1 FIPS providers are not affected by this because\nthe issue lies outside of the FIPS provider boundary.\n\nOpenSSL 3.1 and 3.0 are vulnerable to this issue.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/10/24/1",
+            "https://access.redhat.com/security/cve/CVE-2023-5363",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5363",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=0df40630850fb2740e6be6890bb905d3fc623b2d",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=5f69f5c65e483928c4b28ed16af6e5742929f1ee",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5363",
+            "https://security.netapp.com/advisory/ntap-20231027-0010/",
+            "https://ubuntu.com/security/notices/USN-6450-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5363",
+            "https://www.debian.org/security/2023/dsa-5532",
+            "https://www.openssl.org/news/secadv/20231024.txt"
+          ],
+          "PublishedDate": "2023-10-25T18:17:00Z",
+          "LastModifiedDate": "2023-11-09T13:55:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5678",
+          "PkgID": "libssl3@3.1.3-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.1.3-r0",
+          "FixedVersion": "3.1.4-r1",
+          "Layer": {
+            "Digest": "sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa",
+            "DiffID": "sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5678",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Title": "openssl: Generating excessively long X9.42 DH keys or checking excessively long X9.42 DH keys or parameters may be very slow",
+          "Description": "Issue summary: Generating excessively long X9.42 DH keys or checking\nexcessively long X9.42 DH keys or parameters may be very slow.\n\nImpact summary: Applications that use the functions DH_generate_key() to\ngenerate an X9.42 DH key may experience long delays.  Likewise, applications\nthat use DH_check_pub_key(), DH_check_pub_key_ex() or EVP_PKEY_public_check()\nto check an X9.42 DH key or X9.42 DH parameters may experience long delays.\nWhere the key or parameters that are being checked have been obtained from\nan untrusted source this may lead to a Denial of Service.\n\nWhile DH_check() performs all the necessary checks (as of CVE-2023-3817),\nDH_check_pub_key() doesn't make any of these checks, and is therefore\nvulnerable for excessively large P and Q parameters.\n\nLikewise, while DH_generate_key() performs a check for an excessively large\nP, it doesn't check for an excessively large Q.\n\nAn application that calls DH_generate_key() or DH_check_pub_key() and\nsupplies a key or parameters obtained from an untrusted source could be\nvulnerable to a Denial of Service attack.\n\nDH_generate_key() and DH_check_pub_key() are also called by a number of\nother OpenSSL functions.  An application calling any of those other\nfunctions may similarly be affected.  The other functions affected by this\nare DH_check_pub_key_ex(), EVP_PKEY_public_check(), and EVP_PKEY_generate().\n\nAlso vulnerable are the OpenSSL pkey command line application when using the\n\"-pubcheck\" option, as well as the OpenSSL genpkey command line application.\n\nThe OpenSSL SSL/TLS implementation is not affected by this issue.\n\nThe OpenSSL 3.0 and 3.1 FIPS providers are not affected by this issue.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-754"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-5678",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5678",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=34efaef6c103d636ab507a0cc34dca4d3aecc055",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=710fee740904b6290fef0dd5536fbcedbc38ff0c",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=db925ae2e65d0d925adef429afc37f75bd1c2017",
+            "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=ddeb4b6c6d527e54ce9a99cba785c0f7776e54b6",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5678",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5678",
+            "https://www.openssl.org/news/secadv/20231106.txt"
+          ],
+          "PublishedDate": "2023-11-06T16:15:00Z",
+          "LastModifiedDate": "2023-11-14T17:46:00Z"
+        }
+      ]
+    },
+    {
+      "Target": "Java",
+      "Class": "lang-pkgs",
+      "Type": "jar",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2022-31159",
+          "PkgName": "com.amazonaws:aws-java-sdk-s3",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/aws-java-sdk-s3-1.11.948.jar",
+          "InstalledVersion": "1.11.948",
+          "FixedVersion": "1.12.261",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-31159",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Partial Path Traversal in com.amazonaws:aws-java-sdk-s3 ",
+          "Description": "The AWS SDK for Java enables Java developers to work with Amazon Web Services. A partial-path traversal issue exists within the `downloadDirectory` method in the AWS S3 TransferManager component of the AWS SDK for Java v1 prior to version 1.12.261. Applications using the SDK control the `destinationDirectory` argument, but S3 object keys are determined by the application that uploaded the objects. The `downloadDirectory` method allows the caller to pass a filesystem object in the object key but contained an issue in the validation logic for the key name. A knowledgeable actor could bypass the validation logic by including a UNIX double-dot in the bucket key. Under certain conditions, this could permit them to retrieve a directory from their S3 bucket that is one level up in the filesystem from their working directory. This issue’s scope is limited to directories whose name prefix matches the destinationDirectory. E.g. for destination directory`/tmp/foo`, the actor can cause a download to `/tmp/foo-bar`, but not `/tmp/bar`. If `com.amazonaws.services.s3.transfer.TransferManager::downloadDirectory` is used to download an untrusted buckets contents, the contents of that bucket can be written outside of the intended destination directory. Version 1.12.261 contains a patch for this issue. As a workaround, when calling `com.amazonaws.services.s3.transfer.TransferManager::downloadDirectory`, pass a `KeyFilter` that forbids `S3ObjectSummary` objects that `getKey` method return a string containing the substring `..` .",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:L",
+              "V3Score": 7.9
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://github.com/aws/aws-sdk-java",
+            "https://github.com/aws/aws-sdk-java/commit/cb66c50c885566d9a7fce837a68dc48ddced8a9a",
+            "https://github.com/aws/aws-sdk-java/security/advisories/GHSA-c28r-hw5m-5gv3",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-31159"
+          ],
+          "PublishedDate": "2022-07-15T18:15:00Z",
+          "LastModifiedDate": "2022-07-22T16:27:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-42003",
+          "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/jackson-databind-2.13.3.jar",
+          "InstalledVersion": "2.13.3",
+          "FixedVersion": "2.12.7.1, 2.13.4.2",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-42003",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "deep wrapper array nesting wrt UNWRAP_SINGLE_VALUE_ARRAYS",
+          "Description": "In FasterXML jackson-databind before 2.14.0-rc1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled. Additional fix version in 2.13.4.1 and 2.12.17.1",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-42003",
+            "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=51020",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42003",
+            "https://github.com/FasterXML/jackson-databind",
+            "https://github.com/FasterXML/jackson-databind/blob/2.13/release-notes/VERSION-2.x",
+            "https://github.com/FasterXML/jackson-databind/commit/0e37a39502439ecbaa1a5b5188387c01bf7f7fa1",
+            "https://github.com/FasterXML/jackson-databind/commit/7ba9ac5b87a9d6ac0d2815158ecbeb315ad4dcdc",
+            "https://github.com/FasterXML/jackson-databind/commit/cd090979b7ea78c75e4de8a4aed04f7e9fa8deea",
+            "https://github.com/FasterXML/jackson-databind/commit/d499f2e7bbc5ebd63af11e1f5cf1989fa323aa45",
+            "https://github.com/FasterXML/jackson-databind/commit/d78d00ee7b5245b93103fef3187f70543d67ca33",
+            "https://github.com/FasterXML/jackson-databind/commit/d78d00ee7b5245b93103fef3187f70543d67ca33 (jackson-databind-2.14.0-rc1)",
+            "https://github.com/FasterXML/jackson-databind/commits/jackson-databind-2.4.0-rc1?after=75b97b8519f0d50c62523ad85170d80a197a2c86+174\u0026branch=jackson-databind-2.4.0-rc1\u0026qualified_name=refs%2Ftags%2Fjackson-databind-2.4.0-rc1",
+            "https://github.com/FasterXML/jackson-databind/compare/jackson-databind-2.13.4.1...jackson-databind-2.13.4.2",
+            "https://github.com/FasterXML/jackson-databind/issues/3590",
+            "https://github.com/FasterXML/jackson-databind/issues/3627",
+            "https://lists.debian.org/debian-lts-announce/2022/11/msg00035.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-42003",
+            "https://security.gentoo.org/glsa/202210-21",
+            "https://security.netapp.com/advisory/ntap-20221124-0004/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-42003",
+            "https://www.debian.org/security/2022/dsa-5283"
+          ],
+          "PublishedDate": "2022-10-02T05:15:00Z",
+          "LastModifiedDate": "2022-12-02T15:14:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-42004",
+          "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/jackson-databind-2.13.3.jar",
+          "InstalledVersion": "2.13.3",
+          "FixedVersion": "2.12.7.1, 2.13.4",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-42004",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "use of deeply nested arrays",
+          "Description": "In FasterXML jackson-databind before 2.13.4, resource exhaustion can occur because of a lack of a check in BeanDeserializer._deserializeFromArray to prevent use of deeply nested arrays. An application is vulnerable only with certain customized choices for deserialization.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-42004",
+            "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=50490",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42004",
+            "https://github.com/FasterXML/jackson-databind",
+            "https://github.com/FasterXML/jackson-databind/commit/063183589218fec19a9293ed2f17ec53ea80ba88",
+            "https://github.com/FasterXML/jackson-databind/commit/063183589218fec19a9293ed2f17ec53ea80ba88 (jackson-databind-2.13.4)",
+            "https://github.com/FasterXML/jackson-databind/issues/3582",
+            "https://lists.debian.org/debian-lts-announce/2022/11/msg00035.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-42004",
+            "https://security.gentoo.org/glsa/202210-21",
+            "https://security.netapp.com/advisory/ntap-20221118-0008/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-42004",
+            "https://www.debian.org/security/2022/dsa-5283"
+          ],
+          "PublishedDate": "2022-10-02T05:15:00Z",
+          "LastModifiedDate": "2022-12-02T15:10:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-25647",
+          "PkgName": "com.google.code.gson:gson",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar",
+          "InstalledVersion": "2.8.1",
+          "FixedVersion": "2.8.9",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-25647",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Deserialization of Untrusted Data in com.google.code.gson-gson",
+          "Description": "The package com.google.code.gson:gson before 2.8.9 are vulnerable to Deserialization of Untrusted Data via the writeReplace() method in internal classes, which may lead to DoS attacks.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:H",
+              "V3Score": 7.7
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-25647",
+            "https://github.com/google/gson",
+            "https://github.com/google/gson/pull/1991",
+            "https://github.com/google/gson/pull/1991/commits",
+            "https://lists.debian.org/debian-lts-announce/2022/05/msg00015.html",
+            "https://lists.debian.org/debian-lts-announce/2022/09/msg00009.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-25647",
+            "https://security.netapp.com/advisory/ntap-20220901-0009/",
+            "https://snyk.io/vuln/SNYK-JAVA-COMGOOGLECODEGSON-1730327",
+            "https://www.cve.org/CVERecord?id=CVE-2022-25647",
+            "https://www.debian.org/security/2022/dsa-5227",
+            "https://www.oracle.com/security-alerts/cpujul2022.html"
+          ],
+          "PublishedDate": "2022-05-01T16:15:00Z",
+          "LastModifiedDate": "2022-11-28T17:33:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-45868",
+          "PkgName": "com.h2database:h2",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/com.h2database/h2/2.1.214/d5c2005c9e3279201e12d4776c948578b16bf8b2/h2-2.1.214.jar",
+          "InstalledVersion": "2.1.214",
+          "FixedVersion": "2.2.220",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-45868",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "The web-based admin console in H2 Database Engine through 2.1.214 can  ...",
+          "Description": "The web-based admin console in H2 Database Engine through 2.1.214 can be started via the CLI with the argument -webAdminPassword, which allows the user to specify the password in cleartext for the web admin console. Consequently, a local user (or an attacker that has obtained local access through some means) would be able to discover the password by listing processes and their arguments. NOTE: the vendor states \"This is not a vulnerability of H2 Console ... Passwords should never be passed on the command line and every qualified DBA or system administrator is expected to know that.\"",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-312"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-22wj-vf5f-wrvj",
+            "https://github.com/h2database/h2database",
+            "https://github.com/h2database/h2database/blob/96832bf5a97cdc0adc1f2066ed61c54990d66ab5/h2/src/main/org/h2/server/web/WebServer.java#L346-L347",
+            "https://github.com/h2database/h2database/commit/581ed18ff9d6b3761d851620ed88a3994a351a0d",
+            "https://github.com/h2database/h2database/issues/3686",
+            "https://github.com/h2database/h2database/pull/3833",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-45868",
+            "https://sites.google.com/sonatype.com/vulnerabilities/sonatype-2022-6243"
+          ],
+          "PublishedDate": "2022-11-23T21:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:54:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-37866",
+          "PkgName": "org.apache.ivy:ivy",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/ivy-2.3.0.jar",
+          "InstalledVersion": "2.3.0",
+          "FixedVersion": "2.5.1",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-37866",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Ivy Path traversal",
+          "Description": "When Apache Ivy downloads artifacts from a repository it stores them in the local file system based on a user-supplied \"pattern\" that may include placeholders for artifacts coordinates like the organisation, module or version. If said coordinates contain \"../\" sequences - which are valid characters for Ivy coordinates in general - it is possible the artifacts are stored outside of Ivy's local cache or repository or can overwrite different artifacts inside of the local cache. In order to exploit this vulnerability an attacker needs collaboration by the remote repository as Ivy will issue http requests containing \"..\" sequences and a \"normal\" repository will not interpret them as part of the artifact coordinates. Users of Apache Ivy 2.0.0 to 2.5.1 should upgrade to Ivy 2.5.1.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-37866",
+            "https://lists.apache.org/thread/htxbr8oc464hxrgroftnz3my70whk93b",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-37866",
+            "https://www.cve.org/CVERecord?id=CVE-2022-37866"
+          ],
+          "PublishedDate": "2022-11-07T14:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:49:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-46751",
+          "PkgName": "org.apache.ivy:ivy",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/ivy-2.3.0.jar",
+          "InstalledVersion": "2.3.0",
+          "FixedVersion": "2.5.2",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-46751",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "XML External Entity vulnerability",
+          "Description": "Improper Restriction of XML External Entity Reference, XML Injection (aka Blind XPath Injection) vulnerability in Apache Software Foundation Apache Ivy.This issue affects any version of Apache Ivy prior to 2.5.2.\n\nWhen Apache Ivy prior to 2.5.2 parses XML files - either its own configuration, Ivy files or Apache Maven POMs - it will allow downloading external document type definitions and expand any entity references contained therein when used.\n\nThis can be used to exfiltrate data, access resources only the machine running Ivy has access to or disturb the execution of Ivy in different ways.\n\nStarting with Ivy 2.5.2 DTD processing is disabled by default except when parsing Maven POMs where the default is to allow DTD processing but only to include a DTD snippet shipping with Ivy that is needed to deal with existing Maven POMs that are not valid XML files but are nevertheless accepted by Maven. Access can be be made more lenient via newly introduced system properties where needed.\n\nUsers of Ivy prior to version 2.5.2 can use Java system properties to restrict processing of external DTDs, see the section about \"JAXP Properties for External Access restrictions\" inside Oracle's \"Java API for XML Processing (JAXP) Security Guide\".\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-91",
+            "CWE-611"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/09/06/9",
+            "https://access.redhat.com/security/cve/CVE-2022-46751",
+            "https://docs.oracle.com/en/java/javase/13/security/java-api-xml-processing-jaxp-security-guide.html#GUID-94ABC0EE-9DC8-44F0-84AD-47ADD5340477",
+            "https://gitbox.apache.org/repos/asf?p=ant-ivy.git;a=commit;h=2be17bc18b0e1d4123007d579e43ba1a4b6fab3d",
+            "https://github.com/apache/ant-ivy",
+            "https://github.com/apache/ant-ivy/commit/2be17bc18b0e1d4123007d579e43ba1a4b6fab3d",
+            "https://lists.apache.org/thread/1dj60hg5nr36kjr4p1100dwjrqookps8",
+            "https://lists.apache.org/thread/9gcz4xrsn8c7o9gb377xfzvkb8jltffr",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-46751",
+            "https://www.cve.org/CVERecord?id=CVE-2022-46751"
+          ],
+          "PublishedDate": "2023-08-21T07:15:00Z",
+          "LastModifiedDate": "2023-09-06T15:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-37865",
+          "PkgName": "org.apache.ivy:ivy",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/org.apache.ivy/ivy/2.5.0/7cd93e73e91acb868717ebf2410f966f53ae5897/ivy-2.5.0.jar",
+          "InstalledVersion": "2.5.0",
+          "FixedVersion": "2.5.1",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-37865",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Directory Traversal",
+          "Description": "With Apache Ivy 2.4.0 an optional packaging attribute has been introduced that allows artifacts to be unpacked on the fly if they used pack200 or zip packaging. For artifacts using the \"zip\", \"jar\" or \"war\" packaging Ivy prior to 2.5.1 doesn't verify the target path when extracting the archive. An archive containing absolute paths or paths that try to traverse \"upwards\" using \"..\" sequences can then write files to any location on the local fie system that the user executing Ivy has write access to. Ivy users of version 2.4.0 to 2.5.0 should upgrade to Ivy 2.5.1.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+              "V3Score": 9.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+              "V3Score": 9.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+              "V3Score": 9.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-37865",
+            "https://lists.apache.org/thread/gqvvv7qsm2dfjg6xzsw1s2h08tbr0sdy",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-37865",
+            "https://www.cve.org/CVERecord?id=CVE-2022-37865"
+          ],
+          "PublishedDate": "2022-11-07T11:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:49:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-37866",
+          "PkgName": "org.apache.ivy:ivy",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/org.apache.ivy/ivy/2.5.0/7cd93e73e91acb868717ebf2410f966f53ae5897/ivy-2.5.0.jar",
+          "InstalledVersion": "2.5.0",
+          "FixedVersion": "2.5.1",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-37866",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Ivy Path traversal",
+          "Description": "When Apache Ivy downloads artifacts from a repository it stores them in the local file system based on a user-supplied \"pattern\" that may include placeholders for artifacts coordinates like the organisation, module or version. If said coordinates contain \"../\" sequences - which are valid characters for Ivy coordinates in general - it is possible the artifacts are stored outside of Ivy's local cache or repository or can overwrite different artifacts inside of the local cache. In order to exploit this vulnerability an attacker needs collaboration by the remote repository as Ivy will issue http requests containing \"..\" sequences and a \"normal\" repository will not interpret them as part of the artifact coordinates. Users of Apache Ivy 2.0.0 to 2.5.1 should upgrade to Ivy 2.5.1.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-37866",
+            "https://lists.apache.org/thread/htxbr8oc464hxrgroftnz3my70whk93b",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YDIFDL5WSBEKBUVKTABUFDDD25SBNJLS/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-37866",
+            "https://www.cve.org/CVERecord?id=CVE-2022-37866"
+          ],
+          "PublishedDate": "2022-11-07T14:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:49:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-46751",
+          "PkgName": "org.apache.ivy:ivy",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/org.apache.ivy/ivy/2.5.0/7cd93e73e91acb868717ebf2410f966f53ae5897/ivy-2.5.0.jar",
+          "InstalledVersion": "2.5.0",
+          "FixedVersion": "2.5.2",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-46751",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "XML External Entity vulnerability",
+          "Description": "Improper Restriction of XML External Entity Reference, XML Injection (aka Blind XPath Injection) vulnerability in Apache Software Foundation Apache Ivy.This issue affects any version of Apache Ivy prior to 2.5.2.\n\nWhen Apache Ivy prior to 2.5.2 parses XML files - either its own configuration, Ivy files or Apache Maven POMs - it will allow downloading external document type definitions and expand any entity references contained therein when used.\n\nThis can be used to exfiltrate data, access resources only the machine running Ivy has access to or disturb the execution of Ivy in different ways.\n\nStarting with Ivy 2.5.2 DTD processing is disabled by default except when parsing Maven POMs where the default is to allow DTD processing but only to include a DTD snippet shipping with Ivy that is needed to deal with existing Maven POMs that are not valid XML files but are nevertheless accepted by Maven. Access can be be made more lenient via newly introduced system properties where needed.\n\nUsers of Ivy prior to version 2.5.2 can use Java system properties to restrict processing of external DTDs, see the section about \"JAXP Properties for External Access restrictions\" inside Oracle's \"Java API for XML Processing (JAXP) Security Guide\".\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-91",
+            "CWE-611"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:L",
+              "V3Score": 8.2
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/09/06/9",
+            "https://access.redhat.com/security/cve/CVE-2022-46751",
+            "https://docs.oracle.com/en/java/javase/13/security/java-api-xml-processing-jaxp-security-guide.html#GUID-94ABC0EE-9DC8-44F0-84AD-47ADD5340477",
+            "https://gitbox.apache.org/repos/asf?p=ant-ivy.git;a=commit;h=2be17bc18b0e1d4123007d579e43ba1a4b6fab3d",
+            "https://github.com/apache/ant-ivy",
+            "https://github.com/apache/ant-ivy/commit/2be17bc18b0e1d4123007d579e43ba1a4b6fab3d",
+            "https://lists.apache.org/thread/1dj60hg5nr36kjr4p1100dwjrqookps8",
+            "https://lists.apache.org/thread/9gcz4xrsn8c7o9gb377xfzvkb8jltffr",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-46751",
+            "https://www.cve.org/CVERecord?id=CVE-2022-46751"
+          ],
+          "PublishedDate": "2023-08-21T07:15:00Z",
+          "LastModifiedDate": "2023-09-06T15:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-4759",
+          "PkgName": "org.eclipse.jgit:org.eclipse.jgit",
+          "PkgPath": "root/.gradle/caches/modules-2/files-2.1/org.eclipse.jgit/org.eclipse.jgit/5.11.0.202103091610-r/cbb632e763cf8bf7491269618b472a64144ca36/org.eclipse.jgit-5.11.0.202103091610-r.jar",
+          "InstalledVersion": "5.11.0.202103091610-r",
+          "FixedVersion": "6.6.1.202309021850-r",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-4759",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "arbitrary file overwrite",
+          "Description": "Arbitrary File Overwrite in Eclipse JGit \u003c= 6.6.0\n\nIn Eclipse JGit, all versions \u003c= 6.6.0.202305301015-r, a symbolic link present in a specially crafted git repository can be used to write a file to locations outside the working tree when this repository is cloned with JGit to a case-insensitive filesystem, or when a checkout from a clone of such a repository is performed on a case-insensitive filesystem.\n\nThis can happen on checkout (DirCacheCheckout), merge (ResolveMerger via its WorkingTreeUpdater), pull (PullCommand using merge), and when applying a patch (PatchApplier). This can be exploited for remote code execution (RCE), for instance if the file written outside the working tree is a git filter that gets executed on a subsequent git command.\n\nThe issue occurs only on case-insensitive filesystems, like the default filesystems on Windows and macOS. The user performing the clone or checkout must have the rights to create symbolic links for the problem to occur, and symbolic links must be enabled in the git configuration.\n\nSetting git configuration option core.symlinks = false before checking out avoids the problem.\n\nThe issue was fixed in Eclipse JGit version 6.6.1.202309021850-r and 6.7.0.202309050840-r, available via  Maven Central https://repo1.maven.org/maven2/org/eclipse/jgit/  and  repo.eclipse.org https://repo.eclipse.org/content/repositories/jgit-releases/ .\n\n\nThe JGit maintainers would like to thank RyotaK for finding and reporting this issue.\n\n\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-59",
+            "CWE-178"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-4759",
+            "https://git.eclipse.org/c/jgit/jgit.git",
+            "https://git.eclipse.org/c/jgit/jgit.git/commit/?id=9072103f3b3cf64dd12ad2949836ab98f62dabf1",
+            "https://gitlab.eclipse.org/security/vulnerability-reports/-/issues/11",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-4759",
+            "https://projects.eclipse.org/projects/technology.jgit/releases/6.6.1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-4759"
+          ],
+          "PublishedDate": "2023-09-12T10:15:00Z",
+          "LastModifiedDate": "2023-11-15T19:35:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-4759",
+          "PkgName": "org.eclipse.jgit:org.eclipse.jgit",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/org.eclipse.jgit-5.7.0.202003110725-r.jar",
+          "InstalledVersion": "5.7.0.202003110725-r",
+          "FixedVersion": "6.6.1.202309021850-r",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-4759",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "arbitrary file overwrite",
+          "Description": "Arbitrary File Overwrite in Eclipse JGit \u003c= 6.6.0\n\nIn Eclipse JGit, all versions \u003c= 6.6.0.202305301015-r, a symbolic link present in a specially crafted git repository can be used to write a file to locations outside the working tree when this repository is cloned with JGit to a case-insensitive filesystem, or when a checkout from a clone of such a repository is performed on a case-insensitive filesystem.\n\nThis can happen on checkout (DirCacheCheckout), merge (ResolveMerger via its WorkingTreeUpdater), pull (PullCommand using merge), and when applying a patch (PatchApplier). This can be exploited for remote code execution (RCE), for instance if the file written outside the working tree is a git filter that gets executed on a subsequent git command.\n\nThe issue occurs only on case-insensitive filesystems, like the default filesystems on Windows and macOS. The user performing the clone or checkout must have the rights to create symbolic links for the problem to occur, and symbolic links must be enabled in the git configuration.\n\nSetting git configuration option core.symlinks = false before checking out avoids the problem.\n\nThe issue was fixed in Eclipse JGit version 6.6.1.202309021850-r and 6.7.0.202309050840-r, available via  Maven Central https://repo1.maven.org/maven2/org/eclipse/jgit/  and  repo.eclipse.org https://repo.eclipse.org/content/repositories/jgit-releases/ .\n\n\nThe JGit maintainers would like to thank RyotaK for finding and reporting this issue.\n\n\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-59",
+            "CWE-178"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-4759",
+            "https://git.eclipse.org/c/jgit/jgit.git",
+            "https://git.eclipse.org/c/jgit/jgit.git/commit/?id=9072103f3b3cf64dd12ad2949836ab98f62dabf1",
+            "https://gitlab.eclipse.org/security/vulnerability-reports/-/issues/11",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-4759",
+            "https://projects.eclipse.org/projects/technology.jgit/releases/6.6.1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-4759"
+          ],
+          "PublishedDate": "2023-09-12T10:15:00Z",
+          "LastModifiedDate": "2023-11-15T19:35:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1471",
+          "PkgName": "org.yaml:snakeyaml",
+          "PkgPath": "root/.gradle/wrapper/dists/gradle-7.6.1-bin/2clxi94ab3brv6467628wnxmd/gradle-7.6.1/lib/plugins/snakeyaml-1.32.jar",
+          "InstalledVersion": "1.32",
+          "FixedVersion": "2.0",
+          "Layer": {
+            "Digest": "sha256:c823d4f63a24b0c55a56dc42b8f79795f9c2335220d0c42720d9fbcbe7107eab",
+            "DiffID": "sha256:d8a7599e99ff3810bce23f8425da073637c195c0de44214fe366ee0f22862f79"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1471",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "SnakeYaml: Constructor Deserialization Remote Code Execution",
+          "Description": "SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization. We recommend upgrading to version 2.0 and beyond.\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
+              "V3Score": 8.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "http://packetstormsecurity.com/files/175095/PyTorch-Model-Server-Registration-Deserialization-Remote-Code-Execution.html",
+            "https://access.redhat.com/errata/RHSA-2022:9058",
+            "https://access.redhat.com/security/cve/CVE-2022-1471",
+            "https://bitbucket.org/snakeyaml/snakeyaml",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/5014df1a36f50aca54405bb8433bc99a8847f758",
+            "https://bitbucket.org/snakeyaml/snakeyaml/commits/acc44099f5f4af26ff86b4e4e4cc1c874e2dc5c4",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64581479",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64634374",
+            "https://bitbucket.org/snakeyaml/snakeyaml/issues/561/cve-2022-1471-vulnerability-in#comment-64876314",
+            "https://bitbucket.org/snakeyaml/snakeyaml/wiki/CVE-2022-1471",
+            "https://bugzilla.redhat.com/2150009",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2150009",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1471",
+            "https://errata.almalinux.org/8/ALSA-2022-9058.html",
+            "https://errata.rockylinux.org/RLSA-2022:9058",
+            "https://github.com/google/security-research/security/advisories/GHSA-mjmj-j48q-9wg2",
+            "https://github.com/mbechler/marshalsec",
+            "https://groups.google.com/g/kubernetes-security-announce/c/mwrakFaEdnc",
+            "https://linux.oracle.com/cve/CVE-2022-1471.html",
+            "https://linux.oracle.com/errata/ELSA-2022-9058-1.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1471",
+            "https://security.netapp.com/advisory/ntap-20230818-0015/",
+            "https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1471",
+            "https://www.github.com/mbechler/marshalsec/blob/master/marshalsec.pdf?raw=true"
+          ],
+          "PublishedDate": "2022-12-01T11:15:00Z",
+          "LastModifiedDate": "2023-10-13T16:15:00Z"
+        }
+      ]
+    }
+  ]
+}

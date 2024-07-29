@@ -1,0 +1,1108 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "debian",
+      "Name": "11.7"
+    },
+    "ImageID": "sha256:62a82dfb02662fb366e3fab1a688be32b01aa649b645033c886d8f99af9a71d3",
+    "DiffIDs": [
+      "sha256:e023e0e48e6e29e90e519f4dd356d058ff2bffbd16e28b802f3b8f93aa4ccb17",
+      "sha256:6fbdf253bbc2490dcfede5bdb58ca0db63ee8aff565f6ea9f918f3bce9e2d5aa",
+      "sha256:7bea6b893187b14fc0a759fe5f8972d1292a9c0554c87cbf485f0947c26b8a05",
+      "sha256:ff5700ec54186528cbae40f54c24b1a34fb7c01527beaa1232868c16e2353f52",
+      "sha256:d52f02c6501c9c4410568f0bf6ff30d30d8290f57794c308fe36ea78393afac2",
+      "sha256:e624a5370eca2b8266e74d179326e2a8767d361db14d13edd9fb57e408731784",
+      "sha256:1a73b54f556b477f0a8b939d13c504a3b4f4db71f7a09c63afbc10acb3de5849",
+      "sha256:d2d7ec0f6756eb51cf1602c6f8ac4dd811d3d052661142e0110357bf0b581457",
+      "sha256:4cb10dd2545bd173858450b80853b850e49608260f1a0789e0d0b39edf12f500",
+      "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb",
+      "sha256:1c47a89b8f417471ea2e6af631571f4632ba00772e2778cc7c15b72080f8da14",
+      "sha256:6a1069d9378ceb8b9c68d24d0431f61ac711d50ba675e7f273279f768e3d5f9a",
+      "sha256:bb0331ba46923a59e01101fbd6c18a7f68a782f4622ed1d3ddc4062ee2b835fa",
+      "sha256:dcecd3d0367df6fe0709ccdac68f3e710d499fc6e93110fa84765ba9f288418e",
+      "sha256:5bf213caca445a019d6501033d1a6ad8c26fb0415e25d2e7ef7830ae47026597",
+      "sha256:564879c622a57b0ea320db7ab1fd9a39953f171ba481d5fe36381b77e3225626",
+      "sha256:8ab021f6947dcd3a413e5181b629c28c4a55ab9b180cfb1e66f94012f7f2dff0",
+      "sha256:68c0f124f32d0d1d8135e2305ed63fd5f3792802f0e59021375ca5b2e7514766",
+      "sha256:ff95d2619b1aa335a7f7445924472705eeccabd640738ada22992293904552e0",
+      "sha256:67d0a20df4814419cd7465f49f62942d0cc534b2916b0b611651a40f5de4636d",
+      "sha256:ec0340aa7feb0c0dbfc393c69c43fcfcc7229f60389c5d00ce2d758fb78b01cd",
+      "sha256:2c28500c1f442b35a6f195e4426ba975a13e0a9b3e93a9d2cfe86e5e8265dec8",
+      "sha256:8ad91bbff3a3bd7f1fbf84d1a0b6719e4dcf3fcba9f858b8d23b47bbcbf34c85",
+      "sha256:4c55386b56bfa744b3f9ede9e0136a88a88420ece9ad2edccccdf5cd756df4b7",
+      "sha256:a58505e27bd02fb31a3285624023b2d049074b6694b83d8c58034871878d1ed0",
+      "sha256:47e03de55d6a9f766614344977abc99379c226bb7ad967d743cad561147cbc1e",
+      "sha256:97cbe406696891c730af2d6f7a099b349d960f5fe1a0d2460aef2c5c749ce908",
+      "sha256:6039518c67bf2b4cfc779ec5e7a41bee5f9346e7b5633da1e25a7815e9136bef",
+      "sha256:225776ec0f3ae1af557733a1755003ee9708012d1c05b26d53ce9cb8927ca18d",
+      "sha256:30c5f804a1640e4ad0f7c2d5937c0323a55b95faee8dd11eb4b2beac4514f9ae",
+      "sha256:c34d6c879dc00aeb9059be11109d668b89fdd77024ad9783d4ff834a4f86ef4d",
+      "sha256:825cf03e721a866fa36f74adc7f6726372f54036f1ade0afedc2b6496bf5a27e",
+      "sha256:8c4d8db3407769ec2d66297322b538032b3ec08fbb6cb6a8e012e8c3213aa282",
+      "sha256:5b1059b6875f7c3cbb644cdf5052311f85c63d377600d1523c17791a1fa425b8",
+      "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964",
+      "sha256:5735ab51efe870730461e97339186d33941cab1d360ccec85cdbe06c310a868c",
+      "sha256:89db98c2ddafcb91b9f17647451d9eabf4abc8920ffb0edb112023f9153b7d49",
+      "sha256:3185e2b0e6a1a9b262b4ae4cd773e3c74c0782d4ab836906eb0d23183869c02e",
+      "sha256:5277a721bc690d5d0af5b206a9e5e6171dbfd8bfc3429f244fe51ea730334251"
+    ],
+    "RepoTags": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous"
+    ],
+    "RepoDigests": [
+      "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous@sha256:8c818ef890880fa5b722b7c68784e918777d6f0942588b5c0e3f5f62709d263a"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "1970-01-01T00:00:00Z",
+      "history": [
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "created": "0001-01-01T00:00:00Z"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "dependencies"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "project dependencies"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "resources"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "classes"
+        },
+        {
+          "author": "Jib",
+          "created": "1970-01-01T00:00:00Z",
+          "created_by": "jib-gradle-plugin:3.4.0",
+          "comment": "jvm arg files"
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:e023e0e48e6e29e90e519f4dd356d058ff2bffbd16e28b802f3b8f93aa4ccb17",
+          "sha256:6fbdf253bbc2490dcfede5bdb58ca0db63ee8aff565f6ea9f918f3bce9e2d5aa",
+          "sha256:7bea6b893187b14fc0a759fe5f8972d1292a9c0554c87cbf485f0947c26b8a05",
+          "sha256:ff5700ec54186528cbae40f54c24b1a34fb7c01527beaa1232868c16e2353f52",
+          "sha256:d52f02c6501c9c4410568f0bf6ff30d30d8290f57794c308fe36ea78393afac2",
+          "sha256:e624a5370eca2b8266e74d179326e2a8767d361db14d13edd9fb57e408731784",
+          "sha256:1a73b54f556b477f0a8b939d13c504a3b4f4db71f7a09c63afbc10acb3de5849",
+          "sha256:d2d7ec0f6756eb51cf1602c6f8ac4dd811d3d052661142e0110357bf0b581457",
+          "sha256:4cb10dd2545bd173858450b80853b850e49608260f1a0789e0d0b39edf12f500",
+          "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb",
+          "sha256:1c47a89b8f417471ea2e6af631571f4632ba00772e2778cc7c15b72080f8da14",
+          "sha256:6a1069d9378ceb8b9c68d24d0431f61ac711d50ba675e7f273279f768e3d5f9a",
+          "sha256:bb0331ba46923a59e01101fbd6c18a7f68a782f4622ed1d3ddc4062ee2b835fa",
+          "sha256:dcecd3d0367df6fe0709ccdac68f3e710d499fc6e93110fa84765ba9f288418e",
+          "sha256:5bf213caca445a019d6501033d1a6ad8c26fb0415e25d2e7ef7830ae47026597",
+          "sha256:564879c622a57b0ea320db7ab1fd9a39953f171ba481d5fe36381b77e3225626",
+          "sha256:8ab021f6947dcd3a413e5181b629c28c4a55ab9b180cfb1e66f94012f7f2dff0",
+          "sha256:68c0f124f32d0d1d8135e2305ed63fd5f3792802f0e59021375ca5b2e7514766",
+          "sha256:ff95d2619b1aa335a7f7445924472705eeccabd640738ada22992293904552e0",
+          "sha256:67d0a20df4814419cd7465f49f62942d0cc534b2916b0b611651a40f5de4636d",
+          "sha256:ec0340aa7feb0c0dbfc393c69c43fcfcc7229f60389c5d00ce2d758fb78b01cd",
+          "sha256:2c28500c1f442b35a6f195e4426ba975a13e0a9b3e93a9d2cfe86e5e8265dec8",
+          "sha256:8ad91bbff3a3bd7f1fbf84d1a0b6719e4dcf3fcba9f858b8d23b47bbcbf34c85",
+          "sha256:4c55386b56bfa744b3f9ede9e0136a88a88420ece9ad2edccccdf5cd756df4b7",
+          "sha256:a58505e27bd02fb31a3285624023b2d049074b6694b83d8c58034871878d1ed0",
+          "sha256:47e03de55d6a9f766614344977abc99379c226bb7ad967d743cad561147cbc1e",
+          "sha256:97cbe406696891c730af2d6f7a099b349d960f5fe1a0d2460aef2c5c749ce908",
+          "sha256:6039518c67bf2b4cfc779ec5e7a41bee5f9346e7b5633da1e25a7815e9136bef",
+          "sha256:225776ec0f3ae1af557733a1755003ee9708012d1c05b26d53ce9cb8927ca18d",
+          "sha256:30c5f804a1640e4ad0f7c2d5937c0323a55b95faee8dd11eb4b2beac4514f9ae",
+          "sha256:c34d6c879dc00aeb9059be11109d668b89fdd77024ad9783d4ff834a4f86ef4d",
+          "sha256:825cf03e721a866fa36f74adc7f6726372f54036f1ade0afedc2b6496bf5a27e",
+          "sha256:8c4d8db3407769ec2d66297322b538032b3ec08fbb6cb6a8e012e8c3213aa282",
+          "sha256:5b1059b6875f7c3cbb644cdf5052311f85c63d377600d1523c17791a1fa425b8",
+          "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964",
+          "sha256:5735ab51efe870730461e97339186d33941cab1d360ccec85cdbe06c310a868c",
+          "sha256:89db98c2ddafcb91b9f17647451d9eabf4abc8920ffb0edb112023f9153b7d49",
+          "sha256:3185e2b0e6a1a9b262b4ae4cd773e3c74c0782d4ab836906eb0d23183869c02e",
+          "sha256:5277a721bc690d5d0af5b206a9e5e6171dbfd8bfc3429f244fe51ea730334251"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "java",
+          "-cp",
+          "@/app/jib-classpath-file",
+          "com.paymenttools.eclog.processor.Run"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt",
+          "JAVA_VERSION=17.0.7",
+          "LANG=C.UTF-8"
+        ],
+        "Labels": {
+          "org.opencontainers.image.base.name": "unknowngit.commit.timestamp=1700816295",
+          "org.opencontainers.image.created": "2023-11-24T09:05:17+0000",
+          "org.opencontainers.image.revision": "0519ce32b7be42e814249c9e3426222ed401a1cd",
+          "org.opencontainers.image.source": "https://github.com/paymenttools/ec-log-processor"
+        },
+        "User": "65532",
+        "WorkingDir": "/home/nonroot"
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "europe-west1-docker.pkg.dev/pt-cicd/docker-snapshots/anonymous (debian 11.7)",
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-4911",
+          "VendorIDs": [
+            "DSA-5514-1"
+          ],
+          "PkgID": "libc6@2.31-13+deb11u6",
+          "PkgName": "libc6",
+          "InstalledVersion": "2.31-13+deb11u6",
+          "FixedVersion": "2.31-13+deb11u7",
+          "Layer": {
+            "Digest": "sha256:96266735468f361ae6828901a80fc15a7f75e26640351df9e0f0f9824f36cf92",
+            "DiffID": "sha256:c60b28d3f33cd1af8c56092e9fa1d94ab9a3d95fe5bd5dff6fe4489a1682dcfb"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-4911",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: buffer overflow in ld.so leading to privilege escalation",
+          "Description": "A buffer overflow was discovered in the GNU C Library's dynamic loader ld.so while processing the GLIBC_TUNABLES environment variable. This issue could allow a local attacker to use maliciously crafted GLIBC_TUNABLES environment variables when launching binaries with SUID permission to execute code with elevated privileges.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://packetstormsecurity.com/files/174986/glibc-ld.so-Local-Privilege-Escalation.html",
+            "http://seclists.org/fulldisclosure/2023/Oct/11",
+            "http://www.openwall.com/lists/oss-security/2023/10/03/2",
+            "http://www.openwall.com/lists/oss-security/2023/10/03/3",
+            "http://www.openwall.com/lists/oss-security/2023/10/05/1",
+            "http://www.openwall.com/lists/oss-security/2023/10/13/11",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/3",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/5",
+            "http://www.openwall.com/lists/oss-security/2023/10/14/6",
+            "https://access.redhat.com/errata/RHSA-2023:5453",
+            "https://access.redhat.com/errata/RHSA-2023:5454",
+            "https://access.redhat.com/errata/RHSA-2023:5455",
+            "https://access.redhat.com/errata/RHSA-2023:5476",
+            "https://access.redhat.com/security/cve/CVE-2023-4911",
+            "https://bugzilla.redhat.com/2234712",
+            "https://bugzilla.redhat.com/2237782",
+            "https://bugzilla.redhat.com/2237798",
+            "https://bugzilla.redhat.com/2238352",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2234712",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2237782",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2237798",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2238352",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4527",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4806",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4813",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911",
+            "https://errata.almalinux.org/9/ALSA-2023-5453.html",
+            "https://errata.rockylinux.org/RLSA-2023:5455",
+            "https://linux.oracle.com/cve/CVE-2023-4911.html",
+            "https://linux.oracle.com/errata/ELSA-2023-5455.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4DBUQRRPB47TC3NJOUIBVWUGFHBJAFDL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DFG4P76UHHZEWQ26FWBXG76N2QLKKPZA/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NDAQWHTSVOCOZ5K6KPIWKRT3JX4RTZUR/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-4911",
+            "https://security.gentoo.org/glsa/202310-03",
+            "https://security.netapp.com/advisory/ntap-20231013-0006/",
+            "https://ubuntu.com/security/notices/USN-6409-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-4911",
+            "https://www.debian.org/security/2023/dsa-5514",
+            "https://www.qualys.com/2023/10/03/cve-2023-4911/looney-tunables-local-privilege-escalation-glibc-ld-so.txt",
+            "https://www.qualys.com/cve-2023-4911/"
+          ],
+          "PublishedDate": "2023-10-03T18:15:00Z",
+          "LastModifiedDate": "2023-11-07T04:23:00Z"
+        }
+      ]
+    },
+    {
+      "Target": "Java",
+      "Class": "lang-pkgs",
+      "Type": "jar",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2022-3509",
+          "PkgName": "com.google.protobuf:protobuf-java",
+          "PkgPath": "app/libs/beam-vendor-grpc-1_48_1-0.1.jar",
+          "InstalledVersion": "3.21.1",
+          "FixedVersion": "3.16.3, 3.19.6, 3.20.3, 3.21.7",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-3509",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "protobuf-java: Textformat parsing issue leads to DoS",
+          "Description": "A parsing issue similar to CVE-2022-3171, but with textformat in protobuf-java core and lite versions prior to 3.21.7, 3.20.3, 3.19.6 and 3.16.3 can lead to a denial of service attack. Inputs containing multiple instances of non-repeated embedded messages with repeated or unknown fields causes objects to be converted back-n-forth between mutable and immutable forms, resulting in potentially long garbage collection pauses. We recommend updating to the versions mentioned above.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-3509",
+            "https://github.com/protocolbuffers/protobuf/commit/a3888f53317a8018e7a439bac4abeb8f3425d5e9",
+            "https://github.com/protocolbuffers/protobuf/tree/main/java",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-3509",
+            "https://www.cve.org/CVERecord?id=CVE-2022-3509"
+          ],
+          "PublishedDate": "2022-12-12T13:15:00Z",
+          "LastModifiedDate": "2022-12-15T16:57:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-3510",
+          "PkgName": "com.google.protobuf:protobuf-java",
+          "PkgPath": "app/libs/beam-vendor-grpc-1_48_1-0.1.jar",
+          "InstalledVersion": "3.21.1",
+          "FixedVersion": "3.16.3, 3.19.6, 3.20.3, 3.21.7",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-3510",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "protobuf-java: Message-Type Extensions parsing issue leads to DoS",
+          "Description": "A parsing issue similar to CVE-2022-3171, but with Message-Type Extensions in protobuf-java core and lite versions prior to 3.21.7, 3.20.3, 3.19.6 and 3.16.3 can lead to a denial of service attack. Inputs containing multiple instances of non-repeated embedded messages with repeated or unknown fields causes objects to be converted back-n-forth between mutable and immutable forms, resulting in potentially long garbage collection pauses. We recommend updating to the versions mentioned above.\n\n",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2022-3510",
+            "https://github.com/protocolbuffers/protobuf/commit/db7c17803320525722f45c1d26fc08bc41d1bf48",
+            "https://github.com/protocolbuffers/protobuf/tree/main/java",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-3510",
+            "https://www.cve.org/CVERecord?id=CVE-2022-3510"
+          ],
+          "PublishedDate": "2022-12-12T13:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:51:00Z"
+        },
+        {
+          "VulnerabilityID": "GHSA-xpw8-rcwv-8f8p",
+          "PkgName": "io.netty:netty-codec-http2",
+          "PkgPath": "app/libs/beam-vendor-grpc-1_48_1-0.1.jar",
+          "InstalledVersion": "4.1.77.Final",
+          "FixedVersion": "4.1.100.Final",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "io.netty:netty-codec-http2 vulnerable to HTTP/2 Rapid Reset Attack",
+          "Description": "A client might overload the server by issue frequent RST frames. This can cause a massive amount of load on the remote system and so cause a DDOS attack. \n\n### Impact\nThis is a DDOS attack, any http2 server is affected and so you should update as soon as possible.\n\n### Patches\nThis is patched in version 4.1.100.Final.\n\n### Workarounds\nA user can limit the amount of RST frames that are accepted per connection over a timeframe manually using either an own `Http2FrameListener` implementation or an `ChannelInboundHandler` implementation (depending which http2 API is used).\n\n### References\n- https://www.cve.org/CVERecord?id=CVE-2023-44487\n- https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/\n- https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/apple/swift-nio-http2/security/advisories/GHSA-qppj-fm5r-hxr3",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/58f75f665aa81a8cbcf6ffa74820042a285c5e61",
+            "https://github.com/netty/netty/security/advisories/GHSA-xpw8-rcwv-8f8p",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-44487",
+            "https://www.cve.org/CVERecord?id=CVE-2023-44487"
+          ]
+        },
+        {
+          "VulnerabilityID": "GHSA-xpw8-rcwv-8f8p",
+          "PkgName": "io.netty:netty-codec-http2",
+          "PkgPath": "app/libs/netty-codec-http2-4.1.87.Final.jar",
+          "InstalledVersion": "4.1.87.Final",
+          "FixedVersion": "4.1.100.Final",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "io.netty:netty-codec-http2 vulnerable to HTTP/2 Rapid Reset Attack",
+          "Description": "A client might overload the server by issue frequent RST frames. This can cause a massive amount of load on the remote system and so cause a DDOS attack. \n\n### Impact\nThis is a DDOS attack, any http2 server is affected and so you should update as soon as possible.\n\n### Patches\nThis is patched in version 4.1.100.Final.\n\n### Workarounds\nA user can limit the amount of RST frames that are accepted per connection over a timeframe manually using either an own `Http2FrameListener` implementation or an `ChannelInboundHandler` implementation (depending which http2 API is used).\n\n### References\n- https://www.cve.org/CVERecord?id=CVE-2023-44487\n- https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/\n- https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/apple/swift-nio-http2/security/advisories/GHSA-qppj-fm5r-hxr3",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/58f75f665aa81a8cbcf6ffa74820042a285c5e61",
+            "https://github.com/netty/netty/security/advisories/GHSA-xpw8-rcwv-8f8p",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-44487",
+            "https://www.cve.org/CVERecord?id=CVE-2023-44487"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2023-39410",
+          "PkgName": "org.apache.avro:avro",
+          "PkgPath": "app/libs/avro-1.8.2.jar",
+          "InstalledVersion": "1.8.2",
+          "FixedVersion": "1.11.3",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-39410",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "apache-avro: Apache Avro Java SDK: Memory when deserializing untrusted data in Avro Java SDK",
+          "Description": "When deserializing untrusted or corrupted data, it is possible for a reader to consume memory beyond the allowed constraints and thus lead to out of memory on the system.\n\nThis issue affects Java applications using Apache Avro Java SDK up to and including 1.11.2.  Users should update to apache-avro version 1.11.3 which addresses this issue.\n\n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-502"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/09/29/6",
+            "https://access.redhat.com/security/cve/CVE-2023-39410",
+            "https://github.com/apache/avro",
+            "https://github.com/apache/avro/commit/a12a7e44ddbe060c3dc731863cad5c15f9267828",
+            "https://github.com/pypa/advisory-database/tree/main/vulns/avro/PYSEC-2023-188.yaml",
+            "https://issues.apache.org/jira/browse/AVRO-3819",
+            "https://lists.apache.org/thread/q142wj99cwdd0jo5lvdoxzoymlqyjdds",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-39410",
+            "https://www.cve.org/CVERecord?id=CVE-2023-39410",
+            "https://www.openwall.com/lists/oss-security/2023/09/29/6"
+          ],
+          "PublishedDate": "2023-09-29T17:15:00Z",
+          "LastModifiedDate": "2023-10-06T17:58:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-35515",
+          "PkgName": "org.apache.commons:commons-compress",
+          "PkgPath": "app/libs/commons-compress-1.8.1.jar",
+          "InstalledVersion": "1.8.1",
+          "FixedVersion": "1.21",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-35515",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "apache-commons-compress: infinite loop when reading a specially crafted 7Z archive",
+          "Description": "When reading a specially crafted 7Z archive, the construction of the list of codecs that decompress an entry can result in an infinite loop. This could be used to mount a denial of service attack against services that use Compress' sevenz package.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-835"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2021/07/13/1",
+            "https://access.redhat.com/security/cve/CVE-2021-35515",
+            "https://commons.apache.org/proper/commons-compress/security-reports.html",
+            "https://lists.apache.org/thread.html/r19ebfd71770ec0617a9ea180e321ef927b3fefb4c81ec5d1902d20ab%40%3Cuser.commons.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b%40%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b@%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rab292091eadd1ecc63c516e9541a7f241091cf2e652b8185a6059945%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rab292091eadd1ecc63c516e9541a7f241091cf2e652b8185a6059945@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71%40%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71@%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbaea15ddc5a7c0c6b66660f1d6403b28595e2561bb283eade7d7cd69%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbaea15ddc5a7c0c6b66660f1d6403b28595e2561bb283eade7d7cd69@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbe91c512c5385181149ab087b6c909825d34299f5c491c6482a2ed57%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbe91c512c5385181149ab087b6c909825d34299f5c491c6482a2ed57@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf2f4d7940371a7c7c5b679f50e28fc7fcc82cd00670ced87e013ac88%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf2f4d7940371a7c7c5b679f50e28fc7fcc82cd00670ced87e013ac88@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742@%3Cnotifications.skywalking.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-35515",
+            "https://security.netapp.com/advisory/ntap-20211022-0001/",
+            "https://www.cve.org/CVERecord?id=CVE-2021-35515",
+            "https://www.oracle.com/security-alerts/cpuapr2022.html",
+            "https://www.oracle.com/security-alerts/cpujan2022.html",
+            "https://www.oracle.com/security-alerts/cpujul2022.html",
+            "https://www.oracle.com/security-alerts/cpuoct2021.html"
+          ],
+          "PublishedDate": "2021-07-13T08:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:36:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-35516",
+          "PkgName": "org.apache.commons:commons-compress",
+          "PkgPath": "app/libs/commons-compress-1.8.1.jar",
+          "InstalledVersion": "1.8.1",
+          "FixedVersion": "1.21",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-35516",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "apache-commons-compress: excessive memory allocation when reading a specially crafted 7Z archive",
+          "Description": "When reading a specially crafted 7Z archive, Compress can be made to allocate large amounts of memory that finally leads to an out of memory error even for very small inputs. This could be used to mount a denial of service attack against services that use Compress' sevenz package.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2021/07/13/2",
+            "https://access.redhat.com/security/cve/CVE-2021-35516",
+            "https://commons.apache.org/proper/commons-compress/security-reports.html",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b%40%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b@%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71%40%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71@%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf5b1016fb15b7118b9a5e16bb0b78cb4f1dfcf7821eb137ab5757c91%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf5b1016fb15b7118b9a5e16bb0b78cb4f1dfcf7821eb137ab5757c91@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf68442d67eb166f4b6cf0bbbe6c7f99098c12954f37332073c9822ca%40%3Cuser.commons.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742@%3Cnotifications.skywalking.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-35516",
+            "https://security.netapp.com/advisory/ntap-20211022-0001/",
+            "https://www.cve.org/CVERecord?id=CVE-2021-35516",
+            "https://www.oracle.com/security-alerts/cpuapr2022.html",
+            "https://www.oracle.com/security-alerts/cpujan2022.html",
+            "https://www.oracle.com/security-alerts/cpujul2022.html",
+            "https://www.oracle.com/security-alerts/cpuoct2021.html"
+          ],
+          "PublishedDate": "2021-07-13T08:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:36:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-35517",
+          "PkgName": "org.apache.commons:commons-compress",
+          "PkgPath": "app/libs/commons-compress-1.8.1.jar",
+          "InstalledVersion": "1.8.1",
+          "FixedVersion": "1.21",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-35517",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "apache-commons-compress: excessive memory allocation when reading a specially crafted TAR archive",
+          "Description": "When reading a specially crafted TAR archive, Compress can be made to allocate large amounts of memory that finally leads to an out of memory error even for very small inputs. This could be used to mount a denial of service attack against services that use Compress' tar package.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2021/07/13/3",
+            "http://www.openwall.com/lists/oss-security/2021/07/13/5",
+            "https://access.redhat.com/security/cve/CVE-2021-35517",
+            "https://commons.apache.org/proper/commons-compress/security-reports.html",
+            "https://lists.apache.org/thread.html/r31f75743ac173b0a606f8ea6ea53f351f386c44e7bcf78ae04007c29%40%3Cissues.flink.apache.org%3E",
+            "https://lists.apache.org/thread.html/r31f75743ac173b0a606f8ea6ea53f351f386c44e7bcf78ae04007c29@%3Cissues.flink.apache.org%3E",
+            "https://lists.apache.org/thread.html/r457b2ed564860996b20d938566fe8bd4bfb7c37be8e205448ccb5975%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r457b2ed564860996b20d938566fe8bd4bfb7c37be8e205448ccb5975@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r54afdab05e01de970649c2d91a993f68a6b00cd73e6e34e16c832d46%40%3Cuser.ant.apache.org%3E",
+            "https://lists.apache.org/thread.html/r54afdab05e01de970649c2d91a993f68a6b00cd73e6e34e16c832d46@%3Cuser.ant.apache.org%3E",
+            "https://lists.apache.org/thread.html/r605d906b710b95f1bbe0036a53ac6968f667f2c249b6fbabada9a940%40%3Cuser.commons.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b%40%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b@%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/ra393ffdc7c90a4a37ea023946f390285693795013a642d80fba20203%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/ra393ffdc7c90a4a37ea023946f390285693795013a642d80fba20203@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71%40%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71@%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742@%3Cnotifications.skywalking.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-35517",
+            "https://security.netapp.com/advisory/ntap-20211022-0001/",
+            "https://www.cve.org/CVERecord?id=CVE-2021-35517",
+            "https://www.oracle.com/security-alerts/cpuapr2022.html",
+            "https://www.oracle.com/security-alerts/cpujan2022.html",
+            "https://www.oracle.com/security-alerts/cpujul2022.html",
+            "https://www.oracle.com/security-alerts/cpuoct2021.html"
+          ],
+          "PublishedDate": "2021-07-13T08:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:36:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-36090",
+          "PkgName": "org.apache.commons:commons-compress",
+          "PkgPath": "app/libs/commons-compress-1.8.1.jar",
+          "InstalledVersion": "1.8.1",
+          "FixedVersion": "1.21",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-36090",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "apache-commons-compress: excessive memory allocation when reading a specially crafted ZIP archive",
+          "Description": "When reading a specially crafted ZIP archive, Compress can be made to allocate large amounts of memory that finally leads to an out of memory error even for very small inputs. This could be used to mount a denial of service attack against services that use Compress' zip package.",
+          "Severity": "HIGH",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2021/07/13/4",
+            "http://www.openwall.com/lists/oss-security/2021/07/13/6",
+            "https://access.redhat.com/security/cve/CVE-2021-36090",
+            "https://commons.apache.org/proper/commons-compress/security-reports.html",
+            "https://lists.apache.org/thread.html/r0e87177f8e78b4ee453cd4d3d8f4ddec6f10d2c27707dd71e12cafc9%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r0e87177f8e78b4ee453cd4d3d8f4ddec6f10d2c27707dd71e12cafc9@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r25f4c44616045085bc3cf901bb7e68e445eee53d1966fc08998fc456%40%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r25f4c44616045085bc3cf901bb7e68e445eee53d1966fc08998fc456@%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r3227b1287e5bd8db6523b862c22676b046ad8f4fc96433225f46a2bd%40%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r3227b1287e5bd8db6523b862c22676b046ad8f4fc96433225f46a2bd@%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r4f03c5de923e3f2a8c316248681258125140514ef3307bfe1538e1ab%40%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r4f03c5de923e3f2a8c316248681258125140514ef3307bfe1538e1ab@%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r54049b66afbca766b6763c7531e9fe7a20293a112bcb65462a134949%40%3Ccommits.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r54049b66afbca766b6763c7531e9fe7a20293a112bcb65462a134949@%3Ccommits.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b%40%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r67ef3c07fe3b8c1b02d48012149d280ad6da8e4cec253b527520fb2b@%3Cdev.poi.apache.org%3E",
+            "https://lists.apache.org/thread.html/r75ffc7a461e7e7ae77690fa75bd47bb71365c732e0fbcc44da4f8ff5%40%3Cdev.tomcat.apache.org%3E",
+            "https://lists.apache.org/thread.html/r75ffc7a461e7e7ae77690fa75bd47bb71365c732e0fbcc44da4f8ff5@%3Cdev.tomcat.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9a23d4dbf4e34d498664080bff59f2893b855eb16dae33e4aa92fa53%40%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9a23d4dbf4e34d498664080bff59f2893b855eb16dae33e4aa92fa53@%3Cannounce.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/r9f54c0caa462267e0cc68b49f141e91432b36b23348d18c65bd0d040@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rab292091eadd1ecc63c516e9541a7f241091cf2e652b8185a6059945%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rab292091eadd1ecc63c516e9541a7f241091cf2e652b8185a6059945@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/racd0c0381c8404f298b226cd9db2eaae965b14c9c568224aa3f437ae@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71%40%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb064d705fdfa44b5dae4c366b369ef6597951083196321773b983e71@%3Ccommits.pulsar.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb5fa2ee61828fa2e42361b58468717e84902dd71c4aea8dc0b865df7%40%3Cnotifications.james.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb5fa2ee61828fa2e42361b58468717e84902dd71c4aea8dc0b865df7@%3Cnotifications.james.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb6e1fa80d34e5ada45f72655d84bfd90db0ca44ef19236a49198c88c@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rb7adf3e55359819e77230b4586521e5c6874ce5ed93384bdc14d6aee@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rba65ed5ddb0586f5b12598f55ec7db3633e7b7fede60466367fbf86a@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbbf42642c3e4167788a7c13763d192ee049604d099681f765385d99d%40%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbbf42642c3e4167788a7c13763d192ee049604d099681f765385d99d@%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbe91c512c5385181149ab087b6c909825d34299f5c491c6482a2ed57%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rbe91c512c5385181149ab087b6c909825d34299f5c491c6482a2ed57@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rc4134026d7d7b053d4f9f2205531122732405012c8804fd850a9b26f%40%3Cuser.commons.apache.org%3E",
+            "https://lists.apache.org/thread.html/rc7df4c2f0bbe2028a1498a46d322c91184f7a369e3e4c57d9518cacf%40%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rc7df4c2f0bbe2028a1498a46d322c91184f7a369e3e4c57d9518cacf@%3Cdev.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rd4332baaf6debd03d60deb7ec93bee49e5fdbe958cb6800dff7fb00e@%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rdd5412a5b9a25aed2a02c3317052d38a97128314d50bc1ed36e81d38%40%3Cuser.ant.apache.org%3E",
+            "https://lists.apache.org/thread.html/rdd5412a5b9a25aed2a02c3317052d38a97128314d50bc1ed36e81d38@%3Cuser.ant.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf2f4d7940371a7c7c5b679f50e28fc7fcc82cd00670ced87e013ac88%40%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf2f4d7940371a7c7c5b679f50e28fc7fcc82cd00670ced87e013ac88@%3Ccommits.druid.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf3f0a09fee197168a813966c5816157f6c600a47313a0d6813148ea6%40%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf3f0a09fee197168a813966c5816157f6c600a47313a0d6813148ea6@%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf93b6bb267580e01deb7f3696f7eaca00a290c66189a658cf7230a1a%40%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf93b6bb267580e01deb7f3696f7eaca00a290c66189a658cf7230a1a@%3Cissues.drill.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742%40%3Cnotifications.skywalking.apache.org%3E",
+            "https://lists.apache.org/thread.html/rfba19167efc785ad3561e7ef29f340d65ac8f0d897aed00e0731e742@%3Cnotifications.skywalking.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-36090",
+            "https://security.netapp.com/advisory/ntap-20211022-0001/",
+            "https://www.cve.org/CVERecord?id=CVE-2021-36090",
+            "https://www.oracle.com/security-alerts/cpuapr2022.html",
+            "https://www.oracle.com/security-alerts/cpujan2022.html",
+            "https://www.oracle.com/security-alerts/cpujul2022.html",
+            "https://www.oracle.com/security-alerts/cpuoct2021.html"
+          ],
+          "PublishedDate": "2021-07-13T08:15:00Z",
+          "LastModifiedDate": "2023-11-07T03:36:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-5072",
+          "PkgName": "org.json:json",
+          "PkgPath": "app/libs/json-20230227.jar",
+          "InstalledVersion": "20230227",
+          "FixedVersion": "20231013",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5072",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "JSON-java: parser confusion leads to OOM",
+          "Description": "Denial of Service  in JSON-Java versions up to and including 20230618.  A bug in the parser means that an input string of modest size can lead to indefinite amounts of memory being used. \n",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-5072",
+            "https://github.com/google/security-research/security/advisories/GHSA-4jq9-2xhw-jpx7",
+            "https://github.com/stleary/JSON-java",
+            "https://github.com/stleary/JSON-java/commit/60662e2f8384d3449822a3a1179bfe8de67b55bb",
+            "https://github.com/stleary/JSON-java/issues/758",
+            "https://github.com/stleary/JSON-java/issues/771",
+            "https://github.com/stleary/JSON-java/pull/759",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-5072",
+            "https://www.cve.org/CVERecord?id=CVE-2023-5072"
+          ],
+          "PublishedDate": "2023-10-12T17:15:00Z",
+          "LastModifiedDate": "2023-10-18T18:17:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-20863",
+          "PkgName": "org.springframework:spring-core",
+          "PkgPath": "app/libs/spring-core-5.3.25.jar",
+          "InstalledVersion": "5.3.25",
+          "FixedVersion": "6.0.8, 5.3.27, 5.2.24.RELEASE",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-20863",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "Spring Expression DoS Vulnerability",
+          "Description": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-917"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-20863",
+            "https://github.com/spring-projects/spring-framework",
+            "https://github.com/spring-projects/spring-framework/commit/b73f5fcac22555f844cf27a7eeb876cb9d7f7f7e",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-20863",
+            "https://spring.io/security/cve-2023-20863",
+            "https://www.cve.org/CVERecord?id=CVE-2023-20863"
+          ],
+          "PublishedDate": "2023-04-13T20:15:00Z",
+          "LastModifiedDate": "2023-04-21T18:04:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-34455",
+          "PkgName": "org.xerial.snappy:snappy-java",
+          "PkgPath": "app/libs/snappy-java-1.1.8.4.jar",
+          "InstalledVersion": "1.1.8.4",
+          "FixedVersion": "1.1.10.1",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-34455",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "snappy-java: Unchecked chunk length leads to DoS",
+          "Description": "snappy-java is a fast compressor/decompressor for Java. Due to use of an unchecked chunk length, an unrecoverable fatal error can occur in versions prior to 1.1.10.1.\n\nThe code in the function hasNextChunk in the fileSnappyInputStream.java checks if a given stream has more chunks to read. It does that by attempting to read 4 bytes. If it wasn’t possible to read the 4 bytes, the function returns false. Otherwise, if 4 bytes were available, the code treats them as the length of the next chunk.\n\nIn the case that the `compressed` variable is null, a byte array is allocated with the size given by the input data. Since the code doesn’t test the legality of the `chunkSize` variable, it is possible to pass a negative number (such as 0xFFFFFFFF which is -1), which will cause the code to raise a `java.lang.NegativeArraySizeException` exception. A worse case would happen when passing a huge positive value (such as 0x7FFFFFFF), which would raise the fatal `java.lang.OutOfMemoryError` error.\n\nVersion 1.1.10.1 contains a patch for this issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-34455",
+            "https://github.com/xerial/snappy-java",
+            "https://github.com/xerial/snappy-java/blob/05c39b2ca9b5b7b39611529cc302d3d796329611/src/main/java/org/xerial/snappy/SnappyInputStream.java#L388",
+            "https://github.com/xerial/snappy-java/blob/master/src/main/java/org/xerial/snappy/SnappyInputStream.java",
+            "https://github.com/xerial/snappy-java/commit/3bf67857fcf70d9eea56eed4af7c925671e8eaea",
+            "https://github.com/xerial/snappy-java/security/advisories/GHSA-qcwq-55hx-v3vh",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-34455",
+            "https://security.netapp.com/advisory/ntap-20230818-0009/",
+            "https://www.cve.org/CVERecord?id=CVE-2023-34455"
+          ],
+          "PublishedDate": "2023-06-15T18:15:00Z",
+          "LastModifiedDate": "2023-08-18T14:15:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-43642",
+          "PkgName": "org.xerial.snappy:snappy-java",
+          "PkgPath": "app/libs/snappy-java-1.1.8.4.jar",
+          "InstalledVersion": "1.1.8.4",
+          "FixedVersion": "1.1.10.4",
+          "Layer": {
+            "Digest": "sha256:0b06d6f661b0091ac5659290c00eebd7bc4664317b9775a8e4364561d52df80b",
+            "DiffID": "sha256:aaf3ad678ef165f67687876049f0d54b9faf645b663e3df47496d499c0d38964"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-43642",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Title": "snappy-java: Missing upper bound check on chunk length in snappy-java can lead to Denial of Service (DoS) impact",
+          "Description": "snappy-java is a Java port of the snappy, a fast C++ compresser/decompresser developed by Google. The SnappyInputStream was found to be vulnerable to Denial of Service (DoS) attacks when decompressing data with a too large chunk size. Due to missing upper bound check on chunk length, an unrecoverable fatal error can occur. All versions of snappy-java including the latest released version 1.1.10.3 are vulnerable to this issue. A fix has been introduced in commit `9f8c3cf74` which will be included in the 1.1.10.4 release. Users are advised to upgrade. Users unable to upgrade should only accept compressed data from trusted sources.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-43642",
+            "https://github.com/xerial/snappy-java",
+            "https://github.com/xerial/snappy-java/commit/9f8c3cf74223ed0a8a834134be9c917b9f10ceb5",
+            "https://github.com/xerial/snappy-java/releases/tag/v1.1.10.4",
+            "https://github.com/xerial/snappy-java/security/advisories/GHSA-55g7-9cwv-5qfv",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-43642",
+            "https://www.cve.org/CVERecord?id=CVE-2023-43642"
+          ],
+          "PublishedDate": "2023-09-25T20:15:00Z",
+          "LastModifiedDate": "2023-09-26T15:46:00Z"
+        }
+      ]
+    }
+  ]
+}
