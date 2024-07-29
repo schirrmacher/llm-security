@@ -1,7 +1,11 @@
 import os
+import sys
 import json
+import time
 import logging
 import argparse
+import itertools
+import threading
 
 from typing import TextIO, Optional
 
@@ -34,6 +38,33 @@ def setup_logging(log_level):
     logger.info(ASCII_ART)
 
 
+class Spinner:
+    def __init__(self):
+        self.spinner_cycle = itertools.cycle(["-", "\\", "|", "/"])
+        self.stop_running = threading.Event()
+        self.thread = threading.Thread(target=self._spin)
+
+    def _spin(self):
+        while not self.stop_running.is_set():
+            sys.stdout.write(next(self.spinner_cycle))
+            sys.stdout.flush()
+            time.sleep(0.1)
+            sys.stdout.write("\b")
+        sys.stdout.write("\b")
+
+    def start(self):
+        self.stop_running.clear()
+        if not self.thread.is_alive():
+            self.thread = threading.Thread(target=self._spin)
+            self.thread.start()
+
+    def stop(self):
+        self.stop_running.set()
+        self.thread.join()
+        sys.stdout.write("\b")
+        sys.stdout.flush()
+
+
 def run_security_army_knife(
     cve_file_path: Optional[str],
     trivy_file_path: Optional[str],
@@ -47,6 +78,7 @@ def run_security_army_knife(
     output_format: str,
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
+    spinner = Spinner()
 
     model: BaseModel
     if large_language_model == "Mistral":
@@ -90,9 +122,12 @@ def run_security_army_knife(
     def handle_event(event: Event):
         if event.event_type == Event.Type.BEFORE_ANALYSIS:
             logger.info(f"= {event.cve.name}")
+            spinner.start()
         elif event.event_type == Event.Type.AFTER_ANALYSIS:
+            spinner.stop()
             CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
         else:
+            spinner.stop()
             logger.info(f"  - {event.message}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
@@ -107,6 +142,7 @@ def run_security_army_knife(
         tree = AgentTree(agents=agents)
         tree.traverse(handle_agent, cve_list=cve_list)
     except KeyboardInterrupt:
+        spinner.stop()
         logger.info("👋")
         return 0
 
