@@ -3,6 +3,7 @@ import sys
 import json
 import time
 import logging
+import textwrap
 import argparse
 import itertools
 import threading
@@ -41,7 +42,11 @@ def setup_logging(log_level):
 
 class Spinner:
     def __init__(self):
-        self.spinner_cycle = itertools.cycle(["-", "\\", "|", "/"])
+        self.default_spinner_cycle = itertools.cycle(
+            ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+        )
+        self.http_request_spinner_cycle = itertools.cycle(["◐", "◓", "◑", "◒"])
+        self.spinner_cycle = self.default_spinner_cycle
         self.stop_running = threading.Event()
         self.thread = threading.Thread(target=self._spin)
 
@@ -64,6 +69,12 @@ class Spinner:
         self.thread.join()
         sys.stdout.write("\b")
         sys.stdout.flush()
+
+    def set_default_spinner(self):
+        self.spinner_cycle = self.default_spinner_cycle
+
+    def set_http_request_spinner(self):
+        self.spinner_cycle = self.http_request_spinner_cycle
 
 
 def run_security_army_knife(
@@ -124,17 +135,31 @@ def run_security_army_knife(
 
     def handle_event(event: Event):
         if event.event_type == Event.Type.BEFORE_ANALYSIS:
-            logger.info(f"= {event.cve.name}")
+            logger.info(f"· {event.cve.name}")
+            spinner.start()
+        elif event.event_type == Event.Type.REQUEST:
+            spinner.stop()
+            spinner.set_http_request_spinner()
+            spinner.start()
+        elif event.event_type == Event.Type.RESPONSE:
+            spinner.stop()
+            logger.info(
+                f"  - response: {textwrap.indent(event.message, '    ')}"
+            )
+            spinner.set_default_spinner()
             spinner.start()
         elif event.event_type == Event.Type.AFTER_ANALYSIS:
             spinner.stop()
             CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
+        elif event.event_type == Event.Type.INFORMATION:
+            spinner.stop()
+            logger.info(f"  - {str(event.message)}")
         else:
             spinner.stop()
-            logger.info(f"  - {event.message}")
+            logger.info(f"  - {str(event.event_type.name)}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
-        logger.info(f"+++ {agent.__class__.__name__} +++")
+        logger.info(f"{agent.__class__.__name__}\n")
         analyzed_cve_list = agent.analyze(
             cve_list=cve_list,
             handle_event=handle_event,

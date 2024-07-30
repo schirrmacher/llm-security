@@ -11,6 +11,8 @@ from security_army_knife.agents.base_agent import (
     BeforeAnalysis,
     AfterAnalysis,
     ErrorEvent,
+    RequestEvent,
+    ResponseEvent,
 )
 from security_army_knife.base_model import BaseModel
 
@@ -70,7 +72,10 @@ class APISpecAgent(BaseAgent):
             ]
 
             try:
+                handle_event(RequestEvent(cve))
                 response = self.model.talk(messages, json=True)
+                handle_event(ResponseEvent(cve, response.message.content))
+
                 json_object = json.loads(response.message.content)
                 cve.api_spec_analysis = APISpecAnalysis.from_json(json_object)
                 handle_event(

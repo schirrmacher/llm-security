@@ -8,6 +8,8 @@ from security_army_knife.base_model import BaseModel
 class AgentEvent:
 
     class Type(Enum):
+        REQUEST = "REQUEST"
+        RESPONSE = "RESPONSE"
         INFORMATION = "INFORMATION"
         BEFORE_ANALYSIS = "BEFORE_ANALYSIS"
         AFTER_ANALYSIS = "AFTER_ANALYSIS"
@@ -30,7 +32,7 @@ class CachedEvent(AgentEvent):
         super(CachedEvent, self).__init__(
             event_type=AgentEvent.Type.INFORMATION,
             cve=cve,
-            message="skipped, already analyzed",
+            message="cached",
         )
 
 
@@ -70,6 +72,22 @@ class InformationEvent(AgentEvent):
     def __init__(self, cve: CVE, message: str):
         super(InformationEvent, self).__init__(
             event_type=AgentEvent.Type.INFORMATION, cve=cve, message=message
+        )
+
+
+class RequestEvent(AgentEvent):
+
+    def __init__(self, cve: CVE, message: str = ""):
+        super(RequestEvent, self).__init__(
+            event_type=AgentEvent.Type.REQUEST, cve=cve, message=message
+        )
+
+
+class ResponseEvent(AgentEvent):
+
+    def __init__(self, cve: CVE, message: str):
+        super(ResponseEvent, self).__init__(
+            event_type=AgentEvent.Type.RESPONSE, cve=cve, message=message
         )
 
 
