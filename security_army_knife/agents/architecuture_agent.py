@@ -11,6 +11,8 @@ from security_army_knife.agents.base_agent import (
     BeforeAnalysis,
     AfterAnalysis,
     ErrorEvent,
+    RequestEvent,
+    ResponseEvent,
 )
 from security_army_knife.base_model import BaseModel
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
@@ -60,7 +62,7 @@ class ArchitectureAgent(BaseAgent):
         self, cve_list: list[CVE], handle_event: Callable[[Event], None]
     ) -> list[CVE]:
         for cve in cve_list:
-            self.logger.info(f"Analyzing {cve.name} in ArchitectureAgent...")
+
             handle_event(BeforeAnalysis(cve))
 
             if cve.architecture_analysis:
@@ -96,8 +98,10 @@ class ArchitectureAgent(BaseAgent):
             ]
 
             try:
+                handle_event(RequestEvent(cve))
                 response = self.model.talk(messages, json=True)
-                self.logger.info(f"Received response for {cve.name}")
+                handle_event(ResponseEvent(cve, response.message.content))
+
                 json_object = json.loads(response.message.content)
 
                 infrastructure_conditions = json_object.get(
@@ -106,18 +110,10 @@ class ArchitectureAgent(BaseAgent):
                 cve.architecture_analysis = ArchitectureAnalysis(
                     infrastructure_conditions=infrastructure_conditions
                 )
-                handle_event(
-                    InformationEvent(
-                        cve,
-                        f"infrastructure_conditions: {infrastructure_conditions}",
-                    )
-                )
+                message = f"conditions: {len(infrastructure_conditions)}"
+                handle_event(InformationEvent(cve, message))
 
-                self.logger.info(
-                    f"Architecture Analysis:\n{cve.architecture_analysis}"
-                )
             except Exception as e:
-                self.logger.error(f"Unexpected error for {cve.name}: {e}")
                 handle_event(ErrorEvent(cve, error=e))
 
             handle_event(AfterAnalysis(cve))
