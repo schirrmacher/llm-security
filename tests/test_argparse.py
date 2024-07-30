@@ -17,7 +17,7 @@ class TestParseArguments(unittest.TestCase):
             "-dep",
             "tests/files/sbom.json",
             "-llm",
-            "Mistral",
+            "mistral",
             "-o",
             "severity",
             "-of",
@@ -46,7 +46,7 @@ class TestParseArguments(unittest.TestCase):
             '{"components":{"schemas":{"Act',
         )
         self.assertEqual(args.source_code, "tests/files")
-        self.assertEqual(args.large_language_model, "Mistral")
+        self.assertEqual(args.large_language_model, "mistral")
         self.assertEqual(args.output, "severity")
         self.assertEqual(args.output_format, "json")
 

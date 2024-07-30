@@ -10,6 +10,7 @@ import threading
 
 from typing import TextIO, Optional
 
+from security_army_knife.gemini_model import GeminiModel
 from security_army_knife.mistral_model import MistralModel
 from security_army_knife.base_model import BaseModel
 from security_army_knife.agents.source_code_agent import SourceCodeAgent
@@ -93,8 +94,10 @@ def run_security_army_knife(
     spinner = Spinner()
 
     model: BaseModel
-    if large_language_model == "Mistral":
+    if large_language_model == "mistral":
         model = MistralModel()
+    elif large_language_model == "gemini":
+        model = GeminiModel()
     else:
         raise ValueError(f"{large_language_model} not supported.")
 
@@ -154,12 +157,15 @@ def run_security_army_knife(
         elif event.event_type == Event.Type.INFORMATION:
             spinner.stop()
             logger.info(f"  - {str(event.message)}")
+        elif event.event_type == Event.Type.ERROR:
+            spinner.stop()
+            logger.info(f"  - error: {event.message}")
         else:
             spinner.stop()
             logger.info(f"  - {str(event.event_type.name)}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
-        logger.info(f"{agent.__class__.__name__}\n")
+        logger.info(f"\n{agent.__class__.__name__}\n")
         analyzed_cve_list = agent.analyze(
             cve_list=cve_list,
             handle_event=handle_event,
@@ -271,8 +277,8 @@ def parse_arguments():
         "-llm",
         "--large_language_model",
         type=str,
-        choices=["Mistral"],
-        default="Mistral",
+        choices=["mistral", "gemini"],
+        default="mistral",
         help="Large language model option (only option now is Mistral)",
     )
 
