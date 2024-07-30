@@ -154,12 +154,15 @@ def run_security_army_knife(
         elif event.event_type == Event.Type.INFORMATION:
             spinner.stop()
             logger.info(f"  - {str(event.message)}")
+        elif event.event_type == Event.Type.ERROR:
+            spinner.stop()
+            logger.info(f"  - error: {event.message}")
         else:
             spinner.stop()
             logger.info(f"  - {str(event.event_type.name)}")
 
     def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
-        logger.info(f"{agent.__class__.__name__}\n")
+        logger.info(f"\n{agent.__class__.__name__}\n")
         analyzed_cve_list = agent.analyze(
             cve_list=cve_list,
             handle_event=handle_event,
