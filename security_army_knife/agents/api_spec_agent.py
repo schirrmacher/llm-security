@@ -35,6 +35,8 @@ class APISpecAgent(BaseAgent):
         handle_event: Callable[[Event], None],
     ) -> list[CVE]:
 
+        api_spec = self.api_spec.read()
+
         for cve in cve_list:
 
             handle_event(BeforeAnalysis(cve))
@@ -44,7 +46,7 @@ class APISpecAgent(BaseAgent):
                 continue
 
             task = f"""How looks a vulnerable API spec facilitating the following CVE? {cve.name}: {cve.description}"""
-            api_task = f"Is the following API spec facilitating the exploit or not?: {self.api_spec.read()}"
+            api_task = f"Is the following API spec facilitating the exploit or not?: {api_spec}"
             formatting = """
             Format the result as a single JSON object, like: {
                 "facilitates_attack": true|false,
