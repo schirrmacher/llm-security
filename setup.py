@@ -14,6 +14,7 @@ setup(
         "fastembed==0.2.7",
         "llama-index-core==0.10.55",
         "llama-index-llms-mistralai==0.1.17",
+        "llama-index-llms-gemini==0.1.11",
         "llama-index==0.10.55",
         "pandas==2.2.2",
         "pytest==8.1.1",
