@@ -1,12 +1,27 @@
+import argparse
+
 from security_army_knife.commands.cve import (
     run_cve_analysis,
-    parse_arguments as cve_arguments,
+    add_subcommand as add_cve_parser,
+)
+from security_army_knife.commands.sdr import (
+    run_sdr_analysis,
+    add_subcommand as add_sdr_parser,
 )
 from security_army_knife.commands.util import setup_logging
 
 
 def main():
-    args = cve_arguments()
+
+    parser = argparse.ArgumentParser(
+        description="Security Army Knife - AI for security day to day tasks"
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Subcommands")
+    add_cve_parser(subparsers)
+    add_sdr_parser(subparsers)
+    args = parser.parse_args()
+
     setup_logging(args.log_level)
     if args.command == "cve":
         result_code = run_cve_analysis(
@@ -21,6 +36,14 @@ def main():
             # output
             large_language_model=args.large_language_model,
             output_option=args.output,
+            output_format=args.output_format,
+        )
+        return result_code
+    if args.command == "sdr":
+        result_code = run_sdr_analysis(
+            architecture_diagram=args.architecture_diagram,
+            api_documentation=args.api_documentation,
+            large_language_model=args.large_language_model,
             output_format=args.output_format,
         )
         return result_code
