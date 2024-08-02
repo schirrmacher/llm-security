@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from security_army_knife.cli import parse_arguments
+from security_army_knife.commands.cve import parse_arguments
 
 
 class TestParseArguments(unittest.TestCase):
