@@ -7,6 +7,7 @@ from security_army_knife.analysis.architecture_analysis import (
 )
 from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
+
 class CVECategory:
     os = "os"
     distro = "distro"
@@ -23,7 +24,7 @@ class CVE:
         code_analysis: CodeAnalysis = None,
         api_spec_analysis: APISpecAnalysis = None,
         architecture_analysis: ArchitectureAnalysis = None,
-        final_analysis: EvaluationAnalysis = None  # New attribute for evaluation results
+        final_analysis: EvaluationAnalysis = None,  # New attribute for evaluation results
     ):
         self.name = name
         self.description = description
@@ -53,9 +54,13 @@ class CVE:
             if architecture_analysis_data
             else None
         )
-        final_analysis_data = json_dict.get("final_analysis")  # Get final analysis data
+        final_analysis_data = json_dict.get(
+            "final_analysis"
+        )  # Get final analysis data
         final_analysis = (
-            EvaluationAnalysis(**final_analysis_data) if final_analysis_data else None
+            EvaluationAnalysis(**final_analysis_data)
+            if final_analysis_data
+            else None
         )
         return cls(
             name=json_dict.get("name"),
@@ -89,7 +94,7 @@ class CVE:
                 if self.architecture_analysis
                 else None
             ),
-             "final_analysis": (
+            "final_analysis": (
                 self.final_analysis.to_json() if self.final_analysis else None
             ),
         }
@@ -101,8 +106,12 @@ class CVE:
             f"Category: {self.category}\n"
             f"{self.code_analysis or 'No Code Analysis'}\n"
             f"{self.api_spec_analysis or 'No API Spec Analysis'}\n"
-            f"{self.architecture_analysis or 'No Architecture Analysis'}"
-            f"{self.final_analysis or 'No Final Analysis'}"
+            f"{self.architecture_analysis or 'No Architecture Analysis'}\n"
+            f"Final Analysis:\n"
+            f"  Severity: {self.final_analysis.severity if self.final_analysis else 'No severity'}\n"
+            f"  Summary: {self.final_analysis.summary if self.final_analysis else 'No summary'}\n"
+            f"Threat Scenarios:\n"
+            f"    {'\n    '.join(self.final_analysis.threat_scenarios) if self.final_analysis and self.final_analysis.threat_scenarios else 'No threat scenarios'}"
         )
 
     @staticmethod

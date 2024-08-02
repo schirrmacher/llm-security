@@ -8,10 +8,8 @@ from security_army_knife.analysis.code_analysis import CodeAnalysis
 from security_army_knife.analysis.architecture_analysis import (
     ArchitectureAnalysis,
 )
-from security_army_knife.analysis.cve import (
-    CVE,
-    CVECategory,
-)
+from security_army_knife.analysis.cve import CVE, CVECategory
+from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
 
 class TestCVE(unittest.TestCase):
@@ -24,11 +22,21 @@ class TestCVE(unittest.TestCase):
         )
         self.mock_code_analysis_json = self.mock_code_analysis.to_json()
 
+        self.mock_evaluation_analysis = EvaluationAnalysis(
+            severity="Medium",
+            summary="This CVE has a medium impact with limited exploit scenarios.",
+            threat_scenarios=[
+                "Scenario 1: Exploiting API misconfigurations.",
+                "Scenario 2: Leveraging insecure storage to gain access.",
+            ],
+        )
+
         self.cve_data = {
             "name": "CVE-1234",
             "description": "Example CVE",
             "category": CVECategory.os,
             "code_analysis": self.mock_code_analysis_json,
+            "final_analysis": self.mock_evaluation_analysis.to_json(),
         }
 
         self.new_cve_data = {
@@ -39,7 +47,8 @@ class TestCVE(unittest.TestCase):
                 "queries": ["query2"],
                 "affected_files": ["file2"],
             },
-            "architecture_analysis": None,  # Add this line
+            "architecture_analysis": None,
+            "final_analysis": None,
         }
 
     def tearDown(self):
@@ -103,6 +112,14 @@ class TestCVE(unittest.TestCase):
         architecture_analysis = ArchitectureAnalysis(
             infrastructure_conditions=["condition1"]
         )  # Add initialization for architecture analysis
+        evaluation_analysis = EvaluationAnalysis(
+            severity="High",
+            summary="High severity due to potential widespread impact.",
+            threat_scenarios=[
+                "Scenario 1: Potential data breach via API.",
+                "Scenario 2: Unauthorized access through misconfigured permissions.",
+            ],
+        )
         cve = CVE(
             name="CVE-1234",
             description="Test CVE",
@@ -110,6 +127,7 @@ class TestCVE(unittest.TestCase):
             code_analysis=code_analysis,
             api_spec_analysis=api_spec_analysis,
             architecture_analysis=architecture_analysis,  # Add this line
+            final_analysis=evaluation_analysis,
         )
         self.assertEqual(cve.name, "CVE-1234")
         self.assertEqual(cve.description, "Test CVE")
@@ -119,6 +137,7 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(
             cve.architecture_analysis, architecture_analysis
         )  # Add this line
+        self.assertEqual(cve.final_analysis, evaluation_analysis)
 
         # Test from_json method
         json_data = {
@@ -134,6 +153,13 @@ class TestCVE(unittest.TestCase):
                 "explanation": "Critical issue found",
             },
             "architecture_analysis": None,
+            "final_analysis": {
+                "severity": "Low",
+                "summary": "Low severity with limited exploit scenarios.",
+                "threat_scenarios": [
+                    "Scenario 1: Minimal risk due to strong protections."
+                ],
+            },
         }
         cve_from_json = CVE.from_json(json_data)
         self.assertEqual(cve_from_json.name, "CVE-5678")
@@ -145,9 +171,39 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(
             cve_from_json.api_spec_analysis.explanation, "Critical issue found"
         )
+        self.assertEqual(cve_from_json.final_analysis.severity, "Low")
+        self.assertEqual(
+            cve_from_json.final_analysis.summary,
+            "Low severity with limited exploit scenarios.",
+        )
+        self.assertEqual(
+            cve_from_json.final_analysis.threat_scenarios,
+            ["Scenario 1: Minimal risk due to strong protections."],
+        )
 
         # Test to_json method
-        self.assertEqual(cve_from_json.to_json(), json_data)
+        expected_json = {
+            "name": "CVE-5678",
+            "description": "Another CVE",
+            "category": "app",
+            "code_analysis": {
+                "queries": ["query2"],
+                "affected_files": ["file2"],
+            },
+            "api_spec_analysis": {
+                "facilitates_attack": True,
+                "explanation": "Critical issue found",
+            },
+            "architecture_analysis": None,
+            "final_analysis": {
+                "severity": "Low",
+                "summary": "Low severity with limited exploit scenarios.",
+                "threat_scenarios": [
+                    "Scenario 1: Minimal risk due to strong protections."
+                ],
+            },
+        }
+        self.assertEqual(cve_from_json.to_json(), expected_json)
 
         # Test __str__ method
         self.assertEqual(
@@ -155,7 +211,13 @@ class TestCVE(unittest.TestCase):
             "CVE Name: CVE-1234\nDescription: Test CVE\nCategory: os\n"
             "Code Analysis:\n  Queries: query1\n  Affected Files: file1\n"
             "API Spec Analysis:\n  Facilitates Attack: False\n  Explanation: No critical issues\n"
-            "Architecture Analysis:\n  Infrastructure Conditions: condition1",
+            "Architecture Analysis:\n  Infrastructure Conditions: condition1\n"
+            "Final Analysis:\n"
+            "  Severity: High\n"
+            "  Summary: High severity due to potential widespread impact.\n"
+            "Threat Scenarios:\n"
+            "    Scenario 1: Potential data breach via API.\n"
+            "    Scenario 2: Unauthorized access through misconfigured permissions.",
         )
 
     def test_cve_persist_state(self):
@@ -164,6 +226,7 @@ class TestCVE(unittest.TestCase):
             description="Example CVE",
             category=CVECategory.os,
             code_analysis=self.mock_code_analysis,
+            final_analysis=self.mock_evaluation_analysis,
         )
 
         CVE.persist_state([cve], self.file_path)
