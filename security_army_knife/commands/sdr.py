@@ -1,11 +1,15 @@
 import logging
 import argparse
+import textwrap
+
 from typing import TextIO, Optional
 
 from security_army_knife.commands.util import (
     get_model,
 )
 from security_army_knife.ui.spinner import Spinner
+from security_army_knife.agents.sdr_agent import SDRAgent
+from security_army_knife.agents.base_agent import AgentEvent as Event
 
 
 def add_subcommand(subparsers):
@@ -79,16 +83,22 @@ def run_sdr_analysis(
 
     model = get_model(large_language_model)
 
-    agents = []
-
-    if api_documentation:
-        pass
-
-    if architecture_diagram:
-        pass
+    sdr_agent = SDRAgent(model=model)
 
     try:
-        pass
+
+        def handle_event(event: Event):
+            if event.event_type == Event.Type.REQUEST:
+                spinner.start()
+            elif event.event_type == Event.Type.RESPONSE:
+                spinner.stop()
+
+        response = sdr_agent.analyze(
+            handle_event=handle_event,
+            api_documentation=api_documentation,
+            architecture_diagram=architecture_diagram,
+        )
+        print(response)
     except KeyboardInterrupt:
         spinner.stop()
         logger.info("👋")

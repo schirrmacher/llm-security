@@ -39,4 +39,4 @@ jobs:
           sak/bin/sak cve -trivy examples/trivy_scans/0db792a63dcdb5cf788878f4a8bbca16684b9cce.json \
             -s examples/states/state.json \
             -src examples
-          sak/bin/sak sdr -arc examples/architecture_diagrams/api_gateway.d2
+          sak/bin/sak sdr -h
