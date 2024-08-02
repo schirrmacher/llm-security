@@ -78,7 +78,16 @@ class Spinner:
         self.spinner_cycle = self.http_request_spinner_cycle
 
 
-def run_security_army_knife(
+def get_model(large_language_model: str) -> BaseModel:
+    if large_language_model == "mistral":
+        return MistralModel()
+    elif large_language_model == "gemini":
+        return GeminiModel()
+    else:
+        raise ValueError(f"{large_language_model} not supported.")
+
+
+def run_cve_analysis(
     cve_file_path: Optional[str],
     trivy_file_path: Optional[str],
     architecture_diagram: Optional[TextIO],
@@ -93,13 +102,7 @@ def run_security_army_knife(
     logger = logging.getLogger("SecurityArmyKnife")
     spinner = Spinner()
 
-    model: BaseModel
-    if large_language_model == "mistral":
-        model = MistralModel()
-    elif large_language_model == "gemini":
-        model = GeminiModel()
-    else:
-        raise ValueError(f"{large_language_model} not supported.")
+    model = get_model(large_language_model)
 
     try:
         if trivy_file_path:
@@ -202,11 +205,16 @@ def parse_arguments():
         description="Analyze CVEs to accelerate decisions."
     )
 
+    subparsers = parser.add_subparsers(dest="command", help="Subcommands")
+
+    # Subparser for 'cve' command
+    cve_parser = subparsers.add_parser("cve", help="CVE related commands")
+
     # Creating argument groups
-    input_group = parser.add_argument_group(
+    input_group = cve_parser.add_argument_group(
         "input files", "Input files required for analysis"
     )
-    output_group = parser.add_argument_group(
+    output_group = cve_parser.add_argument_group(
         "output options", "Options for the output format and content"
     )
 
@@ -317,21 +325,25 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     setup_logging(args.log_level)
-    result_code = run_security_army_knife(
-        # input
-        cve_file_path=args.cve_list,
-        trivy_file_path=args.trivy_json,
-        architecture_diagram=args.architecture_diagram,
-        dependency_list=args.dependency_list,
-        api_documentation=args.api_documentation,
-        source_code=args.source_code,
-        state_file_path=args.state,
-        # output
-        large_language_model=args.large_language_model,
-        output_option=args.output,
-        output_format=args.output_format,
-    )
-    return result_code
+    if args.command == "cve":
+        result_code = run_cve_analysis(
+            # input
+            cve_file_path=args.cve_list,
+            trivy_file_path=args.trivy_json,
+            architecture_diagram=args.architecture_diagram,
+            dependency_list=args.dependency_list,
+            api_documentation=args.api_documentation,
+            source_code=args.source_code,
+            state_file_path=args.state,
+            # output
+            large_language_model=args.large_language_model,
+            output_option=args.output,
+            output_format=args.output_format,
+        )
+        return result_code
+    else:
+        print("Unknown command")
+        return 1
 
 
 if __name__ == "__main__":

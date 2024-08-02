@@ -10,6 +10,7 @@ class TestParseArguments(unittest.TestCase):
         "argparse._sys.argv",
         [
             "program_name",
+            "cve",
             "-cve",
             "tests/files/cve-advisories.json",
             "-arc",
