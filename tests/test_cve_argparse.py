@@ -1,7 +1,8 @@
 import unittest
+import argparse
 from unittest.mock import patch
 
-from security_army_knife.commands.cve import parse_arguments
+from security_army_knife.commands.cve import add_subcommand as add_cve_parser
 
 
 class TestParseArguments(unittest.TestCase):
@@ -31,7 +32,14 @@ class TestParseArguments(unittest.TestCase):
     )
     def test_parse_arguments(self):
 
-        args = parse_arguments()
+        parser = argparse.ArgumentParser(
+            description="Security Army Knife - AI for security day to day tasks"
+        )
+
+        subparsers = parser.add_subparsers(dest="command", help="Subcommands")
+        add_cve_parser(subparsers)
+
+        args = parser.parse_args()
 
         self.assertEqual(args.cve_list, "tests/files/cve-advisories.json")
         self.assertEqual(

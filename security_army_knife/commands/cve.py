@@ -23,21 +23,17 @@ from security_army_knife.trivy_importer import TrivyImporter
 from security_army_knife.agents.architecuture_agent import ArchitectureAgent
 
 
-def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description="Analyze CVEs to accelerate decisions."
+def add_subcommand(subparsers):
+
+    parser = subparsers.add_parser(
+        "cve", help="Analyze CVEs to accelerate decisions."
     )
+    parser.set_defaults(which="cve")
 
-    subparsers = parser.add_subparsers(dest="command", help="Subcommands")
-
-    # Subparser for 'cve' command
-    cve_parser = subparsers.add_parser("cve", help="CVE related commands")
-
-    # Creating argument groups
-    input_group = cve_parser.add_argument_group(
+    input_group = parser.add_argument_group(
         "input files", "Input files required for analysis"
     )
-    output_group = cve_parser.add_argument_group(
+    output_group = parser.add_argument_group(
         "output options", "Options for the output format and content"
     )
 
@@ -139,10 +135,6 @@ def parse_arguments():
         default="INFO",
         help="Set the logging level",
     )
-
-    args = parser.parse_args()
-
-    return args
 
 
 def run_cve_analysis(
