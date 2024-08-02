@@ -21,6 +21,7 @@ from security_army_knife.agent_tree import AgentTree
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.trivy_importer import TrivyImporter
 from security_army_knife.agents.architecuture_agent import ArchitectureAgent
+from security_army_knife.agents.evaluation_agnet import EvaluationAgent
 
 
 def parse_arguments():
@@ -190,6 +191,7 @@ def run_cve_analysis(
         agents.append(
             ArchitectureAgent(model, architecture_diagram=architecture_diagram)
         )
+        agents.append(EvaluationAgent(model))
 
     if dependency_list:
         pass

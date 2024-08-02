@@ -5,7 +5,7 @@ from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 from security_army_knife.analysis.architecture_analysis import (
     ArchitectureAnalysis,
 )
-
+from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
 class CVECategory:
     os = "os"
@@ -23,6 +23,7 @@ class CVE:
         code_analysis: CodeAnalysis = None,
         api_spec_analysis: APISpecAnalysis = None,
         architecture_analysis: ArchitectureAnalysis = None,
+        final_analysis: EvaluationAnalysis = None  # New attribute for evaluation results
     ):
         self.name = name
         self.description = description
@@ -30,6 +31,7 @@ class CVE:
         self.code_analysis = code_analysis
         self.api_spec_analysis = api_spec_analysis
         self.architecture_analysis = architecture_analysis
+        self.final_analysis = final_analysis
 
     @classmethod
     def from_json(cls, json_dict: dict):
@@ -51,6 +53,10 @@ class CVE:
             if architecture_analysis_data
             else None
         )
+        final_analysis_data = json_dict.get("final_analysis")  # Get final analysis data
+        final_analysis = (
+            EvaluationAnalysis(**final_analysis_data) if final_analysis_data else None
+        )
         return cls(
             name=json_dict.get("name"),
             description=json_dict.get("description"),
@@ -58,6 +64,7 @@ class CVE:
             code_analysis=code_analysis,
             api_spec_analysis=api_spec_analysis,
             architecture_analysis=architecture_analysis,
+            final_analysis=final_analysis,
         )
 
     @classmethod
@@ -82,6 +89,9 @@ class CVE:
                 if self.architecture_analysis
                 else None
             ),
+             "final_analysis": (
+                self.final_analysis.to_json() if self.final_analysis else None
+            ),
         }
 
     def __str__(self):
@@ -92,6 +102,7 @@ class CVE:
             f"{self.code_analysis or 'No Code Analysis'}\n"
             f"{self.api_spec_analysis or 'No API Spec Analysis'}\n"
             f"{self.architecture_analysis or 'No Architecture Analysis'}"
+            f"{self.final_analysis or 'No Final Analysis'}"
         )
 
     @staticmethod
