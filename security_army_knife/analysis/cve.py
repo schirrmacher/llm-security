@@ -46,17 +46,13 @@ class CVE:
         api_spec_analysis = (
             APISpecAnalysis.from_json(api_spec_data) if api_spec_data else None
         )
-        architecture_analysis_data = json_dict.get(
-            "architecture_analysis"
-        )  # Add this line
-        architecture_analysis = (  # Add this block
+        architecture_analysis_data = json_dict.get("architecture_analysis")
+        architecture_analysis = (
             ArchitectureAnalysis.from_json(architecture_analysis_data)
             if architecture_analysis_data
             else None
         )
-        final_analysis_data = json_dict.get(
-            "final_analysis"
-        )  # Get final analysis data
+        final_analysis_data = json_dict.get("final_analysis")
         final_analysis = (
             EvaluationAnalysis(**final_analysis_data)
             if final_analysis_data
@@ -100,6 +96,12 @@ class CVE:
         }
 
     def __str__(self):
+        threat_scenarios = (
+            "\n    ".join(self.final_analysis.threat_scenarios)
+            if self.final_analysis and self.final_analysis.threat_scenarios
+            else "No threat scenarios"
+        )
+
         return (
             f"CVE Name: {self.name}\n"
             f"Description: {self.description}\n"
@@ -110,8 +112,7 @@ class CVE:
             f"Final Analysis:\n"
             f"  Critical: {self.final_analysis.critical if self.final_analysis else 'No criticality'}\n"
             f"  Summary: {self.final_analysis.summary if self.final_analysis else 'No summary'}\n"
-            f"Threat Scenarios:\n"
-            f"    {'\n    '.join(self.final_analysis.threat_scenarios) if self.final_analysis and self.final_analysis.threat_scenarios else 'No threat scenarios'}"
+            f"Threat Scenarios:\n    {threat_scenarios}"
         )
 
     @staticmethod
