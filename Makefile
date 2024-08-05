@@ -33,3 +33,6 @@ state_remove_api_spec_analysis:
 state_remove_architecture_analysis:
 	@echo "Manipulating state..."
 	jq 'map(del(.architecture_analysis))' state.json > temp_state.json && mv temp_state.json state.json
+state_remove_evaluation_analysis:
+	@echo "Manipulating state..."
+	jq 'map(del(.final_analysis))' state.json > temp_state.json && mv temp_state.json state.json
