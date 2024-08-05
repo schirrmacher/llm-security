@@ -23,7 +23,7 @@ class TestCVE(unittest.TestCase):
         self.mock_code_analysis_json = self.mock_code_analysis.to_json()
 
         self.mock_evaluation_analysis = EvaluationAnalysis(
-            severity="Medium",
+            critical="No",
             summary="This CVE has a medium impact with limited exploit scenarios.",
             threat_scenarios=[
                 "Scenario 1: Exploiting API misconfigurations.",
@@ -113,7 +113,7 @@ class TestCVE(unittest.TestCase):
             infrastructure_conditions=["condition1"]
         )  # Add initialization for architecture analysis
         evaluation_analysis = EvaluationAnalysis(
-            severity="High",
+            critical="Yes",
             summary="High severity due to potential widespread impact.",
             threat_scenarios=[
                 "Scenario 1: Potential data breach via API.",
@@ -154,7 +154,7 @@ class TestCVE(unittest.TestCase):
             },
             "architecture_analysis": None,
             "final_analysis": {
-                "severity": "Low",
+                "critical": "No",
                 "summary": "Low severity with limited exploit scenarios.",
                 "threat_scenarios": [
                     "Scenario 1: Minimal risk due to strong protections."
@@ -171,7 +171,7 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(
             cve_from_json.api_spec_analysis.explanation, "Critical issue found"
         )
-        self.assertEqual(cve_from_json.final_analysis.severity, "Low")
+        self.assertEqual(cve_from_json.final_analysis.critical, "No")
         self.assertEqual(
             cve_from_json.final_analysis.summary,
             "Low severity with limited exploit scenarios.",
@@ -196,7 +196,7 @@ class TestCVE(unittest.TestCase):
             },
             "architecture_analysis": None,
             "final_analysis": {
-                "severity": "Low",
+                "critical": "No",
                 "summary": "Low severity with limited exploit scenarios.",
                 "threat_scenarios": [
                     "Scenario 1: Minimal risk due to strong protections."
@@ -213,7 +213,7 @@ class TestCVE(unittest.TestCase):
             "API Spec Analysis:\n  Facilitates Attack: False\n  Explanation: No critical issues\n"
             "Architecture Analysis:\n  Infrastructure Conditions: condition1\n"
             "Final Analysis:\n"
-            "  Severity: High\n"
+            "  Critical: Yes\n"
             "  Summary: High severity due to potential widespread impact.\n"
             "Threat Scenarios:\n"
             "    Scenario 1: Potential data breach via API.\n"

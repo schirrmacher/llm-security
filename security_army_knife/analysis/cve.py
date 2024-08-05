@@ -108,7 +108,7 @@ class CVE:
             f"{self.api_spec_analysis or 'No API Spec Analysis'}\n"
             f"{self.architecture_analysis or 'No Architecture Analysis'}\n"
             f"Final Analysis:\n"
-            f"  Severity: {self.final_analysis.severity if self.final_analysis else 'No severity'}\n"
+            f"  Critical: {self.final_analysis.critical if self.final_analysis else 'No criticality'}\n"
             f"  Summary: {self.final_analysis.summary if self.final_analysis else 'No summary'}\n"
             f"Threat Scenarios:\n"
             f"    {'\n    '.join(self.final_analysis.threat_scenarios) if self.final_analysis and self.final_analysis.threat_scenarios else 'No threat scenarios'}"

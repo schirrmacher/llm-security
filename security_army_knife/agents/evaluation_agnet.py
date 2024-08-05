@@ -36,11 +36,11 @@ class EvaluationAgent(BaseAgent):
 
             try:
                 # Evaluate and get score and summary using AI
-                summary, severity, threat_scenarios = self.evaluate_cve(cve)
+                summary, critical, threat_scenarios = self.evaluate_cve(cve)
 
                 # Store the results in the CVE object using EvaluationAnalysis
                 cve.final_analysis = EvaluationAnalysis(
-                    severity=severity,
+                    critical=critical,
                     summary=summary,
                     threat_scenarios=threat_scenarios,
                 )
@@ -51,7 +51,7 @@ class EvaluationAgent(BaseAgent):
                 handle_event(
                     InformationEvent(
                         cve,
-                        f"Severity: {severity}, Summary: {summary}, Threat Scenarios: {threat_scenarios}",
+                        f"Critical: {'Yes' if critical else 'No'}, Summary: {summary}, Threat Scenarios: {threat_scenarios}",
                     )
                 )
                 self.logger.info(f"Final Analysis: {cve.final_analysis}")
@@ -64,7 +64,6 @@ class EvaluationAgent(BaseAgent):
         return cve_list
 
     def evaluate_cve(self, cve: CVE):
-        # Use the AI model to generate summary and severity
         messages = [
             ChatMessage(
                 role="system",
@@ -75,7 +74,7 @@ class EvaluationAgent(BaseAgent):
                 role="user",
                 content="""Based on the provided information, please return the output in the following JSON format:
 {
-    "severity": "High | Medium | Low",
+    "critical": "Yes | No",
     "summary": "Detailed analysis and evaluation of the CVE.",
     "threat_scenarios": [
         "Scenario 1: Describe a potential attack scenario related to the CVE.",
@@ -91,12 +90,12 @@ class EvaluationAgent(BaseAgent):
             json_object = json.loads(response.message.content)
 
             summary = json_object.get("summary", "No summary provided.")
-            severity = json_object.get("severity", "Low")
+            critical = json_object.get("critical", "No")
             threat_scenarios = json_object.get(
                 "threat_scenarios", ["No scenarios provided."]
             )
 
-            return summary, severity, threat_scenarios
+            return summary, critical, threat_scenarios
         except Exception as e:
             self.logger.error(f"Error in AI response processing: {e}")
             return (
@@ -109,32 +108,42 @@ class EvaluationAgent(BaseAgent):
         task = (
             f"# Introduction\n"
             f"- You are a cybersecurity expert specializing in evaluating software vulnerabilities.\n"
-            f"- Your task is to assess the severity and provide a comprehensive summary of each CVE.\n"
+            f"- Your task is to determine if a CVE is critical, provide a comprehensive summary, and describe potential threat scenarios.\n"
             f"- Base your evaluation on the analyses conducted by different security agents and the given environment conditions.\n\n"
             f"# Tasks\n"
             f"- Complete the following tasks without repeating this description in your response.\n\n"
             f"## Evaluate CVE Details\n"
-            f"- Consider the CVE's name, description, and category.\n"
-            f"- Analyze the potential impact of the vulnerability on confidentiality, integrity, and availability.\n\n"
+            f"- Consider the API Specification Analysis,Architecture Analysis.\n"
+            f"- Analyze the potential impact of the vulnerability on confidentiality, integrity, and availability (CIA triad).\n\n"
             f"## Analyze Results from Security Agents\n"
             f"- Review the findings from the code analysis, API specification analysis, and architecture analysis.\n"
-            f"- Identify if the API facilitates the vulnerability or mitigates it.\n"
-            f"- Evaluate infrastructure conditions to determine how they contribute to or mitigate the risk.\n\n"
+            f"- Evaluate how infrastructure conditions contribute to or mitigate the risk.\n\n"
             f"## Environment Considerations\n"
             f"- Consider that the system operates with strict network segmentation and firewall policies.\n"
             f"- Assume the environment is secured against local attacks.\n"
             f"- Identify how these environment conditions impact the exploitability of the vulnerability.\n\n"
+            f"## Technology Relevance\n"
+            f"- Assess whether the specific technology or system affected by the CVE is used in the environment.\n"
+            f"- Consider the following:\n"
+            f"  - Does the CVE target a technology stack, platform, or software version that is not present or utilized in this environment?\n"
+            f"  - Are there compensating controls or alternative technologies that mitigate or negate the CVE's impact?\n"
+            f"- If the CVE is irrelevant due to technology absence, classify it as non-critical.\n\n"
             f"## Risk Assessment\n"
-            f"- Assign a severity level (High, Medium, Low) based on the aggregated information.\n"
-            f"- Consider the OWASP Top 10 vulnerabilities and other common security threats in your assessment.\n"
-            f"- Determine how the CVE might be exploited in the current environment.\n\n"
+            f"- Determine if the CVE is critical. A critical CVE should meet one or more of the following criteria:\n"
+            f"  - Exploits are publicly available and actively used by attackers.\n"
+            f"  - The CVE allows remote code execution with minimal effort.\n"
+            f"  - The CVE can lead to a complete compromise of the system or highly sensitive data.\n"
+            f"  - The vulnerability affects a wide range of systems and has a high potential impact.\n"
+            f"  - Existing security controls are insufficient to prevent exploitation.\n"
+            f"- If none of these criteria are met, or if the technology is not relevant, consider the CVE as non-critical.\n\n"
             f"## Threat Scenarios\n"
-            f"- Describe potential threat scenarios and attack vectors relevant to the CVE.\n"
-            f"- Highlight how an attacker might misuse technical conditions to exploit the vulnerability.\n\n"
+            f"- Describe realistic threat scenarios and attack vectors relevant to the CVE.\n"
+            f"- Highlight how an attacker might misuse technical conditions to exploit the vulnerability.\n"
+            f"- Consider the likelihood and ease of exploiting the vulnerability in the given environment.\n\n"
             f"## Summary\n"
             f"- Create a JSON object summarizing your findings with the following attributes:\n"
             f"{{\n"
-            f'"severity": "High | Medium | Low",\n'
+            f'"critical": "Yes | No",\n'
             f'"summary": "Detailed analysis and evaluation of the CVE.",\n'
             f'"threat_scenarios": [\n'
             f'"Scenario 1: Description...",\n'
@@ -150,7 +159,7 @@ class EvaluationAgent(BaseAgent):
             f"- Description: {cve.description}\n"
             f"- Category: {cve.category}\n"
             f"- Code Analysis: {cve.code_analysis if cve.code_analysis else 'No Code Analysis'}\n"
-            f"- API Specification Analysis: {cve.api_spec_analysis if cve.api_spec_analysis else 'No API Spec Analysis'}\n"
+            f"- API Specification Analysis: {cve.api_spec_analysis.explanation if cve.api_spec_analysis else 'No API Spec Analysis'}\n"
             f"- Architecture Analysis: {cve.architecture_analysis if cve.architecture_analysis else 'No Architecture Analysis'}\n"
         )
         return task
@@ -158,7 +167,7 @@ class EvaluationAgent(BaseAgent):
     def output_results(self, cve: CVE):
         """Outputs the results for the given CVE."""
         print(f"Analysis for {cve.name}:")
-        print(f"  Severity: {cve.final_analysis.severity}")
+        print(f"  Critical: {'Yes' if cve.final_analysis.critical else 'No'}")
         print(f"  Summary: {cve.final_analysis.summary}")
         print(
             f"  Threat Scenarios: {', '.join(cve.final_analysis.threat_scenarios)}\n"
