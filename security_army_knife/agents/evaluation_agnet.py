@@ -130,7 +130,6 @@ class EvaluationAgent(BaseAgent):
             f"- If the CVE is irrelevant due to technology absence, classify it as non-critical.\n\n"
             f"## Risk Assessment\n"
             f"- Determine if the CVE is critical. A critical CVE should meet one or more of the following criteria:\n"
-            f"  - Exploits are publicly available and actively used by attackers.\n"
             f"  - The CVE allows remote code execution with minimal effort.\n"
             f"  - The CVE can lead to a complete compromise of the system or highly sensitive data.\n"
             f"  - The vulnerability affects a wide range of systems and has a high potential impact.\n"
