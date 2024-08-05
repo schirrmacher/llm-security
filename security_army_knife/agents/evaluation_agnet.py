@@ -24,7 +24,6 @@ class EvaluationAgent(BaseAgent):
         self, cve_list: List[CVE], handle_event: Callable[[Event], None]
     ) -> List[CVE]:
         for cve in cve_list:
-            self.logger.info(f"Analyzing {cve.name} in EvaluationAgent...")
             handle_event(BeforeAnalysis(cve))
 
             if cve.final_analysis:
@@ -45,16 +44,12 @@ class EvaluationAgent(BaseAgent):
                     threat_scenarios=threat_scenarios,
                 )
 
-                # Output the results
-                self.output_results(cve)
-
                 handle_event(
                     InformationEvent(
                         cve,
                         f"Critical: {'Yes' if critical else 'No'}, Summary: {summary}, Threat Scenarios: {threat_scenarios}",
                     )
                 )
-                self.logger.info(f"Final Analysis: {cve.final_analysis}")
             except Exception as e:
                 self.logger.error(f"Unexpected error for {cve.name}: {e}")
                 handle_event(ErrorEvent(cve, error=e))
@@ -162,12 +157,3 @@ class EvaluationAgent(BaseAgent):
             f"- Architecture Analysis: {cve.architecture_analysis if cve.architecture_analysis else 'No Architecture Analysis'}\n"
         )
         return task
-
-    def output_results(self, cve: CVE):
-        """Outputs the results for the given CVE."""
-        print(f"Analysis for {cve.name}:")
-        print(f"  Critical: {'Yes' if cve.final_analysis.critical else 'No'}")
-        print(f"  Summary: {cve.final_analysis.summary}")
-        print(
-            f"  Threat Scenarios: {', '.join(cve.final_analysis.threat_scenarios)}\n"
-        )
