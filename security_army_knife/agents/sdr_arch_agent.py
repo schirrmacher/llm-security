@@ -11,25 +11,33 @@ from security_army_knife.agents.base_agent import (
     InformationEvent,
     ErrorEvent,
 )
+
 from security_army_knife.analysis.sdr import SDR
+from security_army_knife.analysis.sdr_arch_analysis import SDRArchAnalysis
 from security_army_knife.models.base_model import BaseModel
 
 
-class SDRAgent(BaseAgent):
+class SDRArchAgent(BaseAgent):
 
     dependencies: list[Type] = []
 
-    def __init__(self, model: BaseModel):
+    def __init__(
+        self,
+        model: BaseModel,
+        architecture_diagram: Optional[TextIO],
+        api_documentation: Optional[TextIO],
+    ):
         super().__init__(model=model)
+        self.architecture_diagram = architecture_diagram
+        self.api_documentation = api_documentation
 
     def analyze(
         self,
         handle_event: Callable[[Event], None],
-        architecture_diagram: Optional[TextIO],
-        api_documentation: Optional[TextIO],
+        target: SDR,
     ) -> SDR:
 
-        architecture = architecture_diagram.read()
+        architecture = self.architecture_diagram.read()
 
         task = f"""
         # Introduction
@@ -52,10 +60,10 @@ class SDRAgent(BaseAgent):
 
         ## Identify Environments
         - Identify the execution environment where a component is running
-        - Identify in which environment the components of a dataflow are
-        - Identify the environment for the source and destination to spot security boundaries
+        - Execution environments are platforms or technologies which embed a system component
+        - Examples: kubernetes cluster, container service, cloud function, web browser, mobile device
+        - Identify the environment for the source and destination of a dataflow to spot security boundaries
         - Consider components in the same container to be part of the same environment
-        - Examples: kubernetes cluster, cloud function, device or any other
         - If no environment is mentioned use the 'MISSING' tag
 
         ## Assets
@@ -104,6 +112,8 @@ class SDRAgent(BaseAgent):
         software_artifacts:
         - name: Some artifact
             category: Some category
+        - name: Some artifact
+            category: Some category
 
         dataflows:
         - flow: Server -> Client
@@ -131,17 +141,41 @@ class SDRAgent(BaseAgent):
             ),
         ]
 
-        sdr: Optional[SDR] = None
-
         try:
             handle_event(RequestEvent(None))
             response = self.model.talk(messages, json=True)
             handle_event(ResponseEvent(None, message=response.message.content))
 
             json_object = json.loads(response.message.content)
-            sdr = SDR.from_json(json_object)
+            target.arch_analysis = SDRArchAnalysis.from_json(json_object)
+
+            information = [
+                InformationEvent(
+                    None,
+                    message=f"{len(target.arch_analysis.assets)} asset(s) identified",
+                ),
+                InformationEvent(
+                    None,
+                    message=f"{len(target.arch_analysis.entrypoints)} entrypoint(s) identified",
+                ),
+                InformationEvent(
+                    None,
+                    message=f"{len(target.arch_analysis.persistence_layers)} persistance layer(s) identified",
+                ),
+                InformationEvent(
+                    None,
+                    message=f"{len(target.arch_analysis.software_artifacts)} software artifact(s) discovered",
+                ),
+                InformationEvent(
+                    None,
+                    message=f"{len(target.arch_analysis.dataflows)} dataflow(s) analyzed",
+                ),
+            ]
+
+            for i in information:
+                handle_event(i)
 
         except Exception as e:
             handle_event(ErrorEvent(None, error=e))
 
-        return sdr
+        return target
