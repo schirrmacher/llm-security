@@ -11,7 +11,7 @@ setup:
 format:
 	@echo "Formatting code..."
 	. sak/bin/activate; \
-	sak/bin/python3 -m black --config pyproject.toml tests api security_army_knife --check
+	sak/bin/python3 -m black --config pyproject.toml tests security_army_knife --check
 
 test:
 	@echo "Running tests..."
