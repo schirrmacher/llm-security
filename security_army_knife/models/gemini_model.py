@@ -1,7 +1,7 @@
 from llama_index.core.llms import ChatMessage, ChatResponse
 from llama_index.llms.gemini import Gemini
 
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 
 
 class GeminiModel(BaseModel):

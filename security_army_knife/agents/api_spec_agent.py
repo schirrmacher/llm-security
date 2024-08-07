@@ -14,7 +14,7 @@ from security_army_knife.agents.base_agent import (
     RequestEvent,
     ResponseEvent,
 )
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.cve import CVE

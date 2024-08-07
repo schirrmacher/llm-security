@@ -2,9 +2,9 @@ import os
 import logging
 import argparse
 
-from security_army_knife.gemini_model import GeminiModel
-from security_army_knife.mistral_model import MistralModel
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.gemini_model import GeminiModel
+from security_army_knife.models.mistral_model import MistralModel
+from security_army_knife.models.base_model import BaseModel
 
 ASCII_ART = """
 ░█▀▀░█▀▀░█▀▀░█░█░█▀▄░▀█▀░▀█▀░█░█░░░█▀█░█▀▄░█▄█░█░█░░░█░█░█▀█░▀█▀░█▀▀░█▀▀

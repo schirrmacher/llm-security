@@ -8,7 +8,7 @@ from security_army_knife.agents.base_agent import (
     ResponseEvent,
     ErrorEvent,
 )
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 from security_army_knife.analysis.sdr import SDR
 
 
