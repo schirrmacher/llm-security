@@ -1,6 +1,6 @@
+import json
 import logging
 import argparse
-import textwrap
 
 from typing import TextIO, Optional
 
@@ -9,7 +9,9 @@ from security_army_knife.commands.util import (
 )
 from security_army_knife.ui.spinner import Spinner
 from security_army_knife.agents.sdr_agent import SDRAgent
+from security_army_knife.agents.threat_agent import ThreatAgent
 from security_army_knife.agents.base_agent import AgentEvent as Event
+from security_army_knife.analysis.sdr import SDR
 
 
 def add_subcommand(subparsers):
@@ -84,6 +86,7 @@ def run_sdr_analysis(
     model = get_model(large_language_model)
 
     sdr_agent = SDRAgent(model=model)
+    threat_agent = ThreatAgent(model=model)
 
     try:
 
@@ -92,16 +95,37 @@ def run_sdr_analysis(
                 spinner.start()
             elif event.event_type == Event.Type.RESPONSE:
                 spinner.stop()
+            elif event.event_type == Event.Type.INFORMATION:
+                spinner.stop()
+                logger.info(f"  - {str(event.message)}")
+            elif event.event_type == Event.Type.ERROR:
+                spinner.stop()
+                logger.error(f"  - error: {event.message}")
+            else:
+                logger.info(f"  - {event.message}")
 
-        response = sdr_agent.analyze(
+        sdr = sdr_agent.analyze(
             handle_event=handle_event,
             api_documentation=api_documentation,
             architecture_diagram=architecture_diagram,
         )
-        print(response)
+
+        print(sdr.to_yaml())
+
+        threats = threat_agent.analyze(
+            handle_event=handle_event,
+            api_documentation=api_documentation,
+            architecture_diagram=architecture_diagram,
+            security_design_review=sdr,
+        )
+
+        print(threats)
+
     except KeyboardInterrupt:
-        spinner.stop()
         logger.info("👋")
         return 0
+
+    finally:
+        spinner.stop()
 
     return 0

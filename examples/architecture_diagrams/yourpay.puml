@@ -1,0 +1,34 @@
+@startuml
+
+participant "Terminal" as terminal
+participant "WLP App SDK" as sdk
+participant "WLP Services" as service
+
+=== Enrolment at Merchant Store ==
+autonumber
+sdk -> sdk: Create EC 25519 Key Pair
+sdk <- terminal: Read Public Key from QR Code
+terminal -> service: Public Key, Card Information (later payment Means)
+service -> service: Create Subject (UUIDv4) and persist it with Public Key
+
+=== Device Registration ==
+autonumber
+sdk <- service: Notification for successful Onboarding/Enrolment
+sdk -> service: Public Key, Signature of message body
+service -> service: Verify Signature for proving key posession, Lookup Subject for Public Key
+sdk <- service: Subject, List of Payment Means with one active, TOTP Key
+
+=== Payment Token Retrieval ==
+autonumber
+sdk -> service: Subject, Payment Means Id, TOTP Counter Value based on TOTP Key, Signature of TOTP Counter Value
+service -> service: Lookup Public Key by Subject, Verify Signature for proving key posession
+service -> service: Create Payment Token, Sign Payment Token with Server Key
+sdk <- service: Payment Token with Timestamp, Subject, Server Signature
+
+=== Payment Process ==
+autonumber
+sdk <- terminal: Read signed Payment Token
+terminal -> service: Payment Token + Signature, Payment Information (Currency, Amount)
+service -> service: Verify Payment Token, Payment Information, Perform payment and revoke Payment Token
+
+@enduml
