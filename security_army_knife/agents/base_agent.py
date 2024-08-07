@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Callable, Type
 
 from security_army_knife.analysis.cve import CVE
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 
 
 class AgentEvent:

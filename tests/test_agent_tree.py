@@ -2,9 +2,9 @@ import unittest
 from unittest.mock import MagicMock
 
 from security_army_knife.analysis.cve import CVE
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 from security_army_knife.agents.base_agent import BaseAgent
-from security_army_knife.agent_tree import AgentTree
+from security_army_knife.agents.agent_tree import AgentTree
 
 
 class Model(BaseModel):

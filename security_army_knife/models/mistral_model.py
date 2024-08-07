@@ -3,7 +3,7 @@ import logging
 from llama_index.core.llms import ChatMessage, ChatResponse
 from llama_index.llms.mistralai import MistralAI
 
-from security_army_knife.base_model import BaseModel
+from security_army_knife.models.base_model import BaseModel
 
 
 class MistralModel(BaseModel):
