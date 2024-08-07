@@ -1,103 +1,51 @@
 import yaml
-from typing import List
-
-
-class Asset:
-    def __init__(self, name: str, category: str):
-        self.name = name
-        self.category = category
-
-
-class Entrypoint:
-    def __init__(
-        self, name: str, protocol: str, authentication: str, environment: str
-    ):
-        self.name = name
-        self.protocol = protocol
-        self.authentication = authentication
-        self.environment = environment
-
-
-class PersistenceLayer:
-    def __init__(self, name: str, assets: List[str]):
-        self.name = name
-        self.assets = assets
-
-
-class Dataflow:
-    def __init__(
-        self,
-        flow: str,
-        protocol: str,
-        authentication: str,
-        environmentSrc: str,
-        environmentDst: str,
-        protection: str,
-        assets: List[str],
-    ):
-        self.flow = flow
-        self.protocol = protocol
-        self.authentication = authentication
-        self.environmentSrc = environmentSrc
-        self.environmentDst = environmentDst
-        self.protection = protection
-        self.assets = assets
+from typing import Optional
+from security_army_knife.analysis.sdr_arch_analysis import SDRArchAnalysis
+from security_army_knife.analysis.sdr_threats import SDRThreats
 
 
 class SDR:
     def __init__(
         self,
-        assets: List[Asset],
-        entrypoints: List[Entrypoint],
-        persistence_layers: List[PersistenceLayer],
-        software_artifacts: List[dict],
-        dataflows: List[Dataflow],
+        arch_analysis: Optional[SDRArchAnalysis] = None,
+        threats: Optional[SDRThreats] = None,
     ):
-        self.assets = assets
-        self.entrypoints = entrypoints
-        self.persistence_layers = persistence_layers
-        self.software_artifacts = software_artifacts
-        self.dataflows = dataflows
+        self.arch_analysis = arch_analysis
+        self.threats = threats
 
-    @classmethod
-    def from_json(cls, json_data: dict):
-        assets = [Asset(**asset) for asset in json_data.get("assets", [])]
-        entrypoints = [
-            Entrypoint(**entrypoint)
-            for entrypoint in json_data.get("entrypoints", [])
-        ]
-        persistence_layers = [
-            PersistenceLayer(**persistence_layer)
-            for persistence_layer in json_data.get("persistence_layers", [])
-        ]
-        software_artifacts = json_data.get("software_artifacts", [])
-        dataflows = [
-            Dataflow(**dataflow) for dataflow in json_data.get("dataflows", [])
-        ]
-        return cls(
-            assets,
-            entrypoints,
-            persistence_layers,
-            software_artifacts,
-            dataflows,
-        )
-
-    def to_json(self):
+    def to_dict(self) -> dict:
         return {
-            "assets": [asset.__dict__ for asset in self.assets],
-            "entrypoints": [
-                entrypoint.__dict__ for entrypoint in self.entrypoints
-            ],
-            "persistence_layers": [
-                persistence_layer.__dict__
-                for persistence_layer in self.persistence_layers
-            ],
-            "software_artifacts": self.software_artifacts,
-            "dataflows": [dataflow.__dict__ for dataflow in self.dataflows],
+            "threats": self.threats.to_dict() if self.threats else None,
+            "arch_analysis": (
+                self.arch_analysis.to_dict() if self.arch_analysis else None
+            ),
         }
 
-    def to_yaml(self):
-        return yaml.dump(self.to_json(), sort_keys=False)
+    def to_json(self) -> dict:
+        return self.to_dict()
 
-    def __str__(self):
-        return self.to_yaml()
+    def to_yaml(self) -> str:
+        return yaml.dump(self.to_dict(), sort_keys=False)
+
+    @classmethod
+    def from_json(cls, json_object: dict):
+        arch_analysis = (
+            SDRArchAnalysis.from_json(json_object["arch_analysis"])
+            if json_object.get("arch_analysis")
+            else None
+        )
+        threats = (
+            SDRThreats.from_json(json_object["threats"])
+            if json_object.get("threats")
+            else None
+        )
+        return cls(arch_analysis=arch_analysis, threats=threats)
+
+    def to_markdown(self) -> str:
+        md_str = "# Security Design Review\n\n"
+        if self.arch_analysis:
+            md_str += self.arch_analysis.to_markdown()
+        if self.threats:
+            md_str += "## Threats\n"
+            md_str += self.threats.to_markdown()
+        return md_str

@@ -45,6 +45,7 @@ def main():
             api_documentation=args.api_documentation,
             large_language_model=args.large_language_model,
             output_format=args.output_format,
+            output_filename=args.output_filename,
         )
         return result_code
     else:

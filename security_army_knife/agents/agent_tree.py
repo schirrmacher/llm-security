@@ -34,8 +34,8 @@ class AgentTree:
 
     def traverse(
         self,
-        for_agent: Callable[[BaseAgent, list[Any]], list[Any]],
-        list: list[Any],
+        for_agent: Callable[[BaseAgent, Any], Any],
+        target: Any,
     ) -> None:
 
         order = resolve_dependencies(self.agents)
@@ -43,4 +43,4 @@ class AgentTree:
 
         for agent_name in order:
             agent = agent_map[agent_name]
-            list = for_agent(agent, list)
+            target = for_agent(agent, target)
