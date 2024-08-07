@@ -40,8 +40,6 @@ class SDRThreatAgent(BaseAgent):
         if not target.arch_analysis:
             return target
 
-        api_docs = self.api_documentation.read()
-
         task = f"""
         # Introduction
         - You are a system security expert and hacker.
@@ -54,9 +52,8 @@ class SDRThreatAgent(BaseAgent):
         ## Identify Threats
         - Identify as many threats as possible
         - List the assets affected by the threat
-        - Identify which components are affected by the threat and why
-        - Explain in detail under what conditions the threat occurs and name an example
-        - Mention which components are affected and why
+        - Identify which components are affected by the threat
+        - Mention which components are affected and explain in detail under what conditions the threat occurs
         - Include the knowledge of OWASP Top 10
         - Assign a risks score from 1 (not critical) to 25 (critical)
 
@@ -79,21 +76,27 @@ class SDRThreatAgent(BaseAgent):
         ```
         threats:
             - threat: Some explanation
-                components: Client, Server, Protocol
+                components: 
+                - Client
+                - Server
+                - Protocol
                 condition: What technical conditions must be given
                 score: 4
                 mitigations:
                 - mitigation 1
                 - mitigation 2
             - threat: Some other explanation
-                components: Client, Server, Protocol
+                components:
+                - Client
+                - Server
                 condition: What technical conditions must be given
                 score: 12
                 mitigations:
                 - mitigation 3
                 - mitigation 4
             - threat: Some other explanation
-                components: Client, Server, Protocol
+                components:
+                - Client
                 condition: What technical conditions must be given
                 score: 1
                 mitigations:
@@ -106,11 +109,6 @@ class SDRThreatAgent(BaseAgent):
         ```
         {target.arch_analysis.to_yaml()}
         ```
-
-        # API Specifications
-
-        {api_docs}
-        
         """
 
         messages = [
@@ -130,12 +128,12 @@ class SDRThreatAgent(BaseAgent):
 
             handle_event(
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.threats.threats)} threats identified",
                 )
             )
 
         except Exception as e:
-            handle_event(ErrorEvent(None, error=e))
+            handle_event(ErrorEvent(sdr=target, error=e))
 
         return target

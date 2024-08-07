@@ -100,7 +100,6 @@ def run_sdr_analysis(
         [
             SDRArchAgent(
                 model=model,
-                api_documentation=api_documentation,
                 architecture_diagram=architecture_diagram,
             ),
             SDRThreatAgent(

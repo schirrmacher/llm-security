@@ -51,7 +51,7 @@ class Threat:
             f"- **Score**: {self.score}\n"
             f"- **Components**: {', '.join(self.components)}\n"
             f"- **Condition**: {self.condition}\n\n"
-            f"#### Mitigations:\n{mitigations_md}\n"
+            f"Mitigations:\n{mitigations_md}\n"
         )
 
 

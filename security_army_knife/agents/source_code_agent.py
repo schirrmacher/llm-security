@@ -109,7 +109,7 @@ class SourceCodeAgent(BaseCVEAgent):
 
             except Exception as e:
                 cve.code_analysis = None
-                handle_event(ErrorEvent(cve, error=e))
+                handle_event(ErrorEvent(cve=cve, error=e))
 
             handle_event(AfterAnalysis(cve))
 

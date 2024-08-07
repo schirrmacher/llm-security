@@ -88,7 +88,7 @@ class APISpecAgent(BaseCVEAgent):
 
             except Exception as e:
                 cve.api_spec_analysis = None
-                handle_event(ErrorEvent(cve, error=e))
+                handle_event(ErrorEvent(cve=cve, error=e))
 
             handle_event(AfterAnalysis(cve))
 

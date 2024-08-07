@@ -53,7 +53,7 @@ class EvaluationAgent(BaseCVEAgent):
                 )
             except Exception as e:
                 self.logger.error(f"Unexpected error for {cve.name}: {e}")
-                handle_event(ErrorEvent(cve, error=e))
+                handle_event(ErrorEvent(cve=cve, error=e))
 
             handle_event(AfterAnalysis(cve))
 
