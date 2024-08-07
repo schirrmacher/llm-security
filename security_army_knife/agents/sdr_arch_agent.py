@@ -22,14 +22,10 @@ class SDRArchAgent(BaseAgent):
     dependencies: list[Type] = []
 
     def __init__(
-        self,
-        model: BaseModel,
-        architecture_diagram: Optional[TextIO],
-        api_documentation: Optional[TextIO],
+        self, model: BaseModel, architecture_diagram: Optional[TextIO]
     ):
         super().__init__(model=model)
         self.architecture_diagram = architecture_diagram
-        self.api_documentation = api_documentation
 
     def analyze(
         self,
@@ -142,32 +138,34 @@ class SDRArchAgent(BaseAgent):
         ]
 
         try:
-            handle_event(RequestEvent(None))
+            handle_event(RequestEvent(sdr=target))
             response = self.model.talk(messages, json=True)
-            handle_event(ResponseEvent(None, message=response.message.content))
+            handle_event(
+                ResponseEvent(sdr=target, message=response.message.content)
+            )
 
             json_object = json.loads(response.message.content)
             target.arch_analysis = SDRArchAnalysis.from_json(json_object)
 
             information = [
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.arch_analysis.assets)} asset(s) identified",
                 ),
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.arch_analysis.entrypoints)} entrypoint(s) identified",
                 ),
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.arch_analysis.persistence_layers)} persistance layer(s) identified",
                 ),
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.arch_analysis.software_artifacts)} software artifact(s) discovered",
                 ),
                 InformationEvent(
-                    None,
+                    sdr=target,
                     message=f"{len(target.arch_analysis.dataflows)} dataflow(s) analyzed",
                 ),
             ]
@@ -176,6 +174,6 @@ class SDRArchAgent(BaseAgent):
                 handle_event(i)
 
         except Exception as e:
-            handle_event(ErrorEvent(None, error=e))
+            handle_event(ErrorEvent(sdr=target, error=e))
 
         return target

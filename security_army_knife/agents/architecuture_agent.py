@@ -114,7 +114,7 @@ class ArchitectureAgent(BaseCVEAgent):
                 handle_event(InformationEvent(cve, message))
 
             except Exception as e:
-                handle_event(ErrorEvent(cve, error=e))
+                handle_event(ErrorEvent(cve=cve, error=e))
 
             handle_event(AfterAnalysis(cve))
 
