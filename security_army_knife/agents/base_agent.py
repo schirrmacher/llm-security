@@ -101,7 +101,6 @@ class BaseAgent:
 
     def analyze(
         self,
-        cve_list: list[CVE],
         handle_event: Callable[[AgentEvent], None],
-    ) -> list[CVE]:
-        return cve_list
+    ) -> None:
+        return None

@@ -229,7 +229,7 @@ def run_cve_analysis(
 
     try:
         tree = AgentTree(agents=agents)
-        tree.traverse(handle_agent, cve_list=cve_list)
+        tree.traverse(handle_agent, list=cve_list)
     except KeyboardInterrupt:
         spinner.stop()
         logger.info("👋")

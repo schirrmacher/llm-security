@@ -12,10 +12,11 @@ from security_army_knife.agents.base_agent import (
     ErrorEvent,
 )
 from security_army_knife.analysis.cve import CVE
+from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
 
-class EvaluationAgent(BaseAgent):
+class EvaluationAgent(BaseCVEAgent):
     def __init__(self, model):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")

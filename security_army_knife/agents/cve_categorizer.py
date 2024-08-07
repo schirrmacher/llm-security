@@ -4,7 +4,6 @@ from typing import Callable, Type
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
-    BaseAgent,
     AgentEvent as Event,
     InformationEvent,
     CachedEvent,
@@ -15,10 +14,12 @@ from security_army_knife.agents.base_agent import (
     ResponseEvent,
 )
 
+from security_army_knife.agents.base_cve_agent import BaseCVEAgent
+
 from security_army_knife.analysis.cve import CVE, CVECategory
 
 
-class CVECategorizerAgent(BaseAgent):
+class CVECategorizerAgent(BaseCVEAgent):
 
     dependencies: list[Type] = []
 

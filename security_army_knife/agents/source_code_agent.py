@@ -16,12 +16,13 @@ from security_army_knife.agents.base_agent import (
 )
 from security_army_knife.models.base_model import BaseModel
 
-from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.cve import CVE
+from security_army_knife.agents.base_cve_agent import BaseCVEAgent
+from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 
 
-class SourceCodeAgent(BaseAgent):
+class SourceCodeAgent(BaseCVEAgent):
 
     dependencies: list[Type] = [CVECategorizerAgent]
 
