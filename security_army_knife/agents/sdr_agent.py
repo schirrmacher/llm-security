@@ -1,3 +1,5 @@
+import json
+
 from typing import Type, TextIO, Optional, Callable
 
 from llama_index.core.llms import ChatMessage
@@ -6,8 +8,10 @@ from security_army_knife.agents.base_agent import (
     AgentEvent as Event,
     RequestEvent,
     ResponseEvent,
+    InformationEvent,
     ErrorEvent,
 )
+from security_army_knife.analysis.sdr import SDR
 from security_army_knife.base_model import BaseModel
 
 
@@ -23,7 +27,7 @@ class SDRAgent(BaseAgent):
         handle_event: Callable[[Event], None],
         architecture_diagram: Optional[TextIO],
         api_documentation: Optional[TextIO],
-    ) -> str:
+    ) -> SDR:
 
         architecture = architecture_diagram.read()
 
@@ -34,21 +38,25 @@ class SDRAgent(BaseAgent):
         # Tasks
         - Work on the following tasks.
         - Do not repeat this description in your response.
-        - IF YOU CANNOT IDENTIFY DATA ASSIGN THE VALUE 'MISSING'!
+        - If data is not mentioned in the diagram apply the value 'MISSING'.
 
         ## Analyze Data Flows
         - List all data flows
-        - Highlight components accessible from the public internet which might be vulnerable to DoS attacks
-        - Retrieve communication protocols, similar to HTTPS, MTLS, FTP etc.
+        - Retrieve communication protocols, like HTTPS, MTLS, FTP or any other protocol.
+        - Identify which assets or data is transmitted.
+        - Identify how the assets or data is protected by encryption, signatures or other security schemes.
 
-        ## Public Entrypoints
-        - Identify public entrypoints which are reachable from the internet
+        ## Entrypoints
+        - Identify entrypoints which are reachable from the internet by external systems or users
+        - Examples: load-balancers, API servers etc.
 
         ## Identify Environments
         - Identify the execution environment where a component is running
-        - Categories: kubernetes, cloud function, customer, on-premise, on-edge (phone, laptop, embedded), other
-        - Separate components by environments
-        - Identify in which environment dataflows occur and add this information to the dataflow
+        - Identify in which environment the components of a dataflow are
+        - Identify the environment for the source and destination to spot security boundaries
+        - Consider components in the same container to be part of the same environment
+        - Examples: kubernetes cluster, cloud function, device or any other
+        - If no environment is mentioned use the 'MISSING' tag
 
         ## Assets
         - Identify data which is transmitted if possible.
@@ -56,64 +64,37 @@ class SDRAgent(BaseAgent):
         - Focus on critical assets which might be of value to customers or hackers
 
         ## Identify Persistence Layers
-        - List all layers which are used for persistence
+        - List all components which are used for persistence
         - Identify which assets are persisted in the given persistence component
-        - categorize the asset: pii (Personally identifiable information), secret, domain (business related data)
+        - Categorize the asset: pii (Personally identifiable information), secret (key material, passwords etc.), business (business related data)
 
-        ## Provisioning of Software Binaries
-        - Identify software artifacts like binaries, SDKs, libraries, frameworks etc.
-        - Categorize them: binary, SDK, library
+        ## Provisioning of Software Artifacts
+        - Identify software artifacts like binaries, SDKs, libraries, frameworks which are either provided to external sources or consumed from external sources
+        - If no software artifacts are mentioned leave the result empty
 
-        ## Identify Authentication and Authorization Protocols
+        ## Identify Authentication and Authorization Schemes
         - Identify if authentication protocols are applied
+        - If no authentication scheme is mentioned use the 'MISSING' tag
         - List the protocols and which components apply them
         - Add the protocols to the associated dataflows
 
-        ## Identify Algorithms
-        - Identify algorithms used for authentication protocols or for protecting assets
-
-        ## Threats
-        - Identify risks for each dataflow and the associated asset
-        - Include the knowledge of OWASP Top 10
-        - Challenge how an attacker might get access to an asset by misusing technical conditions in the system
-        - Assign a risks score from 1 (not critical) to 25 (critical)
-
-        ### Default Threats
-        - For databases consider missing backup mechanisms
-        - For key material consider leakage and expiry
-        - For authentication protocols consider missing validation of roles and permissions
-
-        ### Threat Assumptions
-        - Assume the implementation of TLS is secure
-
-        ## Mitigations
-        - For each threat propose a set of mitigations
+        ## Identify Threat Actors
+        - Identify what groups you consider as threat actors for this system
+        - Explain why you consider these threat actors for the given system
+        - Categories: employees, customers, nation-state, cybercriminals, competitors
 
         ## Summary
-        - Create a YAML object with the following attributes:
+        - Create a JSON object with the following attributes:
         ```
         assets:
         - name: Cardholder Details
-            category: pii|domain|secret
+            category: pii|secret|business
 
-        public:
-        - name: Entry point
+        entrypoints:
+        - name: Entry point name
             protocol: Some protocol
             authentication: Some authentication mechanism
-            algorithms:
-                - Some algorithms
             environment: Some environment
-
-        dataflows:
-        - source: Client
-            destination: Some destination
-            protocol: Some protocol
-            authentication: Some authentication mechanism
-            algorithms:
-                - Some algorithms
-            environment: Some environment
-            assets:
-            - Some asset
 
         persistence_layers:
         - name: Some database
@@ -124,11 +105,16 @@ class SDRAgent(BaseAgent):
         - name: Some artifact
             category: Some category
 
-        risks:
-        - asset: Some affected asset
-        threat: describe a potential threat
-        mitigations: 
-            - describe technical mitigations for the threat
+        dataflows:
+        - flow: Server -> Client
+            protocol: Some protocol
+            authentication: Some authentication mechanism
+            environmentSrc: Server Environment
+            environmentDst: Client Environment
+            protection: Scheme for protecting asset
+            assets:
+                - Asset 1
+                - Asset 2
         ```
 
         # Architecture Diagram To Be Analyzed
@@ -145,14 +131,17 @@ class SDRAgent(BaseAgent):
             ),
         ]
 
-        response = ""
+        sdr: Optional[SDR] = None
 
         try:
             handle_event(RequestEvent(None))
-            response = self.model.talk(messages, json=False)
+            response = self.model.talk(messages, json=True)
             handle_event(ResponseEvent(None, message=response.message.content))
+
+            json_object = json.loads(response.message.content)
+            sdr = SDR.from_json(json_object)
 
         except Exception as e:
             handle_event(ErrorEvent(None, error=e))
 
-        return response
+        return sdr

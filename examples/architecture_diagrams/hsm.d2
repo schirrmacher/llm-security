@@ -1,0 +1,32 @@
+explanation: |md
+  ## Overview
+  The following architecutre describes how we perform PIN translations.
+  The translation is performed by the HSM which is running in AWS.
+  Once a transaction has been performed we can transmit it to the aquirer.
+  To do that the HSM translates the sensitive payment credentials with an aquirer provided AES 256 key.
+
+  ## Notes
+  All components labeled named with 'Service', are Java Microservices running on OpenJDK.
+  We are no responsible for the aquirers' environment so use the value 'customer' here for environment.
+  Terminals are Ingenico devices provided by customers.
+| {
+  near: center-left
+}
+
+PCI: "PCI GKE Cluster" {
+  Team: "Team Flipper Java Micro-services" {
+    InboundGatewaysDatabase.shape: cylinder
+    InboundGateway -> InboundGatewaysDatabase: "HTTPS: MTLS"
+    TransactionEngine -> AquirerGateway: "HTTPS: API Key"
+    TransactionEngine -> InboundGateway: "HTTPS: MTLS"
+    TokenizationService -> AquirerGateway: "HTTPS: MTLS"
+    TokenizationService -> InboundGateway: "HTTPS: MTLS"
+  }
+  IstioGateway <-> Team.InboundGateway: "HTTPS: MTLS"
+}
+
+Aquirer <-> PCI.Team.AquirerGateway: "HTTPS: OAuth"
+
+HSM -> PCI.IstioGateway: "HTTPS: OAuth"
+
+Terminal -> PCI.Team.InboundGateway: "ZVT: MTLS"
