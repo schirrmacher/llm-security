@@ -1,5 +1,5 @@
 import networkx as nx
-from typing import Callable
+from typing import Callable, Any
 
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.agents.base_agent import BaseAgent
@@ -34,8 +34,8 @@ class AgentTree:
 
     def traverse(
         self,
-        for_agent: Callable[[BaseAgent, list[CVE]], list[CVE]],
-        cve_list: list[CVE],
+        for_agent: Callable[[BaseAgent, list[Any]], list[Any]],
+        list: list[Any],
     ) -> None:
 
         order = resolve_dependencies(self.agents)
@@ -43,4 +43,4 @@ class AgentTree:
 
         for agent_name in order:
             agent = agent_map[agent_name]
-            cve_list = for_agent(agent, cve_list)
+            list = for_agent(agent, list)

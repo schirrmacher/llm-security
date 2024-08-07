@@ -4,7 +4,6 @@ from typing import Callable, Type, TextIO, Optional
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
-    BaseAgent,
     AgentEvent as Event,
     InformationEvent,
     CachedEvent,
@@ -15,6 +14,7 @@ from security_army_knife.agents.base_agent import (
     ResponseEvent,
 )
 from security_army_knife.models.base_model import BaseModel
+from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.analysis.architecture_analysis import (
@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 
 
-class ArchitectureAgent(BaseAgent):
+class ArchitectureAgent(BaseCVEAgent):
 
     dependencies: list[Type] = [CVECategorizerAgent]
 
