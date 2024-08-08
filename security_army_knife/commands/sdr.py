@@ -10,6 +10,9 @@ from security_army_knife.commands.util import (
 from security_army_knife.ui.spinner import Spinner
 from security_army_knife.agents.sdr_arch_agent import SDRArchAgent
 from security_army_knife.agents.sdr_threat_agent import SDRThreatAgent
+from security_army_knife.agents.sdr_api_threat_agent import (
+    SDRApiThreatAgent,
+)
 from security_army_knife.agents.base_agent import AgentEvent as Event
 from security_army_knife.analysis.sdr import SDR
 from security_army_knife.agents.agent_tree import AgentTree
@@ -102,7 +105,7 @@ def run_sdr_analysis(
                 model=model,
                 architecture_diagram=architecture_diagram,
             ),
-            SDRThreatAgent(
+            SDRApiThreatAgent(
                 model=model,
                 api_documentation=api_documentation,
                 architecture_diagram=architecture_diagram,

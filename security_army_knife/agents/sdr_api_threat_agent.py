@@ -11,13 +11,12 @@ from security_army_knife.agents.base_agent import (
     ErrorEvent,
 )
 from security_army_knife.analysis.sdr import SDR
-from security_army_knife.agents.sdr_arch_agent import SDRArchAnalysis
 from security_army_knife.models.base_model import BaseModel
 from security_army_knife.analysis.sdr_arch_analysis import SDRArchAnalysis
 from security_army_knife.analysis.sdr_threats import SDRThreats
 
 
-class SDRThreatAgent(BaseAgent):
+class SDRApiThreatAgent(BaseAgent):
 
     dependencies: list[Type] = [SDRArchAnalysis]
 
@@ -42,22 +41,62 @@ class SDRThreatAgent(BaseAgent):
 
         task = f"""
         # Introduction
-        - You are a system security expert and hacker.
+        - You are a system security expert and hacker
+        - You focus on API and endpoint security
         - You have experience with Advanced Persistent Threat actors
         - You have knowledge about OWASP Top 10 and MITRE ATT&CK
 
         # Tasks
-        - Work on the following tasks and consider the system architecture below.
+        - Identify as many threats as possible.
         - Do not repeat this description in your response.
-        - If data is not mentioned in the diagram apply the value 'MISSING'.
+        - If the system below does not mention entrypoints you must not derive threats!
+        - Focus on the entrypoints to the system.
 
-        ## Identify Threats
+        # System to be Analyzed for Threats
+        - The following is the system you have to analyze
+        ``
+        {target.arch_analysis.to_yaml()}
+        ```
+
+        ## Identify Threats for Entrypoints of the System
         - Identify as many threats as possible
         - List the assets affected by the threat
         - Identify which components are affected by the threat
-        - Create at least 20 threats with focus on the assets and the affected components
         - Explain a potential scenarios how the threat might affect the assets and components
         - You must omit the threats if they do not affect the described assets or components in the system below
+
+        ## OAuth Threats
+        - Only if you identify OAuth consider the following:
+            - Apply “Proof Key for Code Exchange by OAuth Public Clients” (PKCE)
+            - Do never apply: Implicit flow and Resource Owner Password Credentials flow, since those are considered as insecure
+        - Do not consider those threats when OAuth is not present in the system
+
+        ## JSON Web Token Threats
+        - Only if you identify JWT consider the following:
+            - Do not apply custom signature validation and apply mature and popular validation libraries
+            - Properly evaluate token claims to prevent cross user attacks
+            - Create e2e tests for unhappy paths, invalid tokens was provided
+            - Make use of sender-constrained access tokens and sender-constrained rate limiting
+            - Restrict privileges associated with an Access Token to the minimum required
+            - Monitor usage of invalid tokens
+            - Rotate JWT signing keys after 90 days
+            - Set short Access Token expiry, vary on Refresh Token expiry
+        - Do not consider those threats when JWT is not present in the system
+
+        ## HTTP Threats
+        - Only if you identify HTTP consider the following:
+            - Path Traversal attacks: aim is to access files and directories that are stored outside the web root folder
+            - HTTP flood DDoS attack: utilizes the disparity in relative resource consumption, by sending many post requests directly to a targeted server until it's capacity is saturated
+        - Do not consider those threats when HTTP is not present in the system
+
+        ## MQTT Threats
+        - Only if you identify MQTT consider the following:
+            - Exploits of MQTT session handling
+            - Exploits of MQTT parameter shuffling
+        - Do not consider those threats when MQTT is not present in the system
+
+        ## Exclusion of Threats
+        - You must not include a threat if you do not identify the associated technology
 
         ### Threat Score
         - Assign a risks score from 1 (not critical) to 25 (critical)
@@ -70,51 +109,11 @@ class SDRThreatAgent(BaseAgent):
         - You must explicitly explain how system components are misused or circumvented in a given scenario!
         - Example: Since the system exposes public API endpoints, missing security monitoring might allow attackers to perform brute-force attacks on the APIs unnoticed
 
-        ### General Threats
-        - For key material consider leakage and expiry scenarios
-        - For public entry points consider DDoS attacks, especially if compute intensive operations might be triggered
-        - For transfer of file formats consider security attributes like confidentiality, integrity, authenticity
-        - Missing security monitoring and logging
-
-        ### Persistence Related Threats
-        - For databases consider missing backup mechanisms
-        - Consider that sensitive data, like credit cards and passwords, are encrypted at rest
-
-        ### Authentication Threats
-        - For authentication protocols consider missing validation of roles and permissions
-        - Make sure that each participant in a system can only access the data which she should have access to
-        - If OAuth/OpenID with JWT is applied, make sure to validate the claims in every stage of critical operations
-        - Apply the least privilege principle
-        - For all authentication threats consider e2e tests as mitigation which are testing the unhappy path (invalid authentication attempt)
-
-        ### Mobile Application Threats
-        - For mobile applications, like Android or iOS, consider the following threats
-        - You must not mention the threats if they do not affect the described system below
-        - Challenge if sensitive key material is stored in secure enclaves
-        - Challenge if APIs offer proper bot protection to prevent automated attacks
-        - Only list the above when you identify mobile app technologies (iOS, Android etc.)!
-
-        ### Vendor and Third-party Threats
-        - Consider security issues in third-party components
-        - Consider information stealer malware in dependencies and challenge firewall setups
-        - Mitigation is to review source code of third-party components and perform vulnerability scans
-
-        ### Browser Related Threats
-        - The must only consider the threats when you are really sure that browser based technologies (JavaScript, HTML, Angular, React etc.) are applied in the system below!
-        - Consider proper settings of the same-origin policy (SOP) for Cross-origin resource sharing (CORS)
-        - Consider proper sanitization to prevent Cross-Site Scripting (XSS) attacks
-        - Consider the threat of Cross-Site Request Forgery (CSRF)
-        - Consider Server-Side Request Forgery Attacks (SSRF) which exploits flaws in web applications to access internal resources
-
         ## Mitigations
         - For each threat propose a set of mitigations
         - Add a link to documentation (references) if applicable so engineers know how to solve a particular problem
 
-        ## References
-        - Add this for monitoring and alerting related mitigations: https://paymenttools.atlassian.net/wiki/spaces/ARCH/pages/1570963461/Security+Guide
-        - Add this for authentication related mitigations: https://paymenttools.atlassian.net/wiki/spaces/ARCH/pages/1323663361/DRAFT+Authentication+Authorization+Guide
-
-        ## Summary
+        # Summary
         - Create a JSON object with the following attributes:
         ```
         threats:
@@ -145,12 +144,6 @@ class SDRThreatAgent(BaseAgent):
                 mitigations:
                 - mitigation 3
                 - mitigation 4
-        ```
-
-        # System to be Analyzed for Threats
-
-        ``
-        {target.arch_analysis.to_yaml()}
         ```
         """
 

@@ -7,8 +7,12 @@ explanation: |md
 
   ## Notes
   All components labeled named with 'Service', are Java Microservices running on OpenJDK.
-  We are no responsible for the aquirers' environment so use the value 'customer' here for environment.
-  Terminals are Ingenico devices provided by customers.
+  We are not responsible for the aquirers' environment so use the value 'customer' here for environment.
+  Terminals are Ingenico devices provided by customers as well. Terminals are autheticated with uniquely created
+  certificates.
+
+  The PCI cluster is protected by MTLS, where each service has its own certificate.
+
 | {
   near: center-left
 }
@@ -18,7 +22,7 @@ PCI: "PCI GKE Cluster" {
     InboundGatewaysDatabase.shape: cylinder
     InboundGateway -> InboundGatewaysDatabase: "HTTPS: MTLS"
     TransactionEngine -> AquirerGateway: "HTTPS: API Key"
-    TransactionEngine -> InboundGateway: "HTTPS: MTLS"
+    TransactionEngine -> InboundGateway: "HTTPS: JWT"
     TokenizationService -> AquirerGateway: "HTTPS: MTLS"
     TokenizationService -> InboundGateway: "HTTPS: MTLS"
   }

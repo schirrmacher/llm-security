@@ -7,13 +7,13 @@ class Threat:
         self,
         threat: str,
         components: List[str],
-        condition: str,
+        scenario: str,
         score: int,
         mitigations: List[str],
     ):
         self.threat = threat
         self.components = components
-        self.condition = condition
+        self.scenario = scenario
         self.score = score
         self.mitigations = mitigations
 
@@ -22,7 +22,7 @@ class Threat:
         return cls(
             threat=data["threat"],
             components=data["components"],
-            condition=data["condition"],
+            scenario=data["scenario"],
             score=data["score"],
             mitigations=data["mitigations"],
         )
@@ -31,7 +31,7 @@ class Threat:
         return {
             "threat": self.threat,
             "components": self.components,
-            "condition": self.condition,
+            "scenario": self.scenario,
             "score": self.score,
             "mitigations": self.mitigations,
         }
@@ -50,7 +50,7 @@ class Threat:
             f"### {self.threat}\n"
             f"- **Score**: {self.score}\n"
             f"- **Components**: {', '.join(self.components)}\n"
-            f"- **Condition**: {self.condition}\n\n"
+            f"- **Scenario**: {self.scenario}\n\n"
             f"Mitigations:\n{mitigations_md}\n"
         )
 

@@ -63,18 +63,20 @@ class SDRArchAgent(BaseAgent):
         - If no environment is mentioned use the 'MISSING' tag
 
         ## Assets
-        - Identify data which is transmitted if possible.
-        - Put those into a category called assets
-        - Focus on critical assets which might be of value to customers or hackers
+        - Identify valuable business assets which are handled by the system
+        - Focus on assets which might be of value to customers or hackers
+        - Categorize assets accordingly
+        - Also consider key material
+
+        ## Software Artifacts
+        - Identify all kinds of software artifacts so that we know what technologies are part of the system
+        - Also consider hardware running software, like laptops, mobile phones, on-premise servers, payment terminals etc.
+        - Examples: operating systems, SDKs, libraries, frameworks, databases, programming languages, vendors, platforms, hardware etc.
 
         ## Identify Persistence Layers
         - List all components which are used for persistence
         - Identify which assets are persisted in the given persistence component
-        - Categorize the asset: pii (Personally identifiable information), secret (key material, passwords etc.), business (business related data)
-
-        ## Provisioning of Software Artifacts
-        - Identify software artifacts like binaries, SDKs, libraries, frameworks which are either provided to external sources or consumed from external sources
-        - If no software artifacts are mentioned leave the result empty
+        - Categorize the asset
 
         ## Identify Authentication and Authorization Schemes
         - Identify if authentication protocols are applied
@@ -82,17 +84,14 @@ class SDRArchAgent(BaseAgent):
         - List the protocols and which components apply them
         - Add the protocols to the associated dataflows
 
-        ## Identify Threat Actors
-        - Identify what groups you consider as threat actors for this system
-        - Explain why you consider these threat actors for the given system
-        - Categories: employees, customers, nation-state, cybercriminals, competitors
-
         ## Summary
         - Create a JSON object with the following attributes:
         ```
         assets:
-        - name: Cardholder Details
-            category: pii|secret|business
+        - name: Some critical asset
+            category: category of the asset
+        - name: Another asset
+            category: category of the asset
 
         entrypoints:
         - name: Entry point name
@@ -140,9 +139,7 @@ class SDRArchAgent(BaseAgent):
         try:
             handle_event(RequestEvent(sdr=target))
             response = self.model.talk(messages, json=True)
-            handle_event(
-                ResponseEvent(sdr=target, message=response.message.content)
-            )
+            handle_event(ResponseEvent(sdr=target))
 
             json_object = json.loads(response.message.content)
             target.arch_analysis = SDRArchAnalysis.from_json(json_object)
@@ -154,15 +151,15 @@ class SDRArchAgent(BaseAgent):
                 ),
                 InformationEvent(
                     sdr=target,
+                    message=f"{len(target.arch_analysis.software_artifacts)} software artifact(s) discovered",
+                ),
+                InformationEvent(
+                    sdr=target,
                     message=f"{len(target.arch_analysis.entrypoints)} entrypoint(s) identified",
                 ),
                 InformationEvent(
                     sdr=target,
                     message=f"{len(target.arch_analysis.persistence_layers)} persistance layer(s) identified",
-                ),
-                InformationEvent(
-                    sdr=target,
-                    message=f"{len(target.arch_analysis.software_artifacts)} software artifact(s) discovered",
                 ),
                 InformationEvent(
                     sdr=target,
