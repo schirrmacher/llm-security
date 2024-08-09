@@ -24,6 +24,9 @@ class ArchitectureAnalysis:
 
     def to_markdown(self) -> str:
         conditions_markdown = "\n".join(
-            [f"{i+1}. {condition}" for i, condition in enumerate(self.infrastructure_conditions)]
+            [
+                f"{i+1}. {condition}"
+                for i, condition in enumerate(self.infrastructure_conditions)
+            ]
         )
         return f"### Architecture Analysis\n\n**Details**:\n{conditions_markdown}\n"

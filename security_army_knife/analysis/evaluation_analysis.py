@@ -32,7 +32,7 @@ class EvaluationAnalysis:
             summary=json_data.get("summary", "No summary provided."),
             threat_scenarios=json_data.get("threat_scenarios", []),
         )
-    
+
     def to_markdown(self) -> str:
         threat_scenarios_str = "\n- ".join(self.threat_scenarios)
         return (

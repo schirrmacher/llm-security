@@ -100,12 +100,24 @@ class CVE:
             f"# {self.name}\n\n",
             f"**Description**:\n{self.description}\n\n",
             f"**Category**: {self.category}\n\n",
-            self.api_spec_analysis.to_markdown() if self.api_spec_analysis else "No API Spec Analysis\n\n",
-            self.architecture_analysis.to_markdown() if self.architecture_analysis else "No Architecture Analysis\n\n",
-            self.final_analysis.to_markdown() if self.final_analysis else "No Final Analysis\n\n",
+            (
+                self.api_spec_analysis.to_markdown()
+                if self.api_spec_analysis
+                else "No API Spec Analysis\n\n"
+            ),
+            (
+                self.architecture_analysis.to_markdown()
+                if self.architecture_analysis
+                else "No Architecture Analysis\n\n"
+            ),
+            (
+                self.final_analysis.to_markdown()
+                if self.final_analysis
+                else "No Final Analysis\n\n"
+            ),
         ]
         return "\n".join(sections)
-    
+
     def __str__(self):
         threat_scenarios = (
             "\n    ".join(self.final_analysis.threat_scenarios)
