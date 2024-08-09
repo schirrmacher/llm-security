@@ -12,6 +12,7 @@ setup(
     install_requires=[
         "black==24.4.0",
         "fastembed==0.2.7",
+        "mistralai==1.0.1",
         "llama-index-core==0.10.55",
         "llama-index-llms-mistralai==0.1.17",
         "llama-index-llms-gemini==0.1.11",
