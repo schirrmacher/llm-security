@@ -1,9 +1,28 @@
 import logging
 
+from typing import List
+
+from mistralai import Mistral
 from llama_index.core.llms import ChatMessage, ChatResponse
-from llama_index.llms.mistralai import MistralAI
 
 from security_army_knife.models.base_model import BaseModel
+
+
+def map_chat_messages_to_dicts(chat_messages: List[ChatMessage]) -> List[dict]:
+    return [
+        {"role": message.role.name.lower(), "content": message.content}
+        for message in chat_messages
+    ]
+
+
+class MessageContent:
+    def __init__(self, content: str):
+        self.content = content
+
+
+class MessageWrapper:
+    def __init__(self, message: MessageContent):
+        self.message = message
 
 
 class MistralModel(BaseModel):
@@ -15,24 +34,31 @@ class MistralModel(BaseModel):
         )
 
     def create_llm(self):
-        return MistralAI(
-            model=self.model_name,
+        return Mistral(
             api_key=self.api_key,
-            max_tokens=self.max_tokens,
         )
 
     def talk(self, messages: ChatMessage, json: bool = False) -> ChatResponse:
+
         # Disable logging for model requests, maybe there is a better solution
         # but this works
-        previous_level = logging.getLogger().getEffectiveLevel()
-        logger = logging.getLogger("SecurityArmyKnife")
         logging.disable(logging.CRITICAL)
         if json:
-            response = self.llm.chat(
-                messages, response_format={"type": "json_object"}
+            response = self.llm.chat.complete(
+                model=self.model_name,
+                messages=map_chat_messages_to_dicts(messages),
+                response_format={"type": "json_object"},
             )
         else:
-            response = self.llm.chat(messages)
+            response = self.llm.chat.complete(
+                model=self.model_name,
+                messages=map_chat_messages_to_dicts(messages),
+            )
+
+        message_content = MessageContent(
+            content=response.choices[0].message.content
+        )
+        message_wrapper = MessageWrapper(message=message_content)
 
         logging.disable(logging.NOTSET)
-        return response
+        return message_wrapper

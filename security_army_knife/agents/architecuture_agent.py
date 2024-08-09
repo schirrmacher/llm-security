@@ -98,9 +98,11 @@ class ArchitectureAgent(BaseCVEAgent):
             ]
 
             try:
-                handle_event(RequestEvent(cve))
+                handle_event(RequestEvent(cve=cve))
                 response = self.model.talk(messages, json=True)
-                handle_event(ResponseEvent(cve, response.message.content))
+                handle_event(
+                    ResponseEvent(cve=cve, message=response.message.content)
+                )
 
                 json_object = json.loads(response.message.content)
 
@@ -111,7 +113,7 @@ class ArchitectureAgent(BaseCVEAgent):
                     infrastructure_conditions=infrastructure_conditions
                 )
                 message = f"conditions: {len(infrastructure_conditions)}"
-                handle_event(InformationEvent(cve, message))
+                handle_event(InformationEvent(cve=cve, message=message))
 
             except Exception as e:
                 handle_event(ErrorEvent(cve=cve, error=e))

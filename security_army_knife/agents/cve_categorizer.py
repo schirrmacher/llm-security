@@ -59,9 +59,11 @@ class CVECategorizerAgent(BaseCVEAgent):
             ]
 
             try:
-                handle_event(RequestEvent(cve))
+                handle_event(RequestEvent(cve=cve))
                 response = self.model.talk(messages, json=True)
-                handle_event(ResponseEvent(cve, response.message.content))
+                handle_event(
+                    ResponseEvent(cve=cve, message=response.message.content)
+                )
 
                 json_object = json.loads(response.message.content)
                 cve.category = json_object.get("category", CVECategory.unknown)
