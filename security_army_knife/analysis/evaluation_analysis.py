@@ -32,3 +32,12 @@ class EvaluationAnalysis:
             summary=json_data.get("summary", "No summary provided."),
             threat_scenarios=json_data.get("threat_scenarios", []),
         )
+    
+    def to_markdown(self) -> str:
+        threat_scenarios_str = "\n- ".join(self.threat_scenarios)
+        return (
+            f"### Evaluation Analysis\n\n"
+            f"**Critical**: {'Yes' if self.critical else 'No'}\n\n"
+            f"**Summary**:\n{self.summary}\n\n"
+            f"**Threat Scenarios**:\n- {threat_scenarios_str}\n"
+        )

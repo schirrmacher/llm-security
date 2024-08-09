@@ -37,6 +37,7 @@ def main():
             large_language_model=args.large_language_model,
             output_option=args.output,
             output_format=args.output_format,
+            output_filename=args.output_filename,
         )
         return result_code
     if args.command == "sdr":

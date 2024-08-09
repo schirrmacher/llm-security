@@ -22,3 +22,11 @@ class APISpecAnalysis:
 
     def __str__(self):
         return f"API Spec Analysis:\n  Facilitates Attack: {self.facilitates_attack}\n  Explanation: {self.explanation}"
+    
+    def to_markdown(self) -> str:
+        facilitates_str = "Yes" if self.facilitates_attack else "No"
+        return (
+            f"### API Specification Analysis\n\n"
+            f"**Facilitates Attack**: {facilitates_str}\n\n"
+            f"**Explanation**:\n{self.explanation}\n"
+        )
