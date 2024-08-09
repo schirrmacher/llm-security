@@ -124,21 +124,26 @@ class ArchitectureAgent(BaseCVEAgent):
             try:
                 handle_event(RequestEvent(cve=cve))
                 response = self.model.talk(messages, json=True)
-                handle_event(
-                    ResponseEvent(cve=cve, message=response.message.content)
-                )
+                json_start_index = response.message.content.find('{')
+                json_end_index = response.message.content.rfind('}') + 1
 
-                json_object = json.loads(response.message.content)
+                if json_start_index != -1 and json_end_index != -1:
+                    json_object = json.loads(response.message.content[json_start_index:json_end_index])
 
-                infrastructure_conditions = json_object.get(
-                    "infrastructure_conditions", []
-                )
-                cve.architecture_analysis = ArchitectureAnalysis(
-                    infrastructure_conditions=infrastructure_conditions
-                )
-                message = f"conditions: {len(infrastructure_conditions)}"
-                handle_event(InformationEvent(cve=cve, message=message))
+                    infrastructure_conditions = json_object.get(
+                        "infrastructure_conditions", []
+                    )
+                    cve.architecture_analysis = ArchitectureAnalysis(
+                        infrastructure_conditions=infrastructure_conditions
+                    )
+                    message = f"conditions: {len(infrastructure_conditions)}"
+                    handle_event(InformationEvent(cve=cve, message=message))
+                else:
+                    raise ValueError("No JSON object found in response")
 
+            except (json.JSONDecodeError, ValueError) as e:
+                self.logger.error(f"Failed to parse JSON: {e}")
+                handle_event(ErrorEvent(cve=cve, error=e))
             except Exception as e:
                 handle_event(ErrorEvent(cve=cve, error=e))
 
