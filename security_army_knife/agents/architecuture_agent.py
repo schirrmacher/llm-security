@@ -124,9 +124,16 @@ class ArchitectureAgent(BaseCVEAgent):
             try:
                 handle_event(RequestEvent(cve=cve))
                 response = self.model.talk(messages, json=True)
+
+                # Extract JSON content from the response
                 json_start_index = response.message.content.find("{")
                 json_end_index = response.message.content.rfind("}") + 1
 
+                """
+                We are manually extracting the JSON substring from the response content.
+                Because the model's response include non-JSON text or formatting. By isolating the JSON part
+                We ensure that only valid JSON s passed to the parser, preventing errors during JSON decoding.
+                """
                 if json_start_index != -1 and json_end_index != -1:
                     json_object = json.loads(
                         response.message.content[
