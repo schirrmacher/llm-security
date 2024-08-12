@@ -18,7 +18,10 @@ from security_army_knife.models.base_model import BaseModel
 
 from security_army_knife.analysis.cve import CVE
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
-from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
+from security_army_knife.agents.cve_categorizer import (
+    CVECategorizerAgent,
+    CVECategory,
+)
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 
 
@@ -63,30 +66,42 @@ class SourceCodeAgent(BaseCVEAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            task = f"""How can I detect the following security vulnerability in my code? {cve.name}: {cve.description}"""
-            regex_task = "Can you create a list of very short strings to grep for? Be careful with capitalization and accurate class names"
-            formatting = """
-            Format the result as a JSON list with strings, as an attribute called 'queries'.
-            Make sure the results can be parsed with the Python function re.compile and that the escaping is correct.
+            if cve.category != CVECategory.app:
+                handle_event(InformationEvent(cve, f"skip non-application CVE"))
+                cve.code_analysis = CodeAnalysis(queries=[], affected_files=[])
+                continue
+
+            task = f"""
+            # Introduction
+            - You are a coding expert.
+            - You have experience with sophisticated code reviews.
+
+            # Tasks
+            - In the following I present a security vulnerability (CVE) to you.
+            - You have to examine how we can identify the CVE in source code.
+
+            # Create Queries
+            - Create regular expressions for identifying the CVE
+
+            # CVE to Identify in Source Code
+
+            ```
+            {cve.name}: {cve.description}
+            ```
+
+            # Summary
+            - Format the output as JSON
+
+            ```
+            "queries": ["query 1", "query 2", "query 3"]
+            ```
             """
 
             messages = [
                 ChatMessage(
-                    role="system",
-                    content="You are an expert code reviewer.",
-                ),
-                ChatMessage(
                     role="user",
                     content=task,
-                ),
-                ChatMessage(
-                    role="user",
-                    content=regex_task,
-                ),
-                ChatMessage(
-                    role="user",
-                    content=formatting,
-                ),
+                )
             ]
 
             try:
