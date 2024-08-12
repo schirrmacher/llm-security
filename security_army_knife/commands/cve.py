@@ -123,9 +123,9 @@ def add_subcommand(subparsers):
         "-of",
         "--output_format",
         type=str,
-        choices=["text", "json"],
+        choices=["text", "json", "markdown"],
         default="text",
-        help="Output format (text or json)",
+        help="Output format (text or json or markdown)",
     )
 
     output_group.add_argument(
@@ -135,6 +135,14 @@ def add_subcommand(subparsers):
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         default="INFO",
         help="Set the logging level",
+    )
+    output_group.add_argument(
+        "-f",
+        "--output_filename",
+        type=str,
+        default="cve_analysis",
+        required=False,
+        help="Filename for the output (without extension).",
     )
 
 
@@ -149,6 +157,7 @@ def run_cve_analysis(
     large_language_model: str,
     output_option: str,
     output_format: str,
+    output_filename: Optional[str] = "analysis_result",
 ) -> int:
     logger = logging.getLogger("SecurityArmyKnife")
     spinner = Spinner()
@@ -230,6 +239,15 @@ def run_cve_analysis(
     try:
         tree = AgentTree(agents=agents)
         tree.traverse(handle_agent, target=cve_list)
+
+        if output_format in ["markdown", "both"]:
+            with open(f"{output_filename}.md", "w") as file:
+                for cve in cve_list:
+                    file.write(cve.to_markdown())
+            logger.info(
+                f"Markdown file {output_filename}.md created successfully"
+            )
+
     except KeyboardInterrupt:
         spinner.stop()
         logger.info("👋")

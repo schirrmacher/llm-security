@@ -24,7 +24,7 @@ class CVE:
         code_analysis: CodeAnalysis = None,
         api_spec_analysis: APISpecAnalysis = None,
         architecture_analysis: ArchitectureAnalysis = None,
-        final_analysis: EvaluationAnalysis = None,  # New attribute for evaluation results
+        final_analysis: EvaluationAnalysis = None,
     ):
         self.name = name
         self.description = description
@@ -94,6 +94,29 @@ class CVE:
                 self.final_analysis.to_json() if self.final_analysis else None
             ),
         }
+
+    def to_markdown(self) -> str:
+        sections = [
+            f"# {self.name}\n\n",
+            f"**Description**:\n{self.description}\n\n",
+            f"**Category**: {self.category}\n\n",
+            (
+                self.api_spec_analysis.to_markdown()
+                if self.api_spec_analysis
+                else "No API Spec Analysis\n\n"
+            ),
+            (
+                self.architecture_analysis.to_markdown()
+                if self.architecture_analysis
+                else "No Architecture Analysis\n\n"
+            ),
+            (
+                self.final_analysis.to_markdown()
+                if self.final_analysis
+                else "No Final Analysis\n\n"
+            ),
+        ]
+        return "\n".join(sections)
 
     def __str__(self):
         threat_scenarios = (

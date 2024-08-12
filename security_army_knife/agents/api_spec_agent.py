@@ -1,5 +1,4 @@
 import json
-
 from typing import Callable, Type, TextIO
 
 from llama_index.core.llms import ChatMessage
@@ -44,14 +43,34 @@ class APISpecAgent(BaseCVEAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            task = f"""How looks a vulnerable API spec facilitating the following CVE? {cve.name}: {cve.description}"""
-            api_task = f"Is the following API spec facilitating the exploit or not?: {api_spec}"
-            formatting = """
-            Format the result as a single JSON object, like: {
-                "facilitates_attack": true|false,
-                "explanation": "Why is the API facilitating the vulnerability or not?"
-            }
-            """
+            task = (
+                f"# Introduction\n"
+                f"- You are an API security expert tasked with analyzing API specifications in the context of specific CVEs.\n"
+                f"- Your goal is to evaluate whether the provided API specification facilitates or mitigates the exploitation of a given CVE.\n\n"
+                f"# Tasks\n"
+                f"- Complete the following tasks without repeating this description in your response.\n\n"
+                f"## Analyze CVE Details\n"
+                f"- Review the CVE details, including its name, description, and category.\n"
+                f"- Determine the potential impact on confidentiality, integrity, and availability (CIA triad).\n\n"
+                f"## Evaluate API Specification\n"
+                f"- Examine the provided API specification to identify any vulnerabilities or security flaws.\n"
+                f"- Assess whether the API specification could facilitate the exploitation of the CVE.\n"
+                f"- Consider aspects such as input validation, authentication, authorization, and error handling in the API.\n\n"
+                f"## Risk Assessment\n"
+                f"- Determine whether the API specification increases the risk associated with the CVE.\n"
+                f"- Identify specific elements in the API that contribute to or mitigate the risk.\n\n"
+                f"## Summary\n"
+                f"- Provide a JSON object summarizing your findings with the following attributes:\n"
+                f"{{\n"
+                f'  "facilitates_attack": true|false,\n'
+                f'  "explanation": "A detailed explanation of why the API specification does or does not facilitate the exploitation of the CVE."\n'
+                f"}}\n\n"
+                f"# CVE Data for Analysis\n"
+                f"- Name: {cve.name}\n"
+                f"- Description: {cve.description}\n"
+                f"- Category: {cve.category}\n"
+                f"- API Specification: {api_spec}\n"
+            )
 
             messages = [
                 ChatMessage(
@@ -62,23 +81,11 @@ class APISpecAgent(BaseCVEAgent):
                     role="user",
                     content=task,
                 ),
-                ChatMessage(
-                    role="user",
-                    content=api_task,
-                ),
-                ChatMessage(
-                    role="user",
-                    content=formatting,
-                ),
             ]
 
             try:
                 handle_event(RequestEvent(cve=cve))
                 response = self.model.talk(messages, json=True)
-                handle_event(
-                    ResponseEvent(cve=cve, message=response.message.content)
-                )
-
                 json_object = json.loads(response.message.content)
                 cve.api_spec_analysis = APISpecAnalysis.from_json(json_object)
                 handle_event(
