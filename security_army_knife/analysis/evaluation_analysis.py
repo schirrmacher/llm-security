@@ -1,6 +1,6 @@
 class EvaluationAnalysis:
     def __init__(
-        self, critical: str, summary: str, threat_scenarios: list[str]
+        self, critical: bool, summary: str, threat_scenarios: list[str]
     ):
         self.critical = critical
         self.summary = summary
@@ -13,6 +13,19 @@ class EvaluationAnalysis:
             "summary": self.summary,
             "threat_scenarios": self.threat_scenarios,
         }
+
+    def to_markdown(self):
+        """Convert the EvaluationAnalysis instance to a markdown string."""
+        scenarios_md = "\n".join(
+            f"- {scenario}" for scenario in self.threat_scenarios
+        )
+        return (
+            f"## Final Analysis\n\n"
+            f"**Critical:** {'Yes' if self.critical else 'No'}\n\n"
+            f"**Summary:** {self.summary}\n\n"
+            f"### Threat Scenarios\n"
+            f"{scenarios_md}"
+        )
 
     def __str__(self):
         """Return a human-readable string representation of the EvaluationAnalysis."""
@@ -28,7 +41,7 @@ class EvaluationAnalysis:
     def from_json(cls, json_data: dict):
         """Create an EvaluationAnalysis instance from a JSON dictionary."""
         return cls(
-            critical=json_data.get("critical", "No"),
+            critical=json_data.get("critical", False),
             summary=json_data.get("summary", "No summary provided."),
             threat_scenarios=json_data.get("threat_scenarios", []),
         )
