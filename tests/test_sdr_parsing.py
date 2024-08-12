@@ -48,14 +48,14 @@ class TestSDRFromJson(unittest.TestCase):
                 {
                     "threat": "Threat1",
                     "components": ["Component1", "Component2"],
-                    "condition": "Condition1",
+                    "scenario": "Condition1",
                     "score": 5,
                     "mitigations": ["Mitigation1", "Mitigation2"],
                 },
                 {
                     "threat": "Threat2",
                     "components": ["Component3"],
-                    "condition": "Condition2",
+                    "scenario": "Condition2",
                     "score": 3,
                     "mitigations": ["Mitigation3"],
                 },

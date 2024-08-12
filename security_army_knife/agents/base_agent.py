@@ -111,7 +111,10 @@ class RequestEvent(AgentEvent):
 class ResponseEvent(AgentEvent):
 
     def __init__(
-        self, message: str, cve: Optional[CVE] = None, sdr: Optional[SDR] = None
+        self,
+        message: str = "",
+        cve: Optional[CVE] = None,
+        sdr: Optional[SDR] = None,
     ):
         super(ResponseEvent, self).__init__(
             event_type=AgentEvent.Type.RESPONSE,

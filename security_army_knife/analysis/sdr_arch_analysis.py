@@ -94,15 +94,15 @@ class SDRArchAnalysis:
     def to_dict(self) -> dict:
         return {
             "assets": [asset.__dict__ for asset in self.assets],
+            "software_artifacts": [
+                artifact.__dict__ for artifact in self.software_artifacts
+            ],
             "entrypoints": [
                 entrypoint.__dict__ for entrypoint in self.entrypoints
             ],
             "persistence_layers": [
                 persistence_layer.__dict__
                 for persistence_layer in self.persistence_layers
-            ],
-            "software_artifacts": [
-                artifact.__dict__ for artifact in self.software_artifacts
             ],
             "dataflows": [dataflow.__dict__ for dataflow in self.dataflows],
         }
@@ -119,6 +119,10 @@ class SDRArchAnalysis:
         for asset in self.assets:
             md += f"- **{asset.name}**: {asset.category}\n"
 
+        md += "## Software Artifacts\n"
+        for artifact in self.software_artifacts:
+            md += f"- **{artifact.name}**: {artifact.category}\n"
+
         md += "## Entrypoints\n"
         for entrypoint in self.entrypoints:
             md += f"- **{entrypoint.name}**:\n"
@@ -129,10 +133,6 @@ class SDRArchAnalysis:
         md += "## Persistence Layers\n"
         for pl in self.persistence_layers:
             md += f"- **{pl.name}**: {', '.join(pl.assets)}\n"
-
-        md += "## Software Artifacts\n"
-        for artifact in self.software_artifacts:
-            md += f"- **{artifact.name}**: {artifact.category}\n"
 
         md += "\n## Dataflows\n"
         for df in self.dataflows:
