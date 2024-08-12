@@ -210,9 +210,6 @@ def run_cve_analysis(
             spinner.start()
         elif event.event_type == Event.Type.RESPONSE:
             spinner.stop()
-            logger.info(
-                f"  - response: {textwrap.indent(event.message, '    ')}"
-            )
             spinner.set_default_spinner()
             spinner.start()
         elif event.event_type == Event.Type.AFTER_ANALYSIS:

@@ -31,35 +31,37 @@ class EvaluationAgent(BaseCVEAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            # Log the details of the CVE and its analyses before evaluation
-            self.logger.debug(f"CVE details: {cve}")
-
             try:
-                # Evaluate and get score and summary using AI
-                summary, critical, threat_scenarios = self.evaluate_cve(cve)
 
-                # Store the results in the CVE object using EvaluationAnalysis
+                summary, critical, threat_scenarios = self.evaluate_cve(
+                    cve, handle_event
+                )
+
                 cve.final_analysis = EvaluationAnalysis(
                     critical=critical,
                     summary=summary,
                     threat_scenarios=threat_scenarios,
                 )
-
                 handle_event(
                     InformationEvent(
-                        cve,
-                        f"Critical: {'Yes' if critical else 'No'}, Summary: {summary}, Threat Scenarios: {threat_scenarios}",
+                        cve=cve,
+                        message=f"critical: {critical}",
+                    )
+                )
+                handle_event(
+                    InformationEvent(
+                        cve=cve,
+                        message=f"scenarios detected: {len(threat_scenarios)}",
                     )
                 )
             except Exception as e:
-                self.logger.error(f"Unexpected error for {cve.name}: {e}")
                 handle_event(ErrorEvent(cve=cve, error=e))
 
             handle_event(AfterAnalysis(cve))
 
         return cve_list
 
-    def evaluate_cve(self, cve: CVE):
+    def evaluate_cve(self, cve: CVE, handle_event: Callable[[Event], None]):
         messages = [
             ChatMessage(
                 role="system",
@@ -70,7 +72,7 @@ class EvaluationAgent(BaseCVEAgent):
                 role="user",
                 content="""Based on the provided information, please return the output in the following JSON format:
 {
-    "critical": "Yes | No",
+    "critical": true|false,
     "summary": "Detailed analysis and evaluation of the CVE.",
     "threat_scenarios": [
         "Scenario 1: Describe a potential attack scenario related to the CVE.",
@@ -82,22 +84,26 @@ class EvaluationAgent(BaseCVEAgent):
 
         try:
             response = self.model.talk(messages, json=True)
-            self.logger.info(f"Received response for {cve.name}")
+
             json_object = json.loads(response.message.content)
 
             summary = json_object.get("summary", "No summary provided.")
-            critical = json_object.get("critical", "No")
+            critical = json_object.get("critical", False)
             threat_scenarios = json_object.get(
                 "threat_scenarios", ["No scenarios provided."]
             )
 
             return summary, critical, threat_scenarios
         except Exception as e:
-            self.logger.error(f"Error in AI response processing: {e}")
+            handle_event(
+                ErrorEvent(
+                    cve=cve, error=f"Error in AI response processing: {e}"
+                )
+            )
             return (
-                "Error generating summary",
-                "Low",
-                ["Error generating threat scenarios"],
+                "Error generating summary",  # Summary
+                False,  # Criticality
+                ["Error generating threat scenarios"],  # Scenarios
             )
 
     def construct_prompt(self, cve: CVE):
@@ -133,12 +139,13 @@ class EvaluationAgent(BaseCVEAgent):
             f"- If none of these criteria are met, or if the technology is not relevant, consider the CVE as non-critical.\n\n"
             f"## Threat Scenarios\n"
             f"- Describe realistic threat scenarios and attack vectors relevant to the CVE.\n"
+            f"- Describe at least 3 scenarios and attack vectors relevant to the CVE.\n"
             f"- Highlight how an attacker might misuse technical conditions to exploit the vulnerability.\n"
             f"- Consider the likelihood and ease of exploiting the vulnerability in the given environment.\n\n"
             f"## Summary\n"
             f"- Create a JSON object summarizing your findings with the following attributes:\n"
             f"{{\n"
-            f'"critical": "Yes | No",\n'
+            f'"critical": true|false,\n'
             f'"summary": "Detailed analysis and evaluation of the CVE.",\n'
             f'"threat_scenarios": [\n'
             f'"Scenario 1: Description...",\n'
