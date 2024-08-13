@@ -48,8 +48,8 @@ class TestCVE(unittest.TestCase):
         )
         self.assertEqual(self.cve_instance.category, self.cve_data["category"])
 
-    def test_cve_to_json(self):
-        cve_json = self.cve_instance.to_json()
+    def test_cve_to_dict(self):
+        cve_json = self.cve_instance.to_dict()
         self.assertEqual(cve_json["name"], self.cve_data["name"])
         self.assertEqual(cve_json["description"], self.cve_data["description"])
         self.assertEqual(cve_json["category"], self.cve_data["category"])
@@ -142,8 +142,8 @@ class TestCVEAnalysis(unittest.TestCase):
             2,
         )
 
-    def test_cve_analysis_to_json(self):
-        cve_analysis_json = self.cve_analysis_instance.to_json()
+    def test_cve_analysis_to_dict(self):
+        cve_analysis_json = self.cve_analysis_instance.to_dict()
         self.assertEqual(len(cve_analysis_json["cves"]), 2)
         self.assertEqual(cve_analysis_json["cves"][0]["name"], "CVE-2023-4911")
         self.assertIn("infrastructure_analysis", cve_analysis_json)

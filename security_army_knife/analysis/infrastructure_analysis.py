@@ -2,7 +2,7 @@ class InfrastructureAnalysis:
     def __init__(self, components: list[dict]):
         self.components = components
 
-    def to_json(self):
+    def to_dict(self):
         return {"components": self.components}
 
     def to_markdown(self):
@@ -20,18 +20,17 @@ class InfrastructureAnalysis:
             f"**Explanation:** {component['explanation']}",
         ]
 
-        if component.get("configurations"):
-            details.append(
-                f"**Configurations:** {', '.join(component['configurations'])}"
-            )
+        configurations = component.get("configurations", [])
+        if configurations:
+            details.append(f"**Configurations:** {', '.join(configurations)}")
 
-        if component.get("ports"):
-            details.append(f"**Ports:** {', '.join(component['ports'])}")
+        ports = component.get("ports", [])
+        if ports:
+            details.append(f"**Ports:** {', '.join(ports)}")
 
-        if component.get("protocols"):
-            details.append(
-                f"**Protocols:** {', '.join(component['protocols'])}"
-            )
+        protocols = component.get("protocols")
+        if protocols:
+            details.append(f"**Protocols:** {', '.join(protocols)}")
 
         return "\n".join(details) + "\n"
 

@@ -6,8 +6,7 @@ class EvaluationAnalysis:
         self.summary = summary
         self.threat_scenarios = threat_scenarios
 
-    def to_json(self):
-        """Convert the EvaluationAnalysis instance to a JSON-serializable dictionary."""
+    def to_dict(self):
         return {
             "critical": self.critical,
             "summary": self.summary,

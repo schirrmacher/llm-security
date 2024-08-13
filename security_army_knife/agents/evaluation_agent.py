@@ -1,6 +1,6 @@
 import logging
 import json
-from typing import Callable, List
+from typing import Callable, Type
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
     BaseAgent,
@@ -15,8 +15,23 @@ from security_army_knife.analysis.cve_analysis import CVE, CVEAnalysis
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
+from security_army_knife.agents.api_spec_agent import APISpecAgent
+from security_army_knife.agents.architecuture_agent import ArchitectureAgent
+from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
+from security_army_knife.agents.infrastructure_agent import InfrastructureAgent
+from security_army_knife.agents.source_code_agent import SourceCodeAgent
+
 
 class EvaluationAgent(BaseCVEAgent):
+
+    dependencies: list[Type] = [
+        InfrastructureAgent,
+        CVECategorizerAgent,
+        APISpecAgent,
+        ArchitectureAgent,
+        SourceCodeAgent,
+    ]
+
     def __init__(self, model):
         super().__init__(model=model)
         self.logger = logging.getLogger("SecurityArmyKnife")
@@ -34,7 +49,7 @@ class EvaluationAgent(BaseCVEAgent):
             try:
 
                 summary, critical, threat_scenarios = self.evaluate_cve(
-                    cve, handle_event
+                    cve, analysis, handle_event
                 )
 
                 cve.final_analysis = EvaluationAnalysis(
@@ -63,13 +78,21 @@ class EvaluationAgent(BaseCVEAgent):
 
         return analysis
 
-    def evaluate_cve(self, cve: CVE, handle_event: Callable[[Event], None]):
+    def evaluate_cve(
+        self,
+        cve: CVE,
+        analysis: CVEAnalysis,
+        handle_event: Callable[[Event], None],
+    ):
         messages = [
             ChatMessage(
                 role="system",
                 content="You are a cybersecurity expert tasked with evaluating vulnerabilities.",
             ),
-            ChatMessage(role="user", content=self.construct_prompt(cve)),
+            ChatMessage(
+                role="user",
+                content=self.construct_prompt(cve=cve, analysis=analysis),
+            ),
             ChatMessage(
                 role="user",
                 content="""Based on the provided information, please return the output in the following JSON format:
@@ -108,7 +131,7 @@ class EvaluationAgent(BaseCVEAgent):
                 ["Error generating threat scenarios"],  # Scenarios
             )
 
-    def construct_prompt(self, cve: CVE):
+    def construct_prompt(self, cve: CVE, analysis: CVEAnalysis):
         task = (
             f"# Introduction\n"
             f"- You are a cybersecurity expert specializing in evaluating software vulnerabilities.\n"
@@ -123,7 +146,6 @@ class EvaluationAgent(BaseCVEAgent):
             f"- Review the findings from the code analysis, API specification analysis, and architecture analysis.\n"
             f"- Evaluate how infrastructure conditions contribute to or mitigate the risk.\n\n"
             f"## Environment Considerations\n"
-            f"- Consider that the system operates with strict network segmentation and firewall policies.\n"
             f"- Assume the environment is secured against local attacks.\n"
             f"- Identify how these environment conditions impact the exploitability of the vulnerability.\n\n"
             f"## Technology Relevance\n"
@@ -165,5 +187,6 @@ class EvaluationAgent(BaseCVEAgent):
             f"- Code Analysis: {cve.code_analysis if cve.code_analysis else 'No Code Analysis'}\n"
             f"- API Specification Analysis: {cve.api_spec_analysis.explanation if cve.api_spec_analysis else 'No API Spec Analysis'}\n"
             f"- Architecture Analysis: {cve.architecture_analysis if cve.architecture_analysis else 'No Architecture Analysis'}\n"
+            f"- Infrastructure: {analysis.infrastructure_analysis.to_markdown}\n"
         )
         return task

@@ -131,8 +131,8 @@ def add_subcommand(subparsers):
         "-of",
         "--output_format",
         type=str,
-        choices=["text", "json", "markdown"],
-        default="text",
+        choices=["json", "markdown"],
+        default="json",
         help="Output format (text or json or markdown)",
     )
 
@@ -148,7 +148,7 @@ def add_subcommand(subparsers):
         "-f",
         "--output_filename",
         type=str,
-        default="cve_analysis",
+        default="analysis",
         required=False,
         help="Filename for the output (without extension).",
     )
@@ -210,7 +210,8 @@ def run_cve_analysis(
         agents.append(
             ArchitectureAgent(model, architecture_diagram=architecture_diagram)
         )
-        agents.append(EvaluationAgent(model))
+
+    agents.append(EvaluationAgent(model))
 
     def handle_event(event: Event):
         if event.event_type == Event.Type.BEFORE_ANALYSIS:
@@ -252,13 +253,12 @@ def run_cve_analysis(
         tree = AgentTree(agents=agents)
         tree.traverse(handle_agent, target=cve_analysis)
 
-        if output_format in ["markdown", "both"]:
+        if output_format == "markdown":
             with open(f"{output_filename}.md", "w") as file:
-                for cve in cve_list:
-                    file.write(cve.to_markdown())
-            logger.info(
-                f"Markdown file {output_filename}.md created successfully"
-            )
+                file.write(cve_analysis.to_markdown())
+        else:
+            with open(f"{output_filename}.json", "w") as file:
+                file.write(cve_analysis.to_json())
 
     except KeyboardInterrupt:
         spinner.stop()

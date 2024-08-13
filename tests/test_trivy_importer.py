@@ -305,7 +305,7 @@ class TestTrivyImporter(unittest.TestCase):
 
         for actual, expected in zip(cve_objects, expected_cve_objects):
             if actual != expected:
-                self.assertEqual(actual.to_json(), expected.to_json())
+                self.assertEqual(actual.to_dict(), expected.to_dict())
 
 
 if __name__ == "__main__":
