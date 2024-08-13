@@ -1,8 +1,7 @@
 import json
 import logging
-import textwrap
 import argparse
-from typing import TextIO, Optional
+from typing import TextIO, Optional, List
 
 from security_army_knife.commands.util import (
     is_valid_directory,
@@ -14,14 +13,14 @@ from security_army_knife.agents.source_code_agent import SourceCodeAgent
 from security_army_knife.agents.api_spec_agent import APISpecAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
-    CVE,
 )
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE, CVEAnalysis
 from security_army_knife.agents.agent_tree import AgentTree
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.files.trivy_importer import TrivyImporter
 from security_army_knife.agents.architecuture_agent import ArchitectureAgent
 from security_army_knife.agents.evaluation_agnet import EvaluationAgent
+from security_army_knife.agents.infrastructure_agent import InfrastructureAgent
 
 
 def add_subcommand(subparsers):
@@ -93,6 +92,15 @@ def add_subcommand(subparsers):
     )
 
     input_group.add_argument(
+        "-inf",
+        "--infra",
+        type=argparse.FileType("r"),
+        default=None,
+        required=False,
+        help="Path to the infra as code file",
+    )
+
+    input_group.add_argument(
         "-s",
         "--state",
         type=str,
@@ -153,6 +161,7 @@ def run_cve_analysis(
     dependency_list: Optional[TextIO],
     api_documentation: Optional[TextIO],
     source_code: Optional[str],
+    infrastructure_code: Optional[TextIO],
     state_file_path: Optional[str],
     large_language_model: str,
     output_option: str,
@@ -178,9 +187,18 @@ def run_cve_analysis(
         raise ValueError(f"There are issues with parsing CVEs from: {e}")
 
     if state_file_path:
-        cve_list = CVE.load_and_merge_state(state_file_path, cve_list)
+        cve_analysis = CVEAnalysis.load_and_merge_state(
+            file_path=state_file_path, new_cves=cve_list
+        )
 
     agents = [CVECategorizerAgent(model)]
+
+    if infrastructure_code:
+        agents.append(
+            InfrastructureAgent(
+                model=model, infrastructure_code=infrastructure_code
+            )
+        )
 
     if source_code:
         agents.append(SourceCodeAgent(model, source_code_path=source_code))
@@ -194,15 +212,12 @@ def run_cve_analysis(
         )
         agents.append(EvaluationAgent(model))
 
-    if dependency_list:
-        pass
-
-    if dependency_list:
-        pass
-
     def handle_event(event: Event):
         if event.event_type == Event.Type.BEFORE_ANALYSIS:
-            logger.info(f"· {event.cve.name}")
+            if hasattr(event, "cve") and event.cve:
+                logger.info(f"· {event.cve.name}")
+            else:
+                logger.info(f"· {event.message}")
             spinner.start()
         elif event.event_type == Event.Type.REQUEST:
             spinner.stop()
@@ -214,7 +229,7 @@ def run_cve_analysis(
             spinner.start()
         elif event.event_type == Event.Type.AFTER_ANALYSIS:
             spinner.stop()
-            CVE.persist_state(cve_list=cve_list, file_path=state_file_path)
+            cve_analysis.save_to_file(file_path=state_file_path)
         elif event.event_type == Event.Type.INFORMATION:
             spinner.stop()
             logger.info(f"  - {str(event.message)}")
@@ -225,17 +240,17 @@ def run_cve_analysis(
             spinner.stop()
             logger.info(f"  - {str(event.event_type.name)}")
 
-    def handle_agent(agent: BaseAgent, cve_list: list[CVE]):
+    def handle_agent(agent: BaseAgent, analysis: CVEAnalysis):
         logger.info(f"\n{agent.__class__.__name__}\n")
-        analyzed_cve_list = agent.analyze(
-            cve_list=cve_list,
+        analysis = agent.analyze(
+            analysis=analysis,
             handle_event=handle_event,
         )
-        return analyzed_cve_list
+        return analysis
 
     try:
         tree = AgentTree(agents=agents)
-        tree.traverse(handle_agent, target=cve_list)
+        tree.traverse(handle_agent, target=cve_analysis)
 
         if output_format in ["markdown", "both"]:
             with open(f"{output_filename}.md", "w") as file:

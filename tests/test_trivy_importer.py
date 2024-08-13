@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, mock_open
 import json
 from security_army_knife.files.trivy_importer import TrivyImporter
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE
 
 
 class TestTrivyImporter(unittest.TestCase):
@@ -305,7 +305,7 @@ class TestTrivyImporter(unittest.TestCase):
 
         for actual, expected in zip(cve_objects, expected_cve_objects):
             if actual != expected:
-                self.assertEqual(str(actual), str(expected))
+                self.assertEqual(actual.to_json(), expected.to_json())
 
 
 if __name__ == "__main__":

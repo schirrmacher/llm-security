@@ -13,10 +13,11 @@ from security_army_knife.agents.base_agent import (
     RequestEvent,
     ResponseEvent,
 )
+from security_army_knife.analysis.cve_analysis import CVEAnalysis
 from security_army_knife.models.base_model import BaseModel
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE
 from security_army_knife.analysis.architecture_analysis import (
     ArchitectureAnalysis,
 )
@@ -59,9 +60,9 @@ class ArchitectureAgent(BaseCVEAgent):
         return ET.tostring(root, encoding="unicode")
 
     def analyze(
-        self, cve_list: list[CVE], handle_event: Callable[[Event], None]
-    ) -> list[CVE]:
-        for cve in cve_list:
+        self, analysis: CVEAnalysis, handle_event: Callable[[Event], None]
+    ) -> CVEAnalysis:
+        for cve in analysis.cves:
 
             handle_event(BeforeAnalysis(cve))
 
@@ -160,4 +161,4 @@ class ArchitectureAgent(BaseCVEAgent):
 
             handle_event(AfterAnalysis(cve))
 
-        return cve_list
+        return analysis

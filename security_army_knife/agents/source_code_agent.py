@@ -6,7 +6,6 @@ from typing import Callable, Type
 
 from llama_index.core.llms import ChatMessage
 from security_army_knife.agents.base_agent import (
-    BaseAgent,
     AgentEvent as Event,
     InformationEvent,
     CachedEvent,
@@ -16,7 +15,7 @@ from security_army_knife.agents.base_agent import (
 )
 from security_army_knife.models.base_model import BaseModel
 
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE, CVEAnalysis
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.agents.cve_categorizer import (
     CVECategorizerAgent,
@@ -52,13 +51,13 @@ class SourceCodeAgent(BaseCVEAgent):
 
     def analyze(
         self,
-        cve_list: list[CVE],
+        analysis: CVEAnalysis,
         handle_event: Callable[[Event], None],
-    ) -> list[CVE]:
+    ) -> CVEAnalysis:
 
         all_file_paths = self._list_files_recursive(self.source_code_path)
 
-        for cve in cve_list:
+        for cve in analysis.cves:
 
             handle_event(BeforeAnalysis(cve))
 
@@ -128,4 +127,4 @@ class SourceCodeAgent(BaseCVEAgent):
 
             handle_event(AfterAnalysis(cve))
 
-        return cve_list
+        return analysis

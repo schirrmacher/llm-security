@@ -32,6 +32,7 @@ def main():
             dependency_list=args.dependency_list,
             api_documentation=args.api_documentation,
             source_code=args.source_code,
+            infrastructure_code=args.infra,
             state_file_path=args.state,
             # output
             large_language_model=args.large_language_model,

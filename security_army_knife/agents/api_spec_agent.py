@@ -12,10 +12,11 @@ from security_army_knife.agents.base_agent import (
     RequestEvent,
     ResponseEvent,
 )
+from security_army_knife.analysis.cve_analysis import CVEAnalysis
 from security_army_knife.models.base_model import BaseModel
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.agents.cve_categorizer import CVECategorizerAgent
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE
 from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 
 
@@ -29,13 +30,13 @@ class APISpecAgent(BaseCVEAgent):
 
     def analyze(
         self,
-        cve_list: list[CVE],
+        analysis: CVEAnalysis,
         handle_event: Callable[[Event], None],
-    ) -> list[CVE]:
+    ) -> CVEAnalysis:
 
         api_spec = self.api_spec.read()
 
-        for cve in cve_list:
+        for cve in analysis.cves:
 
             handle_event(BeforeAnalysis(cve))
 
@@ -101,4 +102,4 @@ class APISpecAgent(BaseCVEAgent):
 
             handle_event(AfterAnalysis(cve))
 
-        return cve_list
+        return analysis

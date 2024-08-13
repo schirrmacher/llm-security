@@ -16,7 +16,7 @@ from security_army_knife.agents.base_agent import (
 
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 
-from security_army_knife.analysis.cve import CVE, CVECategory
+from security_army_knife.analysis.cve_analysis import CVECategory, CVEAnalysis
 
 
 class CVECategorizerAgent(BaseCVEAgent):
@@ -28,11 +28,11 @@ class CVECategorizerAgent(BaseCVEAgent):
 
     def analyze(
         self,
-        cve_list: list[CVE],
+        analysis: CVEAnalysis,
         handle_event: Callable[[Event], None],
-    ) -> list[CVE]:
+    ) -> CVEAnalysis:
 
-        for cve in cve_list:
+        for cve in analysis.cves:
 
             handle_event(BeforeAnalysis(cve))
 
@@ -68,7 +68,11 @@ class CVECategorizerAgent(BaseCVEAgent):
                 json_object = json.loads(response.message.content)
                 cve.category = json_object.get("category", CVECategory.unknown)
 
-                handle_event(InformationEvent(cve, f"category: {cve.category}"))
+                handle_event(
+                    InformationEvent(
+                        cve=cve, message=f"category: {cve.category}"
+                    )
+                )
 
             except Exception as e:
                 cve.category = CVECategory.unknown
@@ -76,4 +80,4 @@ class CVECategorizerAgent(BaseCVEAgent):
 
             handle_event(AfterAnalysis(cve))
 
-        return cve_list
+        return analysis

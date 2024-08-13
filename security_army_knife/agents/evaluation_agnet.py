@@ -11,7 +11,7 @@ from security_army_knife.agents.base_agent import (
     CachedEvent,
     ErrorEvent,
 )
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE, CVEAnalysis
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
 
@@ -22,9 +22,9 @@ class EvaluationAgent(BaseCVEAgent):
         self.logger = logging.getLogger("SecurityArmyKnife")
 
     def analyze(
-        self, cve_list: List[CVE], handle_event: Callable[[Event], None]
-    ) -> List[CVE]:
-        for cve in cve_list:
+        self, analysis: CVEAnalysis, handle_event: Callable[[Event], None]
+    ) -> CVEAnalysis:
+        for cve in analysis.cves:
             handle_event(BeforeAnalysis(cve))
 
             if cve.final_analysis:
@@ -59,7 +59,7 @@ class EvaluationAgent(BaseCVEAgent):
 
             handle_event(AfterAnalysis(cve))
 
-        return cve_list
+        return analysis
 
     def evaluate_cve(self, cve: CVE, handle_event: Callable[[Event], None]):
         messages = [
