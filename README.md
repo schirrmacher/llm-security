@@ -9,11 +9,11 @@ This repository contains security utilities. The features will be announced soon
 First run `make setup`, then:
 
 ```
-sak/bin/sak -cve examples/cve-advisories.json \
-    -dep examples/dependencies.csv \
-    -arc examples/architecture.d2 \
-    -api examples/swagger-open-api.json \
-    -src examples
+sak/bin/sak cve \
+    -cve examples/cves/demo.json \
+    -arc examples/architecture_diagrams/hsm.d2 \
+    -api examples/api_specs/tokenization_service.yaml \
+    -inf examples/infrastructure_code/network.tf
 ```
 
 ## Developing

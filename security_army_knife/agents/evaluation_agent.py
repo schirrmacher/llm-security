@@ -45,13 +45,15 @@ class EvaluationAgent(BaseCVEAgent):
                 handle_event(
                     InformationEvent(
                         cve=cve,
-                        message=f"critical: {critical}",
+                        message=(
+                            "🔴 critical" if critical else "🟢 not critical"
+                        ),
                     )
                 )
                 handle_event(
                     InformationEvent(
                         cve=cve,
-                        message=f"scenarios detected: {len(threat_scenarios)}",
+                        message=f"{len(threat_scenarios)} attack scenarios analyzed",
                     )
                 )
             except Exception as e:

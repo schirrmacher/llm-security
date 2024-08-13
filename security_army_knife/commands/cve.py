@@ -1,7 +1,7 @@
 import json
 import logging
 import argparse
-from typing import TextIO, Optional, List
+from typing import TextIO, Optional
 
 from security_army_knife.commands.util import (
     is_valid_directory,
@@ -19,7 +19,7 @@ from security_army_knife.agents.agent_tree import AgentTree
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.files.trivy_importer import TrivyImporter
 from security_army_knife.agents.architecuture_agent import ArchitectureAgent
-from security_army_knife.agents.evaluation_agnet import EvaluationAgent
+from security_army_knife.agents.evaluation_agent import EvaluationAgent
 from security_army_knife.agents.infrastructure_agent import InfrastructureAgent
 
 

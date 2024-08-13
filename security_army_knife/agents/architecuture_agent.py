@@ -148,7 +148,7 @@ class ArchitectureAgent(BaseCVEAgent):
                     cve.architecture_analysis = ArchitectureAnalysis(
                         infrastructure_conditions=infrastructure_conditions
                     )
-                    message = f"conditions: {len(infrastructure_conditions)}"
+                    message = f"{len(infrastructure_conditions)} attack conditions identified"
                     handle_event(InformationEvent(cve=cve, message=message))
                 else:
                     raise ValueError("No JSON object found in response")
