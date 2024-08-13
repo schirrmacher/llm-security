@@ -1,6 +1,6 @@
 from typing import Callable, Type
 
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVEAnalysis
 from security_army_knife.models.base_model import BaseModel
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent
 
@@ -15,7 +15,7 @@ class BaseCVEAgent(BaseAgent):
 
     def analyze(
         self,
-        cve_list: list[CVE],
+        analysis: CVEAnalysis,
         handle_event: Callable[[AgentEvent], None],
-    ) -> list[CVE]:
-        return cve_list
+    ) -> CVEAnalysis:
+        return analysis

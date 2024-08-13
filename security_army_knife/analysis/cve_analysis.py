@@ -6,6 +6,9 @@ from security_army_knife.analysis.architecture_analysis import (
     ArchitectureAnalysis,
 )
 from security_army_knife.analysis.evaluation_analysis import EvaluationAnalysis
+from security_army_knife.analysis.infrastructure_analysis import (
+    InfrastructureAnalysis,
+)
 
 
 class CVECategory:
@@ -126,36 +129,73 @@ class CVE:
         )
 
         return (
-            f"CVE Name: {self.name}\n"
-            f"Description: {self.description}\n"
-            f"Category: {self.category}\n"
-            f"{self.code_analysis or 'No Code Analysis'}\n"
-            f"{self.api_spec_analysis or 'No API Spec Analysis'}\n"
-            f"{self.architecture_analysis or 'No Architecture Analysis'}\n"
-            f"Final Analysis:\n"
-            f"  Critical: {self.final_analysis.critical if self.final_analysis else 'No criticality'}\n"
-            f"  Summary: {self.final_analysis.summary if self.final_analysis else 'No summary'}\n"
-            f"Threat Scenarios:\n    {threat_scenarios}"
+            f"# CVE Name: {self.name}\n\n"
+            f"**Description:** {self.description}\n\n"
+            f"**Category:** {self.category}\n\n"
+            f"## Code Analysis\n"
+            f"{self.code_analysis or 'No Code Analysis'}\n\n"
+            f"## API Spec Analysis\n"
+            f"{self.api_spec_analysis or 'No API Spec Analysis'}\n\n"
+            f"## Architecture Analysis\n"
+            f"{self.architecture_analysis or 'No Architecture Analysis'}\n\n"
+            f"## Final Analysis\n"
+            f"**Critical:** {self.final_analysis.critical if self.final_analysis else 'No criticality'}\n\n"
+            f"**Summary:** {self.final_analysis.summary if self.final_analysis else 'No summary'}\n\n"
+            f"**Threat Scenarios:**\n\n"
+            f"{threat_scenarios}"
         )
 
-    @staticmethod
-    def persist_state(cve_list: list["CVE"], file_path: str):
+
+class CVEAnalysis:
+    def __init__(
+        self,
+        cves: list[CVE],
+        infrastructure_analysis: InfrastructureAnalysis = None,
+    ):
+        self.cves = cves
+        self.infrastructure_analysis = infrastructure_analysis
+
+    @classmethod
+    def from_json(cls, json_dict: dict):
+        cve_list = CVE.from_json_list(json_dict.get("cves", []))
+        infrastructure_analysis = InfrastructureAnalysis.from_json(
+            json_dict.get("infrastructure_analysis", {})
+        )
+        return cls(
+            cves=cve_list, infrastructure_analysis=infrastructure_analysis
+        )
+
+    def to_json(self):
+        return {
+            "cves": [cve.to_json() for cve in self.cves],
+            "infrastructure_analysis": (
+                self.infrastructure_analysis.to_json()
+                if self.infrastructure_analysis
+                else {}
+            ),
+        }
+
+    def to_markdown(self) -> str:
+        markdown_content = "\n\n".join([cve.to_markdown() for cve in self.cves])
+        infrastructure_md = (
+            self.infrastructure_analysis.to_markdown()
+            if self.infrastructure_analysis
+            else ""
+        )
+        return f"{markdown_content}\n\n{infrastructure_md}"
+
+    def save_to_file(self, file_path: str):
         with open(file_path, "w") as file:
-            json.dump([cve.to_json() for cve in cve_list], file, indent=4)
+            json.dump(self.to_json(), file, indent=4)
 
     @staticmethod
-    def load_state(file_path: str) -> list:
-        try:
-            with open(file_path, "r") as file:
-                cve_list = json.load(file)
-                return CVE.from_json_list(cve_list)
-        except (IOError, json.JSONDecodeError, TypeError) as e:
-            # Log the error if needed, e.g., print(e) or use a logging framework
-            return []
+    def load_state(file_path: str) -> "CVEAnalysis":
+        with open(file_path, "r") as file:
+            state = json.load(file)
+            return CVEAnalysis.from_json(state)
 
     @staticmethod
-    def merge_cves(existing_cves: list, new_cves: list) -> list:
-        # Prefer to use existing CVEs because they might have been analyzed already
+    def merge_cves(existing_cves: list[CVE], new_cves: list[CVE]) -> list[CVE]:
         new_cve_dict = {cve.name: cve for cve in new_cves}
 
         for existing_cve in existing_cves:
@@ -167,8 +207,9 @@ class CVE:
         return list(new_cve_dict.values())
 
     @staticmethod
-    def load_and_merge_state(file_path: str, new_cves: list) -> list:
-        existing_cves = CVE.load_state(file_path)
-        merged_cves = CVE.merge_cves(existing_cves, new_cves)
-        CVE.persist_state(merged_cves, file_path)
-        return merged_cves
+    def load_and_merge_state(
+        file_path: str, new_cves: list[CVE]
+    ) -> "CVEAnalysis":
+        cve_analysis = CVEAnalysis.load_state(file_path)
+        cve_analysis.cves = CVEAnalysis.merge_cves(cve_analysis.cves, new_cves)
+        return cve_analysis

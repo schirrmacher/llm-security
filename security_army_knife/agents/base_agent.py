@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Callable, Type, Optional
 
-from security_army_knife.analysis.cve import CVE
+from security_army_knife.analysis.cve_analysis import CVE
 from security_army_knife.analysis.sdr import SDR
 from security_army_knife.models.base_model import BaseModel
 
@@ -61,21 +61,27 @@ class ErrorEvent(AgentEvent):
 
 class BeforeAnalysis(AgentEvent):
 
-    def __init__(self, cve: Optional[CVE] = None, sdr: Optional[SDR] = None):
+    def __init__(
+        self, cve: Optional[CVE] = None, sdr: Optional[SDR] = None, message=""
+    ):
         super(BeforeAnalysis, self).__init__(
             event_type=AgentEvent.Type.BEFORE_ANALYSIS,
             cve=cve,
             sdr=sdr,
+            message=message,
         )
 
 
 class AfterAnalysis(AgentEvent):
 
-    def __init__(self, cve: Optional[CVE] = None, sdr: Optional[SDR] = None):
+    def __init__(
+        self, cve: Optional[CVE] = None, sdr: Optional[SDR] = None, message=""
+    ):
         super(AfterAnalysis, self).__init__(
             event_type=AgentEvent.Type.AFTER_ANALYSIS,
             cve=cve,
             sdr=sdr,
+            message=message,
         )
 
 
