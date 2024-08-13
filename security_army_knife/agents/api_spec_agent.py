@@ -89,10 +89,17 @@ class APISpecAgent(BaseCVEAgent):
                 response = self.model.talk(messages, json=True)
                 json_object = json.loads(response.message.content)
                 cve.api_spec_analysis = APISpecAnalysis.from_json(json_object)
+
+                message = ""
+                if cve.api_spec_analysis.facilitates_attack:
+                    message = "design issue detected in API spec"
+                else:
+                    message = "no design flaw detected"
+
                 handle_event(
                     InformationEvent(
                         cve=cve,
-                        message=f"facilitates_attack: {cve.api_spec_analysis.facilitates_attack}",
+                        message=message,
                     )
                 )
 

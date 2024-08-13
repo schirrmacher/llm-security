@@ -70,7 +70,7 @@ class CVECategorizerAgent(BaseCVEAgent):
 
                 handle_event(
                     InformationEvent(
-                        cve=cve, message=f"category: {cve.category}"
+                        cve=cve, message=f"categorized => {cve.category}"
                     )
                 )
 

@@ -149,7 +149,7 @@ class CVE:
 class CVEAnalysis:
     def __init__(
         self,
-        cves: list[CVE],
+        cves: list[CVE] = [],
         infrastructure_analysis: InfrastructureAnalysis = None,
     ):
         self.cves = cves
@@ -190,9 +190,12 @@ class CVEAnalysis:
 
     @staticmethod
     def load_state(file_path: str) -> "CVEAnalysis":
-        with open(file_path, "r") as file:
-            state = json.load(file)
-            return CVEAnalysis.from_json(state)
+        try:
+            with open(file_path, "r") as file:
+                state = json.load(file)
+                return CVEAnalysis.from_json(state)
+        except Exception as e:
+            return CVEAnalysis()
 
     @staticmethod
     def merge_cves(existing_cves: list[CVE], new_cves: list[CVE]) -> list[CVE]:

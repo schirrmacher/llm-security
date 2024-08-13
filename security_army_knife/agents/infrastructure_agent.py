@@ -110,7 +110,7 @@ class InfrastructureAgent(BaseCVEAgent):
             )
             handle_event(
                 InformationEvent(
-                    message=f"components identified: {len(analysis.infrastructure_analysis.components)}"
+                    message=f"{len(analysis.infrastructure_analysis.components)} security related components detected"
                 )
             )
 
