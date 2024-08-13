@@ -14,7 +14,7 @@ class CodeAnalysis:
             affected_files=json_dict.get("affected_files", []),
         )
 
-    def to_json(self):
+    def to_dict(self):
         return {
             "queries": self.queries,
             "affected_files": self.affected_files,

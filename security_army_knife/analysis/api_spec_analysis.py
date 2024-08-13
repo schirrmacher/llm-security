@@ -14,7 +14,7 @@ class APISpecAnalysis:
             explanation=json_dict.get("explanation", ""),
         )
 
-    def to_json(self):
+    def to_dict(self):
         return {
             "facilitates_attack": self.facilitates_attack,
             "explanation": self.explanation,

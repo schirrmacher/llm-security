@@ -40,7 +40,7 @@ class CVECategorizerAgent(BaseCVEAgent):
                 handle_event(CachedEvent(cve))
                 continue
 
-            task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_json()}"
+            task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_dict()}"
             formatting = "Format the result as JSON and add the attribute 'category' with one of: os, distro, app."
 
             messages = [

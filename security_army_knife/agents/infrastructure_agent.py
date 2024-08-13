@@ -11,6 +11,7 @@ from security_army_knife.agents.base_agent import (
     AfterAnalysis,
     BeforeAnalysis,
     InformationEvent,
+    CachedEvent,
 )
 
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
@@ -36,6 +37,10 @@ class InfrastructureAgent(BaseCVEAgent):
     ) -> CVEAnalysis:
 
         if not self.infrastructure_code:
+            return analysis
+
+        if analysis.infrastructure_analysis:
+            handle_event(CachedEvent())
             return analysis
 
         handle_event(BeforeAnalysis(message="infrastructure analysis starts"))

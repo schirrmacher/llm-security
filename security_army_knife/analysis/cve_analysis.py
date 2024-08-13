@@ -75,26 +75,26 @@ class CVE:
     def from_json_list(cls, json_list: list):
         return [cls.from_json(item) for item in json_list]
 
-    def to_json(self):
+    def to_dict(self):
         return {
             "name": self.name,
             "description": self.description,
             "category": self.category,
             "code_analysis": (
-                self.code_analysis.to_json() if self.code_analysis else None
+                self.code_analysis.to_dict() if self.code_analysis else None
             ),
             "api_spec_analysis": (
-                self.api_spec_analysis.to_json()
+                self.api_spec_analysis.to_dict()
                 if self.api_spec_analysis
                 else None
             ),
             "architecture_analysis": (
-                self.architecture_analysis.to_json()
+                self.architecture_analysis.to_dict()
                 if self.architecture_analysis
                 else None
             ),
             "final_analysis": (
-                self.final_analysis.to_json() if self.final_analysis else None
+                self.final_analysis.to_dict() if self.final_analysis else None
             ),
         }
 
@@ -158,22 +158,29 @@ class CVEAnalysis:
     @classmethod
     def from_json(cls, json_dict: dict):
         cve_list = CVE.from_json_list(json_dict.get("cves", []))
+
         infrastructure_analysis = InfrastructureAnalysis.from_json(
-            json_dict.get("infrastructure_analysis", {})
+            json_dict.get("infrastructure_analysis", None)
         )
         return cls(
             cves=cve_list, infrastructure_analysis=infrastructure_analysis
         )
 
-    def to_json(self):
+    def to_dict(self):
         return {
-            "cves": [cve.to_json() for cve in self.cves],
+            "cves": [cve.to_dict() for cve in self.cves],
             "infrastructure_analysis": (
-                self.infrastructure_analysis.to_json()
+                self.infrastructure_analysis.to_dict()
                 if self.infrastructure_analysis
                 else {}
             ),
         }
+
+    def to_json(self):
+        return json.dumps(
+            self.to_dict(),
+            indent=4,
+        )
 
     def to_markdown(self) -> str:
         markdown_content = "\n\n".join([cve.to_markdown() for cve in self.cves])
@@ -186,7 +193,7 @@ class CVEAnalysis:
 
     def save_to_file(self, file_path: str):
         with open(file_path, "w") as file:
-            json.dump(self.to_json(), file, indent=4)
+            json.dump(self.to_dict(), file, indent=4)
 
     @staticmethod
     def load_state(file_path: str) -> "CVEAnalysis":

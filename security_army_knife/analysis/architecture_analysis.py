@@ -13,7 +13,7 @@ class ArchitectureAnalysis:
             ),
         )
 
-    def to_json(self):
+    def to_dict(self):
         return {
             "infrastructure_conditions": self.infrastructure_conditions,
         }
