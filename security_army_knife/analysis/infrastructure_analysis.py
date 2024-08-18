@@ -26,7 +26,9 @@ class InfrastructureAnalysis:
 
         ports = component.get("ports", [])
         if ports:
-            details.append(f"**Ports:** {', '.join(str(port) for port in ports)}")
+            details.append(
+                f"**Ports:** {', '.join(str(port) for port in ports)}"
+            )
 
         protocols = component.get("protocols", [])
         if protocols:
