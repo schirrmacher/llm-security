@@ -19,7 +19,7 @@ from security_army_knife.agents.agent_tree import AgentTree
 from security_army_knife.agents.base_agent import BaseAgent, AgentEvent as Event
 from security_army_knife.files.trivy_importer import TrivyImporter
 from security_army_knife.agents.architecuture_agent import ArchitectureAgent
-from security_army_knife.agents.evaluation_agent import EvaluationAgent
+from security_army_knife.agents.cve_evaluation_agent import CVEEvaluationAgent
 from security_army_knife.agents.infrastructure_agent import InfrastructureAgent
 
 
@@ -211,7 +211,7 @@ def run_cve_analysis(
             ArchitectureAgent(model, architecture_diagram=architecture_diagram)
         )
 
-    agents.append(EvaluationAgent(model))
+    agents.append(CVEEvaluationAgent(model))
 
     def handle_event(event: Event):
         if event.event_type == Event.Type.BEFORE_ANALYSIS:
