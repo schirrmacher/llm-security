@@ -16,6 +16,7 @@ from security_army_knife.agents.base_agent import (
 
 from security_army_knife.agents.base_cve_agent import BaseCVEAgent
 
+from security_army_knife.analysis.category_analysis import CategoryAnalysis
 from security_army_knife.analysis.cve_analysis import CVECategory, CVEAnalysis
 
 
@@ -36,11 +37,31 @@ class CVECategorizerAgent(BaseCVEAgent):
 
             handle_event(BeforeAnalysis(cve))
 
-            if cve.category != CVECategory.unknown:
+            if cve.category:
                 handle_event(CachedEvent(cve))
                 continue
 
-            task = f"For the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_dict()}"
+            task = f"""
+            # Introduction
+            - You are a system security expert with 30 years of experience in cybersecurity.
+
+            # Task
+            - Categorize the following CVE, choose one of the categories: operating system kernel, operating system distribution library, application layer.{cve.to_dict()}
+
+            ## Java Applications
+            - If the CVE is related to Java extract the following information:
+                - Java runtime, like Oracle JDK, OpenJDK, AdoptOpenJDK etc.
+            - If a value cannot be identified set it to null
+
+            # Summary
+            - Format your response in JSON
+            - Apply the following structure:
+            ```
+            "category": str,
+            "java_runtime": str
+            ```
+            """
+
             formatting = "Format the result as JSON and add the attribute 'category' with one of: os, distro, app."
 
             messages = [
@@ -66,11 +87,12 @@ class CVECategorizerAgent(BaseCVEAgent):
                 )
 
                 json_object = json.loads(response.message.content)
-                cve.category = json_object.get("category", CVECategory.unknown)
+                cve.category = CategoryAnalysis.from_json(json_object)
 
                 handle_event(
                     InformationEvent(
-                        cve=cve, message=f"categorized => {cve.category}"
+                        cve=cve,
+                        message=f"categorized => {cve.category.category}",
                     )
                 )
 

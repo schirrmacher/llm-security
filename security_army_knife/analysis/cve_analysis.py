@@ -1,5 +1,6 @@
 import json
 
+from security_army_knife.analysis.category_analysis import CategoryAnalysis
 from security_army_knife.analysis.code_analysis import CodeAnalysis
 from security_army_knife.analysis.api_spec_analysis import APISpecAnalysis
 from security_army_knife.analysis.architecture_analysis import (
@@ -23,7 +24,7 @@ class CVE:
         self,
         name: str,
         description: str,
-        category: str = CVECategory.unknown,
+        category: CategoryAnalysis = CategoryAnalysis(),
         code_analysis: CodeAnalysis = None,
         api_spec_analysis: APISpecAnalysis = None,
         architecture_analysis: ArchitectureAnalysis = None,
@@ -45,6 +46,12 @@ class CVE:
             if code_analysis_data
             else None
         )
+        category_analysis_data = json_dict.get("category")
+        category_analysis = (
+            CategoryAnalysis(**category_analysis_data)
+            if category_analysis_data
+            else None
+        )
         api_spec_data = json_dict.get("api_spec_analysis")
         api_spec_analysis = (
             APISpecAnalysis.from_json(api_spec_data) if api_spec_data else None
@@ -64,7 +71,7 @@ class CVE:
         return cls(
             name=json_dict.get("name"),
             description=json_dict.get("description"),
-            category=json_dict.get("category", CVECategory.unknown),
+            category=category_analysis,
             code_analysis=code_analysis,
             api_spec_analysis=api_spec_analysis,
             architecture_analysis=architecture_analysis,
@@ -79,7 +86,7 @@ class CVE:
         return {
             "name": self.name,
             "description": self.description,
-            "category": self.category,
+            "category": (self.category.to_dict() if self.category else None),
             "code_analysis": (
                 self.code_analysis.to_dict() if self.code_analysis else None
             ),
@@ -120,30 +127,6 @@ class CVE:
             ),
         ]
         return "\n".join(sections)
-
-    def __str__(self):
-        threat_scenarios = (
-            "\n    ".join(self.final_analysis.threat_scenarios)
-            if self.final_analysis and self.final_analysis.threat_scenarios
-            else "No threat scenarios"
-        )
-
-        return (
-            f"# CVE Name: {self.name}\n\n"
-            f"**Description:** {self.description}\n\n"
-            f"**Category:** {self.category}\n\n"
-            f"## Code Analysis\n"
-            f"{self.code_analysis or 'No Code Analysis'}\n\n"
-            f"## API Spec Analysis\n"
-            f"{self.api_spec_analysis or 'No API Spec Analysis'}\n\n"
-            f"## Architecture Analysis\n"
-            f"{self.architecture_analysis or 'No Architecture Analysis'}\n\n"
-            f"## Final Analysis\n"
-            f"**Critical:** {self.final_analysis.critical if self.final_analysis else 'No criticality'}\n\n"
-            f"**Summary:** {self.final_analysis.summary if self.final_analysis else 'No summary'}\n\n"
-            f"**Threat Scenarios:**\n\n"
-            f"{threat_scenarios}"
-        )
 
 
 class CVEAnalysis:

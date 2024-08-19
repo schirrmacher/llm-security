@@ -2,10 +2,11 @@ import json
 import unittest
 import tempfile
 
+from security_army_knife.analysis.category_analysis import CategoryAnalysis
 from security_army_knife.analysis.cve_analysis import (
     CVE,
     CVEAnalysis,
-    CVECategory,
+    CategoryAnalysis,
 )
 from security_army_knife.analysis.infrastructure_analysis import (
     InfrastructureAnalysis,
@@ -19,7 +20,7 @@ class TestCVE(unittest.TestCase):
         self.cve_data = {
             "name": "CVE-2023-4911",
             "description": "A buffer overflow was discovered...",
-            "category": "distro",
+            "category": {"category": "distro", "java_runtime": None},
             "code_analysis": None,
             "api_spec_analysis": None,
             "architecture_analysis": None,
@@ -28,14 +29,15 @@ class TestCVE(unittest.TestCase):
         self.cve_instance = CVE.from_json(self.cve_data)
 
     def test_cve_initialization(self):
+        category_analysis = CategoryAnalysis(category="distro")
         cve = CVE(
             name="CVE-2023-4911",
             description="A buffer overflow was discovered...",
-            category=CVECategory.distro,
+            category=category_analysis,
         )
         self.assertEqual(cve.name, "CVE-2023-4911")
         self.assertEqual(cve.description, "A buffer overflow was discovered...")
-        self.assertEqual(cve.category, CVECategory.distro)
+        self.assertEqual(cve.category.category, "distro")
         self.assertIsNone(cve.code_analysis)
         self.assertIsNone(cve.api_spec_analysis)
         self.assertIsNone(cve.architecture_analysis)
@@ -46,13 +48,19 @@ class TestCVE(unittest.TestCase):
         self.assertEqual(
             self.cve_instance.description, self.cve_data["description"]
         )
-        self.assertEqual(self.cve_instance.category, self.cve_data["category"])
+        self.assertEqual(
+            self.cve_instance.category.category,
+            self.cve_data["category"]["category"],
+        )
 
     def test_cve_to_dict(self):
         cve_json = self.cve_instance.to_dict()
         self.assertEqual(cve_json["name"], self.cve_data["name"])
         self.assertEqual(cve_json["description"], self.cve_data["description"])
-        self.assertEqual(cve_json["category"], self.cve_data["category"])
+        self.assertEqual(
+            cve_json["category"]["category"],
+            self.cve_data["category"]["category"],
+        )
 
 
 class TestCVEAnalysis(unittest.TestCase):
@@ -81,7 +89,7 @@ class TestCVEAnalysis(unittest.TestCase):
             {
                 "name": "CVE-2023-4911",
                 "description": "A buffer overflow was discovered...",
-                "category": "distro",
+                "category": {"category": "distro", "java_runtime": None},
                 "code_analysis": None,
                 "api_spec_analysis": None,
                 "architecture_analysis": None,
@@ -90,7 +98,7 @@ class TestCVEAnalysis(unittest.TestCase):
             {
                 "name": "CVE-2022-3509",
                 "description": "A parsing issue similar to CVE-2022-3171...",
-                "category": "app",
+                "category": {"category": "app", "java_runtime": "OpenJDK 11"},
                 "code_analysis": {
                     "queries": ["\\btextformat\\b"],
                     "affected_files": ["file1.java"],
@@ -179,7 +187,7 @@ class TestCVEAnalysis(unittest.TestCase):
                 {
                     "name": "CVE-2023-9999",
                     "description": "A new CVE.",
-                    "category": "os",
+                    "category": {"category": "os", "java_runtime": None},
                 }
             )
         ]
