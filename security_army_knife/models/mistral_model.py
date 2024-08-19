@@ -46,6 +46,7 @@ class MistralModel(BaseModel):
         if json:
             response = self.llm.chat.complete(
                 model=self.model_name,
+                temperature=0.1,
                 messages=map_chat_messages_to_dicts(messages),
                 response_format={"type": "json_object"},
             )
