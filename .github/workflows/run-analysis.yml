@@ -34,6 +34,7 @@ on:
 
 jobs:
   run-analysis:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/test-github-action'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
