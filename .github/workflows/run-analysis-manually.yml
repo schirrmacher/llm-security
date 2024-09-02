@@ -52,14 +52,14 @@ jobs:
         if: ${{ github.event.inputs.analysis_type == 'cve' }}
         run: |
           source sak/bin/activate
-          export MISTRALAI_API_KEY= ${{ secrets.MISTRALAI}}
+          export MISTRALAI_API_KEY=${{ secrets.MISTRALAI}}
           sak/bin/sak analyze -arc ${{ github.event.inputs.architecture_diagram }}
 
       - name: Run SDR Analysis
         if: ${{ github.event.inputs.analysis_type == 'sdr' }}
         run: |
           source sak/bin/activate
-          export MISTRALAI_API_KEY= ${{ secrets.MISTRALAI}}
+          export MISTRALAI_API_KEY=${{ secrets.MISTRALAI}}
           sak/bin/sak sdr -arc ${{ github.event.inputs.architecture_diagram }} -api ${{ github.event.inputs.api_documentation }} -of ${{ github.event.inputs.output_format }} -f ${{ github.event.inputs.output_filename }}
 
       - name: Upload Analysis Results
