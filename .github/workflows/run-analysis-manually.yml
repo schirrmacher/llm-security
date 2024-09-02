@@ -1,0 +1,69 @@
+name: Run Security Analysis Manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      analysis_type:
+        description: 'Type of analysis to run (cve or sdr)'
+        required: true
+        default: 'cve'
+        type: choice
+        options:
+          - cve
+          - sdr
+      architecture_diagram:
+        description: 'Path to the architecture diagram file'
+        required: false
+        default: ''
+        type: string
+      api_documentation:
+        description: 'Path to the API documentation file'
+        required: false
+        default: ''
+        type: string
+      output_format:
+        description: 'Output format for the analysis (e.g., markdown)'
+        required: false
+        default: 'markdown'
+        type: string
+      output_filename:
+        description: 'Filename for the output'
+        required: false
+        default: 'analysis'
+        type: string
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies and set up environment
+        run: |
+          make setup
+
+      - name: Run CVE Analysis
+        if: ${{ github.event.inputs.analysis_type == 'cve' }}
+        run: |
+          source sak/bin/activate
+          export MISTRALAI_API_KEY= ${{ secrets.MISTRALAI}}
+          sak/bin/sak analyze -arc ${{ github.event.inputs.architecture_diagram }}
+
+      - name: Run SDR Analysis
+        if: ${{ github.event.inputs.analysis_type == 'sdr' }}
+        run: |
+          source sak/bin/activate
+          export MISTRALAI_API_KEY= ${{ secrets.MISTRALAI}}
+          sak/bin/sak sdr -arc ${{ github.event.inputs.architecture_diagram }} -api ${{ github.event.inputs.api_documentation }} -of ${{ github.event.inputs.output_format }} -f ${{ github.event.inputs.output_filename }}
+
+      - name: Upload Analysis Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-analysis-results
+          path: ${{ github.event.inputs.output_filename }}.md
