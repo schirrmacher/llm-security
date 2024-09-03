@@ -5,9 +5,10 @@ inputs:
   diagrams:
     description: "Folder of architecture diagrams"
     required: true
-  api_specs:
-    description: "Folder of API specifications"
-    required: true
+  output_filename:
+    description: "Filename for the analysis"
+    required: false
+    default: "analysis.md"
 
 runs:
   using: "composite"
@@ -36,7 +37,13 @@ runs:
     - name: Setup gcloud
       uses: google-github-actions/setup-gcloud@v2
 
-    - name: Run SDR Tool
+    - name: Run AI Analysis
       run: |
-        sak/bin/sak sdr -arc ${{ inputs.diagrams }}
+        sak/bin/sak sdr -arc ${{ inputs.diagrams }} --output_filename ${{ inputs.output_filename }} --output_format markdown
       shell: bash
+
+    - name: Upload Results
+          uses: actions/upload-artifact@v4
+          with:
+            name: Security Review
+            path: ${{ inputs.output_filename }}
