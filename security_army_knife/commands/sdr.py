@@ -73,7 +73,7 @@ def add_subcommand(subparsers):
         "-f",
         "--output_filename",
         type=str,
-        default="sdr",
+        default="sdr.md",
         help="Filename of the analysis result",
     )
 
@@ -141,7 +141,7 @@ def run_sdr_analysis(
 
         tree.traverse(handle_agent, target=sdr)
 
-        with open(f"{output_filename}.md", "w") as file:
+        with open(f"{output_filename}", "w") as file:
             file.write(sdr.to_markdown())
 
     except KeyboardInterrupt:
