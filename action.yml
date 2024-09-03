@@ -25,6 +25,7 @@ runs:
       run: |
         ls
         pwd
+        cd ${{ github.action_path }}
         make setup
       shell: bash
 
