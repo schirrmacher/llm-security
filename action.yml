@@ -23,6 +23,8 @@ runs:
 
     - name: Install dependencies
       run: |
+        ls
+        pwd
         make setup
       shell: bash
 
