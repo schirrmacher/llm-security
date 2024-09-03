@@ -5,6 +5,9 @@ inputs:
   diagrams:
     description: "Folder of architecture diagrams"
     required: true
+  api_specs:
+    description: "Folder of API specifications"
+    required: true
 
 runs:
   using: "composite"
@@ -17,6 +20,7 @@ runs:
     - name: Install dependencies
       run: |
         make setup
+      shell: bash
 
     - name: Authenticate to Google Cloud Platform
       id: auth
@@ -34,4 +38,5 @@ runs:
 
     - name: Run SDR Tool
       run: |
-        sak/bin/sak sdr -arc ${{ inputs.diagrams }}
+        sak/bin/sak sdr -arc ${{ inputs.diagrams }} -api ${{ inputs.api_specs }}
+      shell: bash
