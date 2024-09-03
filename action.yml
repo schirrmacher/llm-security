@@ -23,10 +23,7 @@ runs:
 
     - name: Install dependencies
       run: |
-        ls
-        pwd
-        cd ${{ github.action_path }}
-        make setup
+        make -C ${{ github.action_path }} setup
       shell: bash
 
     - name: Authenticate to Google Cloud Platform
@@ -45,7 +42,7 @@ runs:
 
     - name: Run AI Analysis
       run: |
-        sak/bin/sak sdr -arc ${{ inputs.diagrams }} --output_filename ${{ inputs.output_filename }} --output_format markdown
+        ${{ github.action_path }}/sak/bin/sak sdr -arc ${{ inputs.diagrams }} --output_filename ${{ inputs.output_filename }} --output_format markdown
       shell: bash
 
     - name: Upload Results
