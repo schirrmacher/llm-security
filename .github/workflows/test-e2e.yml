@@ -20,29 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.1.7
 
-      - name: Set up Python
-        uses: actions/setup-python@v5.1.1
+      - name: Run SDR Reviewer
+        uses: paymenttools/security-army-knife@main
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: |
-          make setup
-
-      - name: Authenticate to Google Cloud Platform
-        id: auth
-        uses: google-github-actions/auth@v2
-        with:
-          export_environment_variables: true
-          create_credentials_file: true
-          access_token_scopes: https://www.googleapis.com/auth/cloud-platform
-          token_format: "access_token"
-          workload_identity_provider: projects/180906254540/locations/global/workloadIdentityPools/cicd/providers/github
-          service_account: github@pt-cicd.iam.gserviceaccount.com
-
-      - name: Setup gcloud
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Run CLI
-        run: |
-          sak/bin/sak sdr -arc examples/architecture_diagrams/tokenization_service.puml -api examples/api_specs/chargeback_service.json
+          diagrams: "examples/architecture_diagrams/tokenization_service.puml"

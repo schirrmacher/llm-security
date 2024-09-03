@@ -1,0 +1,37 @@
+name: "SDR Reviewer"
+description: "Scan architectures for security threats"
+
+inputs:
+  diagrams:
+    description: "Folder of architecture diagrams"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5.1.1
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        make setup
+
+    - name: Authenticate to Google Cloud Platform
+      id: auth
+      uses: google-github-actions/auth@v2
+      with:
+        export_environment_variables: true
+        create_credentials_file: true
+        access_token_scopes: https://www.googleapis.com/auth/cloud-platform
+        token_format: "access_token"
+        workload_identity_provider: projects/180906254540/locations/global/workloadIdentityPools/cicd/providers/github
+        service_account: github@pt-cicd.iam.gserviceaccount.com
+
+    - name: Setup gcloud
+      uses: google-github-actions/setup-gcloud@v2
+
+    - name: Run SDR Tool
+      run: |
+        sak/bin/sak sdr -arc ${{ inputs.diagrams }}
