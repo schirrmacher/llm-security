@@ -38,7 +38,7 @@ def add_subcommand(subparsers):
         "--architecture_diagram",
         type=argparse.FileType("r"),
         default=None,
-        required=False,
+        required=True,
         help="Path to the architecture diagram file (image or text)",
     )
 

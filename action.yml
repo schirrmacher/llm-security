@@ -38,5 +38,5 @@ runs:
 
     - name: Run SDR Tool
       run: |
-        sak/bin/sak sdr -arc ${{ inputs.diagrams }} -api ${{ inputs.api_specs }}
+        sak/bin/sak sdr -arc ${{ inputs.diagrams }}
       shell: bash
