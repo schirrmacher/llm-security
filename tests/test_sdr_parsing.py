@@ -38,7 +38,6 @@ class TestSDRFromJson(unittest.TestCase):
                     "authentication": "Token",
                     "environmentSrc": "Env1",
                     "environmentDst": "Env2",
-                    "protection": "Encryption",
                     "assets": ["Asset1"],
                 },
             ],

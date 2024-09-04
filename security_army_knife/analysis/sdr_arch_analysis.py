@@ -32,7 +32,6 @@ class Dataflow:
         authentication: str,
         environmentSrc: str,
         environmentDst: str,
-        protection: str,
         assets: List[str],
     ):
         self.flow = flow
@@ -40,7 +39,6 @@ class Dataflow:
         self.authentication = authentication
         self.environmentSrc = environmentSrc
         self.environmentDst = environmentDst
-        self.protection = protection
         self.assets = assets
 
 
@@ -141,7 +139,6 @@ class SDRArchAnalysis:
             md += f"  - **Authentication**: {df.authentication}\n"
             md += f"  - **Environment Source**: {df.environmentSrc}\n"
             md += f"  - **Environment Destination**: {df.environmentDst}\n"
-            md += f"  - **Protection**: {df.protection}\n"
             md += f"  - **Assets**: {', '.join(df.assets)}\n\n"
 
         return md

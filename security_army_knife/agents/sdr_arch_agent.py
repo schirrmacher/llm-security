@@ -116,7 +116,6 @@ class SDRArchAgent(BaseAgent):
             authentication: Some authentication mechanism
             environmentSrc: Server Environment
             environmentDst: Client Environment
-            protection: Scheme for protecting asset
             assets:
                 - Asset 1
                 - Asset 2
