@@ -25,11 +25,20 @@ class SDRThreatAgent(BaseAgent):
         self,
         model: BaseModel,
         architecture_diagram: Optional[TextIO],
-        api_documentation: Optional[TextIO],
+        prompt_path: Optional[str] = None,
     ):
         super().__init__(model=model)
         self.architecture_diagram = architecture_diagram
-        self.api_documentation = api_documentation
+        self.prompt_path = prompt_path
+
+    def _read_task_prompt(self, prompt_path: str) -> str:
+        if not prompt_path:
+            raise ValueError("No task file path provided.")
+
+        with open(prompt_path, "r") as file:
+            task_prompt = file.read()
+
+        return task_prompt
 
     def analyze(
         self,
@@ -37,84 +46,61 @@ class SDRThreatAgent(BaseAgent):
         target: SDR,
     ) -> SDR:
 
+        try:
+            prompt = self._read_task_prompt(self.prompt_path)
+        except Exception as e:
+            handle_event(
+                ErrorEvent(sdr=target, error=f"Failed to read task file: {e}")
+            )
+            return target
+
         if not target.arch_analysis:
             return target
 
         task = f"""
+
         # Introduction
+
         - You are a system security expert and hacker.
         - You have experience with Advanced Persistent Threat actors
         - You have knowledge about OWASP Top 10 and MITRE ATT&CK
 
         # Tasks
+
         - Work on the following tasks and consider the system architecture below.
         - Do not repeat this description in your response.
         - If data is not mentioned in the diagram apply the value 'MISSING'.
 
-        ## Identify Threats
+        # Identify Threats
+
         - Identify as many threats as possible
+        - YOU MUST COME UP WITH MORE THAN 15 THREATS IN THE RESPONSE!!!
         - List the assets affected by the threat
         - Identify which components are affected by the threat
-        - Create at least 20 threats with focus on the assets and the affected components
         - Explain a potential scenarios how the threat might affect the assets and components
         - You must omit the threats if they do not affect the described assets or components in the system below
 
-        ### Threat Score
+        # Threat Score
+
         - Assign a risks score from 1 (not critical) to 25 (critical)
         - Consider DDoS attacks as highly critical
         - Consider authentication failures as highly critical
 
-        ### Attack Scenarios
+        ## Attack Scenarios
+
         - For each threat explain a scenario how the threat becomes reality
         - You must explicitly mention the affected asset!
         - You must explicitly explain how system components are misused or circumvented in a given scenario!
-        - Example: Since the system exposes public API endpoints, missing security monitoring might allow attackers to perform brute-force attacks on the APIs unnoticed
 
-        ### General Threats
-        - For key material consider leakage and expiry scenarios
-        - For public entry points consider DDoS attacks, especially if compute intensive operations might be triggered
-        - For transfer of file formats consider security attributes like confidentiality, integrity, authenticity
-        - Missing security monitoring and logging
+        {prompt}
 
-        ### Persistence Related Threats
-        - For databases consider missing backup mechanisms
-        - Consider that sensitive data, like credit cards and passwords, are encrypted at rest
+        # Mitigations
 
-        ### Authentication Threats
-        - For authentication protocols consider missing validation of roles and permissions
-        - Make sure that each participant in a system can only access the data which she should have access to
-        - If OAuth/OpenID with JWT is applied, make sure to validate the claims in every stage of critical operations
-        - Apply the least privilege principle
-        - For all authentication threats consider e2e tests as mitigation which are testing the unhappy path (invalid authentication attempt)
-
-        ### Mobile Application Threats
-        - For mobile applications, like Android or iOS, consider the following threats
-        - You must not mention the threats if they do not affect the described system below
-        - Challenge if sensitive key material is stored in secure enclaves
-        - Challenge if APIs offer proper bot protection to prevent automated attacks
-        - Only list the above when you identify mobile app technologies (iOS, Android etc.)!
-
-        ### Vendor and Third-party Threats
-        - Consider security issues in third-party components
-        - Consider information stealer malware in dependencies and challenge firewall setups
-        - Mitigation is to review source code of third-party components and perform vulnerability scans
-
-        ### Browser Related Threats
-        - The must only consider the threats when you are really sure that browser based technologies (JavaScript, HTML, Angular, React etc.) are applied in the system below!
-        - Consider proper settings of the same-origin policy (SOP) for Cross-origin resource sharing (CORS)
-        - Consider proper sanitization to prevent Cross-Site Scripting (XSS) attacks
-        - Consider the threat of Cross-Site Request Forgery (CSRF)
-        - Consider Server-Side Request Forgery Attacks (SSRF) which exploits flaws in web applications to access internal resources
-
-        ## Mitigations
-        - For each threat propose a set of mitigations
+        - For each threat propose mitigations
+        - Mitigations describe how to prevent the mentioned threat
         - Add a link to documentation (references) if applicable so engineers know how to solve a particular problem
 
-        ## References
-        - Add this for monitoring and alerting related mitigations: https://paymenttools.atlassian.net/wiki/spaces/ARCH/pages/1570963461/Security+Guide
-        - Add this for authentication related mitigations: https://paymenttools.atlassian.net/wiki/spaces/ARCH/pages/1323663361/DRAFT+Authentication+Authorization+Guide
-
-        ## Summary
+        # Summary
         - Create a JSON object with the following attributes:
         ```
         threats:
@@ -167,14 +153,20 @@ class SDRThreatAgent(BaseAgent):
             handle_event(ResponseEvent(sdr=target))
 
             json_object = json.loads(response.message.content)
-            target.threats = SDRThreats.from_json(json_object)
+
+            threats = SDRThreats.from_json(json_object)
 
             handle_event(
                 InformationEvent(
                     sdr=target,
-                    message=f"{len(target.threats.threats)} threats identified",
+                    message=f"{len(threats.threats)} threats identified",
                 )
             )
+
+            if target.threats is None:
+                target.threats = threats
+            else:
+                target.threats.threats.extend(threats.threats)
 
         except Exception as e:
             handle_event(ErrorEvent(sdr=target, error=e))

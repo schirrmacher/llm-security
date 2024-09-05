@@ -1,4 +1,4 @@
-import json
+import os
 import logging
 import argparse
 
@@ -10,9 +10,7 @@ from security_army_knife.commands.util import (
 from security_army_knife.ui.spinner import Spinner
 from security_army_knife.agents.sdr_arch_agent import SDRArchAgent
 from security_army_knife.agents.sdr_threat_agent import SDRThreatAgent
-from security_army_knife.agents.sdr_api_threat_agent import (
-    SDRApiThreatAgent,
-)
+
 from security_army_knife.agents.base_agent import AgentEvent as Event
 from security_army_knife.analysis.sdr import SDR
 from security_army_knife.agents.agent_tree import AgentTree
@@ -99,19 +97,48 @@ def run_sdr_analysis(
 
     model = get_model(large_language_model)
 
-    tree = AgentTree(
-        [
-            SDRArchAgent(
-                model=model,
-                architecture_diagram=architecture_diagram,
+    current_file_path = os.path.abspath(__file__)
+    current_file_dir = os.path.dirname(current_file_path)
+    parent_dir = os.path.dirname(current_file_dir)
+
+    class GeneralThreatAgent(SDRThreatAgent):
+        pass
+
+    class PersistanceThreatAgent(SDRThreatAgent):
+        pass
+
+    class SecurityMonitoringAgent(SDRThreatAgent):
+        pass
+
+    threat_agents = [
+        SDRArchAgent(
+            model=model,
+            architecture_diagram=architecture_diagram,
+        ),
+        GeneralThreatAgent(
+            model=model,
+            architecture_diagram=architecture_diagram,
+            prompt_path=os.path.join(
+                parent_dir, "agents", "prompts", "general_threats.md"
             ),
-            SDRApiThreatAgent(
-                model=model,
-                api_documentation=api_documentation,
-                architecture_diagram=architecture_diagram,
+        ),
+        PersistanceThreatAgent(
+            model=model,
+            architecture_diagram=architecture_diagram,
+            prompt_path=os.path.join(
+                parent_dir, "agents", "prompts", "persistance_threats.md"
             ),
-        ]
-    )
+        ),
+        SecurityMonitoringAgent(
+            model=model,
+            architecture_diagram=architecture_diagram,
+            prompt_path=os.path.join(
+                parent_dir, "agents", "prompts", "monitoring_threats.md"
+            ),
+        ),
+    ]
+
+    tree = AgentTree(threat_agents)
 
     try:
 

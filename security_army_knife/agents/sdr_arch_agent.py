@@ -79,7 +79,7 @@ class SDRArchAgent(BaseAgent):
         - Categorize the asset
 
         ## Identify Authentication and Authorization Schemes
-        - Identify if authentication protocols are applied
+        - Identify if authentication protocols or schemes are applied
         - If no authentication scheme is mentioned use the 'MISSING' tag
         - List the protocols and which components apply them
         - Add the protocols to the associated dataflows
